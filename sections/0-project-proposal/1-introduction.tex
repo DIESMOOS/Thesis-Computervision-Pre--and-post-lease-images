@@ -1,17 +1,17 @@
 \section{Introduction}
 \label{sec:introduction}
 
-In housing corporations like De Goede Woning Apeldoorn, inspections before and after tenant occupancy are still manual and require on-site visits. The rental department co-worker must enter the property to detect changes such as damage (a hole in the door), alterations (Tiling walls or floors ), or maintenance needs (wear and tear). This process is time-consuming, and even with guidelines, the 10 rental department employees react differently to damages. 
+In housing corporations like De Goede Woning (DGW), inspections before and after tenant occupancy are still manual and require on-site visits. The rental department employee must enter the property to detect changes such as damage (holes), alterations (Tiling floors), or maintenance needs (wear and tear). This process is time-consuming, and even with guidelines, the 10 rental department employees react differently to damages. 
 
-Visual documentation, such as photographs, are archived for every rental house in our company, these photos are difficult to compare and analyze when standing inside the property because you would need a laptop to do so. There, for the rental department needs/wants an assessment method that helps them going into the house well prepared and even help them avoid a discussion with the tenant. There will be less waist of time and tenants get an report by forehand on what changes they need to make before moving out. 
+Visual documentation, such as photographs, are archived for every rental house in our company, these photos are difficult to compare and analyze when standing inside the property because you would need a laptop to do so. There, for the rental department needs/wants an assessment method that helps them going into the house well prepared and even help them avoid a discussion with the tenant. There will be less waist of time and tenants get an report on what changes they need to make before moving out. 
 
-Recent developments in computer vision have enabled the detection of visual differences, object classification, and scene understanding in various domains, mainly medical imaging, infrastructure monitoring, garbage recognition, and manufacturing. However, image-based inspection automation in the rental housing sector has not yet been explored. Existing inspection workflows do not include automated comparison of pre- and post-lease images to detect property changes ahead of physical inspections. 
+Recent developments in computer vision have enabled the detection of visual differences, object classification, and scene understanding in various domains, mainly medical imaging, infrastructure monitoring, garbage recognition, and manufacturing. However, image-based inspection automation in the rental housing sector has not yet been explored. Existing workflows do not include automated comparison of pre- and post-lease images to detect property changes ahead of physical inspections. 
 
-If a model could detect and classify visual changes from photographs, it could assist inspections by prioritizing which properties need attention and reducing time and even unnecessary visits and discussions. At the same time, the domain introduces specific challenges such as inconsistent lighting, camera angle variability, and differing interior layouts\cite{tung2022accuracy}.
+If a model could detect and classify visual changes from photographs, it could assist inspections by prioritizing which properties need attention and reducing time and even unnecessary visits and discussions. At the same time, the domain introduces specific challenges such as inconsistent lighting, camera angle variability, and different interior layouts\cite{tung2022accuracy}.
 
 \textbf{Problem Statement}
 
-Housing corporations like De Goede Woning want the opportunity to make property inspections more efficient and scalable. Instead of relying only on scheduled visits or tenant reports before they move out, an image based approach like computer vision can provide improved insight into the condition of a property over time. This creates new possibilities like where rental housing employees can assess a property from their desk just by the pictures of the client. By changing this process, inspections become not only more reliable and informed, but also more user friendly for both tenants and the housing corporations.
+Housing corporations like DGW want the opportunity to make property inspections efficient and scalable. Instead of relying only on scheduled visits and tenant reports before they move out, an image based approach like computer vision can provide improved insight into the condition of a property over time. This creates new possibilities like where rental housing employees can assess a property from their desk just by the pictures of the client. By changing this process, inspections become more reliable and informed, and also more user friendly for both tenants and the housing corporations.
 
 \textbf{Key Research Question}
 
@@ -19,9 +19,9 @@ Housing corporations like De Goede Woning want the opportunity to make property 
 
 \textbf{Sub-Research Questions}
 \begin{itemize}
-    \item Which computer vision techniques preform the best in detecting damages in time-separated property images?
+    \item Which computer vision techniques preform the best in detecting damages in property images?
     \item How image based change metrics be used to distinguish and classify types of property changes, including damage, alterations, wear-and-tear, and maintenance requirements?
-    \item How can computer vision pipelines be designed to identify and localize changes between pre- and post lease property images?
-    \item How can robust enhancing techniques reduce false positives and false negatives in property change detection under variations in lighting, camera angle, surface appearance(like wallpaper), and image quality?
+    \item How can computer vision pipelines be designed to identify changes between pre- and post lease property images?
+    \item How can enhancing techniques reduce false positives and false negatives in property change detection under variations in lighting, camera angle, surface appearance (like wallpaper), and image quality?
 
 \end{itemize}
