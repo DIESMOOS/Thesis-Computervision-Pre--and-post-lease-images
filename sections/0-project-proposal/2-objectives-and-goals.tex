@@ -2,30 +2,31 @@
 
 This project builds on existing research in automated visual inspection and change detection. Several works inform the scientific foundation of this proposal.
 
-\cite{cheng2024} Cheng provides a comprehensive review of deep learning-based change detection across visual domains, highlighting the importance of temporal comparison and feature extraction for detecting structural variations in images. Their work establishes the relevance of computer vision models for monitoring change over time.
+\cite{cheng2024} Cheng provides a review of deep learning-based change detection across visual domains, highlighting the importance of temporal comparison and feature extraction for detecting structural variations in images. Their work establishes the relevance of computer vision models for monitoring change over time.
 
-\cite{kang2025defectInspection} Kang demonstrate how image-based automatic defect detection can be integrated with building information models to assess deteriorated structures. Their approach shows how visual inspection tasks can be automated in the built environment, reinforcing the applicability of image-based classification to physical infrastructure.
+\cite{kang2025defectInspection} Kang demonstrates how image-based automatic defect detection can be integrated with building information models to assess deteriorated structures. Their approach shows how visual inspection tasks can be automated in the building environment, reinforcing the applicability of image-based classification to physical infrastructure.
 
 In a related urban context, Maarten Sukel\cite{sukel2019garbage} applied object detection techniques to identify garbage in public environments. This work demonstrates that vision-based monitoring can operate in real-world, high-variability settings, supporting the feasibility of visual classification and anomaly detection beyond controlled laboratory data.
 
-These works collectively inform the methodological direction of this project by demonstrating that visual change detection, automatic classification, and environmental monitoring can be achieved with modern computer vision models. However, none of these studies explore automated comparison of pre- and post-lease property images for housing inspections, leaving a clear research gap that this thesis addresses.
+These works collectively inform the methodological direction of this project by demonstrating that visual change detection, automatic classification, and environmental monitoring can be achieved with modern computer vision models. However, none of these studies explore automated comparison of lease  images for housing inspections, leaving a clear research gap that this thesis addresses.
 
 \section{Objectives \& Goals}
 \label{sec:objectives_and_goals}
 
 \textbf{Project Goal} \\
-The goal of this project is to design and evaluate a computer vision approach that can detect and classify visual changes in rental property images to support inspection decision making and assist housing staff during the leasing process.
+This project will develop an computer vision system that detects and classifies inspection findings like damage or wear-and-tear, from uploaded images. The system will produce an inspection summary  and attaches evidence per finding. It will take the previous inspection report to compare outcomes and highlight findings, while tolerating non-identical viewpoints. A design constraint is that each reported finding must be supported by one image of each spot.
 
 \textbf{Objectives}
 \begin{itemize}
     \item Identify relevant computer vision methods for visual change detection.
-    \item Collect a dataset of pre- and post-lease property images to add significantly to the existing dataset.
-    \item Develop or adapt a model to compare and classify visual changes.
-    \item Define meaningful change categories (e.g., damage, maintenance needs, alterations).
-    \item Introduce a scoring or severity assessment that indicates urgency or inspection priority.
-    \item Evaluate the performance of the model using appropriate metrics.
-    \item Provide outputs that help housing staff decide whether an  inspection is necessary before entering a property.
-    \item Reflect on limitations and potential application in real-world housing inspections and leasing workflows.
+    \item Collect a dataset online inside property images to add complement the existing dataset.
+    \item Use a dataset from DGW lease images.
+    \item Develop a model to compare and classify visual changes.
+    \item Define label categories (like damage, maintenance needs.
+    \item Introduce a scoring assessment that indicates urgency or inspection priority.
+    \item Evaluate the performance of the model using metrics.
+    \item Provide outputs that help housing staff decide whether an inspection is necessary before entering a property.
+    \item Reflect on limitations in real-world housing inspections and leasing workflows.
     \item Introducing a benchmark for identifying damage,  maintenance, wear and tear.
 \end{itemize}
 
