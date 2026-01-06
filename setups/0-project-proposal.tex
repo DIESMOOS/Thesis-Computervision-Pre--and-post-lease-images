@@ -1,0 +1,61 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% setup.tex
+% Main tex file for setup and content collocation
+% For the use of University of Amsterdam
+% Information Systems and Data Science students
+% Adapted by Riccardo Fiorista (riccardo.fiorista@proton.me)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Options:
+%% `nolinenumbering` - If you want to remove line numbering on submission
+%% `draftmargins` - If you would like to give your reviewer more space for comments
+\documentclass[]{thesisdesign}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT METADATA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Thesis related entries
+\title{Image-Based Property Change Detection and Classification Using Neural Networks for Pre-Inspection Assessment }
+\subtitle{
+    Word Count: \textbf{[1034  WORDS (LESS THAN 1200)]} | %
+    Submitted on: \textbf{06-01-2026}
+}
+
+% Date on which your thesis is submitted
+\date{Fill In The Date In Format DD.MM.YYYY}
+
+% Author data
+\authorname{Dies de Haan}
+\authoremail{dies.de.haan@student.uva.nl}
+
+% ACM-sepecific entries
+\affiliation{
+  \institution{\thesisinstitution}
+  \city{\thesiscity}
+  \country{\thesiscountry}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONTENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\pagestyle{plain}
+\setcounter{page}{0}
+\fixemptypage
+
+\maketitle
+
+% Sections; Try to stick to this setup
+\input{sections/0-project-proposal/1-introduction.tex}
+\input{sections/0-project-proposal/2-objectives-and-goals.tex}
+\input{sections/0-project-proposal/3-project-plan.tex}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{bibliographies/references}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

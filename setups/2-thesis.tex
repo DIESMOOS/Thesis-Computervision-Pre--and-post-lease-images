@@ -1,0 +1,94 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% setup.tex
+% Main tex file for setup and content collocation
+% For the use of University of Amsterdam
+% Information Systems and Data Science students
+% Adapted by Riccardo Fiorista (riccardo.fiorista@proton.me)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Options:
+% Choose one of:
+%% `is` - Information Systems
+%% `ds` - Data Science 
+% Add (separated by `,`):
+%% `nolinenumbering` - If you want to remove line numbering on submission
+%% `draftmargins` - If you would like to give your reviewer more space for comments
+%% `nofrontpicture` - If you do not wish to have a graphic on your front-page
+%% `nofirstcompanypicture` - If you do not wish to have a graphic on your front-page
+%% `nosecondcompanypicture` - If you do not wish to have a graphic on your front-page
+\documentclass[ds]{mscthesis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT METADATA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Thesis related entries
+\title{Fill In Your Title}
+\subtitle{Fill In Your Sub-Title}
+
+% Date on which your thesis is submitted
+\date{Fill In The Date In Format DD.MM.YYYY}
+
+% 4-5 keywords should do the trick. They should ideally be phrases of 2-4 words or single words.
+\keywords{keywords, belong, here, with, commas, like, this}
+
+% Author data
+\authorname{Your Name}
+\authorid{Your Student ID}
+\authoremail{your@student.mail}
+
+% Supervisors
+\uvasupervisorname{UvA Supervisor}
+\uvasupervisoraffiliation{UvA Supervisor}
+\uvasupervisoremail{supervisor@uva.nl}
+
+% Comment if you do not have an external supervisor
+\externalsupervisorname{External Supervisor} \externalsupervisoraffiliation{External Supervisor}
+\externalsupervisoremail{supervisor@company.nl}
+
+% % Uncomment and fill paths if you want to add custom images
+% %% Figure size suggestions (in general it's best to render them from SVGs):
+% %% 3000x3000 @ 240dpi for all three
+% \titlepicturepath{}
+% \firstcompanypicturepath{}
+% \secondcompanypicture{path}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONTENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\pagestyle{plain}
+
+\maketitlepage
+\fixemptypage
+\setcounter{page}{0}
+
+\begin{abstract}
+% A summary of results should be included. Avoid citations. Maximum length is 200 words.
+Write your abstract here.
+\end{abstract}
+
+\maketitle
+
+\section*{Github Repository}
+\url{https://github.com/you/your_awesome_thesis_repo}
+
+% Sections; Try to stick to this setup but you can comment each section
+\input{sections/2-thesis/1-introduction.tex}
+\input{sections/2-thesis/2-related-work.tex}
+\input{sections/2-thesis/3-methodology.tex}
+\input{sections/2-thesis/4-results.tex}
+\input{sections/2-thesis/5-discussion.tex}
+\input{sections/2-thesis/6-conclusion.tex}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{bibliographies/references}
+
+\newpage
+\input{sections/2-thesis/7-appendix.tex}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
