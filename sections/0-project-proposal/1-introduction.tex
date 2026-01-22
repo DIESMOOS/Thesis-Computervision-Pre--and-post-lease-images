@@ -1,15 +1,15 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Recent research in computer vision has addressed inspection and change detection problems across a wide range of domains, including remote sensing, building inspection, indoor scene understanding, urban monitoring, medical imaging, and insurance claim assessment. There is a clear shift across fields from classical machine learning toward deep learning approaches, primarily convolutional neural networks (CNN) and, more recently, foundational and vision language models. These methods are effectively adopted in detecting defects, damages, and anomalies in the sources like image data.
+Recent discovery's in computer vision have enabled automated inspection across domains such as remote sensing, building assessment, indoor scene understanding, urban monitoring, and medical imaging. These fields rely on deep learning convolutional neural networks and, more recently, foundation-model and vision language approaches to detect defects, anomalies, and structural changes. Earlier work, including the review by Cheng, used classical classifiers, while newer studies explore U-Nets, R-CNN variants, YOLO architectures, and limited applications of Siamese networks. Yet Siamese modelling is still concentrated in medical imaging, where longitudinal datasets like MSSEG2\cite{MSSEG2_dataset} Kamraoui et al.\cite{Kamraoui_Mansencal_Manjon_Coupé_2022} provide, standardized image pairs.
 
-Despite these advances, a large research gap remains after exploring 11 research gaps in papers. The existing approaches focus on single image analysis and do not model temporal change. Semantic comparison of condition images has seen little adoption beyond medical and remote sensing applications. Current methods produce detection or classification outputs without translating results into inspection oriented decision support. As a result, there is no integrated approach for indoor property inspections that combines temporal image comparison with inspection preparation or prioritization.
+This focus on medical data introduces a broader gap. Siamese methods are rarely applied in settings where images are scarce, heterogeneous, and unaligned conditions common in house inspections, military surface-change monitoring, cadastral boundary shifts, and other low data change detection tasks. Although MSSEG2\cite{MSSEG2_dataset} is methodologically instructive, its imaging conditions and high-quality annotations make it unsuitable for real-world house inspections. Consequently, the field lacks a method for robust Siamese-based temporal comparison on small, unstructured image sets and make it equally accurate.
 
-This thesis addresses this gap by investigating image based comparison of pre- and post-lease property images within the rental housing context. By focusing on temporal change detection in indoor environments and linking model outputs to inspection decision making, the proposed approach aims to improve efficiency, consistency, and objectivity in housing inspections.
+This thesis investigates whether an embedded Siamese approach can support pre- and post-lease change assessment in house inspections under uncontrolled visual conditions.
 
 \textbf{Problem Statement}
 
-While automatic inspection tools are explored, approaches for image-based property condition assessment remain absent in housing management. Current practices depend on physical inspections and tenant reports, resulting in limited, not frequent insight into property condition. This gap constrains both efficiency and data based decision making in housing corporations such as De Goede Woning.
+Automated image-based condition assessment is largely absent in the domain of housing management. Reliance on physical inspections provides inconsistent data, limiting the ability of organizations such as De Goede Woning to detect changes over time and make systematic, evidence-based decisions.
 
 \textbf{Key Research Question}
 
