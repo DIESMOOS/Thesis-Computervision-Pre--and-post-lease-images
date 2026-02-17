@@ -1,49 +1,29 @@
-\section{Seminal Papers}
-
-This project builds on existing research in automated visual inspection and change detection. Several works inform the scientific foundation of this proposal  across multiple domains.
-
-Cheng\cite{Cheng_Huang_Li_Lyu_Xu_Zhao_Zhao_Xiang_2024} provides an overview of deep learning based change detection methods, Cheng highlights the role of temporal analysis, identifying structural changes in images. In the built environment, Kang\cite{Kang_Kim_Kim_2025} shows how image-based defect detection can accelerate  automated building inspections, while Choi et al. \cite{Choi_2022} show that damage detection can be applied to vandalism assessment in architectural settings.
-
-Related work in uncontrolled environments supports the this approach. Sukel \cite{Sukel_Rudinac_Worring_2020} applies object detection to urban maintenance tasks, Santos Gonçalves et al. \cite{Gonçalves_Santos_2023} address robust indoor object detection under a variety of conditions, and Tan et al. \cite{Tan_Zhai_Zhai_2024} demonstrate detection from non-standard camera perspectives. Studies like medical longitudinal change detection \cite{Kamraoui_Mansencal_Manjon_Coupé_2022} and insurance claim damage assessment \cite{Lee_Lee_Park_2024}, further illustrate that deep learning can support visual assessment under world-like variability.
-
-These studies show that modern computer vision models are effective for detecting damage, defects, and visual changes across domains. None address automated comparison of pre- and post-lease images for indoor housing inspections, leaving a clear gap in combining temporal image comparison with practical inspection support, which this thesis aims to address.
-
 \section{Objectives \& Goals}
 \label{sec:objectives_and_goals}
 
-\textbf{Project Goal} \\
-This research an Siamese computer vision system that detects and classifies inspection findings like damage or wear-and-tear, from uploaded images. How the system will produce an inspection summary  and attaches evidence per finding. It research how to take the previous inspection report to compare outcomes and highlight findings, while tolerating non identical viewpoints.
+The primary objective of this project is to develop and evaluate a comparative inspection pipeline for lease housing images using two fundamentally different model paradigms.
 
-\textbf{Dataset Construction and Data Sources} \\
-We construct a dataset combining the Building Defects Dataset with the help of \cite{roboflow_universe},with datasets like \cite{asbestos_dataset}, \cite{crack_bphdr}, \cite{house_damage_boxes}, \cite{HKUST} some even have publications. Unlike kamaraui's \cite{Kamraoui_Mansencal_Manjon_Coupé_2022} dataset\cite{MSSEG2_dataset} we cant use, who employ aligned Siamese medical time-points, our approach compares two unpaired pre- and post- inspection residential image sets, introducing distinct domain and matching challenges. 
+Literature shows strong performance of supervised object-detection networks in structured inspection tasks. However, foundation models represent a different paradigm: they are trained on large-scale heterogeneous data and may generalize without domain-specific supervision. While promising, their performance in structured inspection contexts is not obvious, particularly where precise category definitions and visual localization are required. This study therefore aims to provide empirical evidence regarding their comparative suitability.
 
-\textbf{Objectives}
+\textbf{Methodological Approach} \\
 \begin{itemize}
-    \item Identify computer vision methods for visual change detection.
-    \item Collect dataset online inside property images.
-    \item Use a dataset from DGW lease images if it could be shared publicly.
-    \item Develop Siamese model to compare and classify visual changes.
-    \item Define label categories like damage, maintenance needs.
-    \item Introduce a scoring assessment that indicates urgency or inspection priority.
-    \item Evaluate the performance of the model using metrics like confusion matrix.
-    \item Reflect on limitations with Siamese modeling.
-    \item Introducing a benchmark for identifying damage,  maintenance, wear and tear.
+\item Data Annotation
+Lease housing images will be manually labeled according to predefined inspection-relevant categories (damage, unauthorized alterations, excessive wear, maintenance-related issues). This establishes ground truth.
+
+\item YOLO-Based Detection
+A YOLO architecture will be trained on the labeled dataset to detect and localize inspection-relevant findings.
+
+\item  Foundation Model Evaluation
+ChatGPT Pro will be prompted with the same image groups to generate structured inspection outputs, including category predictions and visual indications of detected findings.
+
+\item  Baseline Comparison
+A simple baseline method (e.g., rule-based or similarity-based classification) will be implemented for reference.
 \end{itemize}
 
-\textbf{Extended Goal Breakdown}
-\begin{enumerate}
-    \item \textbf{Research an Image-Based Change Detection Model} \\
-    \textit Create a computer vision model that scores property images taken before and after lease.
-    
-    \item \textbf{Classify visual Change types} \\
-    \textit Distinguish between categories such as damage, alterations, wear and tear, and maintenance.
+\textbf{Evaluation}
+\begin{itemize}
+    \item Metrics: Precision, recall, F1-score, and error rates will be computed against the manually labeled ground truth.
 
-    \item \textbf{Introduce Change Scoring} \\
-    \textit Provide a measurable score or classification level to prioritize actions.
+    \item Robustness Testing: Performance will be analyzed under varying image conditions (lighting, angle, clutter).
+\end{itemize}
 
-    \item \textbf{Support Inspection Evaluation} \\
-    \textit Enable property inspections for lease inspections.
-
-    \item \textbf{Develop a Proof of Concept} \\
-    \textit Build and test a prototype that demonstrates feasibility using sample or real property images.
-\end{enumerate}

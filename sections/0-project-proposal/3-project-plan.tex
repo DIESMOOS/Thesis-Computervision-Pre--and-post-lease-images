@@ -1,9 +1,9 @@
 \section{Project Plan}
 \label{sec:project_plan}
 
-The project uses Scrum sprints, this approach is suitable for computer-vision research because progress depends on experimentation (dataset sourcing, pre processing, baseline definition, model selection, and evaluation), where results may require revising earlier decisions. Sprint planning supports incremental deliverables and frequent review while ensuring alignment with fixed submission deadlines.
+The project follows an iterative Scrum-based sprint structure. This approach is suitable because progress depends on staged experimentation, including manual data annotation, baseline implementation, YOLO model training, foundation-model prompting, and quantitative evaluation. Early experimental results may require refinement of labeling schemes, prompts, or evaluation metrics. Incremental deliverables and regular reviews ensure alignment with official deadlines while allowing methodological adjustments.
 
-\begin{figure}[t]
+\begin{figure}[h]
 \centering
 \begin{tikzpicture}[x=0.62cm,y=1cm, font=\small]
 
@@ -13,12 +13,12 @@ The project uses Scrum sprints, this approach is suitable for computer-vision re
   \draw (\x,0.09) -- (\x,-0.09);
   \node[below] at (\x,-0.09) {\x};
 }
-\node[rotate=55, anchor=south west] at (0.9,0.20) {Data from Company};
+\node[rotate=55, anchor=south west] at (0.9,0.20) {Data Access};
 \node[rotate=55, anchor=south west] at (2.2,0.20) {Thesis Design};
-\node[rotate=55, anchor=south west] at (4.0,0.20) {Exploratory Data Analysis};
+\node[rotate=55, anchor=south west] at (4.0,0.20) {Annotation Plan};
 \node[rotate=55, anchor=south west] at (5.5,0.20) {Writing};
-\node[rotate=55, anchor=south west] at (6.6,0.20) {Build};
-\node[rotate=55, anchor=south west] at (8.7,0.20) {Draft Methodology Section};
+\node[rotate=55, anchor=south west] at (6.6,0.20) {Baseline Setup};
+\node[rotate=55, anchor=south west] at (8.7,0.20) {Method Draft};
 
 \draw[line width=4pt, gray!50, line cap=round] (0.8,0) -- (7.0,0);
 \draw[line width=4pt, gray!50, line cap=round] (8.2,0) -- (11.0,0);
@@ -30,9 +30,9 @@ The project uses Scrum sprints, this approach is suitable for computer-vision re
   \draw (\i,0.09) -- (\i,-0.09);
   \node[below] at (\i,-0.09) {\lab};
 }
-\node[rotate=55, anchor=south west] at (1.0,0.20) {Pre-Draft Thesis};
-\node[rotate=55, anchor=south west] at (3.0,0.20) {Experiment};
-\node[rotate=55, anchor=south west] at (4.2,0.20) {Evaluate};
+\node[rotate=55, anchor=south west] at (1.0,0.20) {Model Training};
+\node[rotate=55, anchor=south west] at (3.0,0.20) {Foundation Prompts};
+\node[rotate=55, anchor=south west] at (4.2,0.20) {Evaluation};
 \node[rotate=55, anchor=south west] at (5.4,0.20) {Draft Thesis};
 \node[rotate=55, anchor=south west] at (8.6,0.20) {Final Thesis};
 
@@ -51,32 +51,40 @@ The project uses Scrum sprints, this approach is suitable for computer-vision re
     \item \textbf{Before 10 Jan:} Register project on Datanose.
     \item \textbf{23 Feb (Canvas):} Thesis Design submission (4 pages).
     \item \textbf{Before 9 Mar (Datanose):} Supervisor-approved Thesis Design.
-    \item \textbf{23 Mar (Canvas):} Exploratory Data Analysis / Literature Review milestone.
+    \item \textbf{23 Mar (Canvas):} Exploratory milestone (Literature + Dataset Plan).
     \item \textbf{20 Apr (Canvas):} Draft Methodology Section.
     \item \textbf{19 May:} Midterm Evaluation.
-    \item \textbf{25 May (Canvas):} Pre-Draft Thesis (preferably including initial Results).
+    \item \textbf{25 May (Canvas):} Pre-Draft Thesis (including initial Results).
     \item \textbf{15 Jun (Canvas):} Draft Thesis.
     \item \textbf{26 Jun (Datanose):} Final Thesis.
 \end{itemize}
 
 \subsection{Roadmap (Sprint-Level Plan)}
-The planning is presented as a two-column list. Each sprint ends with a concrete deliverable and a review checkpoint.
+Each sprint concludes with a concrete deliverable and review checkpoint.
 
 \begin{center}
 \small
 \begin{tabular}{p{0.48\linewidth} p{0.48\linewidth}}
-\textbf{Sprint 1 (Jan 5--18):} Thesis Design start; RQ/scope; register Datanose. &
-\textbf{Sprint 2 (Jan 19--Feb 1):} Thesis Design iteration; refine gap + method motivation. \\
-\textbf{Sprint 3 (Feb 2--15):} Finalise Thesis Design draft; submission preparation. &
-\textbf{Sprint 4 (Feb 16--Mar 1):} Submit Thesis Design (23 Feb); begin data sourcing + EDA. \\
-\textbf{Sprint 5 (Mar 2--15):} Literature extension; data collection + preprocessing. &
-\textbf{Sprint 6 (Mar 16--29):} Submit March milestone (23 Mar); finalise dataset plan. \\
-\textbf{Sprint 7 (Mar 30--Apr 12):} Draft Methodology; baselines + metrics + protocol. &
-\textbf{Sprint 8 (Apr 13--Apr 26):} Submit Methodology (20 Apr); model selection buffer. \\
-\textbf{Sprint 9 (Apr 27--May 10):} Build first model prototype. &
-\textbf{Sprint 10 (May 11--May 24):} Experiments + refinement; Midterm (19 May); Pre-Draft (25 May). \\
-\textbf{Sprint 11 (May 25--Jun 7):} Integrate results; write main thesis chapters. &
-\textbf{Sprint 12 (Jun 8--Jun 21):} Draft Thesis (15 Jun); final revisions + formatting. \\
-\multicolumn{2}{p{\linewidth}}{\textbf{Sprint 13 (Jun 22--Jun 30):} Final Thesis submission (26 Jun) + buffer.} \\
+
+\textbf{Sprint 1 (Jan 5--18):} Refine RQ; finalize scope; register Datanose. &
+\textbf{Sprint 2 (Jan 19--Feb 1):} Thesis Design iteration; justify YOLO vs foundation models. \\
+
+\textbf{Sprint 3 (Feb 2--15):} Finalize Thesis Design draft; prepare submission. &
+\textbf{Sprint 4 (Feb 16--Mar 1):} Submit Thesis Design; define annotation schema. \\
+
+\textbf{Sprint 5 (Mar 2--15):} Manual data annotation; dataset split definition. &
+\textbf{Sprint 6 (Mar 16--29):} Submit March milestone; finalize baseline method. \\
+
+\textbf{Sprint 7 (Mar 30--Apr 12):} Draft Methodology; define metrics and protocol. &
+\textbf{Sprint 8 (Apr 13--Apr 26):} Submit Methodology; implement YOLO training pipeline. \\
+
+\textbf{Sprint 9 (Apr 27--May 10):} Train and tune YOLO model. &
+\textbf{Sprint 10 (May 11--May 24):} Prompt design for ChatGPT Pro; initial experiments; Midterm (19 May). \\
+
+\textbf{Sprint 11 (May 25--Jun 7):} Quantitative comparison; robustness testing; Pre-Draft (25 May). &
+\textbf{Sprint 12 (Jun 8--Jun 21):} Draft Thesis (15 Jun); integrate results and discussion. \\
+
+\multicolumn{2}{p{\linewidth}}{\textbf{Sprint 13 (Jun 22--Jun 30):} Final revisions; formatting; Final Thesis submission (26 Jun) + buffer.} \\
+
 \end{tabular}
 \end{center}

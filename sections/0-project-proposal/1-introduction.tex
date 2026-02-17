@@ -1,25 +1,26 @@
 \section{Introduction}
 \label{sec:introduction}
+Housing corporations rely on digital image archives to assess the condition of rental properties. Inspectors review  lease housing images to identify inspection relevant findings such as structural damage, unauthorized alterations, excessive wear, or maintenance-related issues. These assessments are typically manual and require visual review of large image sets captured under varying lighting conditions, camera angles, and device quality. As the volume of archived images grows, scalable and consistent automated support becomes increasingly relevant.
 
-Recently computer vision has enabled automated inspection across domains such as remote sensing, building assessment, indoor scene understanding, urban monitoring, and medical imaging. These fields use deep learning ranging from CNNs to newer foundation-model and vision-language methods to detect defects, anomalies, and structural changes. Previous work, like the Cheng\cite{Cheng_Huang_Li_Lyu_Xu_Zhao_Zhao_Xiang_2024} review used classical classifiers, while newer studies explore U-Nets, R-CNN, YOLO architectures, and limited applications of Siamese networks. However Siamese modeling is still concentrated in medical imaging, where longitudinal datasets like MSSEG2\cite{MSSEG2_dataset} Kamraoui et al.\cite{Kamraoui_Mansencal_Manjon_Coupé_2022} provide, standardized image pairs.
+Deep learning has shown strong performance in visual inspection domains such as infrastructure monitoring, medical imaging, and insurance damage assessment. Convolutional neural networks, particularly one stage object detection architectures such as YOLO, are widely used for structured detection tasks. These models are supervised and trained on task-specific annotations, enabling accurate localization and classification of predefined categories.
 
-This focus on medical data introduces a broader gap. Siamese methods are rarely applied in settings with scarce, heterogeneous, and unaligned images conditions common in house inspections, military surface-change monitoring, cadastral boundary shifts, and other low data change detection tasks. Although MSSEG2\cite{MSSEG2_dataset} is methodologically instructive, its imaging conditions and high-quality annotations make it unsuitable for real-world house inspections. Consequently, the field lacks a method for robust Siamese-based temporal comparison on small, unstructured image sets and make it equally accurate.
+In parallel, multimodal foundation models such as ChatGPT Pro have emerged. These models are pretrained on large-scale heterogeneous datasets using weakly supervised or unsupervised learning objectives. Due to their broad pretraining, they can perform visual reasoning and classification across domains without explicit task-specific training. This raises an important question: can such general-purpose models perform structured inspection tasks comparably to specialized object-detection networks?
 
-This thesis investigates whether an embedded Siamese approach can support pre- and post-lease change assessment in house inspections under uncontrolled visual conditions.
+Existing literature demonstrates the effectiveness of deep learning for defect and damage detection. However, most studies evaluate a single model family within a specific paradigm. Direct empirical comparison between supervised object-detection networks and multimodal foundation models under identical real world inspection conditions remains limited. In particular, the suitability of foundation models for structured lease housing image assessment has not been systematically evaluated.
 
-\textbf{Problem Statement}
+This thesis addresses this gap by comparing a YOLO-based object-detection network with a multimodal foundation model (ChatGPT Pro) in detecting and classifying predefined inspection-relevant categories within groups of lease housing images.
 
-Although automatic inspection tools are emerging, image-based property condition assessment is still absent in housing management. Reliance on physical inspections and tenant reports provides infrequent, inconsistent data, limiting efficient, evidence-based decision-making for housing corporations such as De Goede Woning 
+The overarching research question is:
 
 \textbf{Key Research Question}
 
-\emph{To what extent can a Siamese model with foundation-model embeddings detect and classify inspection-relevant changes between pre and post lease housing images under real world variability, and how could this use case extend to other low-data change-detection domains?}
+\emph{To what extent do convolutional object-detection networks (YOLO based architectures) differ in performance from foundation vision language models in detecting and classifying predefined inspection relevant changes within lease housing images under real world variability?}
+
+To answer this question, the following sub-questions are derived:
 
 \textbf{Sub-Research Questions}
 \begin{itemize}
-    \item How does a Siamese embedding-based change detection approach perform compared to baseline image similarity methods when applied to lease property images? 
-    \item How can differences between Siamese image embeddings be used to distinguish and classify types of property changes, including damage, alterations, wear and tear, and maintenance needs? 
-    \item To what extent is the Siamese approach robust to variations in lighting, camera angle, surface appearance, and image quality present in provided images? 
-    \item How can the outputs of change detection models be translated into inspection oriented indicators that support housing staff? 
-
+    \item What is the robustness of convolutional object detection networks and foundation vision language models when applied to groups of lease housing images under real world variability (lighting variation, camera angle differences and device heterogeneity)?
+    \item How do convolutional detection networks and foundation vision language models compare quantitatively in detecting and classifying inspection relevant changes within groups of lease housing images (precision, recall, F1-score, and error rates) 
+    \item How does a predefined baseline similarity or rule based method perform on the same image groups, and how do both model families improve upon this baseline?
 \end{itemize}
