@@ -1,22 +1,26 @@
 \section{Introduction}
 \label{sec:introduction}
-Housing corporations rely on digital image archives to assess the condition of rental properties. Inspectors review  lease housing images to identify inspection relevant findings such as structural damage, unauthorized alterations, excessive wear, or maintenance-related issues. These assessments are typically manual and require visual review of large image sets captured under varying lighting conditions, camera angles, and device quality. As the volume of archived images grows, scalable and consistent automated support becomes increasingly relevant.
+Housing corporations rely on digital image archives to assess the condition of rental properties. Inspectors review images to identify findings such as damage,  alterations, wearing, or maintenance issues. These assessments are manual and require a review of the images those images have varying in lighting conditions, camera angles, and device quality. As the volume of archived images grows (now approximately 2000+ own images), scalable and consistent support becomes relevant to corporations, rental agents and inspectors.
 
-Deep learning has shown strong performance in visual inspection domains such as infrastructure monitoring, medical imaging, and insurance damage assessment. Convolutional neural networks, particularly one stage object detection architectures such as YOLO, are widely used for structured detection tasks. These models are supervised and trained on task-specific annotations, enabling accurate localization and classification of predefined categories.
+Deep learning has shown performance in visual inspection domains such as infrastructure monitoring, medical imaging, and insurance damage assessment. CNN in, particularly one stage object detection architectures such as YOLO, are widely used for structured detection tasks. These models are supervised and trained on task-specific annotations, enabling accurate localization and classification of predefined categories.
 
-In parallel, multimodal foundation models such as ChatGPT Pro have emerged. These models are pretrained on large-scale heterogeneous datasets using weakly supervised or unsupervised learning objectives. Due to their broad pretraining, they can perform visual reasoning and classification across domains without explicit task-specific training. This raises an important question: can such general-purpose models perform structured inspection tasks comparably to specialized object-detection networks?
+In parallel, multi modal foundation models such as ChatGPT Pro have emerged. These models are pretrained on large scale heterogeneous datasets using weakly supervised or unsupervised learning objectives. Due to their broad pretraining, they can perform visual reasoning and classification across domains without explicit task-specific training. This raises an important question: can such general-purpose models perform structured inspection tasks comparably to specialized object-detection networks?
 
-Existing literature demonstrates the effectiveness of deep learning for defect and damage detection. However, most studies evaluate a single model family within a specific paradigm. Direct empirical comparison between supervised object-detection networks and multimodal foundation models under identical real world inspection conditions remains limited. In particular, the suitability of foundation models for structured lease housing image assessment has not been systematically evaluated.
+Existing literature demonstrates the effectiveness of deep learning for defect and damage detection. However, most studies evaluate a single model family within a specific sector (mostly medical). 
 
-This thesis addresses this gap by comparing a YOLO-based object-detection network with a multimodal foundation model (ChatGPT Pro) in detecting and classifying predefined inspection-relevant categories within groups of lease housing images.
+Direct empirical comparison between supervised object detection networks and multi modal foundation models under identical real world visual inspection conditions remains limited. Although both paradigms are widely applied in anomaly and defect detection, they rely on fundamentally different learning principles  supervised localization versus multimodal pretraining and are typically evaluated in separate settings with non comparable datasets and metrics. As a result, their relative robustness, generalization capacity, and suitability for structured inspection tasks remain unclear.
 
-The overarching research question is:
+In particular, the suitability of foundation models for structured lease housing image assessment, where inspection relevant changes must be consistently identified and localized, has not yet been systematically evaluated.
+
+This thesis addresses this gap by comparing a YOLO based object-detection network with a multi modal foundation model (ChatGPT Pro) in detecting and classifying predefined inspection-relevant categories within groups of lease housing images.
+
+The research question is:
 
 \textbf{Key Research Question}
 
-\emph{To what extent do convolutional object-detection networks (YOLO based architectures) differ in performance from foundation vision language models in detecting and classifying predefined inspection relevant changes within lease housing images under real world variability?}
+\emph{To what extent do convolutional object detection networks YOLO based architectures differ in performance from foundational language models (ChatGPT) in detecting and classifying predefined inspection relevant changes within lease housing images under real world variability?}
 
-To answer this question, the following sub-questions are derived:
+To answer this question, the following sub-questions are made:
 
 \textbf{Sub-Research Questions}
 \begin{itemize}
