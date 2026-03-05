@@ -3,40 +3,30 @@
 
 This project involves multiple dependencies that may affect timely completion. The main risks concern data availability, annotation workload, model performance, and dependency on external tools. For each risk, a mitigation plan is defined.
 
-\subsection{Data Availability and Quality}
-\textbf{Risk.} The DGW image archive may not arrive on time, may be incomplete, or may contain insufficient examples of certain categories (rare damage types). Without enough labeled samples, YOLOv8 cannot be trained reliably.
+\subsection{Data Availability, Quality and Labeling}
+\textbf{Risk.} The DGW image archive may not arrive on time, may be incomplete, or may contain insufficient examples of certain categories (rare damage types). Without enough labeled samples, YOLOv8 cannot be trained reliably. Manual annotation  may require more time than expected, especially if the dataset is large or if categories require distinctions.
 
-\textbf{Mitigation.}
+\textbf{Mitigation's}
 \begin{itemize}
     \item Use Roboflow damage datasets as a fallback training source.
     \item Begin annotation immediately when the first batch of DGW images becomes available.
-    \item Apply data augmentation to increase diversity and reduce the dependency on rare samples.
-\end{itemize}
-
-\subsection{Annotation Workload}
-\textbf{Risk.} Manual labelling may require more time than expected, especially if the dataset is large or if categories require distinctions.
-
-\textbf{Mitigation}
-\begin{itemize}
-    \item Limit the label schema to a small number of stable categories (e.g., damage, wear, alteration, no damage).
-    \item Use assisted labelling tools in Roboflow (auto annotate + correction).
-    \item Fix a maximum number of images for training to control annotation scope.
+    \item     Limit the label schema to a small number of stable categories (damage, wear, alteration, no damage).
+    \item Use assisted labeling tools in Roboflow (auto annotate + correction).
 \end{itemize}
 
 \subsection{Model Convergence and Technical Issues}
 \textbf{Risk.} YOLOv8 may under perform or fail to converge due to limited data, class imbalance, or hardware constraints. LLaVA may produce inconsistent outputs due to prompt sensitivity.
 
-\textbf{Mitigation.}
+\textbf{Mitigation's}
 \begin{itemize}
     \item Use pre trained YOLOv8 weights to improve convergence on small datasets.
-    \item Apply balancing techniques oversampling, weighted loss.
     \item Freeze prompts for LLaVA to avoid prompt drift and ensure reproducibility.
 \end{itemize}
 
 \subsection{Comparison Complexity: Output Harmonization}
 \textbf{Risk.} YOLOv8 produces bounding boxes, whereas LLaVA generates text. Harmonizing both outputs into a unified evaluation format may require additional engineering.
 
-\textbf{Mitigation.}
+\textbf{Mitigation's}
 \begin{itemize}
     \item Define a clear mapping scheme from bounding boxes and textual outputs to a shared label format early in the project.
     \item Limit the evaluation to categorical outputs rather than spatial localization.
@@ -45,25 +35,14 @@ This project involves multiple dependencies that may affect timely completion. T
 \subsection{Dependency on External Models and Compute}
 \textbf{Risk.} LLaVA or its inference pipeline may require GPU resources that are temporarily unavailable, or model versions may change unexpectedly.
 
-\textbf{Mitigation.}
+\textbf{Mitigation's}
 \begin{itemize}
     \item Download and fix a specific LLaVA checkpoint locally.
     \item Use UvA GPU servers or Google Colab Pro as backup compute options.
-    \item Keep a minimal inference script that works on CPU.
-\end{itemize}
-
-\subsection{Stakeholder Constraints}
-\textbf{Risk.} DGW stakeholders may be slow in delivering datasets or clarifying the label definitions needed for training.
-
-\textbf{Mitigation.}
-\begin{itemize}
-    \item Proceed with Roboflow datasets if DGW delays exceed one sprint.
-    \item Use a preliminary label schema based on publicly available damage taxonomies.
-    \item Update the dataset incrementally without blocking progress.
 \end{itemize}
 
 \subsection{Overall Plan B}
-If supervised training becomes infeasible due to lack of annotated data, a fallback evaluation will compare:
+If supervised training becomes infeasible due to limited annotated data, a fallback evaluation will compare:
 \begin{itemize}
     \item LLaVA (zero-shot),
     \item a rule-based baseline,
