@@ -1,16 +1,30 @@
 \section{Introduction}
 \label{sec:introduction}
-% Mention scientific context/field, problem statement, research gap and candidate (sub) research question(s). 
-Write your introduction here. It should be immediately clear how your proposed contribution is scientifically relevant and fills the research gap.
- \TODO{This is a TODO} This is a test citation \cite{Gruber1995}
+Housing corporations increasingly rely on image archives to document the condition of rental properties. Inspectors compare lease images to identify issues. This process is slow and subjective to opinion. As the volume of pictures grows, scalable and consistent support becomes relevant to housing organizations and inspectors \cite{Kang_Kim_Kim_2025}.
 
-Towards the end of the introduction, you should also add your \textit{preliminary} \textbf{reasearch questions (RQ)} here. You may want to state your main RQ like this:
+The dataset consists of approximately 2000 indoor housing images from the DGW archive, captured under variability in lighting, device types, angles, and room conditions, capturing both occupancy and after tenant turnover, resulting in a mix of furnished and unfurnished units. These are supplemented with public defect-oriented datasets (Roboflow collections) to ensure coverage of relevant inspection categories. This robustness enables evaluation across variability factors. 
 
-\noindent\textit{To what extent can a master thesis template enhance the quality of the final thesis?}\REMARK{This is a remark}
+The inspection relevant categories consist of predefined categories relevant to rental assessments, like cracks, moisture spots, paint deterioration, surface wear, and illegal modifications. These categories are aligned with DGW inspection guidelines and used across the 2  to be assessed models. 
 
-You can then list the sub-questions as:
+Deep learning has shown performance across visual inspection domains, including infrastructure, monitoring, medical imaging, and anomaly detection \cite{Cheng_Huang_Li_Lyu_Xu_Zhao_Zhao_Xiang_2024}. Within supervised object detection, architectures such as YOLOv8 provide a fast, stable, and widely adopted baseline. YOLOv8 is suitable for this project because it can be trained on small and medium datasets, supports different structured categories, and offers reproducible results with limited computation power \cite{Gonçalves_Santos_2023}.
+
+In parallel, multi modal foundation models have emerged. Models such as LLaVA-1.6 are pretrained on large scale image, text corpora and can perform open vocabulary visual reasoning and classification without task specific labels. These models demonstrate strong generalization across domains and increasingly appear in inspection oriented research, including industrial anomaly detection and indoor defect description \cite{Jiang_Li_Deng_Liu_Gao_Zhou_Li_Wang_Zheng_2025, Wen_Chen_2024}. Due to foundational pretraining,  foundation models can handle indoor variability lighting, viewpoint changes, and even clutter without fine tuning.
+
+Although related work shows that both supervised detectors and foundation models can detect defects or anomalies, these model families are always evaluated separately, using different datasets, metrics, and tasks. Direct comparison between the supervised object detection networks and the multi modal foundation models under identical conditions remains missing. As a result, their relative robustness, generalization capacity, and suitability for structured inspection scenarios are not yet fully understood.
+
+Furthermore, the suitability of foundation models for structured lease housing image assessment where inspection relevant categories must be consistently identified and, localized has not been systematically evaluated. This represents a specific application gap.
+
+This thesis addresses these gaps both scientific and application sides by comparing a YOLOv8 object detection model with the multi modal foundation model LLaVA-1.6, evaluating their ability to detect and identify  inspection relevant categories in lease housing images. By evaluating both approaches on identical datasets, metrics, and inspection criteria, this work aims to quantify their performance, robustness, and practical utility for supporting housing corporations in preparing and prioritizing property inspections.
+
+\textbf{Key Research Question}
+
+\emph{To what extent do convolutional object detection networks YOLO based architectures differ in performance from foundational language model LLaVA-1.6. in detecting and identifying predefined inspection relevant categories within lease housing images under real world variability?}
+
+To answer this question, the following sub-questions are made:
+
+\textbf{Sub-Research Questions}
 \begin{itemize}
-    \item How does the structure of the template influence the final grading?
-    \item To what extent is textual guidance sufficient for structured working?
-    \item \dots
+    \item What is the robustness of convolutional object detection networks and foundation vision language models when applied to lease housing images under real world variability (lighting variation, camera angle differences and device heterogeneity)?
+    \item How do convolutional detection networks and foundation vision language models compare quantitatively in detecting and identifying inspection relevant categories within lease housing images (precision, recall, F1-score, and error rates) 
+    \item How does a predefined baseline similarity or rule based method perform on the same images, and how do both model families improve upon this baseline?
 \end{itemize}
