@@ -4,9 +4,11 @@
 This project evaluates the extent to which a supervised object detection model (YOLOv8) and a vision language model (LLaVA~1.6) can detect and identify relevant categories in lease housing images. The methodology follows four components: (1) data and annotation, (2) model configuration, (3) experimental protocol, and (4) evaluation strategy.
 
 \subsection{Data and Annotation}
-The dataset is part of two  main sources, 1 Roboflow damage related datasets (paint damage 67 images, crack datasets 1551 images, house damage 3570 images, and asbestos 1331 images), and 2 the internal DGW archive of lease housing images approximately 2000 images at the start of the project. The DGW archive may expand during the project as new inspection images become available.
+The dataset is part of two  main sources publicly available on Roboflow\cite{noauthor_roboflow_nodate}, those datasets contain defect datasets and a private housing inspection dataset. The public datasets include Roboflow damage related datasets (paint damage 67 images, crack datasets 1551 images, house damage 3570 images, and asbestos 1331 images). These datasets form the primary benchmark used for training and evaluating the models.
 
-The Roboflow datasets are used primarily for model training and validation, providing additional labeled examples of damage related categories. In contrast, the DGW archive represents the real inspection environment and will be used as the primary dataset for evaluating and comparing model performance.
+The private dataset consists of approximately 2000 indoor housing images from the DGW archive, captured under variability in lighting, device types, angles, and room conditions, capturing both occupancy and after tenant turnover, resulting in a mix of furnished and unfurnished units. 
+
+The Roboflow datasets are used primarily for model training and validation, providing additional labeled examples of damage related categories. In contrast, the DGW archive represents a real inspection environment and is used as an additional validation dataset to evaluate how well the models generalize to real housing inspection images.
 
 The DGW collection contains heterogeneous indoor images captured across different devices, lighting conditions, camera angles, and room configurations. Images originate from different inspection moments, including both occupied units and units inspected after tenant turnover, resulting in variation in furniture presence and room layout.
 
@@ -14,18 +16,23 @@ At the start of the project, the DGW images are not annotated. Therefore, a subs
 
 For LLaVA, no additional annotation is required. Instead, the model will be prompted using structured textual queries such as identify visible damage in this image or Is there evidence of wear or alterations? The prompts will remain fixed during the experiments to ensure comparability and reproducibility. The outputs produced by LLaVA will be mapped to the same inspection categories used for the YOLOv8 detector to allow consistent evaluation across both models.
 
-\subsection{Model Selection and Justification}
-\textbf{YOLOv8} is selected as a supervised baseline due to its easy implementation, strong documentation, and  performance for small and medium sized datasets. It supports fast training, predictable convergence, and clear output (bounding boxes + confidence scores). These characteristics make it an appropriate reference model for controlled benchmarking. And YOLO is well suited for detecting localized defects or objects in images
+The annotation schema consists of four inspection categories: damage, wear, alteration, and no damage. These categories reflect inspection outcomes used in housing maintenance assessments. 
+
+\subsection{Model Configuration}
+\textbf{YOLOv8}
+YOLOv8 is used as the supervised object detection model in this study. The model produces bounding box detections with associated confidence scores, allowing localization and classification of inspection-relevant categories. 
+
+Training parameters include the number of epochs, batch size, learning rate, confidence threshold, and non maximum suppression threshold. These parameters are kept constant across experiments to ensure reproducibility.
 
 \textbf{LLaVA 1.6} represents the class of open source vision language foundation models trained on large scale heterogeneous image text pairs. Unlike YOLOv8, it does not require task specific training and performs classification through multimodal reasoning. It therefore provides an ideal contrast to a supervised object detector, allowing direct investigation of whether broad multimodal pretraining transfers to structured indoor inspection tasks. The LLaVA 1.6 model produces text output.
 
-The comparison reflects two fundamentally different paradigms highlighted in the literature: supervised detection with localized bounding boxes versus multimodal high level reasoning across domains. Later in the project the output of the 2 models will be harmonized to ensure equal comparing.
+The comparison reflects two fundamentally different paradigms highlighted in the literature: supervised detection with localized bounding boxes versus multimodal high level reasoning across domains. Later in the project the output of the 2 models will be harmonized to ensure consistent comparison.
 
 \subsection{Experimental Protocol}
 The experiment proceeds in three stages.
 
-\textbf{1. Data split and baseline definition.}
-The annotated dataset is divided into train/validation/test subsets using a stratified strategy to reflect real-world class distribution. The dataset will be split into 70\% train, 15\% validation, and 15\% test. A simple heuristic baseline is defined as predicting the majority class present in the training data. This baseline provides a reference point to evaluate whether the models improve over trivial predictions. 
+\textbf{1. Data split}
+The annotated dataset is divided into train/validation/test subsets using a stratified strategy to reflect real-world class distribution. The dataset will be split into 70\% train, 15\% validation, and 15\% test. 
 
 \textbf{2. Model execution.}
 \begin{itemize}
@@ -40,6 +47,9 @@ For YOLOv8, detected bounding boxes are mapped to the inspection category, and d
 
 This enables comparison across identical samples and label definitions.
 
+\textbf{Implementation and reproducibility}
+All experiments are implemented in Python using standard deep learning frameworks. Model training and inference are executed using fixed random seeds to ensure deterministic behavior where possible. The experimental pipeline, including data preprocessing, training procedures, and evaluation scripts, follows a consistent configuration across all experiments to enable reproducibility and fair comparison between models.
+
 \subsection{Evaluation Strategy}
 Evaluation addresses each sub question explicitly.
 
@@ -47,15 +57,11 @@ Evaluation addresses each sub question explicitly.
 Robustness is evaluated by stratifying the test set along real world variability factors (lighting, angle, clutter, device type). The DGW dataset contains sufficient variation in these factors, enabling controlled robustness evaluation across realistic inspection conditions. Models are compared across these subsets using performance degradation curves.
 
 \textbf{Quantitative performance (SRQ2)}  
-Both models are evaluated using a shared set of metrics: precision, recall, F1 score, accuracy, and error rate. Confusion matrices are produced for interpretability. Performance differences are interpreted through metric comparison rather than formal statistical significance testing.
-
-\textbf{Comparison to baseline (SRQ3).}  
-Baseline performance is compared directly with YOLOv8 and LLaVA. This establishes whether either model improves over trivial or rule based predictors.
+Both models are evaluated using a shared set of metrics: precision, recall, F1 score, accuracy. Confusion matrices are produced for interpretability. Performance differences are interpreted through metric comparison rather than formal statistical significance testing.
 
 \textbf{Qualitative analysis.}  
 misidentification is manually reviewed to identify systematic errors, including failure modes related to occlusion, lighting variation, or subtle property changes. This provides insight into the limitations of each paradigm.
 
-\subsection{Reliability and Validity}
 To ensure reliability, all experiments use fixed seeds and deterministic configurations. To ensure internal validity, prompts for LLaVA are standardized and not adapted per image. External validity is addressed by using real DGW housing images rather than synthetic datasets alone.
 
 \subsection{Ethical Considerations}

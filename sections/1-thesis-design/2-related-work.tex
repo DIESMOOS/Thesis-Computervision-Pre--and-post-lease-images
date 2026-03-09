@@ -1,35 +1,35 @@
 \section{Related Work}
 \label{sec:related_work}
 
-Research on automated visual inspection is done in various domains, including building defect detection \cite{Wen_Chen_2024, Kang_Kim_Kim_2025}, indoor scene understanding, remote sensing change detection \cite{Cheng_Huang_Li_Lyu_Xu_Zhao_Zhao_Xiang_2024}, infrastructure monitoring \cite{Shang_Xu_Zhang_Liu_Wang_Ren_Zhang_Dong_He_2023}, medical imaging \cite{Kamraoui_Mansencal_Manjon_Coupé_2022}, waste recognition \cite{Malla_Bazli_Arashpour_2025}, and insurance or damage assessment \cite{Lee_Lee_Park_2024}. Despite differences in application, these studies share the same goals: identifying anomalies and structural changes in real world images captured under uncontrolled or controlled conditions.
+Research on automated visual inspection is done in various domains, including building defect detection \cite{wen_autonomous_2024, kang_improvement_2025}, indoor scene understanding, remote sensing change detection \cite{cheng_change_2024}, infrastructure monitoring \cite{shang_automatic_2023}, medical imaging \cite{kamraoui_longitudinal_2022}, waste recognition \cite{malla_enhancing_2025}, and insurance or damage assessment \cite{lee_automated_2024}. Despite differences in application, these studies share the same goals: identifying anomalies and structural changes in real world images captured under uncontrolled or controlled conditions.
 
 \subsection{Classical and Deep Learning Approaches}
 
-Early inspection methods relied on classical machine learning and crafted features \cite{Awe_Malhi_Budka_Mavengere_Dave_2025}. These approaches struggle viewpoint shifts. Deep learning has become dominant, with CNN-based models such as U-Net and Faster R-CNN, as well as specialized variants including Multi Fusion U-Net \cite{Shang_Xu_Zhang_Liu_Wang_Ren_Zhang_Dong_He_2023}, MobileNet-SSD \cite{Gonçalves_Santos_2023}, urban detection systems \cite{Sukel_Rudinac_Worring_2020}, and object detectors such as YOLO. These supervised detectors rely on specific annotations, which are often limited or inconsistent. Several studies highlight robustness problems caused by real world indoor variation.
+Early inspection methods relied on classical machine learning and crafted features \cite{awe_towards_2025}. These approaches struggle viewpoint shifts. Deep learning has become dominant, with CNN-based models such as U-Net and Faster R-CNN, as well as specialized variants including Multi Fusion U-Net \cite{shang_automatic_2023}, MobileNet-SSD \cite{goncalves_deep_2023}, urban detection systems \cite{sukel_detecting_2020}, and object detectors such as YOLO. These supervised detectors rely on specific annotations, which are often limited or inconsistent. Several studies highlight robustness problems caused by real world indoor variation.
 
-\subsection{Transformer-Based and Multi modal Foundation Models}
+These approaches have been evaluated on datasets such as pavement crack datasets, building defect datasets, and vehicle damage datasets. Reported performance typically ranges between 80–95\% detection accuracy or map depending on dataset complexity \cite{lee_automated_2024, shang_automatic_2023}.
 
-Recent work explores transformer architectures and multi modal foundation models. Examples include GPT based multi modal inspection workflows \cite{Wen_Chen_2024}, industrial anomaly detection benchmarks such as MMAD \cite{Jiang_Li_Deng_Liu_Gao_Zhou_Li_Wang_Zheng_2025}, and large-scale multi modal defect datasets like IMDD-1M \cite{Ni_Chen_Yang_2026}. Vision-language models have also shown value for generalizable defect identification \cite{Malla_Bazli_Arashpour_2025}.
+\subsection{Transformer-Based and Multimodel Foundation Models}
+
+Recent work explores transformer architectures and multi modal foundation models. Examples include GPT based multi modal inspection workflows \cite{wen_autonomous_2024}, industrial anomaly detection benchmarks such as MMAD \cite{jiang_mmad_2025}, and large scale multi modal defect datasets like IMDD-1M \cite{chen_preference_2025}. Vision language models have also shown value for generalizable defect identification \cite{malla_enhancing_2025}.
+
+These studies evaluate vision language models on industrial inspection datasets and anomaly detection benchmarks such as MMAD, where multimodal models demonstrate strong zero shot classification performance and improved generalization compared to task specific detectors \cite{jiang_mmad_2025}.
 
 These models have large scale pretraining rather than domain specific supervision, enabling broad visual reasoning. However, they lack precise localization and are rarely evaluated on structured indoor inspection tasks. No prior study compares supervised detectors and multi modal models under identical conditions.
 
 \subsection{Dataset and Evaluation Challenges}
 
-Across domains, datasets are heterogeneous and typically captured in uncontrolled environments. Challenges include small dataset size, annotation inconsistency, class imbalance, and missing metadata. Public datasets for defect and damage detection include MSSEG2 \cite{msseg2_data}, Roboflow Paint Damage \cite{HKUST}, Crack Detection \cite{crack}, and House Damage \cite{House}. Evaluation typically uses precision, recall, F1 score, IoU, or Dice coefficients, but inconsistent setups limit comparability across studies.
+Across domains, datasets are heterogeneous and typically captured in uncontrolled environments. Challenges include small dataset size, annotation inconsistency, class imbalance, and missing metadata. Public datasets for defect and damage detection include MSSEG2 \cite{noauthor_data_nodate}, Roboflow Paint Damage \cite{hkust_paint_nodate}, Crack Detection \cite{noauthor_crack_nodate}, and House Damage \cite{noauthor_house_nodate}. Evaluation typically uses precision, recall, F1 score, IoU, or Dice coefficients, but inconsistent setups limit comparability across studies.
 
-\subsection{Research Gap}
-
-Two core gaps emerge:
-\begin{enumerate}
-    \item \textbf{Scientific gap:} Direct comparison between supervised object detectors and multi modal foundation models is missing. Existing studies evaluate each model type independently, on unrelated datasets, making their relative robustness and generalization unclear \cite{Jiang_Li_Deng_Liu_Gao_Zhou_Li_Wang_Zheng_2025, Ni_Chen_Yang_2026, Wen_Chen_2024}.
-    \item \textbf{Application gap:} No study has examined multi modal foundation models for structured lease housing inspection, where damage, wear, and alterations must be consistently identified across groups of indoor images \cite{Kang_Kim_Kim_2025}.
-\end{enumerate}
+These datasets differ in size and annotation style. Crack detection datasets contain thousands of labeled images with pixel level annotations, while general damage datasets include bounding box annotations for multiple defect categories. Such heterogeneity makes direct comparison between studies difficult.
 
 \subsection{Why YOLOv8 and LLaVA}
 
-YOLOv8 is a strong, stable supervised baseline: well maintained, well documented, easy to train in PyTorch, computationally efficient, and widely used in inspection and detection tasks \cite{Shang_Xu_Zhang_Liu_Wang_Ren_Zhang_Dong_He_2023, Lee_Lee_Park_2024}. Its reproducibility makes it suitable for controlled comparison.
+YOLOv8 is a strong, stable supervised baseline: well maintained, well documented, easy to train in PyTorch, computationally efficient, and widely used in inspection and detection tasks \cite{shang_automatic_2023, lee_automated_2024}. Its reproducibility makes it suitable for controlled comparison.
 
-LLaVA represents the open source, multi modal foundation model. It has large scale image text pretraining and demonstrates a strong zero shot classification capability \cite{Malla_Bazli_Arashpour_2025}, making it appropriate for evaluating generalization without domain specific fine tuning.
+Also YOLO based detectors are widely used in visual inspection research due to their strong performance in real time object detection tasks and their frequent use in damage detection benchmarks \cite{lee_automated_2024, shang_automatic_2023}. YOLOv8 represents a recent implementation of this detector family and serves as a representative supervised detection baseline.
+
+LLaVA represents the open source, multi modal foundation model. It has large scale image text pretraining and demonstrates a strong zero shot classification capability \cite{malla_enhancing_2025}, making it appropriate for evaluating generalization without domain specific fine tuning.
 
 \subsection{Contribution of This Thesis}
 
