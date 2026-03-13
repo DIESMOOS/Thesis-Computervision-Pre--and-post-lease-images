@@ -4,19 +4,64 @@
 This project evaluates the extent to which a supervised object detection model (YOLOv8) and a vision language model (LLaVA~1.6) can detect and identify relevant categories in lease housing images. The methodology follows four components: (1) data and annotation, (2) model configuration, (3) experimental protocol, and (4) evaluation strategy.
 
 \subsection{Data and Annotation}
-The dataset is part of two  main sources publicly available on Roboflow\cite{noauthor_roboflow_nodate}, those datasets contain defect datasets and a private housing inspection dataset. The public datasets include Roboflow damage related datasets (paint damage 67 images, crack datasets 1551 images, house damage 3570 images, and asbestos 1331 images). These datasets form the primary benchmark used for training and evaluating the models.
-
-The private dataset consists of approximately 2000 indoor housing images from the DGW archive, captured under variability in lighting, device types, angles, and room conditions, capturing both occupancy and after tenant turnover, resulting in a mix of furnished and unfurnished units. 
+The dataset is part of two  main sources publicly available on Roboflow\cite{noauthor_roboflow_nodate}, those datasets contain defect datasets and a private housing inspection dataset. The public datasets include Roboflow damage related datasets (paint damage 67 images\cite{hkust_paint_nodate}, crack datasets 1551 images\cite{noauthor_crack_nodate}, house damage 3570 images\cite{noauthor_house_nodate}, and asbestos 1331 images\cite{noauthor_asbestos_nodate}). These datasets form the primary benchmark used for training and evaluating the models.
 
 The Roboflow datasets are used primarily for model training and validation, providing additional labeled examples of damage related categories. In contrast, the DGW archive represents a real inspection environment and is used as an additional validation dataset to evaluate how well the models generalize to real housing inspection images.
+
+The private dataset consists of approximately 2000 indoor housing images from the DGW archive.
+
+For LLaVA, no additional annotation is required. Instead, the model will be prompted using structured textual queries such as identify visible damage in this image or Is there evidence of wear or alterations? The prompts will remain fixed during the experiments to ensure comparability and reproducibility. The outputs produced by LLaVA will be mapped to the same inspection categories used for the YOLOv8 detector to allow consistent evaluation across both models.
+
+The annotation schema consists of four inspection categories: damage, wear, alteration, and no damage. These categories reflect inspection outcomes used in housing maintenance assessments. 
+
+\subsection{ROBOFLOW Dataset Characteristics}
+
+The publicly available datasets used for training differ in annotation structure, label definitions, and image composition. Understanding these characteristics is important for model performance.
+
+The crack detection dataset consists exclusively of images containing cracks. Images may contain one or multiple cracks within a single frame, with some images containing up to three visible crack instances. The dataset does not contain images without cracks.
+
+The house damage dataset contains images both with and without visible damage. Images without damage are labeled using a \textit{NoDamage} class. Damaged instances are annotated using bounding boxes, the rest of the annotations have color names rather than explicit structural defect categories.
+
+The HKUST paint damage dataset focuses on surface deterioration such as paint damage. Annotations often surround the affected region rather than tightly fitting the defect area, and multiple annotated regions can occur within a single image. Images may therefore contain several labeled damage instances simultaneously.
+
+The asbestos dataset contains annotations representing different types of visual marks associated with asbestos-related materials. Labels include \textit{thick\_dark\_mark}, \textit{thin\_dark\_mark}, \textit{thick\_light\_mark}, and \textit{thin\_light\_mark}. Individual images may contain a large number of annotations, in some cases exceeding twenty bounding boxes per image.
+
+These structural differences across datasets introduce heterogeneity in annotation style, label semantics, and instance density, which must be considered when training object detection models and when interpreting model performance across datasets.
+
+\subsection{DGW dataset characteristics}
+The private dataset is captured under variability in lighting, device types, angles, and room conditions, capturing both occupancy and after tenant turnover, resulting in a mix of furnished and unfurnished units. 
 
 The DGW collection contains heterogeneous indoor images captured across different devices, lighting conditions, camera angles, and room configurations. Images originate from different inspection moments, including both occupied units and units inspected after tenant turnover, resulting in variation in furniture presence and room layout.
 
 At the start of the project, the DGW images are not annotated. Therefore, a subset of the DGW archive will be manually annotated during the project to enable supervised training of the YOLOv8 detector. Annotation will be performed using boxes corresponding to predefined relevant categories: damage, wear, alteration, and no damage. The label schema follows guidance from housing inspection procedures used by DGW.
 
-For LLaVA, no additional annotation is required. Instead, the model will be prompted using structured textual queries such as identify visible damage in this image or Is there evidence of wear or alterations? The prompts will remain fixed during the experiments to ensure comparability and reproducibility. The outputs produced by LLaVA will be mapped to the same inspection categories used for the YOLOv8 detector to allow consistent evaluation across both models.
+\subsection{Dataset labels}
 
-The annotation schema consists of four inspection categories: damage, wear, alteration, and no damage. These categories reflect inspection outcomes used in housing maintenance assessments. 
+\begin{table}[H]
+\centering
+\small
+
+\resizebox{\linewidth}{!}{
+\begin{tabular}{|p{3cm}|p{4cm}|p{3.5cm}|}
+\hline
+\textbf{Dataset} & \textbf{Labels Used} & \textbf{Role in Study} \\
+\hline
+DGW Housing Dataset & Damage, Wear, Alteration, No Damage & Evaluation dataset \\
+\hline
+Crack Detection Dataset & Crack instances & Training (structural cracks) \\
+\hline
+House Damage Dataset & NoDamage + damage boxes & Training (damage vs no damage) \\
+\hline
+HKUST Paint Damage Dataset & Surface deterioration annotations & Training (paint wear) \\
+\hline
+Asbestos Dataset & thick\_dark\_mark, thin\_dark\_mark, thick\_light\_mark, thin\_light\_mark & Training (material marks) \\
+\hline
+\end{tabular}
+}
+
+\caption{Datasets and labels used in the experiments.}
+\label{tab:dataset_usage}
+\end{table}
 
 \subsection{Model Configuration}
 \textbf{YOLOv8}
@@ -36,7 +81,7 @@ The annotated dataset is divided into train/validation/test subsets using a stra
 
 \textbf{2. Model execution.}
 \begin{itemize}
-    \item YOLOv8 is trained on the annotated training data for a fixed number of epochs with early stopping. The training data consists of the annotated DGW subset supplemented with the Roboflow datasets to increase the diversity of damage examples. Hyper parameters are fixed during training to ensure reproducibility. 
+    \item YOLOv8 is trained on the annotated training data for a fixed number of epochs with early stopping. The training data consists of the annotated DGW subset for testing and the Roboflow datasets for training and testing to increase the diversity of damage examples. Hyper parameters are fixed during training to ensure reproducibility. 
     \item LLaVA is applied directly without training. Each test image receives the same prompt, and the model outputs textual descriptions that are mapped to the predefined inspection categories. 
 \end{itemize}
 
@@ -51,13 +96,24 @@ This enables comparison across identical samples and label definitions.
 All experiments are implemented in Python using standard deep learning frameworks. Model training and inference are executed using fixed random seeds to ensure deterministic behavior where possible. The experimental pipeline, including data preprocessing, training procedures, and evaluation scripts, follows a consistent configuration across all experiments to enable reproducibility and fair comparison between models.
 
 \subsection{Evaluation Strategy}
-Evaluation addresses each sub question explicitly.
+
+The evaluation strategy is designed to address both sub research questions using the same inspection oriented category scheme. Public datasets are used primarily to support YOLOv8 training, while the DGW dataset is used as the main evaluation set because it reflects realistic housing inspection conditions.
+
+For YOLOv8, quantitative evaluation is performed on the annotated DGW test set using precision, recall, and mAP. These metrics assess how accurately the detector localizes and classifies inspection relevant categories under realistic conditions. The public datasets are not used as the main benchmark for final performance claims, but as supporting training data to improve category coverage and robustness.
+
+For LLaVA 1.6, evaluation is also performed on DGW images. Since LLaVA does not produce bounding boxes, its textual outputs are mapped to the predefined categories of damage, wear, alteration, and no damage. Performance is then assessed at category level by comparing predicted categories to the reference labels of the DGW test images. This enables comparison with YOLOv8 at the inspection category level, even though the output format differs.
+
+Robustness is evaluated using DGW images because this dataset contains realistic variation in lighting conditions, device types, room layouts, furniture presence, and viewing angles. This makes the DGW dataset the most suitable dataset for assessing practical inspection performance under real world variability.
+
+The public datasets serve a complementary role. The crack dataset supports learning of repeated crack patterns, the house damage dataset provides both damaged and undamaged scenes, the HKUST paint damage dataset contributes examples of surface deterioration, and the asbestos dataset provides densely annotated defect-like visual marks. These datasets improve the diversity of training examples but do not replace DGW as the primary evaluation benchmark.
+
+In summary, public datasets are used mainly for training support, while the DGW dataset is used to evaluate quantitative performance, category level comparison, and robustness in a realistic inspection context.
 
 \textbf{Model robustness (SRQ1)}  
-Robustness is evaluated by stratifying the test set along real world variability factors (lighting, angle, clutter, device type). The DGW dataset contains sufficient variation in these factors, enabling controlled robustness evaluation across realistic inspection conditions. Models are compared across these subsets using performance degradation curves.
+Robustness is evaluated using the DGW dataset by stratifying the test images according to real world variability factors such as lighting conditions, camera angle, device type, and scene clutter. Performance is measured separately across these subsets to observe performance degradation under changing conditions. This allows comparison of how robust YOLOv8 and LLaVA are when applied to realistic housing inspection scenarios.
 
 \textbf{Quantitative performance (SRQ2)}  
-Both models are evaluated using a shared set of metrics: precision, recall, F1 score, accuracy. Confusion matrices are produced for interpretability. Performance differences are interpreted through metric comparison rather than formal statistical significance testing.
+Quantitative evaluation is performed on the DGW test set. For YOLOv8, standard object detection metrics are used, including precision, recall, and mean Average Precision, which measure both localization and classification accuracy of detected defects. For LLaVA 1.6, the generated textual outputs are mapped to the predefined inspection categories. Performance is then measured using classification metrics such as accuracy, precision, recall, and F1 score at the category level. Confusion matrices are generated to support interpretation of model behavior.
 
 \textbf{Qualitative analysis.}  
 misidentification is manually reviewed to identify systematic errors, including failure modes related to occlusion, lighting variation, or subtle property changes. This provides insight into the limitations of each paradigm.

@@ -4,7 +4,7 @@ Housing corporations increasingly rely on image archives to document the conditi
 
 Deep learning has shown performance across visual inspection domains, including infrastructure, monitoring, medical imaging, and anomaly detection \cite{cheng_change_2024}. Within supervised object detection, architectures such as YOLOv8 provide a fast, stable, and widely adopted baseline \cite{jocher_ultralytics_2023}. YOLOv8 is extra suitable for this project because it can be trained on small and medium datasets, supports different structured categories, and offers reproducible results with limited computation power as mentioned in \cite{goncalves_deep_2023}.
 
-In parallel, multimodal foundation models have emerged. Models such as LLaVA-1.6 are pretrained on large scale image, text corpora and can perform open vocabulary visual reasoning and classification without task specific labels. These models demonstrate strong generalization across domains and increasingly appear in inspection oriented research, including industrial anomaly detection and indoor defect description \cite{jiang_mmad_2025, wen_autonomous_2024}. Due to foundational pretraining,  foundation models can handle indoor variability lighting, viewpoint changes, and even clutter without finetuning \cite{jiang_mmad_2025,wen_autonomous_2024}.
+In parallel, multimodal foundation models have emerged. Models such as LLaVA-1.6 are pretrained on large scale image, text corpora and can perform open vocabulary visual reasoning and classification without task specific labels. These models demonstrate strong generalization across domains and increasingly appear in inspection oriented research, including industrial anomaly detection and indoor defect description \cite{jiang_mmad_2025, wen_autonomous_2024}. Due to foundational pretraining,  foundation models can handle indoor variability lighting, viewpoint changes, and even clutter without finetuning 
 
 Although related work shows that both supervised detectors and foundation models can detect defects or anomalies, these model families are always evaluated separately, using different datasets, metrics, and tasks. Direct comparison between the supervised object detection networks and the multimodal foundation models under identical conditions remains missing. As a result, their relative robustness, generalization capacity, and suitability for structured inspection scenarios are not yet fully understood.
 
@@ -18,7 +18,9 @@ To answer this question, the following sub-questions are made:
 
 \textbf{Sub-Research Questions}
 \begin{itemize}
-    \item What is the robustness of convolutional object detection networks and vision language foundation models when applied to lease housing images under real-world variability (lighting variation, camera angle differences and device heterogeneity), measured as performance degradation across these conditions?
-    
-    \item How do convolutional detection networks and foundation vision language models compare quantitatively in detecting and identifying inspection relevant categories within lease housing images? 
+
+\item What is the robustness of YOLOv8 object detection models and the LLaVA 1.6 vision language model when applied to lease housing inspection images from Roboflow\cite{noauthor_roboflow_nodate} and DGW dataset under real world variability lighting variation, camera angle differences, and device heterogeneity, measured as performance degradation across these conditions?
+
+\item How do YOLOv8\cite{jocher_ultralytics_2023} object detection models and the LLaVA 1.6 vision language model compare quantitatively in detecting and identifying inspection relevant categories within lease housing images from the DGW and Roboflow datasets?
+
 \end{itemize}

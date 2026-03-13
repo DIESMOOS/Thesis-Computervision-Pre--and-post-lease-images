@@ -3,6 +3,8 @@
 
 Research on automated visual inspection is done in various domains, including building defect detection \cite{wen_autonomous_2024, kang_improvement_2025}, indoor scene understanding, remote sensing change detection \cite{cheng_change_2024}, infrastructure monitoring \cite{shang_automatic_2023}, medical imaging \cite{kamraoui_longitudinal_2022}, waste recognition \cite{malla_enhancing_2025}, and insurance or damage assessment \cite{lee_automated_2024}. Despite differences in application, these studies share the same goals: identifying anomalies and structural changes in real world images captured under uncontrolled or controlled conditions.
 
+YOLO based detectors originate from the single stage detection framework introduced by Redmon et al. \cite{redmon_you_2016}, Recent implementations such as YOLOv8 provide improved training stability and usability for applied detection tasks \cite{jocher_ultralytics_2023}.
+
 \subsection{Classical and Deep Learning Approaches}
 
 Early inspection methods relied on classical machine learning and crafted features \cite{awe_towards_2025}. These approaches struggle viewpoint shifts. Deep learning has become dominant, with CNN-based models such as U-Net and Faster R-CNN, as well as specialized variants including Multi Fusion U-Net \cite{shang_automatic_2023}, MobileNet-SSD \cite{goncalves_deep_2023}, urban detection systems \cite{sukel_detecting_2020}, and object detectors such as YOLO. These supervised detectors rely on specific annotations, which are often limited or inconsistent. Several studies highlight robustness problems caused by real world indoor variation.
@@ -25,12 +27,33 @@ These datasets differ in size and annotation style. Crack detection datasets con
 
 \subsection{Why YOLOv8 and LLaVA}
 
-YOLOv8 is a strong, stable supervised baseline: well maintained, well documented, easy to train in PyTorch, computationally efficient, and widely used in inspection and detection tasks \cite{shang_automatic_2023, lee_automated_2024}. Its reproducibility makes it suitable for controlled comparison.
+YOLOv8 is selected as the supervised object detection baseline for this study. 
+It represents a recent and widely adopted implementation of the YOLO detector family, 
+which is known for strong performance in real time object detection tasks. 
+YOLO based detectors are frequently used in visual inspection applications due 
+to their ability to localize defects using bounding boxes while maintaining high 
+inference speed and stable training behavior.
 
-Also YOLO based detectors are widely used in visual inspection research due to their strong performance in real time object detection tasks and their frequent use in damage detection benchmarks \cite{lee_automated_2024, shang_automatic_2023}. YOLOv8 represents a recent implementation of this detector family and serves as a representative supervised detection baseline.
+YOLOv8 is particularly suitable for this study because it supports training on 
+moderate sized datasets, integrates well with common deep learning frameworks 
+such as PyTorch, and provides reproducible results using standardized training 
+pipelines. Its architecture allows simultaneous localization and classification of inspection relevant defects, making it a representative supervised baseline for inspection oriented computer vision tasks.
 
-LLaVA represents the open source, multi modal foundation model. It has large scale image text pretraining and demonstrates a strong zero shot classification capability \cite{malla_enhancing_2025}, making it appropriate for evaluating generalization without domain specific fine tuning.
+In contrast, LLaVA 1.6 represents a multimodal vision language foundation model. Unlike YOLOv8, it does not rely on task specific training for the inspection task but instead uses large scale multimodal pretraining to perform visual reasoning through natural language prompts\cite{liu_visual_2023}. This enables zero shot or prompt-based 
+classification of inspection relevant issues without explicit bounding box training. 
+
+Comparing YOLOv8 and LLaVA 1.6 therefore reflects two fundamentally different 
+approaches to visual inspection supervised object detection based on explicit 
+annotations versus multimodal reasoning based on large scale pretraining. 
+Evaluating both models under identical datasets and inspection categories 
+provides insight into how well foundation models can generalize to structured 
+inspection tasks traditionally handled by supervised detectors.
+
+This comparison is particularly relevant in the context of housing inspection, 
+where labeled datasets are often limited and inspection conditions vary 
+significantly. Investigating the performance of both paradigms helps determine whether multimodal foundation models can complement or potentially reduce 
+the reliance on fully supervised detection pipelines.
 
 \subsection{Contribution of This Thesis}
 
-This thesis provides the first controlled, dataset-identical comparison of a supervised detector (YOLOv8) and a multi modal foundation model (LLaVA) for structured lease housing image assessment. By evaluating both model families under identical metrics and data, the study addresses a recurring gap in the literature and builds a foundation for future inspection-oriented benchmarking.
+This thesis provides the first controlled, dataset identical comparison of a supervised detector YOLOv8 and a multi modal foundation model LLaVA for structured lease housing image assessment. By evaluating both model families under identical metrics and data, the study addresses a recurring gap in the literature and builds a foundation for future inspection oriented benchmarking.
