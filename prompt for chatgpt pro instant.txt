@@ -1,0 +1,61 @@
+
+
+I want you to act as a critical thesis supervisor, a technical product designer, and a practical software engineer at the same time.  Your goal is to help me design a working, reproducible PoC web application for my thesis. Be critical, structured, and concise. Do not give long explanations.
+
+
+
+I am building a housing inspection comparison system. The workflow is as follows. A user selects or enters a property such as a house, apartment, or garage. The system retrieves an old inspection report (text) and an old set of images for that property. The user then uploads a new set of images. The system analyzes the new images using two separate pipelines: YOLOv8 and LLaVA 1.6 for my thesis i will need to compair them both for the same task and compair output and accuracy. YOLOv8 is normaly used for object detection and LLaVA 1.6 for vision-language reasoning. so we need to find a way to compair and get the same sort of output. The system then compares the old and new situation at property level, meaning across the full group of images. 
+
+at first the models and output are the most important things and later when i say i will we need to make the app after the models are correctly working and we have the most important part for the thesis. i have put the thesis design into the documents of this chat read it now. 
+
+
+The system must detect and classify the following categories:
+damage, wear, alteration, and no damage.
+
+For both pipelines separately, the output must include 
+* detected categories
+* number of detections per category
+* which image contains which detections
+* a short summary at property level
+* a comparison with the old report (for example from 1 damage to 3 damages)
+* a simple suggestion such as whether inspection is recommended
+* a disclaimer that results must be checked by a human
+
+Important constraints:
+* the system must be reproducible
+* category definitions must remain fixed
+* LLaVA prompts must be fixed and consistent
+* YOLO is trained on Roboflow datasets
+* DGW dataset will only be used and connected later for evaluation after the evaluation of the roboflo datasets, not in the first PoC build
+* YOLO outputs bounding boxes and LLaVA outputs text, but both must be made comparable
+
+Do not jump directly to solutions.
+
+First, ask me the most important questions needed to make this system technically correct, comparable, reproducible, and buildable. Ask a maximum of 10 questions. Keep everything short and precise.
+
+
+
+Second, identify the main weaknesses or risks in my idea. Be critical and direct. Focus on methodological issues, unfair comparisons between YOLO and LLaVA, data problems, prompt risks, and reproducibility issues. Maximum 6 points.
+
+
+
+Third, propose a concrete PoC architecture. Include frontend pages, backend components, model pipelines, data flow, and output structure. Keep it short and practical.
+
+
+
+Fourth, define the minimal viable PoC that is realistic to build and still valid for a thesis. Be clear about what to include and what to ignore.
+
+
+Fifth, give a short reproducibility checklist with what must be fixed and logged, such as models, parameters, prompts, datasets, and outputs.
+
+
+When relevant, also include short code-level suggestions (for example Python structure, API endpoints, or libraries), but keep it concise and practical.
+
+
+
+Use bullet points. No long paragraphs. No generic advice. Prioritize what actually impacts whether this system will work.
+
+
+If something in my design is weak or unclear, challenge it directly. Do not assume my approach is correct.
+
+dont use huggingface use your own code because they might have firuses and trojan horses in them.

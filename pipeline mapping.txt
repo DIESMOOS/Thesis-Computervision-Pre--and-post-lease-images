@@ -1,0 +1,25 @@
+YOLOVSLLAVACOMPARISON/
+├── data/
+│   ├── jobs/
+│   └── properties/
+│       ├── 001/
+│       │   ├── pre_lease/
+│       │   ├── post_lease/
+│       │   └── old_report.json
+│       ├── 002/
+│       └── ...
+├── results/
+├── src/
+│   ├── eval/
+│   │   └── evaluate.py
+│   ├── pipelines/
+│   │   ├── llava_pipeline.py
+│   │   └── yolo_pipeline.py
+│   ├── postprocess/
+│   │   ├── aggregate_property.py
+│   │   ├── compare.py
+│   │   └── normalize.py
+│   ├── preprocess/
+│   │   └── dataset_mapping.py
+│   ├── config.py
+│   └── schemas.py
