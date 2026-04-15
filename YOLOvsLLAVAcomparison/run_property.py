@@ -1,4 +1,5 @@
 import json
+import sys
 from pathlib import Path
 
 from src.pipelines.yolo_pipeline import run_yolo_on_folder
@@ -8,10 +9,24 @@ from src.postprocess.aggregate_property import aggregate_property
 from src.postprocess.compare import compare_old_new
 
 
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "data"
+RESULTS_DIR = BASE_DIR / "results"
+
+
 def main(property_id: str):
-    property_dir = Path("data/properties") / property_id
+    property_dir = DATA_DIR / "properties" / property_id
     new_images_dir = property_dir / "post_lease"
     old_report_path = property_dir / "old_report.json"
+
+    if not property_dir.exists():
+        raise FileNotFoundError(f"Property folder not found: {property_dir}")
+
+    if not old_report_path.exists():
+        raise FileNotFoundError(f"Old report not found: {old_report_path}")
+
+    if not new_images_dir.exists():
+        raise FileNotFoundError(f"post_lease folder not found: {new_images_dir}")
 
     with open(old_report_path, "r", encoding="utf-8") as f:
         old_report = json.load(f)
@@ -46,8 +61,8 @@ def main(property_id: str):
         }
     }
 
-    out_path = Path("results") / f"{property_id}_result.json"
-    out_path.parent.mkdir(parents=True, exist_ok=True)
+    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = RESULTS_DIR / f"{property_id}_result.json"
 
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(output, f, indent=2)
@@ -55,5 +70,21 @@ def main(property_id: str):
     print(f"Saved to {out_path}")
 
 
+def get_property_id():
+    # Option 1: command line argument
+    if len(sys.argv) > 1:
+        return sys.argv[1]
+
+    # Option 2: ask user in terminal
+    available = sorted(
+        [p.name for p in (DATA_DIR / "properties").iterdir() if p.is_dir()]
+    )
+    print("Available properties:", ", ".join(available))
+
+    property_id = input("Enter property ID to analyze: ").strip()
+    return property_id
+
+
 if __name__ == "__main__":
-    main("001")
+    pid = get_property_id()
+    main(pid)
