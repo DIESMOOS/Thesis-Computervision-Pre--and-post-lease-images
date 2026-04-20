@@ -184,9 +184,8 @@
 \newcommand\firstcompanylogopath[1]{\gdef\@firstcompanylogopath{#1}}  % media/titlepage/sample_company_1.png
 \newcommand\secondcompanylogopath[1]{\gdef\@secondcompanylogopath{#1}}  % media/titlepage/sample_company_2.png
 %% Set default values
-\frontpicturepath{media/titlepage/sample-cover.jpeg}
-\firstcompanylogopath{media/titlepage/ams-ds-logo.png}
-\secondcompanylogopath{media/titlepage/sample-company-1.png}
+\frontpicturepath{media/titlepage/llavayolocompair.png}
+\firstcompanylogopath{media/titlepage/dgw.png}
 
 % Student data
 \newcommand\authorname[1]{\gdef\@authorname{#1}}
