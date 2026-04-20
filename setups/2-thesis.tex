@@ -9,7 +9,7 @@
 % Options:
 % Choose one of:
 %% `is` - Information Systems
-%% `ds` - Data Science 
+%`ds` - Data Science 
 % Add (separated by `,`):
 %% `nolinenumbering` - If you want to remove line numbering on submission
 %% `draftmargins` - If you would like to give your reviewer more space for comments
@@ -17,7 +17,8 @@
 %% `nofirstcompanypicture` - If you do not wish to have a graphic on your front-page
 %% `nosecondcompanypicture` - If you do not wish to have a graphic on your front-page
 \documentclass[ds]{mscthesis}
-
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, shapes.geometric}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DOCUMENT METADATA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -30,17 +31,17 @@
 \date{Fill In The Date In Format DD.MM.YYYY}
 
 % 4-5 keywords should do the trick. They should ideally be phrases of 2-4 words or single words.
-\keywords{keywords, belong, here, with, commas, like, this}
+\keywords{Computer Vision, YOLOv8, LLaVA, Vision Language Models, Damage Detection, Housing Inspection, Multi modal Comparison, Output Harmonization}
 
 % Author data
-\authorname{Your Name}
-\authorid{Your Student ID}
-\authoremail{your@student.mail}
+\authorname{Dies de Haan}
+\authorid{15879062}
+\authoremail{dies.de.haan@student.uva.nl}
 
 % Supervisors
-\uvasupervisorname{UvA Supervisor}
+\uvasupervisorname{Arun Mukundan}
 \uvasupervisoraffiliation{UvA Supervisor}
-\uvasupervisoremail{supervisor@uva.nl}
+\uvasupervisoremail{a.mukundan@uva.nl}
 
 % Comment if you do not have an external supervisor
 \externalsupervisorname{External Supervisor} \externalsupervisoraffiliation{External Supervisor}
@@ -72,15 +73,15 @@ Write your abstract here.
 \maketitle
 
 \section*{Github Repository}
-\url{https://github.com/you/your_awesome_thesis_repo}
+\url{https://github.com/DIESMOOS/Thesis-Computervision-Pre--and-post-lease-images/settings}
 
 % Sections; Try to stick to this setup but you can comment each section
-\input{sections/2-thesis/1-introduction.tex}
-\input{sections/2-thesis/2-related-work.tex}
+%\input{sections/2-thesis/1-introduction.tex}
+%\input{sections/2-thesis/2-related-work.tex}
 \input{sections/2-thesis/3-methodology.tex}
-\input{sections/2-thesis/4-results.tex}
-\input{sections/2-thesis/5-discussion.tex}
-\input{sections/2-thesis/6-conclusion.tex}
+%\input{sections/2-thesis/4-results.tex}
+%\input{sections/2-thesis/5-discussion.tex}
+%\input{sections/2-thesis/6-conclusion.tex}
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{bibliographies/references}
