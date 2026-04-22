@@ -1,7 +1,238 @@
 \section{Methodology}
 \label{sec:methodology}
-% Focus on what you add to the existing method. Explain what you will do and why (and how). Do not forget to characterize your research design. There should be a sub-section on the evaluation. 
-%For DS students, this normally means using manually labelled or ground truth data. For IS students, it is not always needed to have a separate methodology section. You can also integrate the approach with the results in one section. It depends on your type of research what is best fitting.
-Write about your methodology here. Focus on your own contribution. Indicate exactly how you will assess your work in terms of evaluation.
 
-% It is possible to use a separate section for the Experimental Setup, which then focuses on all settings used in your experiments. It also possible to address the settings in a sub-section under Methodology. 
+This study adopts a comparative experimental design to evaluate two fundamentally different computer vision systems for inspection oriented image analysis. a supervised object detection model YOLOv8 and a multi modal vision-language model LLaVA 1.6. The objective is to compare their ability to detect and identify inspection relevant categories in housing related images under a shared task definition.
+
+This approach addresses a gap in existing research, where supervised detection models and multi modal foundation models are typically evaluated separately, using different datasets, tasks, and metrics. By aligning both models within a single experimental framework, this study enables a controlled comparison of their performance, robustness, and practical applicability.
+
+The methodology describes the experimental procedure and justifies the design choices. Its main contribution lies in the harmonization of fundamentally different model outputs localized detections and textual descriptions—into a shared inspection category space.
+
+\subsection{Research Design}
+\label{subsec:research_design}
+
+The research is positioned in the field of computer vision for defect detection and inspection analysis. It follows a comparative experimental design in which two model paradigms are evaluated under identical task conditions:
+
+\begin{itemize}
+    \item \textbf{YOLOv8}, a supervised object detection model that produces bounding boxes and class predictions;
+    \item \textbf{LLaVA 1.6}, a multi modal vision-language model that generates textual interpretations based on image input and prompts.
+\end{itemize}
+
+Both models are applied to the same inspection task and evaluated using a shared category scheme. Their outputs are subsequently aligned to enable direct comparison. This design allows differences in performance to be attributed to the model paradigm rather than to differences in data or evaluation setup.
+
+The novelty of the methodology lies in (i) evaluating both models under identical conditions, (ii) introducing a shared inspection oriented label space, and (iii) harmonizing heterogeneous outputs for comparison.
+
+\subsection{Data Sources}
+\label{subsec:data_sources}
+
+The experimental setup is based on publicly available datasets obtained through Roboflow, which provide annotated examples of damage related visual patterns. The datasets used are
+
+\begin{itemize}
+    \item Paint damage dataset (67 images)
+    \item Crack detection dataset (1551 images)
+    \item House damage dataset (3570 images)
+    \item Asbestos dataset (1331 images)
+\end{itemize}
+
+These datasets differ in annotation structure, label definitions, and visual characteristics. Rather than treating them as a single benchmark, they are used as heterogeneous source material for constructing a unified inspection task.
+
+A private housing inspection dataset (DGW) is available as future validation material for real world evaluation. However, it is not part of the current experimental setup and is therefore not used as a primary data source in this stage.
+
+\subsection{Dataset Harmonization}
+\label{subsec:dataset_harmonization}
+
+The Roboflow datasets exhibit substantial heterogeneity. Some datasets contain only positive examples (crack detection), while others include both damaged and undamaged images. Label definitions vary and are often not directly aligned with inspection terminology.
+
+To enable meaningful comparison, all datasets are harmonized into a shared inspection oriented label scheme. This step is necessary to reduce label inconsistency and to ensure that both models are evaluated on the same conceptual task.
+
+\subsection{Inspection Categories}
+\label{subsec:inspection_categories}
+
+The shared label scheme consists of four inspection-relevant categories:
+
+\begin{itemize}
+    \item \textbf{Damage}: structural or material damage such as cracks, holes, or breakage;
+    \item \textbf{Wear}: gradual deterioration such as discoloration or surface aging;
+    \item \textbf{Alteration}: visible modification or deviation from the intended structure;
+    \item \textbf{No damage}: absence of inspection-relevant issues.
+\end{itemize}
+
+This schema is derived from the application domain rather than from the original dataset labels. All source labels are mapped to these categories where possible. Labels that do not align clearly are excluded or treated cautiously during interpretation.
+
+\subsection{Model Selection}
+\label{subsec:model_selection}
+
+YOLOv8 is selected as the supervised baseline due to its strong performance, stable training behavior, and ability to localize defects through bounding boxes. It represents the standard approach in many inspection-related computer vision tasks.
+
+LLaVA 1.6 is selected as the multi modal baseline because it enables prompt-based visual reasoning without task specific training. It represents a fundamentally different approach based on large-scale multi modal pretraining.
+
+The comparison between these models reflects a key trade-off: supervised localization versus general multi modal reasoning. This makes the comparison both methodologically relevant and aligned with current developments in the field.
+
+\subsection{Pipeline Model}
+\label{subsec:pipeline_model}
+
+The experimental setup is organized as a unified pipeline model that enables a controlled comparison between YOLOv8 and LLaVA 1.6. Rather than evaluating both models independently, they are embedded in the same processing framework consisting of four main stages: data preparation, parallel model execution, output harmonization, and evaluation. This structure ensures that differences in performance can be attributed to the model paradigms themselves rather than to inconsistencies in data handling or evaluation design.
+
+
+\begin{center}
+\resizebox{\columnwidth}{!}{%
+\begin{tikzpicture}[
+    node distance=0.9cm and 1.4cm,
+    every node/.style={font=\scriptsize, align=center},
+    block/.style={
+        rectangle,
+        rounded corners=6pt,
+        draw=black,
+        thick,
+        minimum width=3.4cm,
+        minimum height=0.9cm,
+        fill=gray!10
+    },
+    modelblock/.style={
+        rectangle,
+        rounded corners=6pt,
+        draw=black,
+        thick,
+        minimum width=3.1cm,
+        minimum height=0.9cm,
+        fill=blue!8
+    },
+    evalblock/.style={
+        rectangle,
+        rounded corners=6pt,
+        draw=black,
+        thick,
+        minimum width=3.5cm,
+        minimum height=0.9cm,
+        fill=green!8
+    },
+    line/.style={-{Latex[length=2mm]}, thick}
+]
+
+% Top block
+\node[block] (data) {Public Roboflow Datasets\\
+Paint damage, crack detection,\\
+house damage, asbestos};
+
+% Second block
+\node[block, below=of data] (prep) {Preprocessing and Label Harmonization\\
+Map labels to:\\
+Damage / Wear / Alteration / No damage};
+
+% Left and right branches
+\node[modelblock, below left=1.4cm and 1.2cm of prep] (yolo) {YOLOv8 Branch\\
+Train on harmonized data\\
+and infer on test images};
+
+\node[modelblock, below right=1.4cm and 1.2cm of prep] (llava) {LLaVA 1.6 Branch\\
+Apply fixed prompts\\
+and infer on test images};
+
+% Merge block LOWER than before
+\node[block, below=2.7cm of prep] (harm) {Output Harmonization\\
+Map outputs to shared\\
+image-level categories};
+
+% Bottom evaluation block
+\node[evalblock, below=of harm] (eval) {Evaluation\\
+YOLOv8: Precision / Recall / mAP\\
+Shared: Accuracy / Precision / Recall / F1\\
+Confusion matrices + qualitative analysis};
+
+% Arrows
+\draw[line] (data) -- (prep);
+\draw[line] (prep.south) |- (yolo.north);
+\draw[line] (prep.south) |- (llava.north);
+\draw[line] (yolo.south) |- (harm.north);
+\draw[line] (llava.south) |- (harm.north);
+\draw[line] (harm) -- (eval);
+
+\end{tikzpicture}%
+}
+\captionof{figure}{Overview of the experimental pipeline used to enable a controlled comparison between YOLOv8 and LLaVA 1.6 under a shared inspection-category framework.}
+\label{fig:pipeline}
+\end{center}
+
+
+Figure~\ref{fig:pipeline} shows the overall pipeline model used in this study. The process starts with publicly available Roboflow datasets, which are first harmonized into a shared inspection category scheme. The prepared data is then used in two parallel branches. In the first branch, YOLOv8 is trained on the harmonized annotated data and applied to test images to produce structured detections. In the second branch, LLaVA 1.6 processes the same test images using fixed prompts and generates textual descriptions. Because these outputs are fundamentally different, they are subsequently transformed into a shared image-level representation through a rule-based harmonization step. The aligned outputs are then evaluated using both detection and classification metrics, supported by confusion matrices and qualitative error analysis.
+
+This pipeline model is central to the methodology because it operationalizes the comparison between supervised detection and multi modal reasoning within a single consistent framework.
+\subsection{Experimental Setup}
+\label{subsec:experimental_setup}
+
+Figure~\ref{fig:pipeline} illustrates the experimental pipeline used in this study. The workflow consists of four main stages: data preparation, model execution, output harmonization, and evaluation.
+
+\subsubsection{Data preparation}
+
+The datasets are first processed by mapping their original labels to the shared inspection categories. Where necessary, labels are merged or reinterpreted to ensure consistency. The resulting dataset is then formatted for model input.
+
+For YOLOv8, the data is divided into training, validation, and test sets using a stratified split of 70\%, 15\%, and 15\%, where feasible. This ensures that class distributions are preserved across splits.
+
+For LLaVA, the test images are used directly without additional preprocessing beyond standard input formatting.
+
+\subsubsection{YOLOv8 training}
+
+YOLOv8 is trained on the harmonized dataset using pretrained weights. Training is performed with fixed hyper parameters to ensure reproducibility and comparability. These include the number of epochs, batch size, input resolution, learning rate, and detection thresholds.
+
+The final model is selected based on validation performance and evaluated on the test set.
+
+\subsubsection{LLaVA inference}
+
+LLaVA 1.6 is applied in inference mode using fixed prompt templates. Each image is evaluated using the same prompts to ensure consistency and avoid bias. Example prompts include:
+
+\begin{itemize}
+    \item ``Identify visible damage in this image.''
+    \item ``Is there evidence of wear or alterations in this image?''
+\end{itemize}
+
+No fine-tuning is performed, as the goal is to assess zero-shot performance in an inspection context.
+
+\subsubsection{Output harmonization}
+
+YOLOv8 produces bounding boxes with class predictions, while LLaVA produces textual descriptions. To enable comparison, both outputs are mapped to the shared inspection categories.
+
+For YOLOv8, detections below a confidence threshold are removed, and remaining detections are aggregated to image-level category predictions.
+
+For LLaVA, textual outputs are converted into category labels using a predefined keyword-based mapping scheme. Ambiguous cases are flagged for qualitative analysis.
+
+This harmonization step is central to the methodology, as it enables direct comparison between fundamentally different output formats.
+
+\subsection{Evaluation Metrics}
+\label{subsec:evaluation_metrics}
+
+Evaluation is performed using both detection and classification metrics.
+
+For YOLOv8, performance is measured using:
+
+\begin{itemize}
+    \item Precision
+    \item Recall
+    \item mean Average Precision (mAP)
+\end{itemize}
+
+For the shared comparison between models, image level classification metrics are used:
+
+\begin{itemize}
+    \item Accuracy
+    \item Precision
+    \item Recall
+    \item F1-score
+\end{itemize}
+
+Confusion matrices are used to analyze category-level errors and misclassifications.
+
+\subsection{Qualitative Analysis}
+\label{subsec:qualitative_analysis}
+
+To complement quantitative evaluation, a qualitative analysis is conducted on representative examples. Misclassifications and ambiguous predictions are examined to identify recurring failure modes, such as subtle damage, visual clutter, or unclear model interpretations.
+
+\subsection{Validity, Reliability, and Reproducibility}
+\label{subsec:validity_reliability}
+
+Internal validity is ensured by evaluating both models under identical conditions, using fixed prompts and consistent training settings. Construct validity is supported by aligning all data and outputs to inspection-relevant categories.
+
+Reliability is supported through consistent preprocessing, fixed configurations, and documented procedures. Reproducibility is ensured by implementing the pipeline in Python and reporting all relevant settings.
+
+\subsection{Ethical Considerations}
+\label{subsec:ethical_considerations}
+
+The experiments are conducted on publicly available datasets in a controlled research setting. The study is intended as decision-support research and does not replace human inspection judgment.
