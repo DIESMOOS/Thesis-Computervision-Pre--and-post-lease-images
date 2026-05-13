@@ -4,22 +4,13 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 from pathlib import Path
 from ultralytics import YOLO
 
-# ---------------------------------------------------------
-# TEMP TEST CONFIG
-# ---------------------------------------------------------
-# Later replace with your trained model path, for example:
-# MODEL_PATH = "models/yolo/best.pt"
-MODEL_PATH = "yolov8n.pt"
 
+MODEL_PATH = "yolov8n.pt"  # later: "models/yolo/best.pt"
 CONF_THRESHOLD = 0.25
 IMAGE_EXTS = {".jpg", ".jpeg", ".png"}
 
-# ---------------------------------------------------------
-# TEMP CATEGORY MAP
-# ---------------------------------------------------------
-# This is only for pipeline testing with a generic YOLO model.
-# A generic coco model does not know your thesis classes.
-# Later replace this with the actual class mapping from your trained model.
+THESIS_CATEGORIES = ["damage", "wear", "alteration", "no_damage"]
+
 CATEGORY_MAP = {
     "crack": "damage",
     "damage": "damage",
@@ -34,90 +25,108 @@ CATEGORY_MAP = {
 DEFAULT_FALLBACK_LABEL = "damage"
 
 
-def map_label(label: str) -> str:
-    """
-    Maps raw YOLO class names to thesis categories.
-    Later this should match your trained YOLO class names exactly.
-    """
-    label = label.lower().strip()
-
-    for key, mapped_value in CATEGORY_MAP.items():
-        if key in label:
-            return mapped_value
-
-    return DEFAULT_FALLBACK_LABEL
-
-
-def run_yolo_on_folder(folder_path: str) -> list:
-    """
-    Runs YOLO inference on all images in a folder.
-
-    Returns a list like:
-    [
-        {
-            "image_id": "img1.jpg",
-            "detections": [
-                {
-                    "label": "damage",
-                    "confidence": 0.88,
-                    "bbox": [10.0, 20.0, 40.0, 50.0]
-                }
-            ]
-        }
-    ]
-    """
+def get_image_paths(folder_path: str) -> list[Path]:
     folder = Path(folder_path)
 
     if not folder.exists():
         raise FileNotFoundError(f"Folder not found: {folder}")
 
+    if not folder.is_dir():
+        raise NotADirectoryError(f"Path is not a folder: {folder}")
+
+    return sorted([
+        p for p in folder.iterdir()
+        if p.is_file() and p.suffix.lower() in IMAGE_EXTS
+    ])
+
+
+def map_label(raw_label: str) -> str:
+    raw_label = raw_label.lower().strip()
+
+    for keyword, thesis_label in CATEGORY_MAP.items():
+        if keyword in raw_label:
+            return thesis_label
+
+    return DEFAULT_FALLBACK_LABEL
+
+
+def empty_category_counts() -> dict:
+    return {category: 0 for category in THESIS_CATEGORIES}
+
+
+def summarize_detections(detections: list[dict]) -> dict:
+    counts = empty_category_counts()
+
+    if not detections:
+        counts["no_damage"] = 1
+        return {
+            "categories_present": ["no_damage"],
+            "category_counts": counts,
+            "summary": "No visible inspection-relevant issues."
+        }
+
+    for det in detections:
+        counts[det["label"]] += 1
+
+    categories_present = [
+        category for category, count in counts.items()
+        if count > 0 and category != "no_damage"
+    ]
+
+    return {
+        "categories_present": categories_present,
+        "category_counts": counts,
+        "summary": f"Detected inspection-relevant categories: {', '.join(categories_present)}."
+    }
+
+
+def run_yolo_on_folder(folder_path: str) -> list[dict]:
+    image_paths = get_image_paths(folder_path)
     model = YOLO(MODEL_PATH)
+
     results = []
 
-    for image_path in sorted(folder.iterdir()):
-        if not image_path.is_file():
-            continue
-        if image_path.suffix.lower() not in IMAGE_EXTS:
-            continue
-
-        inference_result = model(str(image_path), verbose=False)
-        r = inference_result[0]
-
+    for image_path in image_paths:
+        result = model(str(image_path), verbose=False)[0]
         detections = []
 
-        if r.boxes is not None and len(r.boxes) > 0:
-            for box in r.boxes:
-                conf = float(box.conf[0])
+        if result.boxes is not None:
+            for box in result.boxes:
+                confidence = float(box.conf[0])
 
-                if conf < CONF_THRESHOLD:
+                if confidence < CONF_THRESHOLD:
                     continue
 
-                cls_id = int(box.cls[0])
-                raw_label = model.names[cls_id]
+                class_id = int(box.cls[0])
+                raw_label = model.names[class_id]
                 mapped_label = map_label(raw_label)
 
-                xyxy = box.xyxy[0].tolist()
-                xyxy = [round(float(x), 2) for x in xyxy]
+                bbox = [round(float(x), 2) for x in box.xyxy[0].tolist()]
 
                 detections.append({
+                    "raw_label": raw_label,
                     "label": mapped_label,
-                    "confidence": round(conf, 4),
-                    "bbox": xyxy
+                    "confidence": round(confidence, 4),
+                    "bbox": bbox
                 })
+
+        parsed_output = summarize_detections(detections)
 
         results.append({
             "image_id": image_path.name,
-            "detections": detections
+            "model_name": "yolo",
+            "detections": detections,
+            "parsed_output": parsed_output
         })
 
     return results
 
 
 if __name__ == "__main__":
-    # Quick local test
     test_folder = "data/properties/001/post_lease"
     output = run_yolo_on_folder(test_folder)
 
     print(f"Processed {len(output)} images")
+
     for item in output[:3]:
         print(item)
