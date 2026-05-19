@@ -48773,6 +48773,7 @@
                 |-- surface damage_DJI_0996_03_03_png.rf.3457cf7b3077528758703931a30433a3.txt
                 |-- surface damage_DJI_0997_03_04_png.rf.465c34a1e09c77640645d78ab5b3ad04.txt
             |-- val.cache
+    |-- inspection_dataset.zip
     |-- jobs
     |-- Original data folders
         |-- asbestos
@@ -73410,12 +73411,8 @@
                 |-- wear_04_48_jpg.rf.0d6b1bf70ceb4bd9d1c59d6142d1da63.jpg
 |-- file structure generator.ipynb
 |-- models
-    |-- housing_yolo
-        |-- args.yaml
-        |-- train_batch0.jpg
-        |-- train_batch1.jpg
-        |-- train_batch2.jpg
-        |-- weights
+    |-- best.pt
+    |-- confusion_matrix_normalized.png
 |-- results
     |-- 001_result.json
     |-- 003_result.json
