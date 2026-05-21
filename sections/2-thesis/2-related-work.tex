@@ -1,6 +1,59 @@
 \section{Related Work}
 \label{sec:related_work}
-% Your work needs to be grounded and compared to earlier work and the state-of-the-art. Start the section with announcing the research gap and also end with the research gap. Consider using hypotheses. 
-Write about your related work here. Make clear to which key papers you will compare your eventual results. This can be done from the perspective of methods used, the task at hand and the addressed domain.
 
-% The related work section is not a a background section. If you want to explain techniques, it is possible to have a background section after the Related Work section. Background should only be added when it has benefit for an informed audience. It is not common to use a background section. 
+Research on automated visual inspection is done in various domains, including building defect detection \cite{wen_autonomous_2024, kang_improvement_2025}, indoor scene understanding, remote sensing change detection \cite{cheng_change_2024}, infrastructure monitoring \cite{shang_automatic_2023}, medical imaging \cite{kamraoui_longitudinal_2022}, waste recognition \cite{malla_enhancing_2025}, and insurance or damage assessment \cite{lee_automated_2024}. Despite differences in application, these studies share the same goals: identifying anomalies and structural changes in real world images captured under uncontrolled or controlled conditions.
+
+YOLO based detectors originate from the single stage detection framework introduced by Redmon et al. \cite{redmon_you_2016}, Recent implementations such as YOLOv8 provide improved training stability and usability for applied detection tasks \cite{jocher_ultralytics_2023}.
+
+\subsection{Classical and Deep Learning Approaches}
+
+Early inspection methods relied on classical machine learning and crafted features \cite{awe_towards_2025}. These approaches struggle viewpoint shifts. Deep learning has become dominant, with CNN-based models such as U-Net and Faster R-CNN, as well as specialized variants including Multi Fusion U-Net \cite{shang_automatic_2023}, MobileNet-SSD \cite{goncalves_deep_2023}, urban detection systems \cite{sukel_detecting_2020}, and object detectors such as YOLO. These supervised detectors rely on specific annotations, which are often limited or inconsistent. Several studies highlight robustness problems caused by real world indoor variation.
+
+These approaches have been evaluated on datasets such as pavement crack datasets, building defect datasets, and vehicle damage datasets. Reported performance typically ranges between 80–95\% detection accuracy or map depending on dataset complexity \cite{lee_automated_2024, shang_automatic_2023}.
+
+\subsection{Transformer-Based and Multimodel Foundation Models}
+
+Recent work explores transformer architectures and multi modal foundation models. Examples include GPT based multi modal inspection workflows \cite{wen_autonomous_2024}, industrial anomaly detection benchmarks such as MMAD \cite{jiang_mmad_2025}, and large scale multi modal defect datasets like IMDD-1M \cite{chen_preference_2025}. Vision language models have also shown value for generalizable defect identification \cite{malla_enhancing_2025}.
+
+These studies evaluate vision language models on industrial inspection datasets and anomaly detection benchmarks such as MMAD, where multimodal models demonstrate strong zero shot classification performance and improved generalization compared to task specific detectors \cite{jiang_mmad_2025}.
+
+These models have large scale pretraining rather than domain specific supervision, enabling broad visual reasoning. However, they lack precise localization and are rarely evaluated on structured indoor inspection tasks. No prior study compares supervised detectors and multi modal models under identical conditions.
+
+\subsection{Dataset and Evaluation Challenges}
+
+Across domains, datasets are heterogeneous and typically captured in uncontrolled environments. Challenges include small dataset size, annotation inconsistency, class imbalance, and missing metadata. Public datasets for defect and damage detection include MSSEG2 \cite{noauthor_data_nodate}, Roboflow Paint Damage \cite{hkust_paint_nodate}, Crack Detection \cite{noauthor_crack_nodate}, and House Damage \cite{noauthor_house_nodate}. Evaluation typically uses precision, recall, F1 score, IoU, or Dice coefficients, but inconsistent setups limit comparability across studies.
+
+These datasets differ in size and annotation style. Crack detection datasets contain thousands of labeled images with pixel level annotations, while general damage datasets include bounding box annotations for multiple defect categories. Such heterogeneity makes direct comparison between studies difficult.
+
+\subsection{Why YOLOv8 and LLaVA}
+
+YOLOv8 is selected as the supervised object detection baseline for this study. 
+It represents a recent and widely adopted implementation of the YOLO detector family, 
+which is known for strong performance in real time object detection tasks. 
+YOLO based detectors are frequently used in visual inspection applications due 
+to their ability to localize defects using bounding boxes while maintaining high 
+inference speed and stable training behavior.
+
+YOLOv8 is particularly suitable for this study because it supports training on 
+moderate sized datasets, integrates well with common deep learning frameworks 
+such as PyTorch, and provides reproducible results using standardized training 
+pipelines. Its architecture allows simultaneous localization and classification of inspection relevant defects, making it a representative supervised baseline for inspection oriented computer vision tasks.
+
+In contrast, LLaVA 1.6 represents a multimodal vision language foundation model. Unlike YOLOv8, it does not rely on task specific training for the inspection task but instead uses large scale multimodal pretraining to perform visual reasoning through natural language prompts\cite{liu_visual_2023}. This enables zero shot or prompt-based 
+classification of inspection relevant issues without explicit bounding box training. 
+
+Comparing YOLOv8 and LLaVA 1.6 therefore reflects two fundamentally different 
+approaches to visual inspection supervised object detection based on explicit 
+annotations versus multimodal reasoning based on large scale pretraining. 
+Evaluating both models under identical datasets and inspection categories 
+provides insight into how well foundation models can generalize to structured 
+inspection tasks traditionally handled by supervised detectors.
+
+This comparison is particularly relevant in the context of housing inspection, 
+where labeled datasets are often limited and inspection conditions vary 
+significantly. Investigating the performance of both paradigms helps determine whether multimodal foundation models can complement or potentially reduce 
+the reliance on fully supervised detection pipelines.
+
+\subsection{Contribution of This Thesis}
+
+This thesis provides the first controlled, dataset identical comparison of a supervised detector YOLOv8 and a multi modal foundation model LLaVA for structured lease housing image assessment. By evaluating both model families under identical metrics and data, the study addresses a recurring gap in the literature and builds a foundation for future inspection oriented benchmarking.
