@@ -24,11 +24,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Thesis related entries
-\title{Fill In Your Title}
-\subtitle{Fill In Your Sub-Title}
+\title{Comparing YOLOv8 and LLaVA 1.6 for Housing Inspection}
+\subtitle{Task Specific and Foundational Models for Transferring Progress from Medical Imaging Toward Housing Inspection}
 
 % Date on which your thesis is submitted
-\date{Fill In The Date In Format DD.MM.YYYY}
+\date{Fill In The Date In Format 25.05.2026}
 
 % 4-5 keywords should do the trick. They should ideally be phrases of 2-4 words or single words.
 \keywords{Computer Vision, YOLOv8, LLaVA, Vision Language Models, Damage Detection, Housing Inspection, Multi modal Comparison, Output Harmonization}
@@ -66,8 +66,15 @@
 \setcounter{page}{0}
 
 \begin{abstract}
-% A summary of results should be included. Avoid citations. Maximum length is 200 words.
-Write your abstract here.
+Housing corporations increasingly rely on image archives to document rental property conditions, yet manual inspection remains time consuming and subjective. Advances in computer vision and multimodal artificial intelligence create opportunities to improve housing inspection through automated image analysis.
+
+Existing research often evaluates supervised object detection models and multimodal foundation models separately using different datasets, metrics, and evaluation settings. Direct comparison between these approaches in housing inspection remains limited, creating uncertainty regarding robustness, generalization, and practical suitability.
+
+Supervised object detection approaches such as YOLOv8 demonstrate strong defect localization capabilities, while multimodal foundation models such as LLaVA 1.6 show strong visual reasoning and zero shot capabilities. Related domains including medical imaging, infrastructure monitoring, and anomaly detection already demonstrate substantial progress through artificial intelligence driven inspection methods. However, transfer of these developments toward housing inspection remains limited.
+
+This thesis introduces a controlled comparison framework in which YOLOv8 and LLaVA 1.6 are evaluated using identical housing inspection datasets, shared inspection categories, and harmonized outputs to enable fair comparison.
+
+The study contributes an inspection oriented benchmarking framework supporting future automated housing inspection systems and helps transfer methodological progress from mature artificial intelligence domains toward housing inspection.
 \end{abstract}
 
 \maketitle
@@ -76,12 +83,12 @@ Write your abstract here.
 \url{https://github.com/DIESMOOS/Thesis-Computervision-Pre--and-post-lease-images/settings}
 
 % Sections; Try to stick to this setup but you can comment each section
-%\input{sections/2-thesis/1-introduction.tex}
-%\input{sections/2-thesis/2-related-work.tex}
+\input{sections/2-thesis/1-introduction.tex}
+\input{sections/2-thesis/2-related-work.tex}
 \input{sections/2-thesis/3-methodology.tex}
-%\input{sections/2-thesis/4-results.tex}
-%\input{sections/2-thesis/5-discussion.tex}
-%\input{sections/2-thesis/6-conclusion.tex}
+\input{sections/2-thesis/4-results.tex}
+\input{sections/2-thesis/5-discussion.tex}
+\input{sections/2-thesis/6-conclusion.tex}
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{bibliographies/references}

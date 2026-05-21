@@ -1,6 +1,85 @@
 \section{Results}
 \label{sec:results}
-% Give the outcomes for each research question in the form of a table or graphic (with caption).
-Write about your results here. Good captions to tables and/or figures are key.
 
-% Sometimes,  especially  if  you  have  quite  different experiments or research  questions,  it makes sense to interleave the experimental setup and the results sections, so the reader does not get lost. It is then helpful to structure clearly in (sub)subsections.
+\subsection{Baseline Performance}
+
+To establish a reference point, a baseline model was evaluated that classifies all images as `no damage`. 
+
+For property 001, which contains only damage and wear images, this baseline fails to correctly identify any inspection-relevant issues.
+
+%-------------------------------------------------
+% Table truth labels property 1 
+\begin{table}[H]
+\centering
+\caption{Ground truth distribution for property 001 (post-lease)}
+\label{tab:gt_property001}
+\begin{tabular}{lc}
+\toprule
+Category & Number of images \\
+\midrule
+Damage & 6 \\
+Wear & 4 \\
+No damage & 0 \\
+\midrule
+Total & 10 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+%-------------------------------------------------
+% heatmaps
+\begin{figure}[H]
+\centering
+
+\begin{tabular}{cc}
+
+\includegraphics[width=0.23\textwidth]
+{sections/2-thesis/llava_confusion_matrix.png}
+
+&
+
+\includegraphics[width=0.24\textwidth]
+{sections/2-thesis/yolo_baseline_confusion_matrix_normalized.png}
+
+\\
+
+(a) LLaVA baseline
+
+&
+
+(b) YOLOv8 baseline
+
+\end{tabular}
+%-------------------------------------------------
+\caption{Confusion matrices of the baseline models used for housing inspection evaluation.}
+\label{fig:baseline_heatmaps}
+
+\end{figure}
+
+
+\subsection{4.2 Model Performance (YOLO vs LLaVA)}
+
+% ---------------------------------------------------
+\begin{table}[H]
+\centering
+\caption{Performance per category for inspection task (property 001)}
+\label{tab:category_performance}
+\begin{tabular}{lccccc}
+\toprule
+Model & Category & Precision & Recall & F1-score \\
+\midrule
+LLaVA Baseline & overall & 0.067 & 1.00 & 0.125 \\
+\midrule
+YOLOv8 Baseline & overall & 0.510 & 0.318 & -- \\
+\midrule
+YOLOv8 Final & Damage & -- & -- & -- \\
+YOLOv8 Final & Wear & -- & -- & -- \\
+YOLOv8 Final & No-damage & -- & -- & -- \\
+\midrule
+LLaVA 1.6 Final & Damage & -- & -- & -- \\
+LLaVA 1.6 Final & Wear & -- & -- & -- \\
+LLaVA 1.6 Final & No-damage & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
