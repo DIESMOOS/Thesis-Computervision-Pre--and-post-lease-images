@@ -1,14 +1,93 @@
-% You can choose whether you prefer a single or double column appendix.
-% Whatever you choose, you will need to stick to it throughout the appendix.
-% For double column style, comment the next line.
-\onecolumn
+\subsection{ Datasets}
+Several publicly available datasets from Roboflow are used for the training process:
 
-\appendix
-\begin{appendices}
+\begin{itemize}
+    \item Paint damage dataset (67 images)
+    \item Crack detection dataset (1551 images)
+    \item House damage dataset (3570 images)
+    \item Asbestos dataset (1331 images)
+\end{itemize}
 
-\section{First Appendix}
-\label{sec:apx:first_appendix}
+These datasets provide additional labeled examples of inspection-related defects and help improve model robustness during training.
 
-Put your appendices here.
+\section{Inspection Category Definitions}
 
-\end{appendices}
+The following categories are used for annotation and evaluation during the experiments.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{3cm}|p{8cm}|}
+\hline
+\textbf{Category} & \textbf{Description} \\
+\hline
+Damage & Visible structural damage such as cracks, holes, or broken surfaces. \\
+\hline
+Wear & Gradual deterioration of surfaces such as paint wear or discoloration. \\
+\hline
+Alteration & Unauthorized modifications or added structures within the property. \\
+\hline
+No Damage & No visible inspection-relevant issues present. \\
+\hline
+\end{tabular}
+\caption{Inspection category definitions used during annotation and evaluation.}
+\label{tab:inspection_categories}
+\end{table}
+
+\section{LLaVA Prompt Templates}
+
+The vision-language model LLaVA is evaluated using fixed prompt templates to ensure reproducibility.
+
+Example prompts include:
+
+\begin{itemize}
+    \item ``Identify visible damage in this image.''
+    \item ``Is there evidence of wear or alterations in this room?''
+    \item ``Describe any inspection-relevant issues visible in the image.''
+\end{itemize}
+
+Model responses are mapped to the predefined inspection categories to allow comparison with the outputs of the YOLOv8 detector.
+
+\subsection{ ROBOFLOW Datasets}
+
+\begin{figure}[H]
+    \centering
+
+    % Row 1
+    \begin{minipage}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{sections/1-thesis-design/asbestos.png}
+        \small (a) Asbestos dataset
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{sections/1-thesis-design/hkust_paintdamage.png}
+        \small (b) Paint damage dataset
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{sections/1-thesis-design/waterdamage_housedamagedataset.png}
+        \small (c) House damage dataset
+    \end{minipage}
+
+    \vspace{0.35cm}
+
+    % Row 2
+    \begin{minipage}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{sections/1-thesis-design/crack.png}
+        \small (d) Crack example
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{sections/1-thesis-design/cracks.png}
+        \small (e) Multiple cracks
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{sections/1-thesis-design/cracks3.png}
+        \small (f) Severe crack pattern
+    \end{minipage}
+
+    \caption{Example images from the external Roboflow datasets used during model training.}
+    \label{fig:roboflow_examples}
+\end{figure}

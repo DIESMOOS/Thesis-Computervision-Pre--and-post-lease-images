@@ -35,7 +35,15 @@ The experimental setup is based on publicly available datasets obtained through 
 
 These datasets differ in annotation structure, label definitions, and visual characteristics. Rather than treating them as a single benchmark, they are used as heterogeneous source material for constructing a unified inspection task.
 
-A private housing inspection dataset (DGW) is available as future validation material for real world evaluation. However, it is not part of the current experimental setup and is therefore not used as a primary data source in this stage.
+A private housing inspection dataset from DGW is reserved exclusively for application testing. The dataset is not used for training, validation, or model optimization. Instead, it is used to assess practical applicability of the developed inspection system within realistic housing inspection workflows, and is therefore not used as a primary data source in this stage.
+
+\subsection{Pipeline Validation}
+
+Before full evaluation, validation checks are performed to verify dataset mappings and harmonization procedures. Sample images are manually inspected to confirm label consistency after harmonization. Output mappings from LLaVA to shared inspection categories are verified using controlled examples. Model failures and unmapped outputs are logged and analysed separately.
+
+\subsection{Leakage Prevention}
+
+The DGW dataset remains fully isolated from model development procedures. No DGW images are used for training, validation, hyperparameter optimization, or model selection. This separation reduces information leakage and strengthens practical applicability assessment.
 
 \subsection{Dataset Harmonization}
 \label{subsec:dataset_harmonization}
@@ -57,6 +65,10 @@ The shared label scheme consists of four inspection-relevant categories:
 \end{itemize}
 
 This schema is derived from the application domain rather than from the original dataset labels. All source labels are mapped to these categories where possible. Labels that do not align clearly are excluded or treated cautiously during interpretation.
+
+\subsection{Dataset Bias and Limitations}
+
+Public datasets originate from different domains and collection procedures, potentially introducing differences in image quality, annotation consistency, class balance, and environmental conditions. Crack datasets, paint damage datasets, and housing inspection images may contain distributional differences that influence model behavior. Results should therefore be interpreted within the context of the selected datasets.
 
 \subsection{Model Selection}
 \label{subsec:model_selection}
@@ -105,20 +117,26 @@ The experimental setup is organized as a unified pipeline model that enables a c
         minimum height=0.9cm,
         fill=green!8
     },
+    appblock/.style={
+        rectangle,
+        rounded corners=6pt,
+        draw=black,
+        thick,
+        minimum width=3.5cm,
+        minimum height=0.9cm,
+        fill=orange!10
+    },
     line/.style={-{Latex[length=2mm]}, thick}
 ]
 
-% Top block
 \node[block] (data) {Public Roboflow Datasets\\
 Paint damage, crack detection,\\
 house damage, asbestos};
 
-% Second block
 \node[block, below=of data] (prep) {Preprocessing and Label Harmonization\\
 Map labels to:\\
 Damage / Wear / Alteration / No damage};
 
-% Left and right branches
 \node[modelblock, below left=1.4cm and 1.2cm of prep] (yolo) {YOLOv8 Branch\\
 Train on harmonized data\\
 and infer on test images};
@@ -127,31 +145,34 @@ and infer on test images};
 Apply fixed prompts\\
 and infer on test images};
 
-% Merge block LOWER than before
 \node[block, below=2.7cm of prep] (harm) {Output Harmonization\\
 Map outputs to shared\\
 image-level categories};
 
-% Bottom evaluation block
-\node[evalblock, below=of harm] (eval) {Evaluation\\
+\node[evalblock, below=of harm] (eval) {Controlled Comparison\\
 YOLOv8: Precision / Recall / mAP\\
 Shared: Accuracy / Precision / Recall / F1\\
 Confusion matrices + qualitative analysis};
 
-% Arrows
+\node[appblock, below=of eval] (app) {Application Testing\\
+DGW housing archive\\
+Practical housing workflow assessment\\
+No training or validation use};
+
 \draw[line] (data) -- (prep);
 \draw[line] (prep.south) |- (yolo.north);
 \draw[line] (prep.south) |- (llava.north);
 \draw[line] (yolo.south) |- (harm.north);
 \draw[line] (llava.south) |- (harm.north);
 \draw[line] (harm) -- (eval);
+\draw[line] (eval) -- (app);
 
 \end{tikzpicture}%
 }
+
 \captionof{figure}{Overview of the experimental pipeline used to enable a controlled comparison between YOLOv8 and LLaVA 1.6 under a shared inspection-category framework.}
 \label{fig:pipeline}
 \end{center}
-
 
 Figure~\ref{fig:pipeline} shows the overall pipeline model used in this study. The process starts with publicly available Roboflow datasets, which are first harmonized into a shared inspection category scheme. The prepared data is then used in two parallel branches. In the first branch, YOLOv8 is trained on the harmonized annotated data and applied to test images to produce structured detections. In the second branch, LLaVA 1.6 processes the same test images using fixed prompts and generates textual descriptions. Because these outputs are fundamentally different, they are subsequently transformed into a shared image-level representation through a rule-based harmonization step. The aligned outputs are then evaluated using both detection and classification metrics, supported by confusion matrices and qualitative error analysis.
 
@@ -220,6 +241,10 @@ For the shared comparison between models, image level classification metrics are
 
 Confusion matrices are used to analyze category-level errors and misclassifications.
 
+\subsection{Reproducibility}
+
+Experiments use fixed seeds where applicable to support reproducibility. Dataset preprocessing, harmonization procedures, inference settings, and evaluation pipelines are version controlled through GitHub. Public datasets and experimental configurations are documented to enable replication.
+
 \subsection{Qualitative Analysis}
 \label{subsec:qualitative_analysis}
 
@@ -236,3 +261,7 @@ Reliability is supported through consistent preprocessing, fixed configurations,
 \label{subsec:ethical_considerations}
 
 The experiments are conducted on publicly available datasets in a controlled research setting. The study is intended as decision-support research and does not replace human inspection judgment.
+
+\subsection{Error Analysis}
+
+Model failures are categorized into error types including missed detections, false detections, category confusion, robustness failures under environmental variation, and output harmonization failures. Qualitative analysis complements quantitative evaluation.
