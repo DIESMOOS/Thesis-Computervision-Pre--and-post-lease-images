@@ -73412,11 +73412,19 @@
 |-- file structure generator.ipynb
 |-- models
     |-- best.pt
-    |-- confusion_matrix_normalized.png
+    |-- housing_yolo
+        |-- args.yaml
+        |-- train_batch0.jpg
+        |-- train_batch1.jpg
+        |-- train_batch2.jpg
+        |-- weights
+    |-- llava_confusion_matrix.png
+    |-- yolo_baseline_confusion_matrix_normalized.png
 |-- results
     |-- 001_result.json
     |-- 003_result.json
     |-- 004_result.json
+    |-- llava_baseline_results.csv
 |-- run_property.py
 |-- src
     |-- config.py
