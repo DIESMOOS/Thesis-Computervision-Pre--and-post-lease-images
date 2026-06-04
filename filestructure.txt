@@ -20808,6 +20808,8 @@
         |-- 5-discussion.tex
         |-- 6-conclusion.tex
         |-- 7-appendix.tex
+        |-- llava_confusion_matrix.png
+        |-- yolo_baseline_confusion_matrix_normalized.png
 |-- setups
     |-- 0-project-proposal.tex
     |-- 1-thesis-design.tex

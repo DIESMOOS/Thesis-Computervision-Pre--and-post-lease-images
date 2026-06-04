@@ -1,62 +1,65 @@
-import os
-os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
-
 from pathlib import Path
 from ultralytics import YOLO
 import torch
-
 
 # =========================
 # CONFIG
 # =========================
 ROOT_DIR = Path(__file__).resolve().parents[1]
 
-DATA_YAML = ROOT_DIR / "data" / "inspection_dataset" / "data.yaml"
-BASE_MODEL = "yolov8n.pt"  # Ultralytics will download this automatically if missing
+DATA_YAML = ROOT_DIR / "Data" / "inspection_dataset" / "data.yaml"
 
+BASE_MODEL = "yolov8m.pt"   # better than yolov8n for thesis-quality results
 PROJECT_DIR = ROOT_DIR / "models"
-RUN_NAME = "housing_yolo"
+RUN_NAME = "75epocs"
 
-#EPOCHS = 75
+EPOCHS = 75
 IMG_SIZE = 640
-#BATCH_SIZE = 16
+BATCH_SIZE = 24
 SEED = 42
-
-EPOCHS = 2
-BATCH_SIZE = 4
+WORKERS = 24
+patience=20
 
 def main():
     if not DATA_YAML.exists():
         raise FileNotFoundError(f"data.yaml not found: {DATA_YAML}")
 
+    if not torch.cuda.is_available():
+        raise RuntimeError("CUDA is not available. Start a Snellius GPU session first.")
+
     print(f"Using dataset: {DATA_YAML}")
     print(f"Using base model: {BASE_MODEL}")
-    print("CUDA available:", torch.cuda.is_available())
+    print(f"CUDA available: {torch.cuda.is_available()}")
+    print(f"GPU: {torch.cuda.get_device_name(0)}")
 
     model = YOLO(BASE_MODEL)
 
-    model.train(
+    results = model.train(
         data=str(DATA_YAML),
         epochs=EPOCHS,
         imgsz=IMG_SIZE,
         batch=BATCH_SIZE,
+        device=0,
+        workers=WORKERS,
+        cache=True,
         seed=SEED,
-        project=str(PROJECT_DIR),
-        name=RUN_NAME,
-        exist_ok=True,
         pretrained=True,
-        patience=10,
+        patience=patience,
         plots=True,
         val=True,
-        device=0 if torch.cuda.is_available() else "cpu",
-        workers=4,
-        cache=True,
+        project=str(PROJECT_DIR),
+        name=RUN_NAME,
+        exist_ok=False,
     )
 
     best_model = PROJECT_DIR / RUN_NAME / "weights" / "best.pt"
+    results_csv = PROJECT_DIR / RUN_NAME / "results.csv"
 
-    print("Training finished.")
+    print("\nTraining finished.")
     print(f"Best model saved at: {best_model}")
+    print(f"Results CSV saved at: {results_csv}")
+
+    return results
 
 
 if __name__ == "__main__":
