@@ -1,81 +1,54 @@
-import os
-os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+"""
+LLaVA-1.6 baseline evaluation script.
 
-import sys
-import subprocess
+Runs the model over the test split and writes per-image predictions to CSV.
+Prints accuracy, per-class precision/recall/F1, and a confusion matrix.
 
-try:
-    from transformers import LlavaNextProcessor, LlavaNextForConditionalGeneration
-except ModuleNotFoundError:
-
-    print("Installing transformers...")
-
-    subprocess.check_call([
-        sys.executable,
-        "-m",
-        "pip",
-        "install",
-        "transformers",
-        "accelerate",
-        "pillow",
-        "torch",
-        "--default-timeout=100"
-    ])
-
-    from transformers import LlavaNextProcessor, LlavaNextForConditionalGeneration
-
-
-from pathlib import Path
-from PIL import Image
-import pandas as pd
-import torch
-MODEL = "llava-hf/llava-v1.6-mistral-7b-hf"
-
-IMG_DIR = Path("data/inspection_dataset/images/test")
-LBL_DIR = Path("data/inspection_dataset/labels/test")
-
-OUT_CSV = Path("results/llava_baseline_results.csv")
-OUT_CSV.parent.mkdir(exist_ok=True)
-
-LABELS = ["damage", "wear", "no_damage"]
-
-CLASS_MAP = {
-    0: "damage",
-    1: "damage",
-    2: "damage",
-    3: "wear",
-    4: "damage",
-    5: "no_damage",
-}
-
-PROMPT = """
-You are inspecting a housing image.
-
-Choose exactly one category:
-damage
-wear
-no_damage
-
-Return only one category name.
+Usage (Snellius):
+    python -m src.eval.llava_baseline
+    python -m src.eval.llava_baseline --limit 50   # quick sanity check
 """
 
-processor = LlavaNextProcessor.from_pretrained(MODEL)
+import argparse
+import logging
+from pathlib import Path
 
-model = LlavaNextForConditionalGeneration.from_pretrained(
-    MODEL,
-    torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
-    device_map="auto"
+import pandas as pd
+import torch
+from sklearn.metrics import classification_report, confusion_matrix
+
+from src.config import (
+    LLAVA_MODEL_ID,
+    LLAVA_MAX_NEW_TOKENS,
+    IMG_DIR_TEST,
+    LBL_DIR_TEST,
+    CLASS_MAP,
+    EVAL_LABELS,
+    RESULTS_DIR,
 )
+from src.pipelines.llava_pipeline import run_llava_on_image
 
+logger = logging.getLogger(__name__)
+
+OUT_CSV = RESULTS_DIR / "llava_baseline_results.csv"
+
+
+# ---------------------------------------------------------------------------
+# Ground-truth helper
+# ---------------------------------------------------------------------------
 
 def get_true_label(label_path: Path) -> str:
+    """
+    Read a YOLO-format label file and return the dominant thesis category.
+    Priority: damage > wear > no_damage.
+    """
     if not label_path.exists() or label_path.stat().st_size == 0:
         return "no_damage"
 
     classes = []
-
     for line in label_path.read_text().splitlines():
-        if line.strip():
+        line = line.strip()
+        if line:
             cls_id = int(line.split()[0])
             classes.append(CLASS_MAP.get(cls_id, "damage"))
 
@@ -86,124 +59,98 @@ def get_true_label(label_path: Path) -> str:
     return "no_damage"
 
 
-def map_llava_output(text: str) -> str:
-    t = text.lower()
+# ---------------------------------------------------------------------------
+# Main evaluation loop
+# ---------------------------------------------------------------------------
 
-    if "no_damage" in t or "no damage" in t or "no visible damage" in t:
-        return "no_damage"
-    if "wear" in t or "paint" in t or "discolor" in t or "deterioration" in t:
-        return "wear"
-    if "damage" in t or "crack" in t or "hole" in t or "broken" in t or "mold" in t:
-        return "damage"
+def evaluate(limit: int | None = None) -> None:
+    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
-    return "no_damage"
-
-
-def run_llava(image_path: Path) -> str:
-    image = Image.open(image_path).convert("RGB")
-
-    conversation = [{
-        "role": "user",
-        "content": [
-            {"type": "image"},
-            {"type": "text", "text": PROMPT},
-        ],
-    }]
-
-    prompt = processor.apply_chat_template(
-        conversation,
-        add_generation_prompt=True
+    image_paths = sorted(
+        p for p in IMG_DIR_TEST.glob("*")
+        if p.suffix.lower() in {".jpg", ".jpeg", ".png"}
     )
 
-    inputs = processor(
-        images=image,
-        text=prompt,
-        return_tensors="pt"
-    ).to(model.device)
+    if limit:
+        image_paths = image_paths[:limit]
 
-    with torch.no_grad():
-        output = model.generate(
-            **inputs,
-            max_new_tokens=5,
-            do_sample=False
-        )
+    logger.info("Evaluating %d images …", len(image_paths))
 
-    raw = processor.decode(output[0], skip_special_tokens=True)
-    return raw
+    rows: list[dict] = []
 
+    for i, image_path in enumerate(image_paths, 1):
+        label_path = LBL_DIR_TEST / f"{image_path.stem}.txt"
+        true_label = get_true_label(label_path)
 
-image_paths = (
-    list(IMG_DIR.glob("*.jpg")) +
-    list(IMG_DIR.glob("*.jpeg")) +
-    list(IMG_DIR.glob("*.png"))
-)
+        try:
+            raw_output, parsed = run_llava_on_image(image_path)
+            # Determine predicted label: highest-count non-no_damage wins,
+            # otherwise fall back to no_damage.
+            counts = parsed["category_counts"]
+            active = {cat: cnt for cat, cnt in counts.items() if cat != "no_damage" and cnt > 0}
+            pred_label = max(active, key=active.get) if active else "no_damage"
+        except Exception as exc:
+            logger.error("Failed on %s: %s", image_path.name, exc)
+            raw_output = ""
+            pred_label = "no_damage"
 
-print("Images found:", len(image_paths))
+        rows.append({
+            "image": image_path.name,
+            "true": true_label,
+            "pred": pred_label,
+            "raw_llava": raw_output[:300],          # truncate for readability
+        })
 
-rows = []
+        if i % 10 == 0:
+            logger.info("  %d / %d done", i, len(image_paths))
 
-for image_path in image_paths[:1]:
-    label_path = LBL_DIR / f"{image_path.stem}.txt"
+    # -----------------------------------------------------------------------
+    # Save
+    # -----------------------------------------------------------------------
+    df = pd.DataFrame(rows)
+    df.to_csv(OUT_CSV, index=False)
+    logger.info("Results saved to %s", OUT_CSV)
 
-    true_label = get_true_label(label_path)
-    raw_output = run_llava(image_path)
-    pred_label = map_llava_output(raw_output)
+    # -----------------------------------------------------------------------
+    # Metrics
+    # -----------------------------------------------------------------------
+    y_true = df["true"].tolist()
+    y_pred = df["pred"].tolist()
 
-    rows.append({
-        "image": str(image_path),
-        "true": true_label,
-        "pred": pred_label,
-        "raw_llava": raw_output
-    })
+    accuracy = (df["true"] == df["pred"]).mean()
 
-    print(image_path.name, "true:", true_label, "pred:", pred_label)
-
-
-df = pd.DataFrame(rows)
-df.to_csv(OUT_CSV, index=False)
-
-correct = (df["true"] == df["pred"]).sum()
-total = len(df)
-accuracy = correct / total if total > 0 else 0
-
-print()
-print("Images evaluated:", total)
-print("Saved to:", OUT_CSV)
-print()
-print("Accuracy:", round(accuracy, 3))
-
-print()
-print("Per-class results:")
-
-for label in LABELS:
-    tp = ((df["true"] == label) & (df["pred"] == label)).sum()
-    fp = ((df["true"] != label) & (df["pred"] == label)).sum()
-    fn = ((df["true"] == label) & (df["pred"] != label)).sum()
-
-    precision = tp / (tp + fp) if (tp + fp) > 0 else 0
-    recall = tp / (tp + fn) if (tp + fn) > 0 else 0
-    f1 = (
-        2 * precision * recall / (precision + recall)
-        if (precision + recall) > 0
-        else 0
-    )
-
-    print(label)
-    print(" precision:", round(precision, 3))
-    print(" recall:   ", round(recall, 3))
-    print(" f1:       ", round(f1, 3))
+    print("\n" + "=" * 60)
+    print(f"LLaVA-1.6 Baseline  |  model: {LLAVA_MODEL_ID}")
+    print("=" * 60)
+    print(f"Images evaluated : {len(df)}")
+    print(f"Overall accuracy : {accuracy:.3f}")
     print()
 
-print("Confusion matrix:")
-print("rows=true, cols=pred")
-print(["true/pred"] + LABELS)
+    print(classification_report(y_true, y_pred, labels=EVAL_LABELS, zero_division=0))
 
-for true_label in LABELS:
-    row = [true_label]
-    for pred_label in LABELS:
-        row.append(
-            int(
-                ((df["true"] == true_label) & (df["pred"] == pred_label)).sum()
-            )
-        )
-    print(row)
+    print("Confusion matrix  (rows = true, cols = pred)")
+    cm = confusion_matrix(y_true, y_pred, labels=EVAL_LABELS)
+    header = f"{'':12s}" + "".join(f"{lbl:>12s}" for lbl in EVAL_LABELS)
+    print(header)
+    for lbl, row in zip(EVAL_LABELS, cm):
+        print(f"{lbl:12s}" + "".join(f"{v:12d}" for v in row))
+
+    print("\nFull results in:", OUT_CSV)
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s %(levelname)s %(message)s",
+        datefmt="%H:%M:%S",
+    )
+
+    parser = argparse.ArgumentParser(description="LLaVA-1.6 baseline evaluation")
+    parser.add_argument("--limit", type=int, default=None, help="Evaluate only the first N images")
+    args = parser.parse_args()
+
+    evaluate(limit=args.limit)

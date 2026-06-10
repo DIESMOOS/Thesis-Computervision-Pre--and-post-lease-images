@@ -1,11 +1,9 @@
 import random
 import shutil
+from collections import Counter, defaultdict
 from pathlib import Path
 
 
-# =========================================
-# PATH CONFIG
-# =========================================
 ROOT_DIR = Path(__file__).resolve().parents[2]
 
 SOURCE_DATA_DIR = ROOT_DIR / "data" / "Original data folders"
@@ -20,10 +18,6 @@ SPLIT_RATIOS = {
     "test": 0.15,
 }
 
-
-# =========================================
-# FINAL YOLO CLASSES
-# =========================================
 TARGET_CLASSES = {
     "damage": 0,
     "crack": 1,
@@ -32,19 +26,15 @@ TARGET_CLASSES = {
     "asbestos": 4,
 }
 
+CLASS_NAMES = {v: k for k, v in TARGET_CLASSES.items()}
 
-# =========================================
-# ORIGINAL DATASET LABEL MAPPING
-# =========================================
 CLASS_MAPPING = {
     "crack": {
         0: "crack",
     },
-
     "paint": {
         0: "wear",
     },
-
     "mold": {
         0: "crack",
         1: "mold",
@@ -52,22 +42,18 @@ CLASS_MAPPING = {
         3: "crack",
         4: "wear",
     },
-
     "mold2": {
         0: "mold",
     },
-
     "house": {
         0: "damage",
         1: "damage",
-        2: None,       # NoDamage ignored for YOLO object detection
+        2: None,
         3: "damage",
     },
-
     "surface damage": {
         0: "damage",
     },
-
     "asbestos": {
         0: "asbestos",
         1: "asbestos",
@@ -77,9 +63,6 @@ CLASS_MAPPING = {
 }
 
 
-# =========================================
-# FOLDER SETUP
-# =========================================
 def make_dirs():
     for split in ["all", "train", "val", "test"]:
         (DATASET_DIR / "images" / split).mkdir(parents=True, exist_ok=True)
@@ -126,9 +109,6 @@ names:
     print(f"data.yaml created at: {yaml_path}")
 
 
-# =========================================
-# DATASET DISCOVERY
-# =========================================
 def find_images(dataset_dir: Path) -> list[Path]:
     return [
         p for p in dataset_dir.rglob("*")
@@ -150,16 +130,12 @@ def find_label_for_image(image_path: Path) -> Path | None:
             return candidate
 
     possible = list(image_path.parent.parent.rglob(label_name))
-
     if possible:
         return possible[0]
 
     return None
 
 
-# =========================================
-# LABEL CONVERSION
-# =========================================
 def segmentation_to_bbox(values: list[str]):
     coords = list(map(float, values))
 
@@ -201,17 +177,13 @@ def remap_label_file(source_label: Path, target_label: Path, dataset_name: str) 
 
         target_class = mapping[original_class_id]
 
-        # None = NoDamage / ignored class
         if target_class is None:
             continue
 
         target_class_id = TARGET_CLASSES[target_class]
 
-        # YOLO bbox format: class x_center y_center width height
         if len(parts) == 5:
             x, y, w, h = map(float, parts[1:5])
-
-        # YOLO segmentation format: class x1 y1 x2 y2 ...
         else:
             x, y, w, h = segmentation_to_bbox(parts[1:])
 
@@ -222,14 +194,10 @@ def remap_label_file(source_label: Path, target_label: Path, dataset_name: str) 
             f"{target_class_id} {x:.6f} {y:.6f} {w:.6f} {h:.6f}"
         )
 
-    # Empty label files are valid. They mean no visible target object.
     target_label.write_text("\n".join(output_lines), encoding="utf-8")
     return True
 
 
-# =========================================
-# MERGE DATASETS
-# =========================================
 def merge_datasets():
     images_all = DATASET_DIR / "images" / "all"
     labels_all = DATASET_DIR / "labels" / "all"
@@ -261,7 +229,9 @@ def merge_datasets():
                 skipped += 1
                 continue
 
-            new_stem = f"{dataset_name}_{image_path.stem}"
+            safe_dataset_name = dataset_name.replace(" ", "_")
+            new_stem = f"{safe_dataset_name}_{image_path.stem}"
+
             target_image = images_all / f"{new_stem}{image_path.suffix.lower()}"
             target_label = labels_all / f"{new_stem}.txt"
 
@@ -284,39 +254,37 @@ def merge_datasets():
         raise ValueError("No images copied. Check SOURCE_DATA_DIR and dataset folders.")
 
 
-# =========================================
-# TRAIN / VAL / TEST SPLIT
-# =========================================
-def split_dataset():
-    images_all = DATASET_DIR / "images" / "all"
-    labels_all = DATASET_DIR / "labels" / "all"
+def get_label_classes(label_path: Path) -> set[int]:
+    classes = set()
 
-    images = [
-        p for p in images_all.iterdir()
-        if p.is_file() and p.suffix.lower() in IMAGE_EXTS
-    ]
+    if not label_path.exists():
+        return classes
 
-    if not images:
-        raise ValueError(f"No images found in {images_all}")
+    for line in label_path.read_text(encoding="utf-8", errors="ignore").splitlines():
+        parts = line.strip().split()
+        if len(parts) >= 5:
+            classes.add(int(float(parts[0])))
 
-    random.seed(SEED)
-    random.shuffle(images)
+    return classes
 
-    total = len(images)
-    train_end = int(total * SPLIT_RATIOS["train"])
-    val_end = train_end + int(total * SPLIT_RATIOS["val"])
 
-    split_map = {
-        "train": images[:train_end],
-        "val": images[train_end:val_end],
-        "test": images[val_end:],
-    }
+def count_labels_in_split(split: str):
+    labels_dir = DATASET_DIR / "labels" / split
+    counter = Counter()
 
-    print("\nSplitting dataset...")
+    for label_file in labels_dir.glob("*.txt"):
+        for line in label_file.read_text(encoding="utf-8", errors="ignore").splitlines():
+            parts = line.strip().split()
+            if len(parts) >= 5:
+                counter[int(float(parts[0]))] += 1
 
+    return counter
+
+
+def copy_split_files(split_map: dict[str, list[Path]]):
     for split, split_images in split_map.items():
         for image_path in split_images:
-            label_path = labels_all / f"{image_path.stem}.txt"
+            label_path = DATASET_DIR / "labels" / "all" / f"{image_path.stem}.txt"
 
             if not label_path.exists():
                 continue
@@ -333,7 +301,94 @@ def split_dataset():
 
         print(f"{split}: {len(split_images)} images")
 
-    print("Split completed.")
+
+def split_dataset():
+    images_all = DATASET_DIR / "images" / "all"
+    labels_all = DATASET_DIR / "labels" / "all"
+
+    images = [
+        p for p in images_all.iterdir()
+        if p.is_file() and p.suffix.lower() in IMAGE_EXTS
+    ]
+
+    if not images:
+        raise ValueError(f"No images found in {images_all}")
+
+    random.seed(SEED)
+
+    image_classes = {}
+    class_image_counts = Counter()
+    background_images = []
+
+    for image_path in images:
+        label_path = labels_all / f"{image_path.stem}.txt"
+        classes = get_label_classes(label_path)
+        image_classes[image_path] = classes
+
+        if not classes:
+            background_images.append(image_path)
+
+        for cls in classes:
+            class_image_counts[cls] += 1
+
+    grouped_images = defaultdict(list)
+
+    for image_path, classes in image_classes.items():
+        if not classes:
+            continue
+
+        rarest_class = min(classes, key=lambda cls: class_image_counts[cls])
+        grouped_images[rarest_class].append(image_path)
+
+    split_map = {
+        "train": [],
+        "val": [],
+        "test": [],
+    }
+
+    print("\nClass-aware splitting dataset...")
+
+    for cls_id, class_images in grouped_images.items():
+        random.shuffle(class_images)
+
+        total = len(class_images)
+
+        if total < 3:
+            split_map["train"].extend(class_images)
+            print(f"Warning: class {cls_id} {CLASS_NAMES.get(cls_id)} has only {total} images, placed in train.")
+            continue
+
+        train_end = max(1, int(total * SPLIT_RATIOS["train"]))
+        val_count = max(1, int(total * SPLIT_RATIOS["val"]))
+        val_end = min(total - 1, train_end + val_count)
+
+        split_map["train"].extend(class_images[:train_end])
+        split_map["val"].extend(class_images[train_end:val_end])
+        split_map["test"].extend(class_images[val_end:])
+
+    random.shuffle(background_images)
+
+    total_bg = len(background_images)
+    train_end = int(total_bg * SPLIT_RATIOS["train"])
+    val_end = train_end + int(total_bg * SPLIT_RATIOS["val"])
+
+    split_map["train"].extend(background_images[:train_end])
+    split_map["val"].extend(background_images[train_end:val_end])
+    split_map["test"].extend(background_images[val_end:])
+
+    for split in split_map:
+        split_map[split] = list(dict.fromkeys(split_map[split]))
+
+    copy_split_files(split_map)
+
+    print("\nClass counts after split:")
+    for split in ["train", "val", "test"]:
+        counter = count_labels_in_split(split)
+        print(f"\n{split.upper()}")
+        for cls_id, cls_name in CLASS_NAMES.items():
+            print(f"{cls_id} {cls_name}: {counter[cls_id]}")
+
+    print("\nClass-aware split completed.")
 
 
 def main():

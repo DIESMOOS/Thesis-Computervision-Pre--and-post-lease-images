@@ -7,17 +7,18 @@ import torch
 # =========================
 ROOT_DIR = Path(__file__).resolve().parents[1]
 
-DATA_YAML = ROOT_DIR / "Data" / "inspection_dataset" / "data.yaml"
+DATA_YAML = ROOT_DIR / "data" / "inspection_dataset" / "data.yaml"
 
 BASE_MODEL = "yolov8m.pt"   # better than yolov8n for thesis-quality results
 PROJECT_DIR = ROOT_DIR / "models"
 RUN_NAME = "75epocs"
 
 EPOCHS = 75
-IMG_SIZE = 640
-BATCH_SIZE = 24
+IMG_SIZE = 1024
+BATCH_SIZE = 64
 SEED = 42
-WORKERS = 24
+WORKERS = 18
+cache = "disk"
 patience=20
 
 def main():
@@ -41,7 +42,7 @@ def main():
         batch=BATCH_SIZE,
         device=0,
         workers=WORKERS,
-        cache=True,
+        cache=cache,
         seed=SEED,
         pretrained=True,
         patience=patience,

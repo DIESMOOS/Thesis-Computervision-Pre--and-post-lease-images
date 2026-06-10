@@ -94234,6 +94234,32 @@
                     |-- wear_04_48_jpg.rf.0d6b1bf70ceb4bd9d1c59d6142d1da63.jpg
     |-- file structure generator.ipynb
     |-- models
+        |-- 75epocs-2
+            |-- args.yaml
+            |-- BoxF1_curve.png
+            |-- BoxPR_curve.png
+            |-- BoxP_curve.png
+            |-- BoxR_curve.png
+            |-- confusion_matrix.png
+            |-- confusion_matrix_normalized.png
+            |-- labels.jpg
+            |-- results.csv
+            |-- results.png
+            |-- train_batch0.jpg
+            |-- train_batch1.jpg
+            |-- train_batch11895.jpg
+            |-- train_batch11896.jpg
+            |-- train_batch11897.jpg
+            |-- train_batch2.jpg
+            |-- val_batch0_labels.jpg
+            |-- val_batch0_pred.jpg
+            |-- val_batch1_labels.jpg
+            |-- val_batch1_pred.jpg
+            |-- val_batch2_labels.jpg
+            |-- val_batch2_pred.jpg
+            |-- weights
+                |-- best.pt
+                |-- last.pt
         |-- best.pt
         |-- housing_yolo
             |-- args.yaml

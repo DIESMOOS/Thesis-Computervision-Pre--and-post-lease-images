@@ -1,0 +1,11 @@
+{
+  "property_id": "002",
+  "category_counts": {
+    "damage": 0,
+    "wear": 3,
+    "alteration": 0,
+    "no_damage": 7
+  },
+  "summary": "Previous inspection showed surface wear.",
+  "inspection_recommended": false
+}

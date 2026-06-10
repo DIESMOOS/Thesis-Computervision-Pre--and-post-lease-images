@@ -1,0 +1,11 @@
+{
+  "property_id": "003",
+  "category_counts": {
+    "damage": 5,
+    "wear": 0,
+    "alteration": 0,
+    "no_damage": 5
+  },
+  "summary": "Previous inspection showed visible damage.",
+  "inspection_recommended": true
+}

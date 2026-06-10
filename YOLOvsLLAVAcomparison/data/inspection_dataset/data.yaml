@@ -1,0 +1,12 @@
+path: data/inspection_dataset
+
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: damage
+  1: crack
+  2: mold
+  3: wear
+  4: asbestos
