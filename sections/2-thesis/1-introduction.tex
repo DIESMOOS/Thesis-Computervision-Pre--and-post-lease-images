@@ -1,43 +1,11 @@
-\section{Abstract}
-\label{sec:abstract}
-Housing corporations increasingly rely on image archives to document rental property conditions, yet manual inspection remains time consuming and subjective. Advances in computer vision and multimodal artificial intelligence create opportunities to improve housing inspection through automated image analysis.
+\begin{abstract}
+Housing corporations increasingly rely on image archives to document rental property conditions, yet manual inspection remains time consuming and subjective. Advances in computer vision and multi modal artificial intelligence create opportunities to improve housing inspection through automated image analysis.
 
-Existing research often evaluates supervised object detection models and multimodal foundation models separately using different datasets, metrics, and evaluation settings. Direct comparison between these approaches in housing inspection remains limited, creating uncertainty regarding robustness, generalization, and practical suitability.
+Existing research often evaluates supervised object detection models and multi modal foundation models separately using different datasets, metrics, and evaluation settings. Direct comparison between these approaches in housing inspection remains limited, creating uncertainty regarding robustness, generalization, and practical suitability.
 
-Supervised object detection approaches such as YOLOv8 demonstrate strong defect localization capabilities, while multimodal foundation models such as LLaVA 1.6 show strong visual reasoning and zero shot capabilities. Related domains including medical imaging, infrastructure monitoring, and anomaly detection already demonstrate substantial progress through artificial intelligence driven inspection methods. However, transfer of these developments toward housing inspection remains limited.
+Supervised object detection approaches such as YOLOv8 demonstrate strong defect localization capabilities, while multi modal foundation models such as LLaVA 1.6 show strong visual reasoning and zero shot capabilities. Related domains including medical imaging, infrastructure monitoring, and anomaly detection already demonstrate substantial progress through artificial intelligence driven inspection methods. However, transfer of these developments toward housing inspection remains limited.
 
 This thesis introduces a controlled comparison framework in which YOLOv8 and LLaVA 1.6 are evaluated using identical housing inspection datasets, shared inspection categories, and harmonized outputs to enable fair comparison.
 
 The study contributes an inspection oriented benchmarking framework supporting future automated housing inspection systems and helps transfer methodological progress from mature artificial intelligence domains toward housing inspection.
-
-
-\section{Introduction}
-\label{sec:introduction}
-Housing corporations increasingly rely on image archives to document the condition of rental properties. Inspectors compare lease images to identify issues. This process is slow and subjective to opinion. As the volume of pictures grows, scalable and consistent support becomes relevant to housing organizations and inspectors \cite{kang_improvement_2025}. 
-
-Deep learning has shown performance across visual inspection domains, including infrastructure, monitoring, medical imaging, and anomaly detection \cite{cheng_change_2024}. Within supervised object detection, architectures such as YOLOv8 provide a fast, stable, and widely adopted baseline \cite{jocher_ultralytics_2023}. YOLOv8 is extra suitable for this project because it can be trained on small and medium datasets, supports different structured categories, and offers reproducible results with limited computation power as mentioned in \cite{goncalves_deep_2023}.
-
-In parallel, multimodal foundation models have emerged. Models such as LLaVA-1.6 are pretrained on large scale image, text corpora and can perform open vocabulary visual reasoning and classification without task specific labels. These models demonstrate strong generalization across domains and increasingly appear in inspection oriented research, including industrial anomaly detection and indoor defect description \cite{jiang_mmad_2025, wen_autonomous_2024}. Due to foundational pretraining,  foundation models can handle indoor variability lighting, viewpoint changes, and even clutter without finetuning 
-
-Although related work shows that both supervised detectors and foundation models can detect defects or anomalies, these model families are always evaluated separately, using different datasets, metrics, and tasks. Direct comparison between the supervised object detection networks and the multimodal foundation models under identical conditions remains missing. As a result, their relative robustness, generalization capacity, and suitability for structured inspection scenarios are not yet fully understood.
-
-This thesis addresses a scientific gap by comparing a YOLOv8 object detection model with the multimodal foundation model LLaVA-1.6, evaluating their ability to detect and identify  inspection relevant categories in lease housing images. By evaluating both approaches on identical datasets, metrics, and inspection criteria, this work aims to quantify their performance, robustness, and practical utility for supporting housing corporations in preparing and prioritizing property inspections.
-
-\textbf{Key Research Question}
-
-\emph{To what extent do task specific object detection models and multimodal foundation models differ in detecting and identifying predefined inspection relevant categories within lease housing images under real world variability?}
-
-To answer this key research question, the following sub questions are defined:
-
-\textbf{Sub Research Questions}
-
-\begin{itemize}
-
-\item What is the robustness of YOLOv8 object detection models and the LLaVA 1.6 vision language model when applied to harmonized housing inspection datasets under real world variability including lighting variation, camera angle differences, and device heterogeneity, measured through performance degradation across conditions?
-
-\item How do YOLOv8 object detection models and the LLaVA 1.6 vision language model compare quantitatively in detecting and identifying inspection relevant categories using a shared inspection category framework?
-
-\item To what extent can models developed on public inspection datasets support practical housing inspection application testing within a housing corporation environment?
-
-\end{itemize}
-
+\end{abstract}
