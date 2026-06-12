@@ -19,20 +19,56 @@ The research is positioned in the field of computer vision for defect detection 
 
 Both models are applied to the same inspection task and evaluated using a shared category scheme. Their outputs are subsequently aligned to enable direct comparison. This design allows differences in performance to be attributed to the model paradigm rather than to differences in data or evaluation setup.
 
-The novelty of the methodology lies in (i) evaluating both models under identical conditions, (ii) introducing a shared inspection oriented label space, and (iii) harmonizing heterogeneous outputs for comparison.
+The novel comparison framework lies in (i) evaluating both models under identical conditions, (ii) introducing a shared inspection oriented label space, and (iii) harmonizing heterogeneous outputs for comparison.
 
 \subsection{Data Sources}
 \label{subsec:data_sources}
 
 The experimental setup is based on publicly available datasets obtained through Roboflow, which provide annotated examples of damage related visual patterns. The datasets used are
 
-\begin{itemize}
-    \item Paint damage dataset (67 images)
-    \item Crack detection dataset (1551 images)
-    \item House damage dataset (3570 images)
-    \item Asbestos dataset (1331 images)
-\end{itemize}
+%------------------------------------
+\begin{table}[h]
+\caption{Overview of the datasets used in this study.}
+\label{tab:datasets}
+\centering
+\scriptsize
+\begin{tabularx}{\columnwidth}{l r X X}
+\toprule
+Dataset & Images & Original labels & Use \\
+\midrule
+Asbestos & 932 &
+thick-dark-mark, thick-light-mark, thin-dark-mark, thin-light-mark &
+Material-mark damage examples \\
 
+Cracks & 3717 &
+crack &
+Structural crack examples \\
+
+House Damage & 3008 &
+Amber, Green, NoDamage, Red &
+General housing damage and no-damage examples \\
+
+Mold 1 & 140 &
+0, 1, 2 &
+Mold-related examples \\
+
+Mold 2 & 938 &
+mold &
+Mold-related examples \\
+
+Paint Damage & 67 &
+Metal &
+Paint/surface damage examples \\
+
+Surface Damage & 1665 &
+crack, damage, erosion &
+Surface deterioration and structural damage examples \\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+
+%------------------------------------
 These datasets differ in annotation structure, label definitions, and visual characteristics. Rather than treating them as a single benchmark, they are used as heterogeneous source material for constructing a unified inspection task.
 
 A private housing inspection dataset from DGW is reserved exclusively for application testing. The dataset is not used for training, validation, or model optimization. Instead, it is used to assess practical applicability of the developed inspection system within realistic housing inspection workflows, and is therefore not used as a primary data source in this stage.
