@@ -106,9 +106,10 @@ LLAVA_MAX_NEW_TOKENS: int = 150
 # Dataset paths
 # ---------------------------------------------------------------------------
 DATA_ROOT: Path = ROOT / "data"
-IMG_DIR_TEST: Path = DATA_ROOT / "inspection_dataset" / "images" / "test"
-LBL_DIR_TEST: Path = DATA_ROOT / "inspection_dataset" / "labels" / "test"
-
+#IMG_DIR_TEST: Path = DATA_ROOT / "inspection_dataset" / "images" / "test"
+#LBL_DIR_TEST: Path = DATA_ROOT / "inspection_dataset" / "labels" / "test"
+IMG_DIR_TEST: Path = DATA_ROOT / "llava_balanced_test" / "images"
+LBL_DIR_TEST: Path = DATA_ROOT / "llava_balanced_test" / "labels"
 # ---------------------------------------------------------------------------
 # Output paths
 # ---------------------------------------------------------------------------
