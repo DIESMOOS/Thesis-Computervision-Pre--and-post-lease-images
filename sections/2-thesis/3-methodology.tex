@@ -19,39 +19,118 @@ The research is positioned in the field of computer vision for defect detection 
 
 Both models are applied to the same inspection task and evaluated using a shared category scheme. Their outputs are subsequently aligned to enable direct comparison. This design allows differences in performance to be attributed to the model paradigm rather than to differences in data or evaluation setup.
 
-The novelty of the methodology lies in (i) evaluating both models under identical conditions, (ii) introducing a shared inspection oriented label space, and (iii) harmonizing heterogeneous outputs for comparison.
+The novel comparison framework lies in (i) evaluating both models under identical conditions, (ii) introducing a shared inspection oriented label space, and (iii) harmonizing heterogeneous outputs for comparison.
 
 \subsection{Data Sources}
 \label{subsec:data_sources}
 
-The experimental setup is based on publicly available datasets obtained through Roboflow, which provide annotated examples of damage related visual patterns. The datasets used are
+The experimental setup is based on publicly available datasets obtained through Roboflow, which provide annotated examples of damage related visual patterns
 
-\begin{itemize}
-    \item Paint damage dataset (67 images)
-    \item Crack detection dataset (1551 images)
-    \item House damage dataset (3570 images)
-    \item Asbestos dataset (1331 images)
-\end{itemize}
+These datasets differ in annotation structure, label definitions, visual characteristics, image quality, and class distributions. They are used as heterogeneous source material for constructing a unified inspection task. 
 
-These datasets differ in annotation structure, label definitions, and visual characteristics. Rather than treating them as a single benchmark, they are used as heterogeneous source material for constructing a unified inspection task.
+To enable comparison of the models the original labels are harmonized into a shared set of inspection categories. Figure 1 illustrates the distribution of labels before and figure 2 demonstrates it after harmonization. This process reduces inconsistencies between datasets while preserving the visual diversity required to evaluate model robustness and generalization.
 
-A private housing inspection dataset from DGW is reserved exclusively for application testing. The dataset is not used for training, validation, or model optimization. Instead, it is used to assess practical applicability of the developed inspection system within realistic housing inspection workflows, and is therefore not used as a primary data source in this stage.
+A private housing inspection dataset from DGW is reserved exclusively for application testing. The dataset is not used for training, validation, hyperparameter tuning, or model optimization. Instead, it is used to assess the practical applicability of the developed inspection system within realistic housing inspection workflows. The DGW dataset contains images captured under varying lighting conditions, camera angles, room configurations, occupancy states, and device types, making it suitable for evaluating model performance under real world variability. Consequently, DGW serves as an independent evaluation benchmark rather than a primary training data source during this stage of the research.
 
-\subsection{Pipeline Validation}
-
-Before full evaluation, validation checks are performed to verify dataset mappings and harmonization procedures. Sample images are manually inspected to confirm label consistency after harmonization. Output mappings from LLaVA to shared inspection categories are verified using controlled examples. Model failures and unmapped outputs are logged and analysed separately.
-
-\subsection{Leakage Prevention}
-
-The DGW dataset remains fully isolated from model development procedures. No DGW images are used for training, validation, hyperparameter optimization, or model selection. This separation reduces information leakage and strengthens practical applicability assessment.
+The DGW dataset was reserved exclusively for application testing and was not used for training, validation, hyperparameter tuning, or model selection.
 
 \subsection{Dataset Harmonization}
 \label{subsec:dataset_harmonization}
 
-The Roboflow datasets exhibit substantial heterogeneity. Some datasets contain only positive examples (crack detection), while others include both damaged and undamaged images. Label definitions vary and are often not directly aligned with inspection terminology.
+The publicly available Roboflow datasets exhibit substantial heterogeneity in annotation structure, label definitions, image composition, and class distributions. Some datasets contain only positive examples, such as the crack detection dataset, while others include both damaged and undamaged images. In addition, identical visual phenomena are often described using different labels across datasets. For example, structural defects may be labeled as \textit{crack}, \textit{damage}, \textit{Amber}, or \textit{Red}, while mold and asbestos datasets use entirely different category schemes.
 
-To enable meaningful comparison, all datasets are harmonized into a shared inspection oriented label scheme. This step is necessary to reduce label inconsistency and to ensure that both models are evaluated on the same conceptual task.
+To enable meaningful comparison, all datasets are harmonized into a shared inspection-oriented label framework consisting of the categories \textit{Damage}, \textit{Wear}, \textit{Mold}, \textit{Asbestos}, and \textit{No Damage}. This harmonization process reduces label inconsistency and ensures that both YOLOv8 and LLaVA are evaluated on the same conceptual inspection task. The complete mapping procedure is shown in Table~\ref{tab:mapping}.
 
+To verify the harmonization procedure, a sample of images from each dataset was manually inspected after label mapping. This validation step was used to confirm that the original labels were consistently assigned to the appropriate harmonized inspection categories. Figure~\ref{fig:harmonization} illustrates the label distribution before and after harmonization, demonstrating how heterogeneous dataset-specific labels were transformed into a unified inspection-category framework.
+
+
+%------------------------------------
+\begin{table}[h]
+\caption{Overview of the datasets used in this study.}
+\label{tab:datasets}
+\centering
+\scriptsize
+\begin{tabularx}{\columnwidth}{l r X X}
+\toprule
+Dataset & Images & Original labels & Use \\
+\midrule
+Asbestos\cite{noauthor_asbestos_nodate} & 932 &
+thick-dark-mark, thick-light-mark, thin-dark-mark, thin-light-mark &
+Material-mark damage examples \\
+
+Cracks \cite{noauthor_crack_nodate} & 3717 &
+crack &
+Structural crack examples \\
+
+House Damage \cite{noauthor_house_nodate} & 3008 &
+Amber, Green, NoDamage, Red &
+General housing damage and no-damage examples \\
+
+Mold \cite{} & 140 &
+0, 1, 2 &
+Mold-related examples \\
+
+Mold 2 & 938 &
+mold &
+Mold-related examples \\
+
+Paint Damage & 67 &
+Metal &
+Paint/surface damage examples \\
+
+Surface Damage & 1665 &
+crack, damage, erosion &
+Surface deterioration and structural damage examples \\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+
+%------------------------------------
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{sections/1-thesis-design/original_label_distribution.png}
+\caption{Distribution of original dataset labels before harmonization.}
+\label{fig:beforeharm}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{sections/2-thesis/harmonizized_label_distribution.png}
+\caption{Distribution of harmonized inspection categories after harmonization.}
+\label{fig:afterharm}
+\end{figure}
+%-----------------------------
+\begin{table}[h]
+\caption{Label harmonization scheme used across datasets.}
+\label{tab:mapping}
+\centering
+\footnotesize
+\begin{tabularx}{\columnwidth}{l X}
+\toprule
+Harmonized Category & Original Labels \\
+\midrule
+Damage &
+crack, damage, Amber, Red \\
+
+Wear &
+Metal, erosion \\
+
+Mold &
+mold, 0, 1, 2 \\
+
+Asbestos &
+thick-dark-mark, thick-light-mark,
+thin-dark-mark, thin-light-mark \\
+
+No Damage &
+NoDamage, Green \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+%--------------------------------
 \subsection{Inspection Categories}
 \label{subsec:inspection_categories}
 
@@ -68,119 +147,128 @@ This schema is derived from the application domain rather than from the original
 
 \subsection{Dataset Bias and Limitations}
 
-Public datasets originate from different domains and collection procedures, potentially introducing differences in image quality, annotation consistency, class balance, and environmental conditions. Crack datasets, paint damage datasets, and housing inspection images may contain distributional differences that influence model behavior. Results should therefore be interpreted within the context of the selected datasets.
+The public datasets used in this study originate from different domains and collection procedures, introducing variation in image composition, annotation practices, and class distributions. For example, crack datasets primarily contain close up defect images, whereas housing inspection datasets contain wider room level views.
 
-\subsection{Model Selection}
-\label{subsec:model_selection}
+Class imbalance is another limitation, as some categories, such as paint damage, contain substantially fewer examples than others.
 
-YOLOv8 is selected as the supervised baseline due to its strong performance, stable training behavior, and ability to localize defects through bounding boxes. It represents the standard approach in many inspection-related computer vision tasks.
-
-LLaVA 1.6 is selected as the multi modal baseline because it enables prompt-based visual reasoning without task specific training. It represents a fundamentally different approach based on large-scale multi modal pretraining.
-
-The comparison between these models reflects a key trade-off: supervised localization versus general multi modal reasoning. This makes the comparison both methodologically relevant and aligned with current developments in the field.
+Consequently, the results should be interpreted within the context of the selected datasets and the harmonized inspection framework used in this study.
 
 \subsection{Pipeline Model}
 \label{subsec:pipeline_model}
 
 The experimental setup is organized as a unified pipeline model that enables a controlled comparison between YOLOv8 and LLaVA 1.6. Rather than evaluating both models independently, they are embedded in the same processing framework consisting of four main stages: data preparation, parallel model execution, output harmonization, and evaluation. This structure ensures that differences in performance can be attributed to the model paradigms themselves rather than to inconsistencies in data handling or evaluation design.
 
+%--------------------------------------
 
-\begin{center}
-\resizebox{\columnwidth}{!}{%
-\begin{tikzpicture}[
-    node distance=0.9cm and 1.4cm,
-    every node/.style={font=\scriptsize, align=center},
-    block/.style={
-        rectangle,
-        rounded corners=6pt,
-        draw=black,
-        thick,
-        minimum width=3.4cm,
-        minimum height=0.9cm,
-        fill=gray!10
-    },
-    modelblock/.style={
-        rectangle,
-        rounded corners=6pt,
-        draw=black,
-        thick,
-        minimum width=3.1cm,
-        minimum height=0.9cm,
-        fill=blue!8
-    },
-    evalblock/.style={
-        rectangle,
-        rounded corners=6pt,
-        draw=black,
-        thick,
-        minimum width=3.5cm,
-        minimum height=0.9cm,
-        fill=green!8
-    },
-    appblock/.style={
-        rectangle,
-        rounded corners=6pt,
-        draw=black,
-        thick,
-        minimum width=3.5cm,
-        minimum height=0.9cm,
-        fill=orange!10
-    },
-    line/.style={-{Latex[length=2mm]}, thick}
-]
+```latex
+\begin{figure}[h]
+\centering
+\fbox{\parbox{0.9\columnwidth}{\centering
+Public Datasets\\
+(Training Data)
+}}
 
-\node[block] (data) {Public Roboflow Datasets\\
-Paint damage, crack detection,\\
-house damage, asbestos};
+\vspace{0.2cm}
+$\downarrow$
 
-\node[block, below=of data] (prep) {Preprocessing and Label Harmonization\\
-Map labels to:\\
-Damage / Wear / Alteration / No damage};
+\vspace{0.2cm}
+\fbox{\parbox{0.9\columnwidth}{\centering
+Dataset Harmonization
+}}
 
-\node[modelblock, below left=1.4cm and 1.2cm of prep] (yolo) {YOLOv8 Branch\\
-Train on harmonized data\\
-and infer on test images};
+\vspace{0.2cm}
+$\downarrow$
 
-\node[modelblock, below right=1.4cm and 1.2cm of prep] (llava) {LLaVA 1.6 Branch\\
-Apply fixed prompts\\
-and infer on test images};
+\vspace{0.2cm}
+\fbox{\parbox{0.9\columnwidth}{\centering
+YOLOv8 \hspace{1cm} LLaVA 1.6
+}}
 
-\node[block, below=2.7cm of prep] (harm) {Output Harmonization\\
-Map outputs to shared\\
-image-level categories};
+\vspace{0.2cm}
+$\downarrow$
 
-\node[evalblock, below=of harm] (eval) {Controlled Comparison\\
-YOLOv8: Precision / Recall / mAP\\
-Shared: Accuracy / Precision / Recall / F1\\
-Confusion matrices + qualitative analysis};
+\vspace{0.2cm}
+\fbox{\parbox{0.9\columnwidth}{\centering
+Unified Inspection Categories
+\\
+(Damage, Wear, Mold, Asbestos, No Damage)
+}}
 
-\node[appblock, below=of eval] (app) {Application Testing\\
-DGW housing archive\\
-Practical housing workflow assessment\\
-No training or validation use};
+\vspace{0.2cm}
+$\downarrow$
 
-\draw[line] (data) -- (prep);
-\draw[line] (prep.south) |- (yolo.north);
-\draw[line] (prep.south) |- (llava.north);
-\draw[line] (yolo.south) |- (harm.north);
-\draw[line] (llava.south) |- (harm.north);
-\draw[line] (harm) -- (eval);
-\draw[line] (eval) -- (app);
+\vspace{0.2cm}
+\fbox{\parbox{0.9\columnwidth}{\centering
+Evaluation on DGW Test Set
+}}
 
-\end{tikzpicture}%
-}
-
-\captionof{figure}{Overview of the experimental pipeline used to enable a controlled comparison between YOLOv8 and LLaVA 1.6 under a shared inspection-category framework.}
+\caption{Overview of the experimental pipeline.}
 \label{fig:pipeline}
-\end{center}
+\end{figure}
+```
+
+%-------------------------------------
 
 Figure~\ref{fig:pipeline} shows the overall pipeline model used in this study. The process starts with publicly available Roboflow datasets, which are first harmonized into a shared inspection category scheme. The prepared data is then used in two parallel branches. In the first branch, YOLOv8 is trained on the harmonized annotated data and applied to test images to produce structured detections. In the second branch, LLaVA 1.6 processes the same test images using fixed prompts and generates textual descriptions. Because these outputs are fundamentally different, they are subsequently transformed into a shared image-level representation through a rule-based harmonization step. The aligned outputs are then evaluated using both detection and classification metrics, supported by confusion matrices and qualitative error analysis.
 
 This pipeline model is central to the methodology because it operationalizes the comparison between supervised detection and multi modal reasoning within a single consistent framework.
+
+
+```latex
 \subsection{Experimental Setup}
 \label{subsec:experimental_setup}
 
-Figure~\ref{fig:pipeline} illustrates the experimental pipeline used in this study. The workflow consists of four main stages: data preparation, model execution, output harmonization, and evaluation.
+The experimental setup was designed to ensure a fair comparison between YOLOv8 and LLaVA 1.6 under identical inspection conditions. All public datasets were harmonized into a shared inspection-category framework consisting of Damage, Wear, Mold, Asbestos, and No Damage. The DGW dataset was excluded from model training and reserved exclusively for application testing.
+
+\subsubsection{Data Preparation}
+
+The harmonized dataset was divided into training, validation, and test subsets using a stratified split. A ratio of 70\% training, 15\% validation, and 15\% testing was applied. All annotations were represented as bounding boxes. Images from the DGW dataset were not used for training, validation, hyperparameter tuning, or model selection.
+
+\begin{table}[h]
+\caption{Experimental configuration.}
+\label{tab:experimental_setup}
+\centering
+\footnotesize
+\begin{tabularx}{\columnwidth}{l X}
+\toprule
+Setting & Value \\
+\midrule
+YOLO Model & YOLOv8m \\
+Pretrained Weights & COCO-pretrained weights \\
+Image Size & 640 $\times$ 640 \\
+Epochs & 75 \\
+Batch Size & 32 \\
+Patience & 20 \\
+Random Seed & 42 \\
+Workers & 24 \\
+Train/Validation/Test Split & 70/15/15 \\
+LLaVA Model & LLaVA v1.6 Mistral 7B \\
+Inference Mode & Zero-shot \\
+Prompt Strategy & Fixed prompt template \\
+Output Mapping & Rule-based category mapping \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Model Configuration}
+
+YOLOv8 was trained using the harmonized training dataset and initialized with pretrained COCO weights. The model was trained for 75 epochs using a fixed random seed to support reproducibility. Hyperparameters were kept constant throughout the experiments.
+
+LLaVA 1.6 was evaluated in a zero-shot setting without task-specific training. The model received the same prompt for all images to ensure consistency across evaluations. Generated textual outputs were converted to the harmonized inspection categories using a predefined rule-based mapping procedure.
+
+The prompt used during evaluation was:
+
+\begin{quote}
+Choose exactly one category from the following list: Damage, Wear, Mold, Asbestos, or No Damage. Respond using only the category name.
+\end{quote}
+
+\subsubsection{Evaluation Procedure}
+
+Both models were evaluated using the same inspection categories and test images. YOLOv8 predictions were evaluated using object-detection metrics, while LLaVA outputs were evaluated after conversion to the shared inspection categories. This approach ensured that both models were compared on the same inspection task despite their different output formats.
+
+Figure~\ref{fig:pipeline} provides an overview of the experimental workflow.
+```
+
 
 \subsubsection{Data preparation}
 
