@@ -1,41 +1,115 @@
+"""
+Central configuration for the YOLO-vs-LLaVA inspection pipeline.
+
+All paths, constants, and model settings live here.
+Import from this module instead of repeating magic strings everywhere.
+"""
+
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "data"
-PROPERTIES_DIR = DATA_DIR / "properties"
-RESULTS_DIR = BASE_DIR / "results"
+ROOT = Path(__file__).resolve().parent.parent
 
-CATEGORIES = ["damage", "wear", "alteration", "no_damage"]
+# ---------------------------------------------------------------------------
+# Taxonomy: aligned with YOLO data.yaml
+# ---------------------------------------------------------------------------
+CATEGORIES: list[str] = [
+    "damage",
+    "crack",
+    "mold",
+    "wear",
+    "asbestos",
+    "no_damage",
+]
 
-YOLO_CONF_THRESHOLD = 0.25
+EVAL_LABELS: list[str] = [
+    "damage",
+    "crack",
+    "mold",
+    "wear",
+    "asbestos",
+    "no_damage",
+]
 
-LLAVA_PROMPT = """
-Analyze this housing inspection image.
+CATEGORY_MAP: dict[str, str] = {
+    "damage": "damage",
+    "broken": "damage",
+    "hole": "damage",
+    "dent": "damage",
+    "missing": "damage",
+    "water_damage": "damage",
+    "fire_damage": "damage",
 
-Return ONLY valid JSON.
+    "crack": "crack",
+    "cracked": "crack",
+    "fracture": "crack",
+    "split": "crack",
 
-Required JSON structure:
-{
-  "categories_present": [],
-  "category_counts": {
-    "damage": 0,
-    "wear": 0,
-    "alteration": 0,
-    "no_damage": 0
-  },
-  "summary": ""
+    "mold": "mold",
+    "mould": "mold",
+    "fungal": "mold",
+    "mildew": "mold",
+
+    "wear": "wear",
+    "worn": "wear",
+    "rust": "wear",
+    "paint": "wear",
+    "peeling": "wear",
+    "stain": "wear",
+    "discolor": "wear",
+    "discoloration": "wear",
+    "deterioration": "wear",
+
+    "asbestos": "asbestos",
+    "thick-dark-mark": "asbestos",
+    "thick-light-mark": "asbestos",
+    "thin-dark-mark": "asbestos",
+    "thin-light-mark": "asbestos",
+
+    "no_damage": "no_damage",
+    "nodamage": "no_damage",
+    "no damage": "no_damage",
 }
 
-Allowed categories only:
-- damage
-- wear
-- alteration
-- no_damage
+CLASS_MAP: dict[int, str] = {
+    0: "damage",
+    1: "crack",
+    2: "mold",
+    3: "wear",
+    4: "asbestos",
+}
 
-Rules:
-- If damage, wear, or alteration is detected, no_damage must be 0.
-- If no visible inspection-relevant issue exists, set no_damage to 1.
-- category_counts must always contain all 4 categories.
-- Do not include markdown.
-- Do not include explanations outside JSON.
-"""
+BINARY_MAP: dict[str, str] = {
+    "damage": "damage",
+    "crack": "damage",
+    "mold": "damage",
+    "wear": "damage",
+    "asbestos": "damage",
+    "no_damage": "not_damage",
+}
+
+BINARY_EVAL_LABELS: list[str] = ["damage", "not_damage"]
+
+# ---------------------------------------------------------------------------
+# YOLO settings
+# ---------------------------------------------------------------------------
+YOLO_MODEL_PATH: Path = ROOT / "models" / "best_run" / "weights" / "best.pt"
+CONF_THRESHOLD: float = 0.25
+IMAGE_EXTS: frozenset[str] = frozenset({".jpg", ".jpeg", ".png"})
+
+# ---------------------------------------------------------------------------
+# LLaVA settings
+# ---------------------------------------------------------------------------
+LLAVA_MODEL_ID: str = "llava-hf/llava-v1.6-mistral-7b-hf"
+LLAVA_MAX_NEW_TOKENS: int = 150
+
+# ---------------------------------------------------------------------------
+# Dataset paths
+# ---------------------------------------------------------------------------
+DATA_ROOT: Path = ROOT / "data"
+IMG_DIR_TEST: Path = DATA_ROOT / "inspection_dataset" / "images" / "test"
+LBL_DIR_TEST: Path = DATA_ROOT / "inspection_dataset" / "labels" / "test"
+
+# ---------------------------------------------------------------------------
+# Output paths
+# ---------------------------------------------------------------------------
+RESULTS_DIR: Path = ROOT / "results"

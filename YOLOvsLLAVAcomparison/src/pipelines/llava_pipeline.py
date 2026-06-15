@@ -1,10 +1,81 @@
 from pathlib import Path
 
-IMAGE_EXTS = {".jpg", ".jpeg", ".png"}
-THESIS_CATEGORIES = ["damage", "wear", "alteration", "no_damage"]
+import torch
+from PIL import Image
+from transformers import LlavaNextForConditionalGeneration, LlavaNextProcessor
+
+from src.config import (
+    CATEGORIES,
+    IMAGE_EXTS,
+    LLAVA_MODEL_ID,
+    LLAVA_MAX_NEW_TOKENS,
+)
+
+logger = logging.getLogger(__name__)
+
+# ---------------------------------------------------------------------------
+# Prompt  — ask the model for structured JSON so parsing is reliable
+# ---------------------------------------------------------------------------
+
+SYSTEM_PROMPT = (
+    "You are an expert housing inspector. "
+    "Analyse the image and classify any visible issues."
+)
+
+USER_PROMPT = """\
+Look at this housing inspection image carefully.
+
+Classify what you see into one or more of these categories:
+  - damage   : structural issues such as cracks, holes, broken surfaces, mould
+  - wear     : surface degradation such as peeling paint, stains, discolouration, rust
+  - alteration : unauthorised modifications or additions
+  - no_damage : the area looks fine
+
+Return ONLY a JSON object with this exact structure and nothing else:
+{
+  "categories_present": ["damage"],
+  "category_counts": {"damage": 1, "wear": 0, "alteration": 0, "no_damage": 0},
+  "summary": "One-sentence description of what you see."
+}
+"""
+
+# ---------------------------------------------------------------------------
+# Model singleton  (loaded at most once per process)
+# ---------------------------------------------------------------------------
+
+_processor: LlavaNextProcessor | None = None
+_model: LlavaNextForConditionalGeneration | None = None
 
 
-def get_image_paths(folder_path: str) -> list[Path]:
+def _load_model() -> tuple[LlavaNextProcessor, LlavaNextForConditionalGeneration]:
+    global _processor, _model
+
+    if _processor is not None and _model is not None:
+        return _processor, _model
+
+    logger.info("Loading LLaVA-1.6 model: %s …", LLAVA_MODEL_ID)
+
+    _processor = LlavaNextProcessor.from_pretrained(LLAVA_MODEL_ID)
+
+    dtype = torch.float16 if torch.cuda.is_available() else torch.float32
+    _model = LlavaNextForConditionalGeneration.from_pretrained(
+        LLAVA_MODEL_ID,
+        torch_dtype=dtype,
+        device_map="auto",
+        # Reduces VRAM by ~40 % on single-GPU Snellius nodes
+        load_in_4bit=torch.cuda.is_available(),
+    )
+    _model.eval()
+
+    logger.info("LLaVA model loaded (dtype=%s, device=%s)", dtype, next(_model.parameters()).device)
+    return _processor, _model
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def get_image_paths(folder_path: str | Path) -> list[Path]:
     folder = Path(folder_path)
 
     if not folder.exists():
@@ -31,23 +102,17 @@ def parse_llava_text(text: str) -> dict:
     text_lower = text.lower()
     counts = empty_category_counts()
 
-    if any(word in text_lower for word in ["crack", "broken", "hole", "damage"]):
+    if any(w in t for w in ["crack", "broken", "hole", "mould", "mold", "damage", "structural"]):
         counts["damage"] = 1
-
-    if any(word in text_lower for word in ["wear", "stain", "peeling", "paint", "discoloration"]):
+    if any(w in t for w in ["wear", "stain", "peel", "paint", "discolor", "rust", "deteriorat"]):
         counts["wear"] = 1
-
-    if any(word in text_lower for word in ["alteration", "modified", "added", "unauthorized"]):
+    if any(w in t for w in ["alteration", "unauthor", "modif", "added", "new install"]):
         counts["alteration"] = 1
 
-    categories_present = [
-        category for category, count in counts.items()
-        if count > 0 and category != "no_damage"
-    ]
-
-    if not categories_present:
+    active = [cat for cat in CATEGORIES if counts[cat] > 0 and cat != "no_damage"]
+    if not active:
         counts["no_damage"] = 1
-        categories_present = ["no_damage"]
+        active = ["no_damage"]
 
     return {
         "categories_present": categories_present,
