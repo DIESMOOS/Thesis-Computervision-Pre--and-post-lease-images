@@ -32,8 +32,8 @@ from src.config import (
     IMAGE_EXTS,
     LLAVA_MODEL_ID,
 )
-from src.pipelines.llava_pipeline import run_llava_on_image
-
+from src.pipelines.llava_pipeline import run_llava_on_image # for wanting to test the specified version
+#from src.pipelines.llava_pipeline_zeroshot import run_llava_on_image # for when wanting to test the zero shot version
 logger = logging.getLogger(__name__)
 
 OUT_CSV = RESULTS_DIR / "llava_baseline_results.csv"
@@ -54,7 +54,7 @@ def get_true_label(label_path: Path) -> str:
         cls_id = int(line.split()[0])
         labels.append(CLASS_MAP.get(cls_id, "damage"))
 
-    for label in ["mold", "asbestos", "crack", "damage", "wear"]:
+    for label in ["crack", "mold", "asbestos", "wear", "damage"]:
         if label in labels:
             return label
 

@@ -1,8 +1,5 @@
 """
-LLaVA-1.6 pipeline for housing inspection.
-
-Runs LLaVA on images and returns structured predictions using YOLO-aligned labels:
-damage, crack, mold, wear, asbestos, no_damage.
+Optimized LLaVA-1.6 pipeline for housing inspection.
 """
 
 import json
@@ -24,32 +21,64 @@ from src.config import (
 logger = logging.getLogger(__name__)
 
 
-USER_PROMPT = """\
-You are a housing inspection assistant.
+USER_PROMPT = """
+You are an expert housing inspection assistant.
 
-Classify the image into exactly one of these labels:
+Use a careful inspection procedure inspired by medical image review:
+1. Inspect the image for visible abnormalities.
+2. Compare it with the examples.
+3. Decide whether a real defect is visible.
+4. Select exactly one final label.
+
+Allowed labels:
 damage, crack, mold, wear, asbestos, no_damage.
 
-Definitions:
-- crack: visible cracks, fractures, splits, or line-shaped breaks.
-- mold: visible mold, mould, mildew, fungal growth, or damp-related black spots.
-- asbestos: asbestos-like material marks, suspicious fibrous material, or asbestos-related surface patterns.
-- wear: surface degradation, peeling paint, stains, discoloration, rust, aging, or gradual deterioration.
-- damage: other visible damage such as holes, broken surfaces, dents, missing material, fire damage, or water damage.
-- no_damage: no visible inspection-relevant issue.
+Few-shot examples:
 
-Rules:
-- If a crack is visible, choose crack.
-- If mold or mould is visible, choose mold.
-- If asbestos-like material is visible, choose asbestos.
-- Choose no_damage when the image only shows a normal wall, floor, ceiling, pipe, surface, or room feature without a clear visible defect. Do not mark minor shadows, texture, lighting, normal edges, or ordinary material patterns as damage.
-- Choose no_damage only when the area looks fine.
+Example 1:
+Observation: A normal wall or floor surface is visible. There are no clear cracks, stains, mold, holes, or broken parts.
+Label: no_damage
 
-Return only this JSON object:
+Example 2:
+Observation: A clear line-shaped break is visible in the wall or surface.
+Label: crack
+
+Example 3:
+Observation: Dark damp spots or fungal-looking patches are visible.
+Label: mold
+
+Example 4:
+Observation: Paint is peeling, discolored, stained, rusty, or worn from normal use.
+Label: wear
+
+Example 5:
+Observation: A surface is broken, has a hole, missing material, dent, fire damage, or water damage.
+Label: damage
+
+Example 6:
+Observation: Suspicious fibrous material or asbestos-like surface markings are visible.
+Label: asbestos
+
+Important rules:
+- If no clear defect is visible, choose no_damage.
+- Do not classify shadows, lighting differences, texture, corners, joints, or ordinary material patterns as defects.
+- Do not choose crack unless a clear line-shaped break is visible.
+- Do not choose mold unless visible damp spots, mildew, or fungal growth are present.
+- Do not choose damage unless there is clear broken material, a hole, missing material, or severe deterioration.
+- The final label must be exactly one allowed label.
+
+Return ONLY valid JSON:
 {
-  "label": "one_of_damage_crack_mold_wear_asbestos_no_damage",
-  "summary": "one short sentence"
+  "observations": "short description of visible relevant findings",
+  "label": "damage|crack|mold|wear|asbestos|no_damage",
+  "summary": "short reason for the chosen label"
 }
+
+Important hierarchy:
+- If the defect is a line shaped break, choose crack, not damage.
+- If the defect is mold or damp black spots, choose mold, not damage.
+- If the defect is peeling, discoloration, rust, or gradual surface aging, choose wear, not damage.
+- Use damage only for other visible defects such as holes, broken surfaces, dents, missing material, water damage, or fire damage.
 """
 
 
@@ -99,8 +128,25 @@ def empty_category_counts() -> dict[str, int]:
     return {cat: 0 for cat in CATEGORIES}
 
 
-def _make_parsed(label: str, summary: str) -> dict:
+def normalize_label(label: str) -> str:
+    label = str(label).lower().strip()
+    label = label.replace(" ", "_").replace("-", "_")
+
+    if label == "mould":
+        return "mold"
+
+    if label in ["nodamage", "no_damage", "no__damage"]:
+        return "no_damage"
+
+    if label in CATEGORIES:
+        return label
+
+    return "no_damage"
+
+
+def make_parsed(label: str, summary: str = "", observations: str = "") -> dict:
     label = normalize_label(label)
+
     counts = empty_category_counts()
     counts[label] = 1
 
@@ -110,45 +156,33 @@ def _make_parsed(label: str, summary: str) -> dict:
     return {
         "categories_present": [label],
         "category_counts": counts,
+        "observations": observations.strip(),
         "summary": summary.strip() or "No summary provided.",
     }
 
 
-def normalize_label(label: str) -> str:
-    label = label.lower().strip()
-    label = label.replace(" ", "_")
-
-    if label == "mould":
-        return "mold"
-
-    if label in CATEGORIES:
-        return label
-
-    return "no_damage"
-
-
-def _keyword_label(text: str) -> str:
+def fallback_label(text: str) -> str:
     t = text.lower()
 
-    # First check for explicit no-damage statements
     if any(w in t for w in [
-        "no visible issue",
+        "no visible defect",
         "no visible damage",
+        "no inspection-relevant defect",
         "no defect",
-        "no signs of",
+        "no defects",
         "appears intact",
-        "looks fine",
-        "clean",
-        "normal condition"
+        "looks normal",
+        "normal surface",
+        "normal wall",
+        "unblemished surface",
     ]):
         return "no_damage"
 
-    # Specific issue classes first.
+    if any(w in t for w in ["asbestos", "asbestos-like", "fibrous insulation"]):
+        return "asbestos"
+
     if any(w in t for w in ["mold", "mould", "mildew", "fungal", "black spots"]):
         return "mold"
-
-    if any(w in t for w in ["asbestos", "asbestos-like", "fibrous"]):
-        return "asbestos"
 
     if any(w in t for w in ["crack", "cracked", "fracture", "split"]):
         return "crack"
@@ -158,44 +192,31 @@ def _keyword_label(text: str) -> str:
         "broken",
         "dent",
         "missing material",
-        "fire damage",
         "water damage",
-        "damaged surface"
+        "fire damage",
+        "damaged surface",
     ]):
         return "damage"
 
     if any(w in t for w in [
         "wear",
         "worn",
-        "stain",
         "peeling",
-        "paint",
+        "stain",
         "discolor",
         "discolour",
         "rust",
         "aging",
-        "deteriorat"
+        "deteriorat",
     ]):
         return "wear"
-
-    if any(w in t for w in [
-        "no visible",
-        "no issue",
-        "no damage",
-        "looks fine",
-        "clean",
-        "intact"
-    ]):
-        return "no_damage"
-
-    if "damage" in t or "defect" in t:
-        return "damage"
 
     return "no_damage"
 
 
 def _extract_json(raw_text: str) -> dict:
     text = raw_text.strip()
+    text = text.replace("```json", "").replace("```", "").strip()
 
     match = re.search(r"\{.*?\}", text, re.DOTALL)
 
@@ -205,16 +226,15 @@ def _extract_json(raw_text: str) -> dict:
 
             label = parsed.get("label", "no_damage")
             summary = parsed.get("summary", "")
+            observations = parsed.get("observations", "")
 
-            return _make_parsed(label, summary)
+            return make_parsed(label, summary, observations)
 
-        except Exception:
-            pass
+        except Exception as exc:
+            logger.warning("Could not parse JSON output: %s", exc)
 
-    # fallback only if JSON parsing fails
-    label = _keyword_label(text)
-
-    return _make_parsed(label, text[:300])
+    label = fallback_label(text)
+    return make_parsed(label, text[:300], "")
 
 
 def run_llava_on_image(image_path: Path) -> tuple[str, dict]:
@@ -259,7 +279,6 @@ def run_llava_on_image(image_path: Path) -> tuple[str, dict]:
     )[0].strip()
 
     parsed = _extract_json(raw_text)
-
     return raw_text, parsed
 
 
@@ -273,18 +292,16 @@ def run_llava_on_folder(folder_path: str | Path) -> list[dict]:
         except Exception as exc:
             logger.error("LLaVA failed on %s: %s", image_path.name, exc)
             raw_text = ""
-            parsed = _make_parsed("no_damage", f"Inference error: {exc}")
+            parsed = make_parsed("no_damage", f"Inference error: {exc}", "")
 
-        results.append(
-            {
-                "image_id": image_path.name,
-                "model_name": "llava",
-                "raw_output": raw_text,
-                "parsed_output": parsed,
-            }
-        )
+        results.append({
+            "image_id": image_path.name,
+            "model_name": "llava_optimized",
+            "raw_output": raw_text,
+            "parsed_output": parsed,
+        })
 
-    logger.info("Processed %d images with LLaVA", len(results))
+    logger.info("Processed %d images with optimized LLaVA", len(results))
     return results
 
 

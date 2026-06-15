@@ -1,163 +1,943 @@
 image,true,pred,true_binary,pred_binary,raw_llava
+asbestos_pc450BP0006_synt1_jpg.rf.22a9782ef71ab88328039b1de9ae287a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various small dark"
+asbestos_pc450BP0006_synt1_jpg.rf.7d08fb4e384059ca67706501c1cc7780.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various dark spots"
+asbestos_pc450BP0006_synt2_jpg.rf.254202f2c3c9b36e5c8ec275767d0344.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various dark spots"
 asbestos_pc450BP0006_synt2_jpg.rf.34e826c23968e2bb258d9f520011a806.jpg,no_damage,no_damage,not_damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a surface with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage.""
-}
-```"
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0006_synt2_jpg.rf.eed061a57d2c6f6d390cf7f141cb1eed.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various dark spots"
+asbestos_pc450BP0011synt1_jpg.rf.568d456639c2ab61a3e2b2e07aadc12b.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a dark,"
+asbestos_pc450BP0011synt1_jpg.rf.a4369ffe56ff7d0a5a77efb964b0bc9e.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0011synt2_jpg.rf.6e04f23a178ba51050321351df4a1209.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0011synt2_jpg.rf.c8236f22b93d72f782ade660e57fad13.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern of"
+asbestos_pc450BP0011synt_jpg.rf.36111cfb156047c36858f0a2d03ac370.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0011synt_jpg.rf.7aa2d2aedb22333bf16300f10c5ba424.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0011synt_jpg.rf.82097e64af1750baa09de2e2a85393e2.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various small,"
+asbestos_pc450BP0027synt2_jpg.rf.30ca56e18591523711eff3ae9083c0e3.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
 asbestos_pc450BP0027synt2_jpg.rf.901a9b9873dca44103b5d474829e29de.jpg,no_damage,no_damage,not_damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a surface with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage.""
-}
-```"
+  ""observations"": ""The image shows a surface with various small dark"
+asbestos_pc450BP0027synt_jpg.rf.1633bf7cb137153e31cca57f7c5e8c46.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various textures"
+asbestos_pc450BP0030synt1_jpg.rf.79ebefcaaad6f359e241ab32abeadd35.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various thin,"
+asbestos_pc450BP0030synt1_jpg.rf.ec4f5d87c889c0625cb12f49b24db973.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0030synt2_jpg.rf.035ceaa2c55ccbe98b161711fefb17d7.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0030synt2_jpg.rf.ebb00ab1be981e28ce201e105c358452.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0030synt2_jpg.rf.fd65ed85db4bc7df53131187df20efa2.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern of"
+asbestos_pc450BP0030synt_jpg.rf.2ede67ffcc85e7ab54e1a4c83d6c0066.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various small,"
+asbestos_pc450BP0030synt_jpg.rf.601b50742fb8b645d06b00a5e91685f1.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various small,"
+asbestos_pc450BP0030synt_jpg.rf.ab8ee52c9330a5d12e65ee35cec8d3a2.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern of"
+asbestos_pc450BP0030synt_jpg.rf.c1cee4ee4514b94de71496219d0fdacf.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0040_synt1_jpg.rf.15e98b908400a2954e2759f5b882164c.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern of"
+asbestos_pc450BP0040_synt1_jpg.rf.2d0617c75f0017200cd80deabc979215.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450BP0040_synt2_jpg.rf.8176903ec276974878ccafc5969d9008.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0040_synt2_jpg.rf.84b6e5929a9927070c66e59a3aba485c.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0040_synt_jpg.rf.93500a34ab850f27824b81fa284ebad1.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0040_synt_jpg.rf.bc6271cfd8225420da103bc4813a346c.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern of"
+asbestos_pc450BP0049synt1_jpg.rf.5c36b1b89221de2e207e25bf1f809169.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various small,"
+asbestos_pc450BP0049synt1_jpg.rf.b76eb6524c18e3c94d87a6a925e8c84d.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern of"
+asbestos_pc450BP0049synt1_jpg.rf.ea5ab37b5d703fd5a19b7ac9db5490c9.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various dark spots"
+asbestos_pc450BP0049synt2_jpg.rf.9797bc947f99a84b6ae1e20d4cdc428a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0049synt_jpg.rf.64f1002b158813d9c759a475f483bce6.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various small,"
+asbestos_pc450BP0049synt_jpg.rf.b8e78435204d47506491d877b1d955e4.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various small,"
+asbestos_pc450BP0055_synt1_jpg.rf.0fdc9ba7254f7b96ae1a51e7aafa6df0.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various dark spots"
+asbestos_pc450BP0055_synt1_jpg.rf.836ed632e1462932d24c62a14f522a87.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various dark spots"
+asbestos_pc450BP0055_synt2_jpg.rf.0df1385bb7fee1be3d45fa3db1191ee3.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0055_synt2_jpg.rf.20bb89877041764a2749cc0ab21ca68e.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various dark lines"
+asbestos_pc450BP0055_synt2_jpg.rf.84ac6022ce0e7cb67433c34ca3a35e98.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0055_synt3_jpg.rf.8aa0a2450000ec3d201c38191ec4799a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern of"
+asbestos_pc450BP0055_synt_jpg.rf.685d19c361b0732c4b552125599c938b.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various lines and"
+asbestos_pc450BP0055_synt_jpg.rf.74370b596a389adce2445b8b47e7dcf1.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various thin,"
+asbestos_pc450BP0055_synt_jpg.rf.e2cbb0bb0dab0d572025a8b8e178ea0b.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450BP0058-synt2_jpg.rf.bf027700f41fe8e0416f148405d5dfd5.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a dark, textured surface"
+asbestos_pc450BP0058-synt2_jpg.rf.d09291fc1fa3ff1c8f3d2f4a6afb2624.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a dark, textured surface"
+asbestos_pc450BP0058-synt_jpg.rf.91129a73bf9825b5c1e10511b09cae6f.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-041_jpg.rf.e5ccca7a96c56d1390ef7d4bede18fe5.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a single,"
+asbestos_pc450newF-042_jpg.rf.601d9f0d35de1d632a5d657a3bafa086.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a dark, textured surface"
+asbestos_pc450newF-042_jpg.rf.ce1eda557f3ba431bf7910f7317028b3.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a dark, textured surface"
+asbestos_pc450newF-043_jpg.rf.29cbfde5ba2c1f5dffb0676408943f9a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a uniform dark surface with no"
+asbestos_pc450newF-043_jpg.rf.2d4ca6e7e5c70cf9c5e58f8a71eeb2bd.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-043_jpg.rf.6d6e048bc4fb489ab9302b298e17f601.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a uniform, dark surface with"
+asbestos_pc450newF-043_jpg.rf.ed13f2fc1a2e213174d92c59c3840ef6.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-044_jpg.rf.094209508db9d2444d187f6b456c7410.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-044_jpg.rf.3bd246a60c5cd8fd5dcc5665373c7efb.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a dark, textured surface"
+asbestos_pc450newF-045_jpg.rf.72b2ff60c5ba4a91ca901f217f39ad28.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a uniform, dark surface with"
+asbestos_pc450newF-047_jpg.rf.16c9ce0552ca2101d0de961d6d62f566.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-050_jpg.rf.d236cb023215f081ffe308fd6f1c0054.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-051_jpg.rf.38c9b8a48d2085154347dc441684b480.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-051_jpg.rf.a87b202faab8fabb1a42be16ebe21d9c.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-054_jpg.rf.5b915cc3c1b7aaa022abe61fd88b2292.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a uniform, textured surface"
+asbestos_pc450newF-054_jpg.rf.844c51aac105d04b53c96743c004c4e3.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a uniform, textured surface"
+asbestos_pc450newF-054_jpg.rf.d3d6af1a45296a8979fc5606c0665ebe.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a uniform, textured surface"
+asbestos_pc450newF-054_jpg.rf.d88561b0b0ec51ee78b0af5685aaef1a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-055_jpg.rf.33726caaa861b8616caca50e733984b2.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-056_jpg.rf.a226c4e38e03cf1be4634fcab202bb3f.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a dark,"
+asbestos_pc450newF-056_jpg.rf.e87ac995b75ed9c00c9ff8e5e3226fcc.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a dark,"
+asbestos_pc450newF-057_jpg.rf.750f7cb94eb7118982616c829e57860f.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-058_jpg.rf.13b753163d106d744cc376421673231c.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-058_jpg.rf.43f330ba9ce7eb13b2802356ea68be61.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a small,"
+asbestos_pc450newF-059_jpg.rf.4c4efc33e86fdc6cc13199aa2a5e0adf.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-059_jpg.rf.7106897ea77196e99fd0da55c60295a3.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a line-"
+asbestos_pc450newF-059_jpg.rf.7d07f5083167e97a16ac39b7dafad252.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-059_jpg.rf.a9760281e3db599202a6c419af19c01a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-060_jpg.rf.241853bdc0933824f3a52e0516050e92.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-061_jpg.rf.a3ac7ddfe5eb5b2d95c945cd7fc66969.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-061_jpg.rf.fee6a4f144272d26abced5b1dcb1e993.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-062_jpg.rf.9b8eeb968245aca574c180beb7d91db6.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-063_jpg.rf.170aca6af94de8fcba7a3937040f0f84.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-063_jpg.rf.38e9659c39c4990ac597951fcc0362d9.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a dark,"
+asbestos_pc450newF-064_jpg.rf.2a47f02e2b49fc84c12b6ac92666517b.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a dark,"
+asbestos_pc450newF-066_jpg.rf.8e41ba51af3fc04cd09eb3730a83179a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-066_jpg.rf.95f15dd13ce5bea84172d4030d27db18.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a small,"
+asbestos_pc450newF-066_jpg.rf.e2e7c1214951dd0d5cc612cda416e8f0.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-066_jpg.rf.ede880a1c55fdd7c363ef93b020255a5.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-067_jpg.rf.64bdc298c9141c398fbd2c884f052118.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-067_jpg.rf.816c2e233b63d1802c360f86b37ab066.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-068_jpg.rf.206ce078473d704cea94c315ddef9619.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-069_jpg.rf.0819ad7f2f80404c2c8f5a85add41007.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-069_jpg.rf.b710f0041ac2b107e80a09c6b5b3b09e.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-072_jpg.rf.767030750151ce8b9a2b4ff6325ea478.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-073_jpg.rf.1cab8c05ca8fed2ee016e3fde6b307db.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a single,"
+asbestos_pc450newF-073_jpg.rf.2389f02d49f693e347f802caf454735f.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a small,"
+asbestos_pc450newF-074_jpg.rf.2c11244b78c35999ba3ab3c7c43bd999.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-075_jpg.rf.b7d9145404ffa3d24875485819487695.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a dark,"
+asbestos_pc450newF-076_jpg.rf.cebc652bd5a2466ad9c4d2fb578f36ab.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-077_jpg.rf.d787556b22551598fd5530abf537147e.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with small"
+asbestos_pc450newF-078_jpg.rf.32257920c3969041932fce1906a31975.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-080_jpg.rf.6fc6051e25405e8930c89ad58938fa7c.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
 asbestos_pc450newF-080_jpg.rf.749b5e53205edf9d626c8b7ffd155c21.jpg,no_damage,no_damage,not_damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a surface with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage.""
-}
-```"
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-082_jpg.rf.1c2eeca5d85be6dea63558f04b72751e.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-083_jpg.rf.8c4d14aba1c23b76998248d93bde51c8.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-083_jpg.rf.a16ce8c2d0098a887e0274593e339317.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-084_jpg.rf.0837a6bf2e537a4916cd8964fea411f1.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with small"
+asbestos_pc450newF-085_jpg.rf.1cbf60f719e5aa68e591cc9955e8d9eb.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-087_jpg.rf.dc1088a236200ec49ac016b224d2491e.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-088_jpg.rf.ef1b85d1ac0be16dcf20fa4c952b24c1.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a dark,"
+asbestos_pc450newF-089_jpg.rf.800a5a3b8fffdacfa1a784b8d9525f6e.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern of"
+asbestos_pc450newF-089_jpg.rf.84dfc5488bc63a06a6360cc7d3b6509f.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-089_jpg.rf.e406d25716aa0d2236f4f8ede9bcfa31.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
 asbestos_pc450newF-090_jpg.rf.862c9594853c67107743883af3f1c048.jpg,no_damage,no_damage,not_damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a surface with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage.""
-}
-```"
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-091_jpg.rf.86deb9733be398780ebeb5074c5f3c9f.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-092_jpg.rf.163f9a6067796b5f6ddaf62067d8f11f.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-092_jpg.rf.27312994640363f3f70e5d410c8239b7.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a dark,"
+asbestos_pc450newF-093_jpg.rf.802779cee57af73e00b375dc359a04dc.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-093_jpg.rf.8d7eea0b9c3adb196681dff797e56ab1.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-094_jpg.rf.3ddbfa4e9758815c10bc814f80da17fc.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-094_jpg.rf.47943ccd1c95e21a865cd112bdb97268.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a dark, elongated"
+asbestos_pc450newF-094_jpg.rf.655cb57448716fc9fe082a39ffa72523.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a small,"
+asbestos_pc450newF-095_jpg.rf.1da8c50fc4e189a5256e0d42941bc264.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-097_jpg.rf.a69156c585226cf635724cf7ccfd5b92.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-098_jpg.rf.11ea4281fdee2b09c9e256da60f9b6c2.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-098_jpg.rf.7b8c96c949de4fe61bc40d3196b60f77.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-102_jpg.rf.9a73062c0e3d43887bdce4adde28cbf6.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with small"
+asbestos_pc450newF-103_jpg.rf.2c9e1892176fb09353058bd9c1124062.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-103_jpg.rf.47cef06992e0f28246ca78341e686301.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various small dark"
+asbestos_pc450newF-103_jpg.rf.8f80de938b2e5470ff63e78c159553c3.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with small"
+asbestos_pc450newF-104_jpg.rf.3a2813654d719a91003b73123a724e9a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a single,"
+asbestos_pc450newF-105_jpg.rf.a66ae1f12407fdf852b07bf26d6bb376.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-106_jpg.rf.752630473c6a4ca999ffaa28abd1f295.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a uniform, textured surface"
+asbestos_pc450newF-112_jpg.rf.09171b6b9e1d024a589d314eb07113e6.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-112_jpg.rf.7b47e5b2927cc70bc86320d912e044c8.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-112_jpg.rf.d35bfb18e13c8b87a6ec8167a786f780.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-112_jpg.rf.daa4cf80ace1588a938f2a05f0ed49bc.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-113_jpg.rf.f4db63b24f9982e6dd747be1293efef5.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a uniform, textured surface"
+asbestos_pc450newF-113_jpg.rf.fad8b518afa802ea08fb191c2ba77e08.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-114_jpg.rf.db80bafc0d5a272e3a2ad70a9f4c9b77.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a small,"
+asbestos_pc450newF-116_jpg.rf.53cbaaf90996c271a3b3a66be256bd38.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-122_jpg.rf.c4f66431de1797d63bbc3272921fe81e.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various dark spots"
+asbestos_pc450newF-126_jpg.rf.dff0a9da9671f92fddc5daf0b9de0cf4.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a dark,"
 asbestos_pc450newF-127_jpg.rf.2df00779998953f1e32301e5e2436d32.jpg,no_damage,no_damage,not_damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a surface with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage.""
-}
-```"
-crack_1676.rf.5f750c0964875bc8d9de449becef78c9.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+  ""observations"": ""The image shows a surface with a few dark"
+asbestos_pc450newF-131_jpg.rf.199e7b8ea953f27e9b2f157bc4a0ef20.jpg,no_damage,no_damage,not_damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a plain, textured surface with no visible cracks, mold, wear, or asbestos. It appears to be a normal wall or floor without any inspection-relevant issues.""
-}
-```"
-crack_1728.rf.8bbbf38c1012ab49adabef3f5df778ff.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+  ""observations"": ""The image shows a surface with a dark,"
+asbestos_pc450newF-142_jpg.rf.7b39969e6e83c27abb191e7ae370913a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a wall with a few small cracks and some minor wear, but no visible damage, mold, or asbestos.""
-}
-```"
-crack_1813.rf.79f1af872f76dd8b46df4a83ed5f54c6.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+  ""observations"": ""The image shows a surface with a small,"
+asbestos_pc450newF-142_jpg.rf.c0e433467474ff545c17d220c5e4910a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a wall with a visible crack, but no other visible inspection-relevant issues.""
-}
-```"
-crack_1867.rf.9a2614949fdffb516b9f45e0a847357b.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-143_jpg.rf.491f28aa25f37f742691209e78758afd.jpg,no_damage,no_damage,not_damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a surface with a visible crack, but no other signs of damage, mold, wear, or asbestos.""
-}
-```"
-crack_1884.rf.8ee67a56640346c19e84f983a00d5e69.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-143_jpg.rf.9492dab1d5bda5036a058947a22eb81a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a wall with a visible crack, but no other visible inspection-relevant issues.""
-}
-```"
-house_Cracks_Minor_102_jpg.rf.aba5ec9a0b28f35b228a1e4b05ebf988.jpg,damage,no_damage,damage,not_damage,"```json
+  ""observations"": ""The image shows a uniform, textured surface"
+asbestos_pc450newF-145_jpg.rf.205bc11686ec0b5a2175b861b65305db.jpg,no_damage,no_damage,not_damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a plain, unblemished surface with no visible cracks, mold, wear, or asbestos.""
-}
-```"
-house_Cracks_Minor_104_jpg.rf.2337887f31fe268f6b06584a1923f0b2.jpg,damage,no_damage,damage,not_damage,"```json
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-145_jpg.rf.c5c9c67100dc7c2e8cf36d263466108b.jpg,no_damage,no_damage,not_damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a plain, unblemished surface with no visible cracks, mold, wear, or asbestos.""
-}
-```"
-house_Cracks_Minor_18_jpg.rf.58d6f636021dcb56ef3e7dab0353b673.jpg,damage,no_damage,damage,not_damage,"```json
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-146_jpg.rf.1e4c5f5d7e6a6433c14b124bd669f22d.jpg,no_damage,no_damage,not_damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a wall with a visible crack, but no other visible inspection-relevant issues.""
-}
-```"
-house_Cracks_Minor_19_jpg.rf.4033a8633b4d6cdbba6025fd82d25b6a.jpg,damage,no_damage,damage,not_damage,"```json
+  ""observations"": ""The image shows a uniform, textured surface"
+asbestos_pc450newF-149_jpg.rf.5ec30b50224bc68894c48fb3ea2cf9e3.jpg,no_damage,no_damage,not_damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a wall with a visible crack, but no other visible inspection-relevant issues.""
-}
-```"
-house_Cracks_Minor_22_jpg.rf.6d2a385370894aa6dd7e476a92475975.jpg,damage,no_damage,damage,not_damage,"```json
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-149_jpg.rf.a8c59ef2b720fc69df4f163bf251b01c.jpg,no_damage,no_damage,not_damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a wall with a visible crack, but no other visible inspection-relevant issues.""
-}
-```"
+  ""observations"": ""The image shows a surface with a pattern that"
+asbestos_pc450newF-149_jpg.rf.d6d843c7f84b11232a852ca1e38ff8e3.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a dark,"
+asbestos_pc450newF-149_jpg.rf.fbc65f3c9df5c3c3fa3181621d1e17cc.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-157_jpg.rf.2b89d4fa6900be22c543bf3c9f270a0d.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-157_jpg.rf.7af1b03c1c44f4b46277a515fa5791fd.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern that"
+asbestos_pc450newF-157_jpg.rf.e6de77972d2f123986e6fd6558401924.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-158_jpg.rf.0af349692ddf4b6a7c20209687489e6a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image appears to show a surface with a"
+asbestos_pc450newF-158_jpg.rf.72657d2179c01c7a6e947f4b9ee7cf77.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various dark spots"
+asbestos_pc450newF-158_jpg.rf.9095839806b6acc22e1941a1b76e9c25.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern that"
+asbestos_pc450newF-161_jpg.rf.c8ddb8cb68b2c0c2f2fe5a6d5661a1d3.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image appears to be a close-up"
+asbestos_pc450newF-168_jpg.rf.6f14e2c7fb63506e9894c3ff8a16376e.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various dark spots"
+asbestos_pc450newF-168_jpg.rf.801d2e3670ed5a067513c92c8c2cb817.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-169_jpg.rf.1982757cbe84379b953fa0055466a25f.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern that"
+asbestos_pc450newF-169_jpg.rf.8d863c8ecedaf9de7b6ba77b819494d0.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with no"
+asbestos_pc450newF-170_jpg.rf.035fc6c8790e966741c6c8f55cec9b7f.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-170_jpg.rf.adb548e739564a5036617ab5fafd4cd8.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a dark,"
+asbestos_pc450newF-172_jpg.rf.4a8bb3819619ff99a7cac5a21ba6396b.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-172_jpg.rf.8b5d37cf473db8277b192a83796a3b46.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-177_jpg.rf.674a55ea986662c5e119c31adc2630b3.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image appears to be a close-up"
+asbestos_pc450newF-178_jpg.rf.12762954d6926ddb78fb2233c24241fc.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern of"
+asbestos_pc450newF-181_jpg.rf.21c6c2f4aede04916cefc71fcc855c8b.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various dark spots"
+asbestos_pc450newF-181_jpg.rf.48016b12e9328c2d110d1ba660764713.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various dark spots"
+asbestos_pc450newF-181_jpg.rf.5b03ae2ca14bd60cd97fd850c11ea488.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-182_jpg.rf.16c229a3fe9e74e87b00c702c39218de.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-182_jpg.rf.6a624e928ccf3ce2b6ce7906338eeebe.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a dark,"
+asbestos_pc450newF-182_jpg.rf.6fac28c622b809bd6b8052b17155668a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various dark spots"
+asbestos_pc450newF-184_jpg.rf.66ed48a5b2a1dc73106bda87cde4a62a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-187_jpg.rf.cd7ee063074edc146cf89fb0be1981f3.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a uniform texture"
+asbestos_pc450newF-187_jpg.rf.dc650a37afac5627885efd958fba66e1.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various dark and"
+asbestos_pc450newF-190_jpg.rf.0dc422fdd85fc6a01c552d51f557dbbe.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-190_jpg.rf.7ebb8cbeb0a7f0d219324a126b2665f0.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-197_jpg.rf.c5b4eb552da540021c995f190149bce0.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various small,"
+asbestos_pc450newF-198_jpg.rf.9e0625f5c0799e0c66dcaa7ad1f8c448.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-199_jpg.rf.3498feada01050000a87b351d3bf6d2f.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various dark and"
+asbestos_pc450newF-199_jpg.rf.38186ae8f4393b30494de76132d528b3.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a dark,"
+asbestos_pc450newF-199_jpg.rf.97bc3545068af330f729a672f6c8f20a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-199_jpg.rf.c9d2d7820eaa75a50ee861a37700a14e.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image appears to be a close-up"
+asbestos_pc450newF-204_jpg.rf.48d622cd140087bb6df7cd1bfd37f949.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-204_jpg.rf.6851dd7323643751ac70ed83dceee68b.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-204_jpg.rf.bd2aa4764edd9a57f6a3b874b5ba66b0.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image appears to be a close-up"
+asbestos_pc450newF-204_jpg.rf.cebcbe2f6ec65affcc8f06b0e50cf29c.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a small,"
+asbestos_pc450newF-205_jpg.rf.045ef8528b3d5a84282093fa74ca6a67.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a dark,"
+asbestos_pc450newF-205_jpg.rf.57a1f240620a7601f8326757f11be3ce.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-205_jpg.rf.7552d02a0c15be9a565f4cdfbf1b4249.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-205_jpg.rf.a1523ed00ced0c5afd80f98929b42cac.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+asbestos_pc450newF-205_jpg.rf.a5f2660f862ede8c6401f71db6089267.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a dark, irregularly"
+asbestos_pc450newF-205_jpg.rf.b16a2b0446f2cdd5c21576c5d06befc4.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with various small dark"
+asbestos_pc450newF-205_jpg.rf.e36dbf5a4ea2a05e8a9acd4a2f8c97eb.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+crack_1231.rf.926bbdda64bad09c5eb0358396ae86c2.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1325.rf.1d8b0cb834547793ef90ac8527c4437f.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1385.rf.7dbd894022946b6cc6741fb684e77613.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1607.rf.5e65f55fb6c8d45ad9052b4cc1900d46.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1608.rf.e7484f1ea9dd06f0f2eac5d665d76143.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1619.rf.5a42efe0c04aca69843e73fcc3a1a1bc.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""A visible crack is present in the surface."","
+crack_1630.rf.98b22fd7d9d3fab4edbabaeb38c49275.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a white wall with a visible"
+crack_1630.rf.ec6838f405f0cf5e1ea8fdc0a06c22cb.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_165.rf.2a4593d9b6e2d3b0ac1235451ec36e9c.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a concrete surface with a visible"
+crack_1650.rf.79643439c920dc1200301c14fc253cf4.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a concrete surface with visible cr"
+crack_1654.rf.b95ef2b7b66e5e709879f599a6eb14a3.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a concrete surface with a visible"
+crack_1660.rf.c04a0365264956abd6c8196b5f41489e.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1661.rf.6d85cbaf1c86254b84015f4121edd810.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1664.rf.983e2c588e155a753c994411ddcb1b07.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern of"
+crack_1676.rf.5f750c0964875bc8d9de449becef78c9.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1680.rf.ae254e5b787b249ce267bcd004602f96.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with visible cracks"
+crack_1688.rf.42b9eb1adb83b6921a5b0f4a28253d3d.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1689.rf.f8e1839c836ad255dc7584aabeee31e8.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1692.rf.cc124a6b0f20f422bc9925312cef83c8.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1695.rf.0f54d403501995b473592764461e4087.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+crack_1701.rf.47458ce0d44d998f8234f75afa14d4af.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with visible cracks"
+crack_1703.rf.f75692d2d512df728da3d2e205a50058.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1704.rf.f894a16d7341c02200d55d26376082a1.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1706.rf.011d213c21ec78896c36728dcbc156f5.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1708.rf.24e2f1f4231226896558f4f929a68a6c.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1716.rf.85ea38b36008beaa72c5d8541f734eb0.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+crack_1720.rf.bf161bea9b7233feb33e58a232550c6a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1721.rf.85833887211c6e7630b7d6c2ae300657.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1726.rf.4a55ff9fc8788b0898d9862082782276.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1728.rf.8bbbf38c1012ab49adabef3f5df778ff.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with visible cracks"
+crack_1728.rf.e15f30a88a384bd6369263f9091567ba.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with visible cracks"
+crack_1730.rf.05ffd9748627b1c3d5d244f22d838491.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1732.rf.624e7325b6518766431271bf652f5dec.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1739.rf.85562ad3e76ff4da3e2ab4aecad48597.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1744.rf.1d36a859430caa6ac0259a77a487c2a7.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1745.rf.e22c99aea77764bf452e1702a3013213.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1746.rf.5b03d884171e79bac0ee466b98a7c2cf.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1748.rf.cc0f6216978617935abcd670e48cc1ef.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1752.rf.fa17d2eb44dc06ed93571ce88333f180.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1758.rf.b32d503ef13023c781a180da138a9bda.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1760.rf.0f3db06b0b674724e5fe5428fda7f2a4.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1761.rf.e5f5ebce460b27fb3bb65f6da9bd4712.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1763.rf.7fa38a85f66c8cd964d45e11891075db.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with visible cracks"
+crack_1765.rf.89baed145b93b2a0bf67133a8aa2a4e3.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1766.rf.fe7831a8d2c84ef1859a84f04b5a34ed.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with visible cracks"
+crack_1769.rf.f46accb57bb53a8ea2eeedf5d924ec61.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a textured surface with a"
+crack_1781.rf.3e21ef1e683a45f2f7c7885bdcf936cc.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a concrete surface with a few"
+crack_1782.rf.20b73f5796d71dc480cb6859068d828e.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1782.rf.eb9b8d324f2cd0e6b43c77edcdfb8651.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1786.rf.73b7e8575e70b2c788d1eb88db31c6fa.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1788.rf.394f94468516c12e4947991e899cc9e4.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1789.rf.25772c238d07d3d8112a909e11a9db26.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1796.rf.275fb13c398ac3c6ac6064168d2510a7.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1801.rf.56fc2a741a1a809d6bbdf4027692ea68.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with visible cracks"
+crack_1802.rf.c8a8df7a6b2dcd463dd0bac49c377cde.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1803.rf.7d87ade794f2fccdf8eaf6978fc98463.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1807.rf.de5b6f84e4d4592a0f666d78b3ba85e5.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1807.rf.fe906e2c2e269b7f1835c532053eff0a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a close-up of a"
+crack_1813.rf.79f1af872f76dd8b46df4a83ed5f54c6.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a wall with a visible crack"
+crack_1814.rf.47301b8b8e9d2106bd3e8ed758693663.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1816.rf.7c9f11884cbd0f3c194060d5ec5e84ce.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+crack_1825.rf.c312b85db639d96209e1d3d309934bab.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1825.rf.eccb3dc28b1d314cb1870d39a6af7e32.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1834.rf.e2c4fcd75a47fe26056a74fdf3274038.jpg,no_damage,wear,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with visible stains"
+crack_1836.rf.5d0d4fe80615967cb1382ec1cc4e2603.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1836.rf.b347f76972041b2d99629f09907b3a2c.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1841.rf.dc1e42a0abaabd82ca45f13d6c7a4174.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1845.rf.549d65e97598d7aca97375740b742d34.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+crack_1845.rf.acb9a632b49abfa31433be870bd7a15c.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1846.rf.e018a5855ad64323cf4230ab64824276.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1849.rf.784d6d78b5f85f6e8be2015f4e5c943c.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1850.rf.189425ff46d28988d7404df964bf33ed.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a clear line"
+crack_1855.rf.3a47ddc0d76fb8a9d61c61b240f3af1a.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a concrete surface with a visible"
+crack_1855.rf.67458b0fae12fdfa450d0c48d4c17280.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1855.rf.a7defc947f3dc7b262c99e6ed800273c.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1856.rf.125d78b2981a6cc6371fa7418a77c1be.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1856.rf.57d70cbffc8419ffc40ae4baefd7e780.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1857.rf.0a7ef01474061074d9027de2d021b16e.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1864.rf.4cec0a0c1b5040a935bf454ba293a5e5.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1867.rf.9a2614949fdffb516b9f45e0a847357b.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1874.rf.390ef42307a5d487bdfe68867a3e2dac.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1874.rf.937faaf3d568c74ed5e3cb2b1906f175.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1875.rf.7cad31ca6a88e7b173f837891ce4eecc.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a few small"
+crack_1876.rf.7e5a55204a6adabce8ebbac77c2bb896.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a clear line"
+crack_1878.rf.d08376419788b76ab8c1015f2976e467.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1878.rf.dfdefc9d139946d169c8dfa890b3987d.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1879.rf.c54ee04443eb51a8deba86d150b714d7.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a clear line"
+crack_1884.rf.8ee67a56640346c19e84f983a00d5e69.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1889.rf.8ef1882b20e82498c16dfe40c26a2557.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a yellowish"
+crack_1893.rf.b99fe5d1fbe145ee51de21b8bd7c76e4.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1903.rf.42f0b145a662953cc954281f099f5dc7.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1903.rf.fcde61244262d1033370ebc1666d621d.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a close-up of a"
+crack_1906.rf.58b3bf4d6f1c68228ecc260358d6a55d.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a concrete surface with a visible"
+crack_1909.rf.7d448f405a38454568bebe346cf3f2e3.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1915.rf.b247a0edab5af8731fa7942737ec7849.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with visible cracks"
+crack_1917.rf.a5c819a7211a6e476a79479799865d4c.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+crack_1918.rf.9f62bcab116c031ea67b90b0181c5ac8.jpg,no_damage,crack,not_damage,damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible crack"
+crack_1921.rf.e704f0b0e352f4ac12f23e71ffa6d9ad.jpg,no_damage,no_damage,not_damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a concrete surface with visible signs"
+house_Cracks_Minor_14_jpg.rf.bcf71ed4c671352492fd27c906036555.jpg,damage,no_damage,damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line"
+house_Cracks_Minor_23_jpg.rf.c763b9882df6c6d0917344ab183b6444.jpg,damage,no_damage,damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern of"
+house_Cracks_Minor_32_jpg.rf.14c2e2ecb69c1ec65cdcf155bdfe97c5.jpg,damage,no_damage,damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a surface that appears to be"
 house_Cracks_Minor_35_jpg.rf.20d0a3f1ad5460bfbe05d12e7d1405c9.jpg,damage,no_damage,damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a plain, unblemished surface with no visible cracks, mold, wear, or asbestos.""
-}
-```"
-house_Cracks_Minor_36_jpg.rf.bf3099e1da5028b51a15cda26fb69611.jpg,damage,no_damage,damage,not_damage,"```json
+  ""observations"": ""The image shows a surface with a visible line"
+house_Cracks_Minor_3_jpg.rf.8d8ede8232298fc9f222a0587c2f9301.jpg,damage,no_damage,damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a plain, textured surface with no visible cracks, mold, wear, or asbestos.""
-}
-```"
-house_Cracks_Minor_40_jpg.rf.7e34fb8125c98d34c76a871025d34417.jpg,damage,no_damage,damage,not_damage,"```json
+  ""observations"": ""The image shows a surface with a pattern that"
+house_Cracks_Minor_44_jpg.rf.8f7868ce7cbf3821e063f9f1c1c9101f.jpg,damage,no_damage,damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a wall with a visible crack, but no other visible inspection-relevant issues.""
-}
-```"
-house_Cracks_Minor_47_jpg.rf.fa51a510d73d106dc682f19e31d93887.jpg,damage,no_damage,damage,not_damage,"```json
+  ""observations"": ""The image shows a surface with a visible line"
+house_Cracks_Minor_45_jpg.rf.49d944c7578f780902e91e3114779141.jpg,damage,no_damage,damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a wall with a visible crack, but no other visible inspection-relevant issues.""
-}
-```"
-house_Cracks_Minor_56_jpg.rf.e8d5e5ab921a7fd4fdec28798fee1a5d.jpg,damage,no_damage,damage,not_damage,"```json
+  ""observations"": ""The image shows a surface with a visible line"
+house_Cracks_Minor_48_jpg.rf.137b74a843f5465f549dfca38902d45f.jpg,damage,no_damage,damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a plain, unblemished surface with no visible cracks, mold, wear, or asbestos.""
-}
-```"
-mold2_0_TRMRMMGLPICT000021193200_jpg.rf.0913a51ffab1c1f3b4f5794a8b21fbe4.jpg,mold,wear,damage,damage,"```json
+  ""observations"": ""The image shows a surface with a visible line"
+house_Cracks_Minor_4_jpg.rf.1b42a4d45555cda42b0c5ad7c4056570.jpg,damage,no_damage,damage,not_damage,"```json
 {
-  ""label"": ""wear"",
-  ""summary"": ""The image shows a wall with visible mold and wear.""
-}
-```"
-mold2_Mold-Remediation-Cost_jpg.rf.6da29b814958b339199e78e3513db228.jpg,mold,wear,damage,damage,"```json
+  ""observations"": ""The image shows a surface that appears to be"
+house_Cracks_Minor_55_jpg.rf.58756dc37e742b14c5a03b15ec7f7380.jpg,damage,no_damage,damage,not_damage,"```json
 {
-  ""label"": ""wear"",
-  ""summary"": ""Worker in protective gear cleaning a wall with a yellow spray bottle.""
-}
-```"
-mold2_marchmarkspaintingmain_jpg.rf.54daf1a83c0d479e4da6c10f0472940c.jpg,mold,wear,damage,damage,"```json
+  ""observations"": ""The image shows a surface that appears to be"
+house_Cracks_Minor_59_jpg.rf.5a5bcafe5e2828d3f1ac8b3ae2ae392d.jpg,damage,no_damage,damage,not_damage,"```json
 {
-  ""label"": ""wear"",
-  ""summary"": ""The image shows a wall with visible dirt and stains, which indicates wear.""
-}
-```"
-mold2_penetrating-damp-signs-moss-image_jpg.rf.19bf68626cc4a1e9572b7ed1eceeb122.jpg,mold,no_damage,damage,not_damage,"```json
+  ""observations"": ""The image shows a surface that appears to be"
+house_Cracks_Minor_5_jpg.rf.8e52fe84c83c3a5d329a69cd02f02222.jpg,damage,no_damage,damage,not_damage,"```json
 {
-  ""label"": ""no_damage"",
-  ""summary"": ""The image shows a brick wall with some moss growth, but no visible damage, cracks, mold, wear, or asbestos.""
-}
-```"
-mold_0_TRMRMMGLPICT000021193200_jpg.rf.70e8880b6e2c85f8d5fe4defbef3e4d1.jpg,wear,mold,damage,damage,"```json
+  ""observations"": ""The image shows a surface with a visible line"
+house_Cracks_Minor_60_jpg.rf.e97d1e163fd7731b912d1505559c314a.jpg,damage,no_damage,damage,not_damage,"```json
 {
-  ""label"": ""mold"",
-  ""summary"": ""Visible mold growth on the wall""
-}
-```"
-mold_48-mold-remediation-7_png.rf.ca34d59e133f8b9707d29ef39bb71c80.jpg,crack,wear,damage,damage,"```json
+  ""observations"": ""The image shows a surface with a visible line"
+house_Cracks_Minor_72_jpg.rf.d0f3808ab2cf3cf37037c0074ecf7848.jpg,damage,crack,damage,damage,"```json
 {
-  ""label"": ""wear"",
-  ""summary"": ""The image shows a wall with visible signs of wear, such as peeling paint, stains, and discoloration.""
-}
-```"
-mold_marchmarkspaintingmain_jpg.rf.cba684a6e821bf15fadc4ec87d8b8acc.jpg,wear,wear,damage,damage,"```json
+  ""observations"": ""The image shows a surface with a visible crack"
+house_Cracks_Minor_93_jpg.rf.2bb07c99ce60f698ef890d4b9574eb73.jpg,damage,crack,damage,damage,"```json
 {
-  ""label"": ""wear"",
-  ""summary"": ""The image shows a surface with visible wear, such as peeling paint, stains, discoloration, or gradual deterioration.""
-}
-```"
+  ""observations"": ""The image shows a surface with a visible crack"
+mold_0_TRMRMMGLPICT000021193200_jpg.rf.70e8880b6e2c85f8d5fe4defbef3e4d1.jpg,wear,no_damage,damage,not_damage,"```json
+{
+  ""observations"": ""The image shows a wall with a dark,"
