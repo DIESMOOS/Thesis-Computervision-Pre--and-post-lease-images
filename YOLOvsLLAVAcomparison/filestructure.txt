@@ -73383,4 +73383,7 @@
     |-- schemas.py
     |-- trainyolo.py
     |-- __pycache__
+|-- webapp
+    |-- app.py
+    |-- requirements.txt
 |-- yolov8n.pt
