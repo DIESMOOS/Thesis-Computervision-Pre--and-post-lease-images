@@ -73323,23 +73323,149 @@
                     |-- DJI_0995_03_05_png.rf.7641393ae451fa1ba8e18b2b52804b68.txt
     |-- properties
         |-- 001
+            |-- old_report.json
             |-- post_lease
+                |-- damage_01_DJI_0201_02_05_png.rf.53c74d223500e783f6aa71f43a527f2a.jpg
+                |-- damage_02_1848.rf.40496b6e1c621fbdd25123d7748f3adf.jpg
+                |-- damage_03_1829.rf.59758da08694189089332ba2bae10caf.jpg
+                |-- damage_04_2315.rf.6672ce94a253c1377ea0b82eac6445b6.jpg
+                |-- damage_05_3582.rf.5da9b4bee92a8cede632a41e013109c5.jpg
+                |-- damage_06_3909.rf.0ce68c894937599cb6f2693a3ab7ff46.jpg
+                |-- wear_01_43_jpg.rf.c91a1c8f7883dbd6720f572787fa2839.jpg
+                |-- wear_02_49_jpg.rf.7bff8bd7cb2c92a4374245277a081a67.jpg
+                |-- wear_03_11_jpg.rf.db8bc22ed69f2e63a120ae8bc5599e68.jpg
+                |-- wear_04_46_jpg.rf.41a631eb14608ca7b461021cc62c916e.jpg
             |-- pre_lease
+                |-- no_damage_01_NoDamage_638_jpg.rf.c08e312fe4ce08fc4e8faa7cf95d0126.jpg
+                |-- no_damage_02_NoDamage_585_jpg.rf.097458a9b815b4211a539d3d717b61a4.jpg
+                |-- no_damage_03_NoDamage_236_jpg.rf.616761d52397428ed4a927d67a6172cc.jpg
+                |-- no_damage_04_NoDamage_754_jpg.rf.e92a6001b1ae7e609df5f512e4a95cde.jpg
+                |-- no_damage_05_NoDamage_209_jpg.rf.2b38ded5180c80fa734a7a1e6ab2fca0.jpg
+                |-- no_damage_06_NoDamage_175_jpg.rf.c275fb9d1506305ce3b3743233a7079a.jpg
+                |-- wear_01_36_jpg.rf.47633d17aa62ad6dbee552106300aeda.jpg
+                |-- wear_02_26_jpg.rf.52bcc84d4f3bb08ee8fbfe7ebf4a6c4b.jpg
+                |-- wear_03_22_jpg.rf.8d6495b11b9fd77019e006644a915d3f.jpg
+                |-- wear_04_20_jpg.rf.c4bb80b24b5a1215c79bcb2b49055d4c.jpg
         |-- 002
+            |-- old_report.json
             |-- post_lease
+                |-- damage_01_DJI_0203_02_05_png.rf.72b2789d8b52f3f2c32b28f8f15a675f.jpg
+                |-- damage_02_Mold_Severe_2_jpg.rf.19f760e626809806b98fb5765292e391.jpg
+                |-- damage_03_Cracks_Minor_51_jpg.rf.b4a525c38aafc55eb2c064585d4191a3.jpg
+                |-- no_damage_01_NoDamage_848_jpeg.rf.c3af05d63b8428d39128d2fb6b9aa9c9.jpg
+                |-- no_damage_02_NoDamage_913_jpeg.rf.473086dfb7e8f463bd49e97472608bff.jpg
+                |-- no_damage_03_NoDamage_123_jpeg.rf.9d9cf28a285c02ed5d26262302302194.jpg
+                |-- no_damage_04_NoDamage_78_jpeg.rf.2ad13c1001238c31f4a6e61a5d495890.jpg
+                |-- wear_01_67_jpg.rf.f649ea90d4ce011023f96b545e14f6b9.jpg
+                |-- wear_02_21_jpg.rf.de2ae09e17c8d6c2ef677ba438ebd0be.jpg
+                |-- wear_03_60_jpg.rf.adc76b6decfc72c3089a1a97b1704df2.jpg
             |-- pre_lease
+                |-- no_damage_01_NoDamage_122_png.rf.1fba67b1fa6c4613627bc0f52226b9b8.jpg
+                |-- no_damage_02_NoDamage_730_jpg.rf.4a7c12a9a90b16626e77adb38d69878d.jpg
+                |-- no_damage_03_NoDamage_658_jpg.rf.2490fe0da97d32ace4a60a69b6b84296.jpg
+                |-- no_damage_04_NoDamage_714_jpg.rf.26a6e99f941dbecda0062118d8be4a76.jpg
+                |-- no_damage_05_NoDamage_538_jpg.rf.178011aa9fb76365345570c2c0347a07.jpg
+                |-- no_damage_06_NoDamage_387_jpg.rf.6816cdd4ef2afe3eb9b949db7af05a11.jpg
+                |-- no_damage_07_NoDamage_146_jpeg.rf.9ba8c73bf7e43b26f48febc3e0fd31ed.jpg
+                |-- wear_01_40_jpg.rf.41a74fc027c94a47d35fb0b58f8563c8.jpg
+                |-- wear_02_51_jpg.rf.6a36754558cad6959586ce4f8e920f37.jpg
+                |-- wear_03_2_jpg.rf.f0f686dfc91a4312a905a7c71bdc98bd.jpg
         |-- 003
+            |-- old_report.json
             |-- post_lease
+                |-- damage_01_1945.rf.6b3260cfc78dd875173ccd73163478f0.jpg
+                |-- damage_02_DJI_0590_03_02_png.rf.46323f511f2759284659908eb6254583.jpg
+                |-- damage_03_2539.rf.4e80b1c9465191994df6d056a819f9be.jpg
+                |-- damage_04_NaturalDamage_688_jpg.rf.b7e3c061b342943782257f0916eb6a88.jpg
+                |-- damage_05_2202.rf.e7d87903264d57eb109372b5c86574a7.jpg
+                |-- damage_06_Cracks_Severe_28_jpg.rf.be40517908ac7c835a365191532ae904.jpg
+                |-- damage_07_NaturalDamage_408_jpg.rf.c8959979c722c23570d583bfce93e78d.jpg
+                |-- damage_08_3410.rf.35434f68fb4abdb7f578a31f90a267f4.jpg
+                |-- no_damage_01_NoDamage_613_jpg.rf.6e46aa818ab1cfbffbf12d6018243c03.jpg
+                |-- no_damage_02_NoDamage_206_jpg.rf.ab78173df0b3515d64dabf2d23981595.jpg
             |-- pre_lease
+                |-- damage_01_2308.rf.c9793d90a08838cec73445e801920603.jpg
+                |-- damage_02_NaturalDamage_7_jpeg.rf.f06b3f5b69541b604f0bf2c047947aef.jpg
+                |-- damage_03_2337.rf.b581589279fec8db86d8e4913e6764aa.jpg
+                |-- damage_04_NaturalDamage_362_jpg.rf.af252624cd9c4bb37a279dd3cbf8f407.jpg
+                |-- damage_05_NaturalDamage_102_jpeg.rf.c0f7719e79ea8fe150b416752639a20c.jpg
+                |-- no_damage_01_NoDamage_836_png.rf.ca5a5c0c86270bd9dc518133f56abe88.jpg
+                |-- no_damage_02_NoDamage_143_jpeg.rf.92e5b6294c6bc1c49434676f15b81b32.jpg
+                |-- no_damage_03_NoDamage_797_jpeg.rf.836c0dc7691e4907263844e489073d42.jpg
+                |-- no_damage_04_NoDamage_28_jpeg.rf.00609de0b90ac7e2b5758dc06bd71da9.jpg
+                |-- no_damage_05_NoDamage_553_jpg.rf.ab064fc90638c6fb2324cf289e938698.jpg
         |-- 004
+            |-- old_report.json
             |-- post_lease
+                |-- no_damage_01_NoDamage_356_jpg.rf.539a3096538a495f470a1ce96ae9d646.jpg
+                |-- no_damage_02_NoDamage_226_jpg.rf.6f172b198526ef5e5f7529c2d2f181be.jpg
+                |-- no_damage_03_NoDamage_446_jpg.rf.7d6a17f69dcce6fa0c19afec59a0cfc8.jpg
+                |-- no_damage_04_NoDamage_656_jpg.rf.78ca6951f18913d390338f43e9eec450.jpg
+                |-- no_damage_05_NoDamage_889_jpeg.rf.d82459f5fefbe466134087dbf8cb6674.jpg
+                |-- no_damage_06_NoDamage_334_jpg.rf.75b5c045f2d69455040dd101482704f6.jpg
+                |-- no_damage_07_NoDamage_905_jpeg.rf.2dbe69e0584d6476f8e650b7ffc6ca18.jpg
+                |-- no_damage_08_NoDamage_343_jpg.rf.448a542a72affaa97fed6f305f5afbb5.jpg
+                |-- wear_01_39_jpg.rf.ee6deed767033a2509d0ddf9037755da.jpg
+                |-- wear_02_27_jpg.rf.005f3954ccd17eaf47e9a2b7b8f3e998.jpg
             |-- pre_lease
+                |-- damage_01_2209.rf.c6e4de7e4d9a9758b02244b0f18f407d.jpg
+                |-- damage_02_785.rf.e71507a8e5ac4c4aabd175b306cab342.jpg
+                |-- damage_03_2371.rf.b4883aebf343dc38a24aa5962d4b876e.jpg
+                |-- no_damage_01_NoDamage_734_jpg.rf.eae70109e5f50f3daa9c5d4bf8827d4d.jpg
+                |-- no_damage_02_NoDamage_404_jpg.rf.b17398790104be293ab155091966acff.jpg
+                |-- no_damage_03_NoDamage_311_jpg.rf.52488362992383e9d2dc73cb09109815.jpg
+                |-- no_damage_04_NoDamage_683_jpg.rf.01f9f9975d559a6fa87f81fa7be9535c.jpg
+                |-- wear_01_28_jpg.rf.c6e40422a7c2049870fa3ce5d09eed28.jpg
+                |-- wear_02_6_jpg.rf.54a2f2998156f39abd41718f68c3180e.jpg
+                |-- wear_03_32_jpg.rf.0ad8e376cd7eaec6b18a97df313bf255.jpg
         |-- 005
+            |-- old_report.json
             |-- post_lease
+                |-- no_damage_01_NoDamage_782_jpg.rf.263c72daf930a5323bf01fc431075e96.jpg
+                |-- no_damage_02_NoDamage_189_jpg.rf.c55eeab27f01b6261510c1688ef8e4dc.jpg
+                |-- no_damage_03_NoDamage_925_jpeg.rf.08363be6fe6fb0937209e82b44f00940.jpg
+                |-- no_damage_04_NoDamage_462_jpg.rf.2ab86c612dd74c39e179e1f8ac1b202b.jpg
+                |-- no_damage_05_NoDamage_362_jpg.rf.cc694d37fecf0ca35e28e37cf788d6e1.jpg
+                |-- no_damage_06_NoDamage_220_jpg.rf.892334ddd3c5fc3de8308d39478819e9.jpg
+                |-- no_damage_07_NoDamage_675_jpg.rf.3f55470917dd9ed0bc0ed8c59d74b5ca.jpg
+                |-- wear_01_8_jpg.rf.b5b4bf9aaa52ddd974a0f63e7175a018.jpg
+                |-- wear_02_59_jpg.rf.a7f681b284facfcc93e4b30b114841c3.jpg
+                |-- wear_03_31_jpg.rf.4288c0015a14586600f396b57083313e.jpg
             |-- pre_lease
+                |-- no_damage_01_NoDamage_704_jpg.rf.80eaaf4257aee1026aa3e7d6446cee83.jpg
+                |-- no_damage_02_NoDamage_215_jpg.rf.23e4bd22484a834210ad34205401b07e.jpg
+                |-- no_damage_03_NoDamage_742_jpg.rf.0cef005b7b7ae1b1685ec338fe633ddc.jpg
+                |-- no_damage_04_NoDamage_71_jpeg.rf.fe3d7f88fc00d3e2c48fa6fe4582bb06.jpg
+                |-- no_damage_05_NoDamage_679_jpg.rf.b88e589e30441c73fa9f707c9328f7e8.jpg
+                |-- no_damage_06_NoDamage_417_jpg.rf.e8038cf75cba538ffa573a2fa6dd689b.jpg
+                |-- no_damage_07_NoDamage_62_jpeg.rf.d8b0fb6d825b46f74b248215ffc4e176.jpg
+                |-- no_damage_08_NoDamage_665_jpg.rf.154d950a964f96dea5a48a93d64caf6a.jpg
+                |-- wear_01_23_jpg.rf.6cbd862d96c68998a1839c35b0b84f46.jpg
+                |-- wear_02_56_jpg.rf.e04aab8b13e024f71384f59a66cbf8b8.jpg
         |-- 006
+            |-- old_report.json
             |-- post_lease
+                |-- damage_01_WaterDamage_374_jpg.rf.42bd9e7ed3a4b5eb1d6a5d82a23f3d03.jpg
+                |-- damage_02_DJI_0590_03_02_png.rf.b713165eb039c18a93d445d42496dcd1.jpg
+                |-- no_damage_01_NoDamage_223_jpg.rf.75f39e01c4abe038d9ead7ef05f11485.jpg
+                |-- no_damage_02_NoDamage_3_jpeg.rf.c7b3bebcb50cbe7db8d4b456aaeae888.jpg
+                |-- no_damage_03_NoDamage_150_jpeg.rf.fa699435c33b7eedb7bec9a7c4c00764.jpg
+                |-- no_damage_04_NoDamage_594_jpg.rf.5e22a0a6ffb96321d57d76769f7f955b.jpg
+                |-- no_damage_05_NoDamage_77_jpeg.rf.093d0b9a9ea05e742fe27327255365f1.jpg
+                |-- wear_01_45_jpg.rf.bf3f84b21705e39aa97bb3092e56758e.jpg
+                |-- wear_02_34_jpg.rf.efc215356033884f7ab9cf8360c15521.jpg
+                |-- wear_03_61_jpg.rf.d047017f36f79ee13e39fe566e51788f.jpg
             |-- pre_lease
+                |-- no_damage_01_NoDamage_738_jpg.rf.3e07898fc2b67629f9b971c914020e06.jpg
+                |-- no_damage_02_NoDamage_291_jpg.rf.c35c54e416b529d44bcf01f8d940f4ca.jpg
+                |-- no_damage_03_NoDamage_92_jpeg.rf.a74cabe23d76630aacdc7c1d718823dc.jpg
+                |-- no_damage_04_NoDamage_83_jpeg.rf.2bc235237196f60171b1d3fc4540f071.jpg
+                |-- no_damage_05_NoDamage_84_jpeg.rf.d468eeb1547638eff409a1aeb6fb4e71.jpg
+                |-- no_damage_06_NoDamage_345_jpg.rf.ae026ee3622b675b249791ab836c8b2c.jpg
+                |-- wear_01_33_jpg.rf.a162ded5f5b8b1f83a13a28d07798ca9.jpg
+                |-- wear_02_13_jpg.rf.88fd40051c7089b59b6a7646ac185676.jpg
+                |-- wear_03_41_jpg.rf.0e5dd674cf42b1453f8a910ff7a57a26.jpg
+                |-- wear_04_48_jpg.rf.0d6b1bf70ceb4bd9d1c59d6142d1da63.jpg
 |-- file structure generator.ipynb
 |-- harmonizized_label_distribution.png
 |-- Labeldistribution_generator.ipynb
@@ -73371,11 +73497,16 @@
         |-- readme.txt
         |-- yolo_pipeline.py
         |-- __pycache__
+            |-- llava_pipeline.cpython-312.pyc
+            |-- yolo_pipeline.cpython-312.pyc
     |-- postprocess
         |-- aggregate_property.py
         |-- compare.py
         |-- normalize.py
         |-- __pycache__
+            |-- aggregate_property.cpython-312.pyc
+            |-- compare.cpython-312.pyc
+            |-- normalize.cpython-312.pyc
     |-- preprocess
         |-- build_fake_properties_from_zip.py
         |-- create_and_split_dataset.py
@@ -73383,6 +73514,8 @@
     |-- schemas.py
     |-- trainyolo.py
     |-- __pycache__
+        |-- config.cpython-312.pyc
+        |-- schemas.cpython-312.pyc
 |-- webapp
     |-- app.py
     |-- requirements.txt

@@ -1,0 +1,22 @@
+{
+  "property_id": "006",
+  "story": "mold_problem",
+  "category_counts": {
+    "damage": 2,
+    "crack": 0,
+    "mold": 0,
+    "wear": 4,
+    "asbestos": 0,
+    "no_damage": 8
+  },
+  "expected_post_counts": {
+    "damage": 2,
+    "crack": 2,
+    "mold": 7,
+    "wear": 3,
+    "asbestos": 1,
+    "no_damage": 5
+  },
+  "summary": "Previous inspection showed: damage, wear.",
+  "inspection_recommended": true
+}

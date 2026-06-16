@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 PROPERTIES_DIR = ROOT / "data" / "properties"
 
-YOLO_MODEL_PATH = ROOT / "models" / "best_run" / "weights" / "best.pt"
+YOLO_MODEL_PATH = ROOT / "models" / "best.pt"
 
 CLASS_NAMES = {
     0: "damage",
@@ -20,6 +20,7 @@ CLASS_NAMES = {
     2: "mold",
     3: "wear",
     4: "asbestos"
+    
 }
 
 # -------------------------------------------------

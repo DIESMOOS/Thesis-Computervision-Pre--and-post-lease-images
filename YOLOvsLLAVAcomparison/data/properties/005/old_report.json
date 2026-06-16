@@ -1,0 +1,22 @@
+{
+  "property_id": "005",
+  "story": "stable_good",
+  "category_counts": {
+    "damage": 0,
+    "crack": 0,
+    "mold": 0,
+    "wear": 3,
+    "asbestos": 0,
+    "no_damage": 12
+  },
+  "expected_post_counts": {
+    "damage": 0,
+    "crack": 0,
+    "mold": 0,
+    "wear": 3,
+    "asbestos": 0,
+    "no_damage": 12
+  },
+  "summary": "Previous inspection showed: wear.",
+  "inspection_recommended": false
+}
