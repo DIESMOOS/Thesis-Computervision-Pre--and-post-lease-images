@@ -20,67 +20,34 @@ from src.config import (
 
 logger = logging.getLogger(__name__)
 
-
 USER_PROMPT = """
 You are an expert housing inspection assistant.
 
-Use a careful inspection procedure inspired by medical image review:
-1. Inspect the image for visible abnormalities.
-2. Compare it with the examples.
-3. Decide whether a real defect is visible.
-4. Select exactly one final label.
-
-Allowed labels:
+Classify the image into exactly one of these labels:
 damage, crack, mold, wear, asbestos, no_damage.
 
-Few-shot examples:
+Definitions:
+- no_damage: normal surface, no clear inspection-relevant defect.
+- crack: clear line-shaped break, split, fracture, or visible crack.
+- mold: damp spots, mildew, fungal growth, black mold-like patches.
+- wear: peeling paint, discoloration, rust, stains, aging, gradual surface deterioration.
+- damage: holes, broken material, dents, missing material, severe water/fire damage.
+- asbestos: suspicious fibrous material or asbestos-like surface markings.
 
-Example 1:
-Observation: A normal wall or floor surface is visible. There are no clear cracks, stains, mold, holes, or broken parts.
-Label: no_damage
+Important:
+- Choose crack if a line-shaped break is visible.
+- Choose mold if damp/fungal/black spots are visible.
+- Choose wear if the issue is peeling, staining, discoloration, or gradual aging.
+- Choose damage only for broken, missing, holed, dented, or severely damaged material.
+- Choose no_damage only if no clear defect is visible.
 
-Example 2:
-Observation: A clear line-shaped break is visible in the wall or surface.
-Label: crack
-
-Example 3:
-Observation: Dark damp spots or fungal-looking patches are visible.
-Label: mold
-
-Example 4:
-Observation: Paint is peeling, discolored, stained, rusty, or worn from normal use.
-Label: wear
-
-Example 5:
-Observation: A surface is broken, has a hole, missing material, dent, fire damage, or water damage.
-Label: damage
-
-Example 6:
-Observation: Suspicious fibrous material or asbestos-like surface markings are visible.
-Label: asbestos
-
-Important rules:
-- If no clear defect is visible, choose no_damage.
-- Do not classify shadows, lighting differences, texture, corners, joints, or ordinary material patterns as defects.
-- Do not choose crack unless a clear line-shaped break is visible.
-- Do not choose mold unless visible damp spots, mildew, or fungal growth are present.
-- Do not choose damage unless there is clear broken material, a hole, missing material, or severe deterioration.
-- The final label must be exactly one allowed label.
-
-Return ONLY valid JSON:
+Return ONLY valid JSON in this exact format:
 {
-  "observations": "short description of visible relevant findings",
+  "observations": "short visual description",
   "label": "damage|crack|mold|wear|asbestos|no_damage",
-  "summary": "short reason for the chosen label"
+  "summary": "short reason"
 }
-
-Important hierarchy:
-- If the defect is a line shaped break, choose crack, not damage.
-- If the defect is mold or damp black spots, choose mold, not damage.
-- If the defect is peeling, discoloration, rust, or gradual surface aging, choose wear, not damage.
-- Use damage only for other visible defects such as holes, broken surfaces, dents, missing material, water damage, or fire damage.
 """
-
 
 _processor: LlavaNextProcessor | None = None
 _model: LlavaNextForConditionalGeneration | None = None
@@ -129,17 +96,88 @@ def empty_category_counts() -> dict[str, int]:
 
 
 def normalize_label(label: str) -> str:
-    label = str(label).lower().strip()
-    label = label.replace(" ", "_").replace("-", "_")
+    text = str(label).lower().strip()
+    text = text.replace(" ", "_").replace("-", "_")
 
-    if label == "mould":
+    parts = re.split(r"[|,;/]+", text)
+    parts = [p.strip() for p in parts if p.strip()]
+
+    cleaned = []
+    for part in parts:
+        if part == "mould":
+            part = "mold"
+        if part in ["nodamage", "no__damage", "none", "normal"]:
+            part = "no_damage"
+        cleaned.append(part)
+
+    priority = [
+        "asbestos",
+        "mold",
+        "crack",
+        "damage",
+        "wear",
+        "no_damage",
+    ]
+
+    for label_name in priority:
+        if label_name in cleaned:
+            return label_name
+
+    for label_name in priority:
+        if label_name in text:
+            return label_name
+
+    return "no_damage"
+
+
+def fallback_label(text: str) -> str:
+    t = text.lower()
+
+    if any(w in t for w in ["asbestos", "asbestos-like"]):
+        return "asbestos"
+
+    if any(w in t for w in [
+        "mold", "mould", "mildew", "fungal",
+        "black spot", "black spots",
+        "damp spot", "damp spots"
+    ]):
         return "mold"
 
-    if label in ["nodamage", "no_damage", "no__damage"]:
-        return "no_damage"
+    if any(w in t for w in [
+        "crack", "cracked", "fracture", "split",
+        "visible crack", "line-shaped break", "line shaped break"
+    ]):
+        return "crack"
 
-    if label in CATEGORIES:
-        return label
+    if any(w in t for w in [
+        "hole", "broken", "dent", "missing material",
+        "water damage", "fire damage", "damaged surface",
+        "severe deterioration"
+    ]):
+        return "damage"
+
+    if any(w in t for w in [
+        "wear", "worn", "peeling", "paint damage",
+        "stain", "stained", "discolor", "discolour",
+        "rust", "aging", "ageing", "deteriorat"
+    ]):
+        return "wear"
+
+    if any(w in t for w in [
+        "no visible defect",
+        "no visible damage",
+        "no inspection-relevant defect",
+        "no defect",
+        "no defects",
+        "appears intact",
+        "looks normal",
+        "normal surface",
+        "normal wall",
+        "unblemished surface",
+        "no clear defect",
+        "no clear damage",
+    ]):
+        return "no_damage"
 
     return "no_damage"
 
@@ -164,7 +202,8 @@ def make_parsed(label: str, summary: str = "", observations: str = "") -> dict:
 def fallback_label(text: str) -> str:
     t = text.lower()
 
-    if any(w in t for w in [
+    # If LLaVA clearly says there is no defect, respect that first.
+    no_damage_phrases = [
         "no visible defect",
         "no visible damage",
         "no inspection-relevant defect",
@@ -175,39 +214,39 @@ def fallback_label(text: str) -> str:
         "normal surface",
         "normal wall",
         "unblemished surface",
-    ]):
+        "no clear defect",
+        "no clear damage",
+    ]
+
+    if any(w in t for w in no_damage_phrases):
         return "no_damage"
 
-    if any(w in t for w in ["asbestos", "asbestos-like", "fibrous insulation"]):
+    if any(w in t for w in ["asbestos", "asbestos-like"]):
         return "asbestos"
 
-    if any(w in t for w in ["mold", "mould", "mildew", "fungal", "black spots"]):
+    if any(w in t for w in [
+        "mold", "mould", "mildew", "fungal",
+        "black spot", "black spots", "damp spot", "damp spots"
+    ]):
         return "mold"
 
-    if any(w in t for w in ["crack", "cracked", "fracture", "split"]):
+    if any(w in t for w in [
+        "crack", "cracked", "fracture", "split",
+        "line-shaped break", "line shaped break",
+        "visible crack"
+    ]):
         return "crack"
 
     if any(w in t for w in [
-        "hole",
-        "broken",
-        "dent",
-        "missing material",
-        "water damage",
-        "fire damage",
-        "damaged surface",
+        "hole", "broken", "dent", "missing material",
+        "water damage", "fire damage", "damaged surface"
     ]):
         return "damage"
 
     if any(w in t for w in [
-        "wear",
-        "worn",
-        "peeling",
-        "stain",
-        "discolor",
-        "discolour",
-        "rust",
-        "aging",
-        "deteriorat",
+        "wear", "worn", "peeling", "paint damage",
+        "stain", "stained", "discolor", "discolour",
+        "rust", "aging", "ageing", "deteriorat"
     ]):
         return "wear"
 
@@ -218,7 +257,7 @@ def _extract_json(raw_text: str) -> dict:
     text = raw_text.strip()
     text = text.replace("```json", "").replace("```", "").strip()
 
-    match = re.search(r"\{.*?\}", text, re.DOTALL)
+    match = re.search(r"\{[\s\S]*\}", text)
 
     if match:
         try:
@@ -228,13 +267,21 @@ def _extract_json(raw_text: str) -> dict:
             summary = parsed.get("summary", "")
             observations = parsed.get("observations", "")
 
+            label = normalize_label(label)
+
+            combined = f"{observations} {summary} {text}"
+
+            # Only override no_damage if the text clearly contains a defect.
+            if label == "no_damage":
+                label = fallback_label(combined)
+
             return make_parsed(label, summary, observations)
 
         except Exception as exc:
             logger.warning("Could not parse JSON output: %s", exc)
 
     label = fallback_label(text)
-    return make_parsed(label, text[:300], "")
+    return make_parsed(label, text[:300], text[:300])
 
 
 def run_llava_on_image(image_path: Path) -> tuple[str, dict]:
@@ -281,6 +328,68 @@ def run_llava_on_image(image_path: Path) -> tuple[str, dict]:
     parsed = _extract_json(raw_text)
     return raw_text, parsed
 
+def run_llava_on_images(image_paths: list[Path]) -> list[tuple[str, dict]]:
+    processor, model = _load_model()
+
+    images = [
+        Image.open(image_path).convert("RGB")
+        for image_path in image_paths
+    ]
+
+    conversations = []
+
+    for _ in image_paths:
+        conversations.append(
+            [
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "image"},
+                        {"type": "text", "text": USER_PROMPT},
+                    ],
+                }
+            ]
+        )
+
+    prompt_texts = [
+        processor.apply_chat_template(
+            conversation,
+            add_generation_prompt=True,
+        )
+        for conversation in conversations
+    ]
+
+    inputs = processor(
+        images=images,
+        text=prompt_texts,
+        return_tensors="pt",
+        padding=True,
+    ).to(model.device)
+
+    input_len = inputs["input_ids"].shape[1]
+
+    with torch.no_grad():
+        output_ids = model.generate(
+            **inputs,
+            max_new_tokens=LLAVA_MAX_NEW_TOKENS,
+            do_sample=False,
+        )
+
+    generated_ids = output_ids[:, input_len:]
+
+    raw_texts = processor.batch_decode(
+        generated_ids,
+        skip_special_tokens=True,
+    )
+
+    results = []
+
+    for raw_text in raw_texts:
+        raw_text = raw_text.strip()
+        parsed = _extract_json(raw_text)
+        results.append((raw_text, parsed))
+
+    return results
 
 def run_llava_on_folder(folder_path: str | Path) -> list[dict]:
     image_paths = get_image_paths(folder_path)
@@ -294,12 +403,14 @@ def run_llava_on_folder(folder_path: str | Path) -> list[dict]:
             raw_text = ""
             parsed = make_parsed("no_damage", f"Inference error: {exc}", "")
 
-        results.append({
-            "image_id": image_path.name,
-            "model_name": "llava_optimized",
-            "raw_output": raw_text,
-            "parsed_output": parsed,
-        })
+        results.append(
+            {
+                "image_id": image_path.name,
+                "model_name": "llava_optimized",
+                "raw_output": raw_text,
+                "parsed_output": parsed,
+            }
+        )
 
     logger.info("Processed %d images with optimized LLaVA", len(results))
     return results

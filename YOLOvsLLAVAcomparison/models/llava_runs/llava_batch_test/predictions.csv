@@ -1,0 +1,61 @@
+image,true,pred,true_binary,pred_binary,raw_output_file,raw_llava
+asbestos_pc450BP0006_synt1_jpg.rf.22a9782ef71ab88328039b1de9ae287a.jpg,asbestos,asbestos,damage,damage,raw_outputs/asbestos_pc450BP0006_synt1_jpg.rf.22a9782ef71ab88328039b1de9ae287a.json,"```json
+{
+  ""observations"": ""The image appears to be a close-up of a surface with various textures and speckles, which could be indicative of a material with a rough or porous surface. There are no clear line-shaped breaks, damp spots, mildew, fungal growth, black mold-like patches, peeling paint, discoloration, rust, stains, aging, or gradual surface deterioration. There is no visible asbestos-like material. The surface appears to be in normal condition with no clear inspection-relevant defect."
+asbestos_pc450BP0006_synt1_jpg.rf.7d08fb4e384059ca67706501c1cc7780.jpg,asbestos,asbestos,damage,damage,raw_outputs/asbestos_pc450BP0006_synt1_jpg.rf.7d08fb4e384059ca67706501c1cc7780.json,"```json
+{
+  ""observations"": ""The image shows a surface with various dark spots and lines that could be interpreted as mold, cracks, or wear. There are no clear signs of damage or asbestos."",
+  ""label"": ""wear|mold|crack|no_damage"",
+  ""summary"": ""The image appears to show a surface with signs of wear, mold, and cracks, but no clear signs of damage or asbestos.""
+}
+```"
+asbestos_pc450BP0006_synt2_jpg.rf.254202f2c3c9b36e5c8ec275767d0344.jpg,asbestos,asbestos,damage,damage,raw_outputs/asbestos_pc450BP0006_synt2_jpg.rf.254202f2c3c9b36e5c8ec275767d0344.json,"```json
+{
+  ""observations"": ""The image appears to show a surface with various small, dark spots and lines that could be interpreted as cracks or mold. There is no clear evidence of wear, damage, or asbestos."",
+  ""label"": ""no_damage"",
+  ""summary"": ""The image does not show any clear inspection-relevant defect.""
+}
+```"
+asbestos_pc450BP0006_synt2_jpg.rf.34e826c23968e2bb258d9f520011a806.jpg,asbestos,asbestos,damage,damage,raw_outputs/asbestos_pc450BP0006_synt2_jpg.rf.34e826c23968e2bb258d9f520011a806.json,"```json
+{
+  ""observations"": ""The image shows a surface with several small, dark spots scattered across it, which could be interpreted as either mold or wear. There are no clear line-shaped cracks or asbestos-like materials visible."",
+  ""label"": ""wear|mold"",
+  ""summary"": ""The surface appears to have some form of wear or mold, but it is not possible to definitively determine the exact nature of the spots from this image alone.""
+}
+```"
+asbestos_pc450BP0006_synt2_jpg.rf.eed061a57d2c6f6d390cf7f141cb1eed.jpg,asbestos,asbestos,damage,damage,raw_outputs/asbestos_pc450BP0006_synt2_jpg.rf.eed061a57d2c6f6d390cf7f141cb1eed.json,"```json
+{
+  ""observations"": ""The image shows a surface with various dark spots and lines that could be interpreted as mold, cracks, or wear. There are no clear signs of damage or asbestos."",
+  ""label"": ""wear|mold|crack|no_damage"",
+  ""summary"": ""The image appears to show a surface with signs of wear, mold, and cracks, but no clear signs of damage or asbestos.""
+}
+```"
+asbestos_pc450BP0011synt1_jpg.rf.568d456639c2ab61a3e2b2e07aadc12b.jpg,asbestos,asbestos,damage,damage,raw_outputs/asbestos_pc450BP0011synt1_jpg.rf.568d456639c2ab61a3e2b2e07aadc12b.json,"```json
+{
+  ""observations"": ""The image appears to be a close-up of a surface with a dark, speckled texture, which could be a wall or a ceiling. There is no clear line-shaped break, split, fracture, or visible crack. There are no damp spots, mildew, fungal growth, or black mold-like patches. The surface does not show any peeling paint, discoloration, rust, stains, aging, or gradual surface deterioration. There is no suspicious fibrous material or asbestos-like surface markings. The image"
+asbestos_pc450BP0011synt1_jpg.rf.a4369ffe56ff7d0a5a77efb964b0bc9e.jpg,asbestos,asbestos,damage,damage,raw_outputs/asbestos_pc450BP0011synt1_jpg.rf.a4369ffe56ff7d0a5a77efb964b0bc9e.json,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern of darker areas that could be interpreted as either mold or a type of wear or damage. There are no clear cracks or asbestos visible."",
+  ""label"": ""wear|damage"",
+  ""summary"": ""The surface appears to have some form of wear or damage, possibly due to water exposure or other environmental factors.""
+}
+```"
+asbestos_pc450BP0011synt2_jpg.rf.6e04f23a178ba51050321351df4a1209.jpg,asbestos,asbestos,damage,damage,raw_outputs/asbestos_pc450BP0011synt2_jpg.rf.6e04f23a178ba51050321351df4a1209.json,"```json
+{
+  ""observations"": ""The image shows a surface with a granular texture, which could be a wall or a ceiling. There are no clear line-shaped breaks, damp spots, mildew, fungal growth, black mold-like patches, peeling paint, discoloration, rust, stains, aging, gradual surface deterioration, or suspicious fibrous material or asbestos-like surface markings. The surface appears to be in a normal condition with no clear inspection-relevant defect."",
+  ""label"": ""no_damage"",
+  ""summary"":"
+asbestos_pc450BP0011synt2_jpg.rf.c8236f22b93d72f782ade660e57fad13.jpg,asbestos,crack,damage,damage,raw_outputs/asbestos_pc450BP0011synt2_jpg.rf.c8236f22b93d72f782ade660e57fad13.json,"```json
+{
+  ""observations"": ""The image shows a surface with a pattern of dark lines that could be interpreted as cracks or possibly some form of wear or damage. However, without a clearer view or additional context, it is difficult to definitively classify the image."",
+  ""label"": ""wear|damage"",
+  ""summary"": ""The image appears to show a surface with some form of wear or damage, but the exact nature of the issue is not clear.""
+}
+```"
+asbestos_pc450BP0011synt_jpg.rf.36111cfb156047c36858f0a2d03ac370.jpg,asbestos,crack,damage,damage,raw_outputs/asbestos_pc450BP0011synt_jpg.rf.36111cfb156047c36858f0a2d03ac370.json,"```json
+{
+  ""observations"": ""The image shows a surface with a dark, elongated marking that could be a crack or a line-shaped break. There are no clear signs of mold, wear, or asbestos."",
+  ""label"": ""crack"",
+  ""summary"": ""The image features a potential crack on the surface.""
+}
+```"

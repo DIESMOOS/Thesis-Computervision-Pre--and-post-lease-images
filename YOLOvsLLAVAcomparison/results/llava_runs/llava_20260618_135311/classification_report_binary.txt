@@ -1,0 +1,8 @@
+              precision    recall  f1-score   support
+
+      damage       0.63      1.00      0.77        17
+  not_damage       0.00      0.00      0.00        10
+
+    accuracy                           0.63        27
+   macro avg       0.31      0.50      0.39        27
+weighted avg       0.40      0.63      0.49        27

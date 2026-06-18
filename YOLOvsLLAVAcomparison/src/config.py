@@ -100,7 +100,7 @@ IMAGE_EXTS: frozenset[str] = frozenset({".jpg", ".jpeg", ".png"})
 # LLaVA settings
 # ---------------------------------------------------------------------------
 LLAVA_MODEL_ID: str = "llava-hf/llava-v1.6-mistral-7b-hf"
-LLAVA_MAX_NEW_TOKENS: int = 20
+LLAVA_MAX_NEW_TOKENS: int = 128
 
 # ---------------------------------------------------------------------------
 # Dataset paths
@@ -112,8 +112,8 @@ IMG_DIR_TEST: Path = DATA_ROOT / "inspection_dataset" / "images" / "test"
 LBL_DIR_TEST: Path = DATA_ROOT / "inspection_dataset" / "labels" / "test"
 
 # turn on if you want to test the controlled dataset
-#IMG_DIR_TEST: Path = DATA_ROOT / "llava_balanced_test" / "images"
-#LBL_DIR_TEST: Path = DATA_ROOT / "llava_balanced_test" / "labels"
+# IMG_DIR_TEST: Path = DATA_ROOT / "llava_balanced_test" / "images"
+# LBL_DIR_TEST: Path = DATA_ROOT / "llava_balanced_test" / "labels"
 
 # ---------------------------------------------------------------------------
 # Output paths

@@ -1,0 +1,7 @@
+,damage,crack,mold,wear,asbestos,no_damage
+damage,0,0,0,0,0,0
+crack,0,0,0,0,0,0
+mold,0,0,0,0,0,0
+wear,0,0,0,0,0,0
+asbestos,0,2,0,0,8,0
+no_damage,0,0,0,0,0,0

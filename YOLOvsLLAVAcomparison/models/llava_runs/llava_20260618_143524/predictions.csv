@@ -1819,14 +1819,14 @@ surface damage_DJI_0981_06_05_png.rf.1aaa5af1e0ef5dcc268eac14c41254fe.jpg,damage
   ""summary"": ""The image features a crack in the surface.""
 }
 ```"
-surface damage_DJI_0981_06_06_png.rf.a0b1225abd3de24f513bff008790593e.jpg,no_damage,damage,not_damage,damage,raw_outputs/surface damage_DJI_0981_06_06_png.rf.a0b1225abd3de24f513bff008790593e.json,"```json
+surface damage_DJI_0981_06_06_png.rf.a0b1225abd3de24f513bff008790593e.jpg,no_damage,mold,not_damage,damage,raw_outputs/surface damage_DJI_0981_06_06_png.rf.a0b1225abd3de24f513bff008790593e.json,"```json
 {
   ""observations"": ""The image shows a close-up of a white surface with visible spots and marks, which could be indicative of wear or damage. There are no clear cracks or mold visible."",
   ""label"": ""wear|damage"",
   ""summary"": ""The surface appears to have some wear or damage, possibly due to exposure to the elements or other environmental factors.""
 }
 ```"
-surface damage_DJI_0982_06_04_png.rf.475df62516e27851cce96ee15dd4ed5b.jpg,damage,crack,damage,damage,raw_outputs/surface damage_DJI_0982_06_04_png.rf.475df62516e27851cce96ee15dd4ed5b.json,"```json
+surface damage_DJI_0982_06_04_png.rf.475df62516e27851cce96ee15dd4ed5b.jpg,damage,asbestos,damage,damage,raw_outputs/surface damage_DJI_0982_06_04_png.rf.475df62516e27851cce96ee15dd4ed5b.json,"```json
 {
   ""observations"": ""The image shows a close-up of a surface with a dark, possibly textured, material. There is a vertical line that appears to be a crack or a seam in the material. The surface has a rough texture and there are no visible signs of mold, wear, or asbestos."",
   ""label"": ""crack|no_damage"",
@@ -1871,7 +1871,7 @@ surface damage_DJI_0984_05_03_png.rf.1630bafa75e5bfa53c46de35c2d742d2.jpg,damage
   ""summary"": ""The surface appears to be showing signs of wear and has a visible crack.""
 }
 ```"
-surface damage_DJI_0984_07_04_png.rf.6238e478b0a588ac404416f7980de936.jpg,damage,crack,damage,damage,raw_outputs/surface damage_DJI_0984_07_04_png.rf.6238e478b0a588ac404416f7980de936.json,"```json
+surface damage_DJI_0984_07_04_png.rf.6238e478b0a588ac404416f7980de936.jpg,damage,asbestos,damage,damage,raw_outputs/surface damage_DJI_0984_07_04_png.rf.6238e478b0a588ac404416f7980de936.json,"```json
 {
   ""observations"": ""The image shows a close-up of a white surface with a darker line or marking on it, which could be a crack or a line of wear. There are no clear signs of mold or asbestos."",
   ""label"": ""wear|crack"",
@@ -1993,7 +1993,7 @@ surface damage_DJI_0993_03_04_png.rf.d712d99712fa311b3821fe341962b15c.jpg,no_dam
   ""summary"": ""The image shows wear on the surface of the cylindrical object.""
 }
 ```"
-surface damage_DJI_0995_03_05_png.rf.7641393ae451fa1ba8e18b2b52804b68.jpg,no_damage,damage,not_damage,damage,raw_outputs/surface damage_DJI_0995_03_05_png.rf.7641393ae451fa1ba8e18b2b52804b68.json,"```json
+surface damage_DJI_0995_03_05_png.rf.7641393ae451fa1ba8e18b2b52804b68.jpg,no_damage,wear,not_damage,damage,raw_outputs/surface damage_DJI_0995_03_05_png.rf.7641393ae451fa1ba8e18b2b52804b68.json,"```json
 {
   ""observations"": ""The image shows a close-up of a surface with visible rust and peeling paint, indicating wear and potential damage."",
   ""label"": ""wear|damage"",
@@ -2023,9 +2023,7 @@ surface damage_DJI_0996_03_03_png.rf.36c7187dd5a1aa4dd26179b3ca02c16d.jpg,no_dam
 ```"
 surface damage_DJI_0997_03_04_png.rf.465c34a1e09c77640645d78ab5b3ad04.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0997_03_04_png.rf.465c34a1e09c77640645d78ab5b3ad04.json,"```json
 {
-  ""observations"": ""The image shows a close-up of a structure with a focus on a cylindrical object, possibly a pipe or a part of a larger structure. There is no clear defect visible in the image, such as a line-shaped break, damp spots, mildew, fungal growth, black mold-like patches, peeling paint, discoloration, rust, stains, aging, gradual surface deterioration, or suspicious fibrous material or asbestos-like surface markings."",
-  ""label"": ""no_damage"",
-  """
+  ""observations"": ""The image shows a close-up of a structure with a focus on a cylindrical object, possibly a pipe or a part of a larger structure. There is no clear defect visible in the image, such as a line-shaped break, damp spots, mildew, fungal growth, black mold-like patches, peeling paint, discoloration, rust, stains, aging, gradual surface deterioration, or asbestos-like surface markings. The image does not provide enough information to make a definitive assessment of the cond"
 surface damage_DJI_0997_03_06_png.rf.5d6a664d91b7584a560bb1cda897805f.jpg,no_damage,crack,not_damage,damage,raw_outputs/surface damage_DJI_0997_03_06_png.rf.5d6a664d91b7584a560bb1cda897805f.json,"```json
 {
   ""observations"": ""The image shows a close-up of a surface with a visible crack running horizontally across it."",

@@ -1,0 +1,12 @@
+              precision    recall  f1-score   support
+
+      damage       0.33      0.00      0.00       535
+       crack       0.00      0.00      0.00       607
+        mold       0.00      0.00      0.00       177
+        wear       0.00      0.00      0.00        35
+    asbestos       0.00      0.00      0.00       198
+   no_damage       0.14      0.93      0.25       276
+
+    accuracy                           0.14      1828
+   macro avg       0.08      0.16      0.04      1828
+weighted avg       0.12      0.14      0.04      1828

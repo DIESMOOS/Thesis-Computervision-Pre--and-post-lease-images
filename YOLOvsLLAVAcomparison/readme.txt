@@ -6,7 +6,7 @@ source .venv/bin/activate
 python - <<'PY'
 import pandas as pd
 
-df = pd.read_csv("results/llava_baseline_results.csv")
+df = pd.read_csv("models/llava_runs/llava_baseline_results.csv")
 
 for i,row in df.head(15).iterrows():
     print("="*80)

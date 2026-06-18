@@ -1,0 +1,27 @@
+{
+  "run_name": "llava_20260618_154407",
+  "model": "llava-hf/llava-v1.6-mistral-7b-hf",
+  "images_evaluated": 1828,
+  "limit": null,
+  "bootstrap": 1000,
+  "batch_size": 128,
+  "image_dir": "/gpfs/home3/ddehaan/Thesis-Computervision-Pre--and-post-lease-images/YOLOvsLLAVAcomparison/data/inspection_dataset/images/test",
+  "label_dir": "/gpfs/home3/ddehaan/Thesis-Computervision-Pre--and-post-lease-images/YOLOvsLLAVAcomparison/data/inspection_dataset/labels/test",
+  "labels": [
+    "damage",
+    "crack",
+    "mold",
+    "wear",
+    "asbestos",
+    "no_damage"
+  ],
+  "predictions_file": "/gpfs/home3/ddehaan/Thesis-Computervision-Pre--and-post-lease-images/YOLOvsLLAVAcomparison/models/llava_runs/llava_20260618_154407/predictions.csv",
+  "summary_file": "/gpfs/home3/ddehaan/Thesis-Computervision-Pre--and-post-lease-images/YOLOvsLLAVAcomparison/models/llava_runs/llava_20260618_154407/summary.csv",
+  "medical_imaging_inspired_options": [
+    "Fine-tune LLaVA on medical or housing inspection images",
+    "Use retrieval-augmented prompting",
+    "Use few-shot examples",
+    "Use chain-of-thought-style structured reasoning",
+    "Use domain-specific models instead of vanilla LLaVA"
+  ]
+}

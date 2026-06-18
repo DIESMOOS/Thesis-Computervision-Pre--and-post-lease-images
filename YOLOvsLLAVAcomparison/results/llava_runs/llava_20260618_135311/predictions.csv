@@ -1,0 +1,186 @@
+image,true,pred,true_binary,pred_binary,raw_output_file,raw_llava
+asbestos_pc450BP0006_synt2_jpg.rf.34e826c23968e2bb258d9f520011a806.jpg,no_damage,asbestos,not_damage,damage,raw_outputs/asbestos_pc450BP0006_synt2_jpg.rf.34e826c23968e2bb258d9f520011a806.json,"```json
+{
+  ""observations"": ""The image shows a surface with several small, dark spots scattered across it, which could be interpreted as either mold or wear. There are no clear line-shaped cracks or asbestos-like materials visible."",
+  ""label"": ""wear|mold"",
+  ""summary"": ""The surface appears to have some form of wear or mold, but it is not possible to definitively determine the exact nature of the spots from this image alone.""
+}
+```"
+asbestos_pc450BP0027synt2_jpg.rf.901a9b9873dca44103b5d474829e29de.jpg,no_damage,asbestos,not_damage,damage,raw_outputs/asbestos_pc450BP0027synt2_jpg.rf.901a9b9873dca44103b5d474829e29de.json,"```json
+{
+  ""observations"": ""The image appears to be a close-up of a surface with various textures and speckles, which could be indicative of a material with a rough or porous surface. There are no clear line-shaped breaks, damp spots, mildew, fungal growth, black mold-like patches, peeling paint, discoloration, rust, stains, aging, or gradual surface deterioration. There is no visible asbestos-like material. The surface appears to be in normal condition with no clear inspection-relevant defect."
+asbestos_pc450newF-080_jpg.rf.749b5e53205edf9d626c8b7ffd155c21.jpg,no_damage,asbestos,not_damage,damage,raw_outputs/asbestos_pc450newF-080_jpg.rf.749b5e53205edf9d626c8b7ffd155c21.json,"```json
+{
+  ""observations"": ""The image shows a surface with a uniform texture and no clear defects visible."",
+  ""label"": ""no_damage"",
+  ""summary"": ""The surface appears to be in good condition with no visible damage, cracks, mold, wear, or asbestos.""
+}
+```"
+asbestos_pc450newF-090_jpg.rf.862c9594853c67107743883af3f1c048.jpg,no_damage,asbestos,not_damage,damage,raw_outputs/asbestos_pc450newF-090_jpg.rf.862c9594853c67107743883af3f1c048.json,"```json
+{
+  ""observations"": ""The image shows a surface with a few small, dark spots scattered across it, which could be interpreted as either mold or wear, depending on the context. There are no clear line-shaped cracks, holes, or broken material visible."",
+  ""label"": ""wear|mold"",
+  ""summary"": ""The image appears to show a surface with some signs of wear or mold, but no clear damage or asbestos is visible.""
+}
+```"
+asbestos_pc450newF-127_jpg.rf.2df00779998953f1e32301e5e2436d32.jpg,no_damage,asbestos,not_damage,damage,raw_outputs/asbestos_pc450newF-127_jpg.rf.2df00779998953f1e32301e5e2436d32.json,"```json
+{
+  ""observations"": ""The image appears to show a surface with some dark spots and a few indistinct shapes that could be interpreted as cracks or lines. There is no clear evidence of mold, wear, or asbestos."",
+  ""label"": ""no_damage"",
+  ""summary"": ""No clear inspection-relevant defect is visible in the image.""
+}
+```"
+crack_1676.rf.5f750c0964875bc8d9de449becef78c9.jpg,no_damage,crack,not_damage,damage,raw_outputs/crack_1676.rf.5f750c0964875bc8d9de449becef78c9.json,"```json
+{
+  ""observations"": ""The image shows a close-up of a surface with a visible crack running across it."",
+  ""label"": ""crack"",
+  ""summary"": ""The crack is the most prominent feature in the image.""
+}
+```"
+crack_1728.rf.8bbbf38c1012ab49adabef3f5df778ff.jpg,no_damage,crack,not_damage,damage,raw_outputs/crack_1728.rf.8bbbf38c1012ab49adabef3f5df778ff.json,"```json
+{
+  ""observations"": ""The image shows a close-up of a surface with visible cracks and wear."",
+  ""label"": ""wear|crack"",
+  ""summary"": ""The surface appears to be aged and has developed cracks, which are indicative of wear and tear.""
+}
+```"
+crack_1813.rf.79f1af872f76dd8b46df4a83ed5f54c6.jpg,no_damage,crack,not_damage,damage,raw_outputs/crack_1813.rf.79f1af872f76dd8b46df4a83ed5f54c6.json,"```json
+{
+  ""observations"": ""A clear line-shaped break in the surface of a wall"",
+  ""label"": ""crack"",
+  ""summary"": ""The image shows a crack in the wall.""
+}
+```"
+crack_1867.rf.9a2614949fdffb516b9f45e0a847357b.jpg,no_damage,crack,not_damage,damage,raw_outputs/crack_1867.rf.9a2614949fdffb516b9f45e0a847357b.json,"```json
+{
+  ""observations"": ""A clear line-shaped break in the surface of a material, possibly concrete or stone."",
+  ""label"": ""crack"",
+  ""summary"": ""The image shows a crack in the surface of the material.""
+}
+```"
+crack_1884.rf.8ee67a56640346c19e84f983a00d5e69.jpg,no_damage,crack,not_damage,damage,raw_outputs/crack_1884.rf.8ee67a56640346c19e84f983a00d5e69.json,"```json
+{
+  ""observations"": ""The image shows a close-up of a wall with a visible crack running vertically along the edge of the wall."",
+  ""label"": ""crack"",
+  ""summary"": ""The crack is the most prominent feature in the image.""
+}
+```"
+house_Cracks_Minor_102_jpg.rf.aba5ec9a0b28f35b228a1e4b05ebf988.jpg,damage,crack,damage,damage,raw_outputs/house_Cracks_Minor_102_jpg.rf.aba5ec9a0b28f35b228a1e4b05ebf988.json,"```json
+{
+  ""observations"": ""The image shows a square with a visible crack running through it, dividing the square into two distinct halves."",
+  ""label"": ""crack"",
+  ""summary"": ""The image displays a clear line-shaped break, which is indicative of a crack.""
+}
+```"
+house_Cracks_Minor_104_jpg.rf.2337887f31fe268f6b06584a1923f0b2.jpg,damage,crack,damage,damage,raw_outputs/house_Cracks_Minor_104_jpg.rf.2337887f31fe268f6b06584a1923f0b2.json,"```json
+{
+  ""observations"": ""The image shows a square with a visible crack along the top edge."",
+  ""label"": ""crack"",
+  ""summary"": ""The crack is a clear line-shaped break visible in the image.""
+}
+```"
+house_Cracks_Minor_18_jpg.rf.58d6f636021dcb56ef3e7dab0353b673.jpg,damage,crack,damage,damage,raw_outputs/house_Cracks_Minor_18_jpg.rf.58d6f636021dcb56ef3e7dab0353b673.json,"```json
+{
+  ""observations"": ""The image shows a close-up of a surface with a line-shaped break or crack."",
+  ""label"": ""crack"",
+  ""summary"": ""The visible line-shaped break or crack indicates that the image should be classified as 'crack'.""
+}
+```"
+house_Cracks_Minor_19_jpg.rf.4033a8633b4d6cdbba6025fd82d25b6a.jpg,damage,crack,damage,damage,raw_outputs/house_Cracks_Minor_19_jpg.rf.4033a8633b4d6cdbba6025fd82d25b6a.json,"```json
+{
+  ""observations"": ""The image shows a close-up of a surface with a visible crack running across it."",
+  ""label"": ""crack"",
+  ""summary"": ""The image displays a clear line-shaped break, split, fracture, or visible crack.""
+}
+```"
+house_Cracks_Minor_22_jpg.rf.6d2a385370894aa6dd7e476a92475975.jpg,damage,crack,damage,damage,raw_outputs/house_Cracks_Minor_22_jpg.rf.6d2a385370894aa6dd7e476a92475975.json,"```json
+{
+  ""observations"": ""The image shows a close-up of a surface with a line-shaped break or crack."",
+  ""label"": ""crack"",
+  ""summary"": ""The visible line-shaped break or crack indicates that the image should be classified as 'crack'.""
+}
+```"
+house_Cracks_Minor_35_jpg.rf.20d0a3f1ad5460bfbe05d12e7d1405c9.jpg,damage,crack,damage,damage,raw_outputs/house_Cracks_Minor_35_jpg.rf.20d0a3f1ad5460bfbe05d12e7d1405c9.json,"```json
+{
+  ""observations"": ""The image shows a close-up of a surface with a visible crack."",
+  ""label"": ""crack"",
+  ""summary"": ""The crack is the most prominent feature in the image.""
+}
+```"
+house_Cracks_Minor_36_jpg.rf.bf3099e1da5028b51a15cda26fb69611.jpg,damage,crack,damage,damage,raw_outputs/house_Cracks_Minor_36_jpg.rf.bf3099e1da5028b51a15cda26fb69611.json,"```json
+{
+  ""observations"": ""The image shows a close-up of a surface with a line-shaped break or crack."",
+  ""label"": ""crack"",
+  ""summary"": ""The visible line-shaped break or crack indicates that the image should be classified as 'crack'.""
+}
+```"
+house_Cracks_Minor_40_jpg.rf.7e34fb8125c98d34c76a871025d34417.jpg,damage,crack,damage,damage,raw_outputs/house_Cracks_Minor_40_jpg.rf.7e34fb8125c98d34c76a871025d34417.json,"```json
+{
+  ""observations"": ""The image shows a close-up of a surface with a line-shaped break or crack."",
+  ""label"": ""crack"",
+  ""summary"": ""The visible line-shaped break or crack indicates that the image should be classified as 'crack'.""
+}
+```"
+house_Cracks_Minor_47_jpg.rf.fa51a510d73d106dc682f19e31d93887.jpg,damage,crack,damage,damage,raw_outputs/house_Cracks_Minor_47_jpg.rf.fa51a510d73d106dc682f19e31d93887.json,"```json
+{
+  ""observations"": ""The image shows a surface with a visible line-shaped break or crack."",
+  ""label"": ""crack"",
+  ""summary"": ""The image depicts a crack in the surface.""
+}
+```"
+house_Cracks_Minor_56_jpg.rf.e8d5e5ab921a7fd4fdec28798fee1a5d.jpg,damage,crack,damage,damage,raw_outputs/house_Cracks_Minor_56_jpg.rf.e8d5e5ab921a7fd4fdec28798fee1a5d.json,"```json
+{
+  ""observations"": ""The image shows a close-up of a surface with a line-shaped break or crack."",
+  ""label"": ""crack"",
+  ""summary"": ""The visible line-shaped break or crack indicates that the image should be classified as 'crack'.""
+}
+```"
+mold2_0_TRMRMMGLPICT000021193200_jpg.rf.0913a51ffab1c1f3b4f5794a8b21fbe4.jpg,mold,mold,damage,damage,raw_outputs/mold2_0_TRMRMMGLPICT000021193200_jpg.rf.0913a51ffab1c1f3b4f5794a8b21fbe4.json,"```json
+{
+  ""observations"": ""The image shows a wall with a dark, discolored area that appears to be mold or mildew growth. The wall also has some wear and tear, with peeling paint and discoloration. There are no visible cracks or damage."",
+  ""label"": ""mold|wear"",
+  ""summary"": ""The wall has mold and wear issues.""
+}
+```"
+mold2_Mold-Remediation-Cost_jpg.rf.6da29b814958b339199e78e3513db228.jpg,mold,mold,damage,damage,raw_outputs/mold2_Mold-Remediation-Cost_jpg.rf.6da29b814958b339199e78e3513db228.json,"```json
+{
+  ""observations"": ""A person in a protective suit is spraying a yellow substance onto a wall with visible mold growth."",
+  ""label"": ""mold"",
+  ""summary"": ""The presence of mold on the wall indicates a need for remediation.""
+}
+```"
+mold2_marchmarkspaintingmain_jpg.rf.54daf1a83c0d479e4da6c10f0472940c.jpg,mold,mold,damage,damage,raw_outputs/mold2_marchmarkspaintingmain_jpg.rf.54daf1a83c0d479e4da6c10f0472940c.json,"```json
+{
+  ""observations"": ""The image shows a close-up of a surface with a dark, speckled substance that appears to be mold or mildew growth."",
+  ""label"": ""mold"",
+  ""summary"": ""The presence of mold or mildew indicates a need for remediation and possibly an underlying moisture issue.""
+}
+```"
+mold2_penetrating-damp-signs-moss-image_jpg.rf.19bf68626cc4a1e9572b7ed1eceeb122.jpg,mold,mold,damage,damage,raw_outputs/mold2_penetrating-damp-signs-moss-image_jpg.rf.19bf68626cc4a1e9572b7ed1eceeb122.json,"```json
+{
+  ""observations"": ""The image shows a brick wall with visible moss growth and some wear and tear on the lower part of the wall."",
+  ""label"": ""wear|mold"",
+  ""summary"": ""The wall appears to be in a state of disrepair, with signs of wear and moss growth, which may indicate poor maintenance or damp conditions.""
+}
+```"
+mold_0_TRMRMMGLPICT000021193200_jpg.rf.70e8880b6e2c85f8d5fe4defbef3e4d1.jpg,wear,mold,damage,damage,raw_outputs/mold_0_TRMRMMGLPICT000021193200_jpg.rf.70e8880b6e2c85f8d5fe4defbef3e4d1.json,"```json
+{
+  ""observations"": ""The image shows a wall with a significant amount of mold growth, which is visible as dark, damp patches on the surface. The mold appears to be concentrated in one area, and the wall itself looks unpainted and possibly unfinished."",
+  ""label"": ""mold"",
+  ""summary"": ""The image depicts a wall with mold growth, which is a clear indication of a defect related to moisture and humidity issues.""
+}
+```"
+mold_48-mold-remediation-7_png.rf.ca34d59e133f8b9707d29ef39bb71c80.jpg,crack,mold,damage,damage,raw_outputs/mold_48-mold-remediation-7_png.rf.ca34d59e133f8b9707d29ef39bb71c80.json,"```json
+{
+  ""observations"": ""The image shows a wall with visible mold growth, discoloration, and peeling paint, indicating wear and potential damage."",
+  ""label"": ""wear|mold"",
+  ""summary"": ""The wall appears to be in poor condition, with signs of mold and wear.""
+}
+```"
+mold_marchmarkspaintingmain_jpg.rf.cba684a6e821bf15fadc4ec87d8b8acc.jpg,wear,wear,damage,damage,raw_outputs/mold_marchmarkspaintingmain_jpg.rf.cba684a6e821bf15fadc4ec87d8b8acc.json,"```json
+{
+  ""observations"": ""The image shows a close-up of a surface with a dark, speckled substance that appears to be dirt or grime accumulated over time, which could be indicative of wear or neglect."",
+  ""label"": ""wear"",
+  ""summary"": ""The presence of dirt or grime on the surface suggests a lack of maintenance or cleaning, which could be a sign of wear or neglect.""
+}
+```"

@@ -4,11 +4,16 @@ LLaVA-1.6 evaluation script.
 Uses src/pipelines/llava_pipeline.py for inference and evaluates predictions
 against the YOLO test split using the YOLO-aligned labels:
 damage, crack, mold, wear, asbestos, no_damage.
+
+Outputs are saved in:
+models/llava_runs/<run_name>/
 """
 
 import argparse
+import json
 import logging
 import random
+from datetime import datetime
 from pathlib import Path
 
 import numpy as np
@@ -32,12 +37,21 @@ from src.config import (
     IMAGE_EXTS,
     LLAVA_MODEL_ID,
 )
-from src.pipelines.llava_pipeline import run_llava_on_image # for wanting to test the specified version
-#from src.pipelines.llava_pipeline_zeroshot import run_llava_on_image # for when wanting to test the zero shot version
+
+from src.pipelines.llava_pipeline import run_llava_on_images
+
+ROOT_DIR = Path(__file__).resolve().parents[2]
 logger = logging.getLogger(__name__)
 
-OUT_CSV = RESULTS_DIR / "llava_baseline_results.csv"
-OUT_SUMMARY = RESULTS_DIR / "llava_medical_style_summary.csv"
+
+def make_run_dir(run_name: str | None = None) -> Path:
+    if run_name is None:
+        run_name = datetime.now().strftime("llava_%Y%m%d_%H%M%S")
+
+    run_dir = ROOT_DIR / "models" / "llava_runs" / run_name
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "raw_outputs").mkdir(parents=True, exist_ok=True)
+    return run_dir
 
 
 def get_true_label(label_path: Path) -> str:
@@ -120,8 +134,24 @@ def print_confusion_matrix(y_true, y_pred, labels):
         print(f"{label:14s}" + "".join(f"{value:14d}" for value in row))
 
 
-def evaluate(limit: int | None = None, bootstrap: int = 1000) -> None:
+def save_confusion_matrix(y_true, y_pred, labels, out_path: Path):
+    cm = confusion_matrix(y_true, y_pred, labels=labels)
+    pd.DataFrame(cm, index=labels, columns=labels).to_csv(out_path)
+
+
+def evaluate(
+    limit: int | None = None,
+    bootstrap: int = 1000,
+    run_name: str | None = None,
+    batch_size: int = 128,
+) -> None:
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+
+    run_dir = make_run_dir(run_name)
+
+    out_csv = run_dir / "predictions.csv"
+    out_summary = run_dir / "summary.csv"
+    raw_dir = run_dir / "raw_outputs"
 
     image_paths = sorted(
         p for p in IMG_DIR_TEST.glob("*")
@@ -132,38 +162,63 @@ def evaluate(limit: int | None = None, bootstrap: int = 1000) -> None:
         image_paths = image_paths[:limit]
 
     logger.info("Evaluating %d images", len(image_paths))
+    logger.info("Run directory: %s", run_dir)
+    logger.info("Batch size: %d", batch_size)
 
     rows = []
 
-    for i, image_path in enumerate(image_paths, 1):
-        label_path = LBL_DIR_TEST / f"{image_path.stem}.txt"
-        true_label = get_true_label(label_path)
+    for start_idx in range(0, len(image_paths), batch_size):
+        batch_paths = image_paths[start_idx:start_idx + batch_size]
 
         try:
-            raw_output, parsed = run_llava_on_image(image_path)
-            pred_label = choose_pred_label(parsed, raw_output)
+            batch_outputs = run_llava_on_images(batch_paths)
         except Exception as exc:
-            logger.error("Failed on %s: %s", image_path.name, exc)
-            raw_output = ""
-            parsed = {}
-            pred_label = "no_damage"
+            logger.error("Batch failed: %s", exc)
+            batch_outputs = [("", {}) for _ in batch_paths]
 
-        rows.append(
-            {
-                "image": image_path.name,
-                "true": true_label,
-                "pred": pred_label,
-                "true_binary": to_binary(true_label),
-                "pred_binary": to_binary(pred_label),
-                "raw_llava": raw_output[:500],
-            }
-        )
+        for offset, image_path in enumerate(batch_paths):
+            i = start_idx + offset + 1
 
-        if i % 10 == 0:
-            logger.info("%d / %d done", i, len(image_paths))
+            label_path = LBL_DIR_TEST / f"{image_path.stem}.txt"
+            true_label = get_true_label(label_path)
+
+            raw_output, parsed = batch_outputs[offset]
+            pred_label = choose_pred_label(parsed, raw_output)
+            print(f"Using batch size: {batch_size}")
+
+            raw_file = raw_dir / f"{image_path.stem}.json"
+            raw_file.write_text(
+                json.dumps(
+                    {
+                        "image": image_path.name,
+                        "true": true_label,
+                        "pred": pred_label,
+                        "true_binary": to_binary(true_label),
+                        "pred_binary": to_binary(pred_label),
+                        "raw_llava": raw_output,
+                        "parsed": parsed,
+                    },
+                    indent=2,
+                )
+            )
+
+            rows.append(
+                {
+                    "image": image_path.name,
+                    "true": true_label,
+                    "pred": pred_label,
+                    "true_binary": to_binary(true_label),
+                    "pred_binary": to_binary(pred_label),
+                    "raw_output_file": str(raw_file.relative_to(run_dir)),
+                    "raw_llava": raw_output[:500],
+                }
+            )
+
+            if i % 10 == 0:
+                logger.info("%d / %d done", i, len(image_paths))
 
     df = pd.DataFrame(rows)
-    df.to_csv(OUT_CSV, index=False)
+    df.to_csv(out_csv, index=False)
 
     y_true = df["true"].tolist()
     y_pred = df["pred"].tolist()
@@ -231,14 +286,72 @@ def evaluate(limit: int | None = None, bootstrap: int = 1000) -> None:
         )
 
     summary = pd.DataFrame(summary_rows)
-    summary.to_csv(OUT_SUMMARY, index=False)
+    summary.to_csv(out_summary, index=False)
+
+    multiclass_report = classification_report(
+        y_true,
+        y_pred,
+        labels=EVAL_LABELS,
+        zero_division=0,
+    )
+
+    binary_report = classification_report(
+        y_true_bin,
+        y_pred_bin,
+        labels=binary_labels,
+        zero_division=0,
+    )
+
+    (run_dir / "classification_report_multiclass.txt").write_text(multiclass_report)
+    (run_dir / "classification_report_binary.txt").write_text(binary_report)
+
+    save_confusion_matrix(
+        y_true,
+        y_pred,
+        EVAL_LABELS,
+        run_dir / "confusion_matrix_multiclass.csv",
+    )
+
+    save_confusion_matrix(
+        y_true_bin,
+        y_pred_bin,
+        binary_labels,
+        run_dir / "confusion_matrix_binary.csv",
+    )
+
+    run_config = {
+        "run_name": run_dir.name,
+        "model": LLAVA_MODEL_ID,
+        "images_evaluated": len(df),
+        "limit": limit,
+        "bootstrap": bootstrap,
+        "batch_size": batch_size,
+        "image_dir": str(IMG_DIR_TEST),
+        "label_dir": str(LBL_DIR_TEST),
+        "labels": EVAL_LABELS,
+        "predictions_file": str(out_csv),
+        "summary_file": str(out_summary),
+        "medical_imaging_inspired_options": [
+            "Fine-tune LLaVA on medical or housing inspection images",
+            "Use retrieval-augmented prompting",
+            "Use few-shot examples",
+            "Use chain-of-thought-style structured reasoning",
+            "Use domain-specific models instead of vanilla LLaVA",
+        ],
+    }
+
+    (run_dir / "run_config.json").write_text(json.dumps(run_config, indent=2))
+
+    df.to_csv(RESULTS_DIR / "llava_baseline_results.csv", index=False)
+    summary.to_csv(RESULTS_DIR / "llava_medical_style_summary.csv", index=False)
 
     print("\n" + "=" * 70)
     print(f"LLaVA-1.6 evaluation | model: {LLAVA_MODEL_ID}")
     print("=" * 70)
     print(f"Images evaluated  : {len(df)}")
-    print(f"Predictions saved : {OUT_CSV}")
-    print(f"Summary saved     : {OUT_SUMMARY}")
+    print(f"Run folder        : {run_dir}")
+    print(f"Predictions saved : {out_csv}")
+    print(f"Summary saved     : {out_summary}")
     print()
 
     print("Ground-truth distribution:")
@@ -250,14 +363,14 @@ def evaluate(limit: int | None = None, bootstrap: int = 1000) -> None:
     print()
 
     print("Multiclass classification report:")
-    print(classification_report(y_true, y_pred, labels=EVAL_LABELS, zero_division=0))
+    print(multiclass_report)
 
     print("Multiclass confusion matrix:")
     print_confusion_matrix(y_true, y_pred, EVAL_LABELS)
     print()
 
     print("Binary damage vs not_damage classification report:")
-    print(classification_report(y_true_bin, y_pred_bin, labels=binary_labels, zero_division=0))
+    print(binary_report)
 
     print("Binary confusion matrix:")
     print_confusion_matrix(y_true_bin, y_pred_bin, binary_labels)
@@ -277,6 +390,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Evaluate LLaVA-1.6 on YOLO-aligned housing labels")
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--bootstrap", type=int, default=1000)
+    parser.add_argument("--name", type=str, default=None)
+    parser.add_argument("--batch-size", type=int, default=4)
     args = parser.parse_args()
 
-    evaluate(limit=args.limit, bootstrap=args.bootstrap)
+    evaluate(
+        limit=args.limit,
+        bootstrap=args.bootstrap,
+        run_name=args.name,
+        batch_size=args.batch_size,
+    )
