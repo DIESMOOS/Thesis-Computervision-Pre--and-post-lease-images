@@ -1,10 +1,10 @@
 {
-  "run_name": "llava_batch_test",
-  "model": "llava-hf/llava-v1.6-mistral-7b-hf",
-  "images_evaluated": 10,
-  "limit": 10,
-  "bootstrap": 100,
-  "batch_size": 4,
+  "run_name": "llava_onevision_full",
+  "model": "llava-hf/llava-onevision-qwen2-7b-ov-hf",
+  "images_evaluated": 1828,
+  "limit": null,
+  "bootstrap": 1000,
+  "batch_size": 128,
   "image_dir": "/gpfs/home3/ddehaan/Thesis-Computervision-Pre--and-post-lease-images/YOLOvsLLAVAcomparison/data/inspection_dataset/images/test",
   "label_dir": "/gpfs/home3/ddehaan/Thesis-Computervision-Pre--and-post-lease-images/YOLOvsLLAVAcomparison/data/inspection_dataset/labels/test",
   "labels": [
@@ -15,8 +15,8 @@
     "asbestos",
     "no_damage"
   ],
-  "predictions_file": "/gpfs/home3/ddehaan/Thesis-Computervision-Pre--and-post-lease-images/YOLOvsLLAVAcomparison/models/llava_runs/llava_batch_test/predictions.csv",
-  "summary_file": "/gpfs/home3/ddehaan/Thesis-Computervision-Pre--and-post-lease-images/YOLOvsLLAVAcomparison/models/llava_runs/llava_batch_test/summary.csv",
+  "predictions_file": "/gpfs/home3/ddehaan/Thesis-Computervision-Pre--and-post-lease-images/YOLOvsLLAVAcomparison/models/llava_runs/llava_onevision_full/predictions.csv",
+  "summary_file": "/gpfs/home3/ddehaan/Thesis-Computervision-Pre--and-post-lease-images/YOLOvsLLAVAcomparison/models/llava_runs/llava_onevision_full/summary.csv",
   "medical_imaging_inspired_options": [
     "Fine-tune LLaVA on medical or housing inspection images",
     "Use retrieval-augmented prompting",

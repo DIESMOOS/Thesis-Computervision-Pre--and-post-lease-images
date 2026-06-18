@@ -100,7 +100,8 @@ IMAGE_EXTS: frozenset[str] = frozenset({".jpg", ".jpeg", ".png"})
 # LLaVA settings
 # ---------------------------------------------------------------------------
 LLAVA_MODEL_ID: str = "llava-hf/llava-v1.6-mistral-7b-hf"
-LLAVA_MAX_NEW_TOKENS: int = 128
+#LLAVA_MODEL_ID: str = "llava-hf/llava-onevision-qwen2-7b-ov-hf" # LLaVA-OneVision 7B
+LLAVA_MAX_NEW_TOKENS: int = 256
 
 # ---------------------------------------------------------------------------
 # Dataset paths

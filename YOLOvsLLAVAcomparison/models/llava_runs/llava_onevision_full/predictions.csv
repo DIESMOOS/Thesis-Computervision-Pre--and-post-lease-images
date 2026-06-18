@@ -1791,243 +1791,39 @@ surface damage_DJI_0977_04_09_png.rf.64497fc9e092fcb6d424984a80cadbde.jpg,no_dam
 surface damage_DJI_0978_04_02_png.rf.3484af6b34c1a60a44666613d078ef32.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0978_04_02_png.rf.3484af6b34c1a60a44666613d078ef32.json,
 surface damage_DJI_0978_04_08_png.rf.6ac75b94d5ed51aa44c1bcaa625251c6.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0978_04_08_png.rf.6ac75b94d5ed51aa44c1bcaa625251c6.json,
 surface damage_DJI_0978_05_08_png.rf.f9cf58f4cc56edd8d2b55c53890d45ff.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0978_05_08_png.rf.f9cf58f4cc56edd8d2b55c53890d45ff.json,
-surface damage_DJI_0979_05_07_png.rf.b549b739a4160e85a52ebee946ed8ce5.jpg,damage,asbestos,damage,damage,raw_outputs/surface damage_DJI_0979_05_07_png.rf.b549b739a4160e85a52ebee946ed8ce5.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a cylindrical object with a visible seam or joint. There is no clear evidence of damage, crack, mold, wear, or asbestos. The surface appears to be in good condition."",
-  ""label"": ""no_damage"",
-  ""summary"": ""No clear inspection-relevant defect is visible.""
-}
-```"
-surface damage_DJI_0981_04_05_png.rf.3d6a439ae444bbab60203475760a021e.jpg,no_damage,crack,not_damage,damage,raw_outputs/surface damage_DJI_0981_04_05_png.rf.3d6a439ae444bbab60203475760a021e.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a visible crack."",
-  ""label"": ""crack"",
-  ""summary"": ""The crack is the most prominent feature in the image.""
-}
-```"
-surface damage_DJI_0981_05_06_png.rf.851ddcf1f6242824db7e7942d93bc399.jpg,no_damage,crack,not_damage,damage,raw_outputs/surface damage_DJI_0981_05_06_png.rf.851ddcf1f6242824db7e7942d93bc399.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a visible crack and some wear, possibly due to age or exposure to the elements."",
-  ""label"": ""wear|crack"",
-  ""summary"": ""The surface appears to be in a state of disrepair, with a crack and signs of wear.""
-}
-```"
-surface damage_DJI_0981_06_05_png.rf.1aaa5af1e0ef5dcc268eac14c41254fe.jpg,damage,crack,damage,damage,raw_outputs/surface damage_DJI_0981_06_05_png.rf.1aaa5af1e0ef5dcc268eac14c41254fe.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a visible line-shaped break, which could be a crack. There are no clear signs of mold, wear, damage, or asbestos."",
-  ""label"": ""crack"",
-  ""summary"": ""The image features a crack in the surface.""
-}
-```"
-surface damage_DJI_0981_06_06_png.rf.a0b1225abd3de24f513bff008790593e.jpg,no_damage,mold,not_damage,damage,raw_outputs/surface damage_DJI_0981_06_06_png.rf.a0b1225abd3de24f513bff008790593e.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a white surface with visible spots and marks, which could be indicative of wear or damage. There are no clear cracks or mold visible."",
-  ""label"": ""wear|damage"",
-  ""summary"": ""The surface appears to have some wear or damage, possibly due to exposure to the elements or other environmental factors.""
-}
-```"
-surface damage_DJI_0982_06_04_png.rf.475df62516e27851cce96ee15dd4ed5b.jpg,damage,asbestos,damage,damage,raw_outputs/surface damage_DJI_0982_06_04_png.rf.475df62516e27851cce96ee15dd4ed5b.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a dark, possibly textured, material. There is a vertical line that appears to be a crack or a seam in the material. The surface has a rough texture and there are no visible signs of mold, wear, or asbestos."",
-  ""label"": ""crack|no_damage"",
-  ""summary"": ""The image shows a crack in the material and no other clear inspection-relevant defects.""
-}
-```"
-surface damage_DJI_0982_06_04_png.rf.a15b16fee074bca4f861e130d3a2914a.jpg,damage,crack,damage,damage,raw_outputs/surface damage_DJI_0982_06_04_png.rf.a15b16fee074bca4f861e130d3a2914a.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a visible crack running vertically along the edge of the frame."",
-  ""label"": ""crack"",
-  ""summary"": ""The image shows a clear line-shaped break, split, fracture, or visible crack.""
-}
-```"
-surface damage_DJI_0982_06_04_png.rf.f8f36c0238a4cddfacecbbc9f4a00738.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0982_06_04_png.rf.f8f36c0238a4cddfacecbbc9f4a00738.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a reflection of a structure. There is no clear defect visible, such as a crack, mold, wear, or damage. The surface appears to be a smooth, reflective material, possibly glass or metal, with a slight discoloration or wear near the bottom edge. There is no asbestos or other suspicious material visible."",
-  ""label"": ""no_damage"",
-  ""summary"": ""The surface appears to be in good condition with no clear defects.""
-}
-```"
-surface damage_DJI_0982_06_05_png.rf.062f506a15c00d8e50f90e52ee543c68.jpg,no_damage,damage,not_damage,damage,raw_outputs/surface damage_DJI_0982_06_05_png.rf.062f506a15c00d8e50f90e52ee543c68.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with visible damage, including holes and missing material."",
-  ""label"": ""damage"",
-  ""summary"": ""The surface appears to be in poor condition with clear signs of damage.""
-}
-```"
-surface damage_DJI_0982_06_05_png.rf.b13c8462a3afab85c06e90c11579e22d.jpg,no_damage,damage,not_damage,damage,raw_outputs/surface damage_DJI_0982_06_05_png.rf.b13c8462a3afab85c06e90c11579e22d.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a white surface with some visible stains and a small hole or indentation."",
-  ""label"": ""wear|damage"",
-  ""summary"": ""The surface appears to have some wear and tear, with a small hole or indentation that could be considered damage.""
-}
-```"
-surface damage_DJI_0984_03_03_png.rf.017214f3184126d25ea24c0229b4b755.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0984_03_03_png.rf.017214f3184126d25ea24c0229b4b755.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a green field with a structure in the foreground. The structure appears to be a part of a larger building or installation, possibly a satellite dish or a similar type of equipment. There are no clear defects visible in the image, such as cracks, mold, wear, or damage. The surface of the structure looks smooth and there are no visible signs of asbestos. The image does not provide enough information to make a definitive assessment of the c"
-surface damage_DJI_0984_05_03_png.rf.1630bafa75e5bfa53c46de35c2d742d2.jpg,damage,crack,damage,damage,raw_outputs/surface damage_DJI_0984_05_03_png.rf.1630bafa75e5bfa53c46de35c2d742d2.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a visible crack and some wear, which could be due to age or exposure to the elements."",
-  ""label"": ""wear|crack"",
-  ""summary"": ""The surface appears to be showing signs of wear and has a visible crack.""
-}
-```"
-surface damage_DJI_0984_07_04_png.rf.6238e478b0a588ac404416f7980de936.jpg,damage,asbestos,damage,damage,raw_outputs/surface damage_DJI_0984_07_04_png.rf.6238e478b0a588ac404416f7980de936.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a white surface with a darker line or marking on it, which could be a crack or a line of wear. There are no clear signs of mold or asbestos."",
-  ""label"": ""wear|crack"",
-  ""summary"": ""The image shows a possible crack or line of wear on a white surface.""
-}
-```"
-surface damage_DJI_0985_04_03_png.rf.dc9ce9e83dcd432b4905c0fe1b7561d7.jpg,no_damage,wear,not_damage,damage,raw_outputs/surface damage_DJI_0985_04_03_png.rf.dc9ce9e83dcd432b4905c0fe1b7561d7.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a series of parallel lines that could be interpreted as a crack or a seam. The surface appears to be a white material, possibly a wall or a piece of equipment, and there is some wear visible in the form of discoloration or aging."",
-  ""label"": ""wear"",
-  ""summary"": ""The image shows a surface with visible wear, including discoloration or aging.""
-}
-```"
-surface damage_DJI_0985_04_03_png.rf.f46dd628433882a4e3108a07c7d049a1.jpg,no_damage,crack,not_damage,damage,raw_outputs/surface damage_DJI_0985_04_03_png.rf.f46dd628433882a4e3108a07c7d049a1.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a visible line-shaped break, which could be indicative of a crack."",
-  ""label"": ""crack"",
-  ""summary"": ""The image shows a surface with a visible line-shaped break, which could be indicative of a crack.""
-}
-```"
-surface damage_DJI_0985_06_02_png.rf.4bdf2a5cd8ee36ba1a537cd4ef83313a.jpg,damage,crack,damage,damage,raw_outputs/surface damage_DJI_0985_06_02_png.rf.4bdf2a5cd8ee36ba1a537cd4ef83313a.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a visible crack running horizontally across it."",
-  ""label"": ""crack"",
-  ""summary"": ""The crack is a clear line-shaped break visible in the image.""
-}
-```"
-surface damage_DJI_0985_06_02_png.rf.515991db7827230bb724f74cd16f66dd.jpg,damage,crack,damage,damage,raw_outputs/surface damage_DJI_0985_06_02_png.rf.515991db7827230bb724f74cd16f66dd.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a visible crack and some wear, which could be due to age or exposure to the elements."",
-  ""label"": ""wear|crack"",
-  ""summary"": ""The surface appears to be showing signs of wear and has a visible crack.""
-}
-```"
-surface damage_DJI_0985_07_03_png.rf.a0a95f57e2c7953a54d891887980088f.jpg,damage,damage,damage,damage,raw_outputs/surface damage_DJI_0985_07_03_png.rf.a0a95f57e2c7953a54d891887980088f.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a dark, textured appearance, possibly a wall or a column. There is a circular marking on the surface, which could be a hole or a missing piece of material. The surface appears to be in a state of disrepair or wear."",
-  ""label"": ""damage"",
-  ""summary"": ""The image shows a surface with a circular marking, which could be a hole or a missing piece of material, indicating damage.""
-}
-```"
-surface damage_DJI_0986_05_04_png.rf.e07ae23b74cc1f9c6803df4c1bc638d5.jpg,no_damage,crack,not_damage,damage,raw_outputs/surface damage_DJI_0986_05_04_png.rf.e07ae23b74cc1f9c6803df4c1bc638d5.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a visible crack and some wear, which could be due to age or exposure to the elements."",
-  ""label"": ""wear|crack"",
-  ""summary"": ""The surface appears to be showing signs of wear and has a visible crack.""
-}
-```"
-surface damage_DJI_0987_05_04_png.rf.8b8ffff1e1517a0cec8e0c1a134fc8bc.jpg,no_damage,crack,not_damage,damage,raw_outputs/surface damage_DJI_0987_05_04_png.rf.8b8ffff1e1517a0cec8e0c1a134fc8bc.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a circular pattern and a line-shaped break or crack. There are no clear signs of mold, wear, or asbestos."",
-  ""label"": ""crack"",
-  ""summary"": ""The image features a visible crack in the material.""
-}
-```"
-surface damage_DJI_0988_06_04_png.rf.95d3bc0dc04417a70c5594638f678fce.jpg,damage,crack,damage,damage,raw_outputs/surface damage_DJI_0988_06_04_png.rf.95d3bc0dc04417a70c5594638f678fce.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a cylindrical structure, possibly a pipe or a column, with a visible crack running along its length."",
-  ""label"": ""crack"",
-  ""summary"": ""The crack is a clear line-shaped break, split, fracture, or visible crack.""
-}
-```"
-surface damage_DJI_0989_05_04_png.rf.e93e2aa546d23d443f85f5a4cb7ca1be.jpg,no_damage,crack,not_damage,damage,raw_outputs/surface damage_DJI_0989_05_04_png.rf.e93e2aa546d23d443f85f5a4cb7ca1be.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a white surface with a visible crack and some wear, possibly due to exposure to the elements or age."",
-  ""label"": ""wear|crack"",
-  ""summary"": ""The surface appears to be showing signs of wear and has a visible crack.""
-}
-```"
-surface damage_DJI_0990_04_04_png.rf.afddefd18ecaf6510fd6a4eeb1f78d14.jpg,no_damage,crack,not_damage,damage,raw_outputs/surface damage_DJI_0990_04_04_png.rf.afddefd18ecaf6510fd6a4eeb1f78d14.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a cylindrical object with a white surface and a darker band around its circumference. There is a visible crack or split in the darker band, which is a clear line-shaped break."",
-  ""label"": ""crack"",
-  ""summary"": ""The image shows a crack in the darker band of the cylindrical object.""
-}
-```"
-surface damage_DJI_0990_04_04_png.rf.b66892443c5e4462e17c3e9697f4687b.jpg,no_damage,wear,not_damage,damage,raw_outputs/surface damage_DJI_0990_04_04_png.rf.b66892443c5e4462e17c3e9697f4687b.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a cylindrical structure, possibly part of a larger object or vehicle. There is visible wear and tear, with some discoloration and peeling or chipping material on the surface. There are no clear cracks, mold, or asbestos visible."",
-  ""label"": ""wear"",
-  ""summary"": ""The image shows wear and tear on the surface of the cylindrical object.""
-}
-```"
-surface damage_DJI_0990_06_04_png.rf.1fc35e35e126037747f52efb5f03261f.jpg,damage,crack,damage,damage,raw_outputs/surface damage_DJI_0990_06_04_png.rf.1fc35e35e126037747f52efb5f03261f.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a cylindrical object with a visible crack along its length."",
-  ""label"": ""crack"",
-  ""summary"": ""The crack is a clear line-shaped break visible on the surface of the cylindrical object.""
-}
-```"
-surface damage_DJI_0990_06_04_png.rf.6cf08f2d74c7bf1eb50be2accdbd44a5.jpg,damage,crack,damage,damage,raw_outputs/surface damage_DJI_0990_06_04_png.rf.6cf08f2d74c7bf1eb50be2accdbd44a5.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a cylindrical object with a visible crack along its length."",
-  ""label"": ""crack"",
-  ""summary"": ""The crack is a clear line-shaped break visible on the surface of the cylindrical object.""
-}
-```"
-surface damage_DJI_0992_03_04_png.rf.8037ab02260a02f140ddf009cfcb17c1.jpg,no_damage,crack,not_damage,damage,raw_outputs/surface damage_DJI_0992_03_04_png.rf.8037ab02260a02f140ddf009cfcb17c1.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a cylindrical object with a visible crack or split on its surface."",
-  ""label"": ""crack"",
-  ""summary"": ""The crack is a clear line-shaped break, split, fracture, or visible crack.""
-}
-```"
-surface damage_DJI_0992_05_04_png.rf.cc8ab0880e0d616a9c8d234b114999bf.jpg,damage,crack,damage,damage,raw_outputs/surface damage_DJI_0992_05_04_png.rf.cc8ab0880e0d616a9c8d234b114999bf.json,"```json
-{
-  ""observations"": ""The image shows a building with a white exterior. There is a visible crack on the side of the building, which is the most prominent feature. The crack appears to be a line-shaped break in the material. There are no clear signs of mold, wear, or asbestos. The building appears to be in a state of disrepair, and the crack may indicate structural issues."",
-  ""label"": ""crack"",
-  ""summary"": ""The image shows a crack on the side of a building, which is the most prominent fea"
-surface damage_DJI_0993_03_04_png.rf.5ff5be2f4907786e8205e719c3199f4d.jpg,no_damage,asbestos,not_damage,damage,raw_outputs/surface damage_DJI_0993_03_04_png.rf.5ff5be2f4907786e8205e719c3199f4d.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a structure, possibly a part of a building or a piece of machinery. There is a visible crack or split in the material, which is likely a metal or composite material. The crack appears to be a line-shaped break, and there is some wear visible in the form of discoloration or peeling material. There is no clear evidence of mold or asbestos, and the rest of the surface appears to be in good condition."",
-  ""label"": ""crack|wear|no_damage"",
-  """
-surface damage_DJI_0993_03_04_png.rf.d712d99712fa311b3821fe341962b15c.jpg,no_damage,wear,not_damage,damage,raw_outputs/surface damage_DJI_0993_03_04_png.rf.d712d99712fa311b3821fe341962b15c.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a structure with a cylindrical object, possibly a pipe or a part of a machine. There is visible wear and tear, with some discoloration and peeling on the surface. There are no clear cracks, mold, or asbestos visible."",
-  ""label"": ""wear"",
-  ""summary"": ""The image shows wear on the surface of the cylindrical object.""
-}
-```"
-surface damage_DJI_0995_03_05_png.rf.7641393ae451fa1ba8e18b2b52804b68.jpg,no_damage,wear,not_damage,damage,raw_outputs/surface damage_DJI_0995_03_05_png.rf.7641393ae451fa1ba8e18b2b52804b68.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with visible rust and peeling paint, indicating wear and potential damage."",
-  ""label"": ""wear|damage"",
-  ""summary"": ""The surface appears to be in poor condition, with signs of rust and peeling paint, which could lead to further deterioration if not addressed.""
-}
-```"
-surface damage_DJI_0995_03_06_png.rf.407e556b5102c85d3227e1b762b32bf1.jpg,no_damage,crack,not_damage,damage,raw_outputs/surface damage_DJI_0995_03_06_png.rf.407e556b5102c85d3227e1b762b32bf1.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a visible crack and some wear, which could be due to age or exposure to the elements."",
-  ""label"": ""wear|crack"",
-  ""summary"": ""The surface appears to be showing signs of wear and has a visible crack.""
-}
-```"
-surface damage_DJI_0996_03_03_png.rf.050eaec10ef19ad108ba6697e14f1a4c.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0996_03_03_png.rf.050eaec10ef19ad108ba6697e14f1a4c.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a shadow cast on it, which appears to be the shadow of a structure or object. The surface itself is not clearly visible due to the shadow. There are no visible defects such as cracks, mold, wear, or damage that can be confidently identified from this angle and distance."",
-  ""label"": ""no_damage"",
-  ""summary"": ""The image does not provide enough information to make a definitive assessment of the surface condition.""
-}
-```"
-surface damage_DJI_0996_03_03_png.rf.36c7187dd5a1aa4dd26179b3ca02c16d.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0996_03_03_png.rf.36c7187dd5a1aa4dd26179b3ca02c16d.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a shadow cast on it, which appears to be the shadow of a structure or object. The surface itself is not clearly visible due to the shadow. There are no visible defects such as cracks, mold, wear, or damage that can be confidently identified from this angle and distance."",
-  ""label"": ""no_damage"",
-  ""summary"": ""The image does not provide enough information to make a definitive assessment of the surface condition.""
-}
-```"
-surface damage_DJI_0997_03_04_png.rf.465c34a1e09c77640645d78ab5b3ad04.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0997_03_04_png.rf.465c34a1e09c77640645d78ab5b3ad04.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a structure with a focus on a cylindrical object, possibly a pipe or a part of a larger structure. There is no clear defect visible in the image, such as a line-shaped break, damp spots, mildew, fungal growth, black mold-like patches, peeling paint, discoloration, rust, stains, aging, gradual surface deterioration, or asbestos-like surface markings. The image does not provide enough information to make a definitive assessment of the cond"
-surface damage_DJI_0997_03_06_png.rf.5d6a664d91b7584a560bb1cda897805f.jpg,no_damage,crack,not_damage,damage,raw_outputs/surface damage_DJI_0997_03_06_png.rf.5d6a664d91b7584a560bb1cda897805f.json,"```json
-{
-  ""observations"": ""The image shows a close-up of a surface with a visible crack running horizontally across it."",
-  ""label"": ""crack"",
-  ""summary"": ""The crack is the most prominent feature in the image.""
-}
-```"
+surface damage_DJI_0979_05_07_png.rf.b549b739a4160e85a52ebee946ed8ce5.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0979_05_07_png.rf.b549b739a4160e85a52ebee946ed8ce5.json,
+surface damage_DJI_0981_04_05_png.rf.3d6a439ae444bbab60203475760a021e.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0981_04_05_png.rf.3d6a439ae444bbab60203475760a021e.json,
+surface damage_DJI_0981_05_06_png.rf.851ddcf1f6242824db7e7942d93bc399.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0981_05_06_png.rf.851ddcf1f6242824db7e7942d93bc399.json,
+surface damage_DJI_0981_06_05_png.rf.1aaa5af1e0ef5dcc268eac14c41254fe.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0981_06_05_png.rf.1aaa5af1e0ef5dcc268eac14c41254fe.json,
+surface damage_DJI_0981_06_06_png.rf.a0b1225abd3de24f513bff008790593e.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0981_06_06_png.rf.a0b1225abd3de24f513bff008790593e.json,
+surface damage_DJI_0982_06_04_png.rf.475df62516e27851cce96ee15dd4ed5b.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0982_06_04_png.rf.475df62516e27851cce96ee15dd4ed5b.json,
+surface damage_DJI_0982_06_04_png.rf.a15b16fee074bca4f861e130d3a2914a.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0982_06_04_png.rf.a15b16fee074bca4f861e130d3a2914a.json,
+surface damage_DJI_0982_06_04_png.rf.f8f36c0238a4cddfacecbbc9f4a00738.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0982_06_04_png.rf.f8f36c0238a4cddfacecbbc9f4a00738.json,
+surface damage_DJI_0982_06_05_png.rf.062f506a15c00d8e50f90e52ee543c68.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0982_06_05_png.rf.062f506a15c00d8e50f90e52ee543c68.json,
+surface damage_DJI_0982_06_05_png.rf.b13c8462a3afab85c06e90c11579e22d.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0982_06_05_png.rf.b13c8462a3afab85c06e90c11579e22d.json,
+surface damage_DJI_0984_03_03_png.rf.017214f3184126d25ea24c0229b4b755.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0984_03_03_png.rf.017214f3184126d25ea24c0229b4b755.json,
+surface damage_DJI_0984_05_03_png.rf.1630bafa75e5bfa53c46de35c2d742d2.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0984_05_03_png.rf.1630bafa75e5bfa53c46de35c2d742d2.json,
+surface damage_DJI_0984_07_04_png.rf.6238e478b0a588ac404416f7980de936.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0984_07_04_png.rf.6238e478b0a588ac404416f7980de936.json,
+surface damage_DJI_0985_04_03_png.rf.dc9ce9e83dcd432b4905c0fe1b7561d7.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0985_04_03_png.rf.dc9ce9e83dcd432b4905c0fe1b7561d7.json,
+surface damage_DJI_0985_04_03_png.rf.f46dd628433882a4e3108a07c7d049a1.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0985_04_03_png.rf.f46dd628433882a4e3108a07c7d049a1.json,
+surface damage_DJI_0985_06_02_png.rf.4bdf2a5cd8ee36ba1a537cd4ef83313a.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0985_06_02_png.rf.4bdf2a5cd8ee36ba1a537cd4ef83313a.json,
+surface damage_DJI_0985_06_02_png.rf.515991db7827230bb724f74cd16f66dd.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0985_06_02_png.rf.515991db7827230bb724f74cd16f66dd.json,
+surface damage_DJI_0985_07_03_png.rf.a0a95f57e2c7953a54d891887980088f.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0985_07_03_png.rf.a0a95f57e2c7953a54d891887980088f.json,
+surface damage_DJI_0986_05_04_png.rf.e07ae23b74cc1f9c6803df4c1bc638d5.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0986_05_04_png.rf.e07ae23b74cc1f9c6803df4c1bc638d5.json,
+surface damage_DJI_0987_05_04_png.rf.8b8ffff1e1517a0cec8e0c1a134fc8bc.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0987_05_04_png.rf.8b8ffff1e1517a0cec8e0c1a134fc8bc.json,
+surface damage_DJI_0988_06_04_png.rf.95d3bc0dc04417a70c5594638f678fce.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0988_06_04_png.rf.95d3bc0dc04417a70c5594638f678fce.json,
+surface damage_DJI_0989_05_04_png.rf.e93e2aa546d23d443f85f5a4cb7ca1be.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0989_05_04_png.rf.e93e2aa546d23d443f85f5a4cb7ca1be.json,
+surface damage_DJI_0990_04_04_png.rf.afddefd18ecaf6510fd6a4eeb1f78d14.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0990_04_04_png.rf.afddefd18ecaf6510fd6a4eeb1f78d14.json,
+surface damage_DJI_0990_04_04_png.rf.b66892443c5e4462e17c3e9697f4687b.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0990_04_04_png.rf.b66892443c5e4462e17c3e9697f4687b.json,
+surface damage_DJI_0990_06_04_png.rf.1fc35e35e126037747f52efb5f03261f.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0990_06_04_png.rf.1fc35e35e126037747f52efb5f03261f.json,
+surface damage_DJI_0990_06_04_png.rf.6cf08f2d74c7bf1eb50be2accdbd44a5.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0990_06_04_png.rf.6cf08f2d74c7bf1eb50be2accdbd44a5.json,
+surface damage_DJI_0992_03_04_png.rf.8037ab02260a02f140ddf009cfcb17c1.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0992_03_04_png.rf.8037ab02260a02f140ddf009cfcb17c1.json,
+surface damage_DJI_0992_05_04_png.rf.cc8ab0880e0d616a9c8d234b114999bf.jpg,damage,no_damage,damage,not_damage,raw_outputs/surface damage_DJI_0992_05_04_png.rf.cc8ab0880e0d616a9c8d234b114999bf.json,
+surface damage_DJI_0993_03_04_png.rf.5ff5be2f4907786e8205e719c3199f4d.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0993_03_04_png.rf.5ff5be2f4907786e8205e719c3199f4d.json,
+surface damage_DJI_0993_03_04_png.rf.d712d99712fa311b3821fe341962b15c.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0993_03_04_png.rf.d712d99712fa311b3821fe341962b15c.json,
+surface damage_DJI_0995_03_05_png.rf.7641393ae451fa1ba8e18b2b52804b68.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0995_03_05_png.rf.7641393ae451fa1ba8e18b2b52804b68.json,
+surface damage_DJI_0995_03_06_png.rf.407e556b5102c85d3227e1b762b32bf1.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0995_03_06_png.rf.407e556b5102c85d3227e1b762b32bf1.json,
+surface damage_DJI_0996_03_03_png.rf.050eaec10ef19ad108ba6697e14f1a4c.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0996_03_03_png.rf.050eaec10ef19ad108ba6697e14f1a4c.json,
+surface damage_DJI_0996_03_03_png.rf.36c7187dd5a1aa4dd26179b3ca02c16d.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0996_03_03_png.rf.36c7187dd5a1aa4dd26179b3ca02c16d.json,
+surface damage_DJI_0997_03_04_png.rf.465c34a1e09c77640645d78ab5b3ad04.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0997_03_04_png.rf.465c34a1e09c77640645d78ab5b3ad04.json,
+surface damage_DJI_0997_03_06_png.rf.5d6a664d91b7584a560bb1cda897805f.jpg,no_damage,no_damage,not_damage,not_damage,raw_outputs/surface damage_DJI_0997_03_06_png.rf.5d6a664d91b7584a560bb1cda897805f.json,
