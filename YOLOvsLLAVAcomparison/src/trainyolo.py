@@ -12,18 +12,18 @@ import torch
 ROOT_DIR = Path(__file__).resolve().parents[1]
 
 DATA_YAML = ROOT_DIR / "data" / "inspection_dataset" / "data.yaml"
-BASE_MODEL = "yolov8n.pt"  # Ultralytics will download this automatically if missing
+BASE_MODEL = "yolov8m.pt"  # Ultralytics will download this automatically if missing
 
 PROJECT_DIR = ROOT_DIR / "models"
 RUN_NAME = "housing_yolo"
 
-#EPOCHS = 75
-IMG_SIZE = 640
-#BATCH_SIZE = 16
+EPOCHS = 75
+IMG_SIZE = 1024
+BATCH_SIZE = 64
+WORKERS = 18
 SEED = 42
-
-EPOCHS = 2
-BATCH_SIZE = 4
+PATIENCE = 20
+CACHE="disk"
 
 def main():
     if not DATA_YAML.exists():
@@ -45,12 +45,12 @@ def main():
         name=RUN_NAME,
         exist_ok=True,
         pretrained=True,
-        patience=10,
+        patience=PATIENCE,
         plots=True,
         val=True,
         device=0 if torch.cuda.is_available() else "cpu",
-        workers=4,
-        cache=True,
+        workers=WORKERS,
+        cache=CACHE,
     )
 
     best_model = PROJECT_DIR / RUN_NAME / "weights" / "best.pt"
