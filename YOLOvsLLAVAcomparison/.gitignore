@@ -3,3 +3,4 @@ yolo_env/
 __pycache__/
 *.pyc
 .venv/
+*.npy
