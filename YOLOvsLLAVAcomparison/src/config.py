@@ -119,4 +119,4 @@ LBL_DIR_TEST: Path = DATA_ROOT / "inspection_dataset" / "labels" / "test"
 # ---------------------------------------------------------------------------
 # Output paths
 # ---------------------------------------------------------------------------
-RESULTS_DIR: Path = ROOT / "results"
+RESULTS_DIR: Path = ROOT / "models"

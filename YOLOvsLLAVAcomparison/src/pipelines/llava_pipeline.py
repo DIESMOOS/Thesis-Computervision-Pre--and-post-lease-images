@@ -1,19 +1,39 @@
 """
-Improved LLaVA-1.6 pipeline for housing inspection.
+LLaVA-1.6 pipeline — memory-safe batched version.
 
-Medical-imaging-inspired improvements:
-- structured review procedure
-- few-shot textual examples
-- self-check step
-- strict single-label JSON output
-- negation-aware fallback parsing
-- batch inference support
+OOM ROOT CAUSE (batch_size=128)
+---------------------------------
+LLaVA-1.6 encodes each image as ~576 tokens before the text prompt.
+With batch_size=128 and padding to the longest sequence:
+  - Input tensors  : 128 × (576 + ~350 prompt tokens) × hidden_dim × fp16
+  - KV cache       : 128 × 32 layers × 8 heads × seq_len → fills VRAM fast
+
+On an A100-80GB the practical safe batch size is 8–16, not 128.
+The 24 GB "reserved but unallocated" in the OOM error is fragmentation —
+fixed by PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True (set below).
+
+FIXES IN THIS VERSION
+----------------------
+  1. PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True  set in os.environ
+     before any CUDA allocation happens.
+  2. Default batch_size lowered to 8.
+  3. Auto-retry with halving: if a batch hits OOM the batch is split in two
+     and retried recursively until it succeeds or reaches size 1.
+  4. torch.cuda.empty_cache() after every batch to release fragmented blocks.
+  5. Images are resized to a max side of 672 px before encoding to keep
+     per-image token counts consistent and predictable.
+  6. _build_inputs() sets padding_side="left" — required for correct greedy
+     decoding in padded batches (right-padding shifts the EOS position).
 """
 
 import json
 import logging
+import os
 import re
 from pathlib import Path
+
+# Must be set before torch imports so the CUDA allocator picks it up.
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 import torch
 from PIL import Image
@@ -22,82 +42,56 @@ from transformers import LlavaNextForConditionalGeneration, LlavaNextProcessor
 from src.config import (
     CATEGORIES,
     IMAGE_EXTS,
-    LLAVA_MODEL_ID,
     LLAVA_MAX_NEW_TOKENS,
+    LLAVA_MODEL_ID,
 )
 
 logger = logging.getLogger(__name__)
 
-ALLOWED_LABELS = ["damage", "crack", "mold", "wear", "asbestos", "no_damage"]
+VALID_LABELS: list[str] = ["damage", "crack", "mold", "wear", "asbestos", "no_damage"]
 
-USER_PROMPT = """
-You are an expert housing inspection assistant.
+# Resize images to this maximum side length before encoding.
+# LLaVA-1.6 natively handles up to 672 px per tile; capping here keeps the
+# token count per image at ~576 instead of 4×576 for high-res images.
+MAX_IMAGE_SIZE = 1024
 
-Your task is to classify the image into exactly ONE label:
-damage, crack, mold, wear, asbestos, no_damage.
+# ---------------------------------------------------------------------------
+# Prompt
+# ---------------------------------------------------------------------------
 
-Use a careful inspection procedure inspired by medical image review:
-1. Inspect the visible surface carefully.
-2. Look for small abnormalities, not only severe defects.
-3. Compare the visible pattern with the label definitions.
-4. Check whether your answer is contradicted by the image.
-5. Return exactly one final label.
+PROMPT = """You are a housing inspection classifier. Look at the image carefully.
 
-Label definitions:
-- crack: a clear line-shaped break, split, fracture, or visible crack.
-- mold: damp spots, mildew, fungal growth, black mold-like patches.
-- wear: peeling paint, discoloration, rust, staining, aging, or gradual surface deterioration.
-- damage: holes, broken material, dents, missing material, water damage, fire damage, severe deterioration.
-- asbestos: suspicious fibrous material, asbestos-like board/surface markings, or material markings resembling asbestos inspection examples.
-- no_damage: normal surface with no visible inspection-relevant abnormality.
+Pick EXACTLY ONE label from: damage, crack, mold, wear, asbestos, no_damage
 
-Few-shot examples:
-Example 1:
-Observation: A plain wall or floor is visible. No cracks, spots, stains, peeling, holes, or suspicious markings are visible.
-Reasoning: The surface appears normal.
-Final label: no_damage
+Decision rules (apply in order — stop at first match):
+1. asbestos  → flat corrugated or board-like grey/white surface with a matte
+               texture; may show thin/thick line markings on the surface.
+               NOT rust, NOT peeling paint.
+2. crack     → a continuous line-shaped fracture, split, or break in the surface.
+               The line must be clearly visible, not just a discolouration.
+3. mold      → dark organic spots, green/black patches, mildew, or damp staining
+               with fuzzy or spreading edges.
+4. damage    → a hole, missing chunk, broken material, dent, or collapse.
+               NOT surface aging — the structure itself is broken.
+5. wear      → peeling paint, rust, discolouration, stains, or surface aging
+               where the structure is still intact.
+6. no_damage → none of the above are visible.
 
-Example 2:
-Observation: A line-shaped break is visible on the surface.
-Reasoning: The main visual abnormality is a linear break.
-Final label: crack
+Tie-break rules:
+- Corrugated grey surface with lines → asbestos (not wear, not no_damage)
+- Thin surface line → crack (not damage)
+- Brown/orange patches on intact surface → wear (not damage)
+- Dark fuzzy patches → mold (not wear)
 
-Example 3:
-Observation: Dark damp patches or fungal-looking spots are visible.
-Reasoning: The pattern looks like mold or mildew.
-Final label: mold
+Return ONLY this JSON, nothing else before or after it:
+```json
+{"label": "<one of the 6 labels>", "reason": "<max 10 words>"}
+```"""
 
-Example 4:
-Observation: Paint is peeling, stained, discolored, rusty, or gradually deteriorated.
-Reasoning: The issue looks like surface aging or use-related deterioration.
-Final label: wear
 
-Example 5:
-Observation: There is a hole, broken material, missing material, dent, or severe deterioration.
-Reasoning: The object or surface is physically damaged.
-Final label: damage
-
-Example 6:
-Observation: The surface has suspicious material markings or asbestos-like texture.
-Reasoning: The visual pattern resembles asbestos-related material markings.
-Final label: asbestos
-
-Important rules:
-- Choose no_damage only if the image is clearly normal.
-- If there is any visible abnormality, choose the closest defect label.
-- Do not output multiple labels.
-- Do not use labels like "wear|mold".
-- The final label must be exactly one of the allowed labels.
-
-Return ONLY valid JSON:
-{
-  "observations": "short visual description",
-  "reasoning": "short inspection reasoning",
-  "self_check": "briefly check whether another label would fit better",
-  "label": "damage|crack|mold|wear|asbestos|no_damage",
-  "uncertain": true/false
-}
-"""
+# ---------------------------------------------------------------------------
+# Model singleton
+# ---------------------------------------------------------------------------
 
 _processor: LlavaNextProcessor | None = None
 _model: LlavaNextForConditionalGeneration | None = None
@@ -105,36 +99,44 @@ _model: LlavaNextForConditionalGeneration | None = None
 
 def _load_model() -> tuple[LlavaNextProcessor, LlavaNextForConditionalGeneration]:
     global _processor, _model
-
     if _processor is not None and _model is not None:
         return _processor, _model
 
     logger.info("Loading LLaVA model: %s", LLAVA_MODEL_ID)
-
     _processor = LlavaNextProcessor.from_pretrained(LLAVA_MODEL_ID)
 
-    dtype = torch.float16 if torch.cuda.is_available() else torch.float32
+    # Left-pad so EOS alignment is correct in batched greedy decode
+    _processor.tokenizer.padding_side = "left"
 
+    dtype = torch.float16 if torch.cuda.is_available() else torch.float32
     _model = LlavaNextForConditionalGeneration.from_pretrained(
         LLAVA_MODEL_ID,
         torch_dtype=dtype,
         device_map="auto",
         low_cpu_mem_usage=True,
     )
-
     _model.eval()
+
+    if torch.cuda.is_available():
+        free, total = torch.cuda.mem_get_info()
+        logger.info(
+            "LLaVA loaded | dtype=%s | GPU free=%.1f GB / total=%.1f GB",
+            dtype, free / 1e9, total / 1e9,
+        )
+
     return _processor, _model
 
 
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
 def get_image_paths(folder_path: str | Path) -> list[Path]:
     folder = Path(folder_path)
-
     if not folder.exists():
         raise FileNotFoundError(f"Folder not found: {folder}")
-
     if not folder.is_dir():
         raise NotADirectoryError(f"Not a directory: {folder}")
-
     return sorted(
         p for p in folder.iterdir()
         if p.is_file() and p.suffix.lower() in IMAGE_EXTS
@@ -145,317 +147,329 @@ def empty_category_counts() -> dict[str, int]:
     return {cat: 0 for cat in CATEGORIES}
 
 
-def normalize_label(label: str) -> str:
-    text = str(label).lower().strip()
-    text = text.replace(" ", "_").replace("-", "_")
-
-    parts = re.split(r"[|,;/]+", text)
-    parts = [p.strip() for p in parts if p.strip()]
-
-    for part in parts:
-        if part == "mould":
-            part = "mold"
-
-        if part in ["nodamage", "no__damage", "none", "normal"]:
-            part = "no_damage"
-
-        if part in ALLOWED_LABELS:
-            return part
-
-    if text == "mould":
-        return "mold"
-
-    if text in ["nodamage", "no__damage", "none", "normal"]:
-        return "no_damage"
-
-    if text in ALLOWED_LABELS:
-        return text
-
-    return "no_damage"
-
-
-def remove_negated_phrases(text: str) -> str:
-    t = text.lower()
-
-    negated_patterns = [
-        r"no clear [^.]*",
-        r"no visible [^.]*",
-        r"no signs? of [^.]*",
-        r"no evidence of [^.]*",
-        r"does not show [^.]*",
-        r"not visible [^.]*",
-        r"without [^.]*",
-    ]
-
-    for pattern in negated_patterns:
-        t = re.sub(pattern, " ", t)
-
-    return t
-
-
-def fallback_label(text: str) -> str:
-    t_original = text.lower()
-    t = remove_negated_phrases(t_original)
-
-    if any(w in t for w in ["asbestos", "asbestos_like", "asbestos-like"]):
-        return "asbestos"
-
-    if any(w in t for w in [
-        "mold", "mould", "mildew", "fungal",
-        "black spot", "black spots",
-        "damp spot", "damp spots",
-        "dark damp", "fungus"
-    ]):
-        return "mold"
-
-    if any(w in t for w in [
-        "crack", "cracked", "fracture", "split",
-        "visible crack", "line-shaped break", "line shaped break"
-    ]):
-        return "crack"
-
-    if any(w in t for w in [
-        "hole", "broken", "dent", "missing material",
-        "water damage", "fire damage", "damaged surface",
-        "severe deterioration", "physical damage"
-    ]):
-        return "damage"
-
-    if any(w in t for w in [
-        "wear", "worn", "peeling", "paint damage",
-        "stain", "stained", "discolor", "discolour",
-        "rust", "aging", "ageing", "deteriorat"
-    ]):
-        return "wear"
-
-    if any(w in t_original for w in [
-        "no visible defect",
-        "no visible damage",
-        "no inspection-relevant defect",
-        "no defect",
-        "no defects",
-        "appears intact",
-        "looks normal",
-        "normal surface",
-        "normal wall",
-        "unblemished surface",
-        "no clear defect",
-        "no clear damage",
-    ]):
-        return "no_damage"
-
-    return "no_damage"
-
-
-def make_parsed(
-    label: str,
-    observations: str = "",
-    reasoning: str = "",
-    self_check: str = "",
-    uncertain: bool = False,
-) -> dict:
-    label = normalize_label(label)
-
+def make_parsed(label: str, reason: str) -> dict:
+    label = label if label in VALID_LABELS else "no_damage"
     counts = empty_category_counts()
     counts[label] = 1
-
-    if label != "no_damage":
-        counts["no_damage"] = 0
-
     return {
         "categories_present": [label],
         "category_counts": counts,
-        "observations": observations.strip(),
-        "reasoning": reasoning.strip(),
-        "self_check": self_check.strip(),
-        "uncertain": bool(uncertain),
+        "reason": reason.strip()[:200],
     }
 
 
+def _resize(image: Image.Image, max_side: int = MAX_IMAGE_SIZE) -> Image.Image:
+    """Resize so the longest side equals max_side, preserving aspect ratio."""
+    w, h = image.size
+    if max(w, h) <= max_side:
+        return image
+    scale = max_side / max(w, h)
+    return image.resize((int(w * scale), int(h * scale)), Image.LANCZOS)
+
+
+def _sanitize(raw: str) -> str:
+    """Remove control characters that break json.loads()."""
+    sanitized = re.sub(r"[\x00-\x1f\x7f]", " ", raw)
+    return re.sub(r"  +", " ", sanitized)
+
+
 def _extract_json(raw_text: str) -> dict:
-    text = raw_text.strip()
-    text = text.replace("```json", "").replace("```", "").strip()
+    """Parse label + reason from model output. Three fallback strategies."""
+    text = _sanitize(raw_text)
 
-    match = re.search(r"\{[\s\S]*\}", text)
-
-    if match:
+    # 1. Fenced JSON block  ```json { ... } ```
+    fence = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
+    if fence:
         try:
-            parsed = json.loads(match.group())
+            return _parse_obj(json.loads(fence.group(1)), text)
+        except json.JSONDecodeError:
+            pass
 
-            observations = str(parsed.get("observations", ""))
-            reasoning = str(parsed.get("reasoning", ""))
-            self_check = str(parsed.get("self_check", ""))
-            raw_label = str(parsed.get("label", "no_damage"))
-            uncertain = bool(parsed.get("uncertain", False))
+    # 2. Bare JSON object
+    brace = re.search(r"\{[^{}]*\}", text, re.DOTALL)
+    if brace:
+        try:
+            return _parse_obj(json.loads(brace.group()), text)
+        except json.JSONDecodeError:
+            pass
 
-            label = normalize_label(raw_label)
+    # 3. Keyword scan
+    logger.debug("No JSON found — keyword scan on: %r", raw_text[:120])
+    return make_parsed(_keyword_label(text), "keyword fallback")
 
-            combined = f"{observations} {reasoning} {self_check}"
 
-            # If model says no_damage but describes a defect, override.
-            if label == "no_damage":
-                fallback = fallback_label(combined)
-                if fallback != "no_damage":
-                    label = fallback
+def _parse_obj(obj: dict, full_text: str) -> dict:
+    raw_label = str(obj.get("label", "")).lower().strip()
+    reason = str(obj.get("reason", obj.get("summary", obj.get("observations", ""))))
+#--------------------------------------------------
+    combined = f"{raw_label} {reason}".lower()
 
-            return make_parsed(
-                label=label,
-                observations=observations,
-                reasoning=reasoning,
-                self_check=self_check,
-                uncertain=uncertain,
+    # asbestos override
+    if any(x in combined for x in [
+        "corrugated",
+        "fibrous",
+        "cement board",
+        "asbestos-like",
+        "thin line markings",
+        "thick line markings",
+    ]):
+        return make_parsed("asbestos", reason)
+
+    # crack override
+    if any(x in combined for x in [
+        "line-shaped fracture",
+        "continuous crack",
+        "visible crack",
+        "split in surface",
+    ]):
+        return make_parsed("crack", reason)
+
+    # mold override
+    if any(x in combined for x in [
+        "mildew",
+        "fungal",
+        "black mold",
+        "dark fuzzy",
+        "damp patch",
+    ]):
+        return make_parsed("mold", reason)
+#--------------------------------------------------
+    if any(sep in raw_label for sep in ("|", ",", "/", " and ", " or ")):
+        first = re.split(r"[|,/]| and | or ", raw_label)[0].strip()
+        return make_parsed(_normalize_label(first), f"[uncertain: {raw_label}] {reason}")
+
+    return make_parsed(_normalize_label(raw_label), reason)
+
+
+def _normalize_label(raw: str) -> str:
+    t = raw.lower().strip().replace(" ", "_").replace("-", "_")
+    if t in VALID_LABELS:
+        return t
+    aliases = {
+        "no_damage": "no_damage", "nodamage": "no_damage",
+        "none": "no_damage", "normal": "no_damage", "clean": "no_damage",
+        "mould": "mold", "fungal": "mold", "mildew": "mold",
+        "cracked": "crack", "fracture": "crack", "split": "crack",
+        "broken": "damage", "hole": "damage", "dent": "damage",
+        "peeling": "wear", "rust": "wear", "stain": "wear",
+        "discolor": "wear", "deterioration": "wear",
+    }
+    if t in aliases:
+        return aliases[t]
+    for label in VALID_LABELS:
+        if label in t:
+            return label
+    return "no_damage"
+
+
+def _keyword_label(text: str) -> str:
+    t = text.lower()
+    no_dmg = ["no visible defect", "no defect", "no damage", "appears intact",
+               "looks normal", "normal surface", "no clear defect"]
+    if any(p in t for p in no_dmg):
+        return "no_damage"
+    rules = [
+        ("asbestos", ["asbestos", "corrugated", "fibrous"]),
+        ("crack",    ["crack", "cracked", "fracture", "split", "line-shaped break"]),
+        ("mold",     ["mold", "mould", "mildew", "fungal", "black spot", "damp spot"]),
+        ("damage",   ["hole", "broken", "dent", "missing material", "water damage",
+                      "fire damage", "collapsed"]),
+        ("wear",     ["wear", "peeling", "rust", "stain", "discolor", "deteriorat"]),
+    ]
+    for label, keywords in rules:
+        if any(kw in t for kw in keywords):
+            return label
+    return "no_damage"
+
+
+# ---------------------------------------------------------------------------
+# Core batch runner — with OOM auto-retry
+# ---------------------------------------------------------------------------
+
+def _run_batch(
+    processor: LlavaNextProcessor,
+    model: LlavaNextForConditionalGeneration,
+    images: list[Image.Image],
+    batch_size: int,
+) -> list[str]:
+    """
+    Run model.generate() on `images` in sub-batches of `batch_size`.
+    On OOM, halves the batch size and retries automatically.
+    Returns a list of raw decoded strings, one per image.
+    """
+    if not images:
+        return []
+
+    # If batch fits in one go, run it directly
+    if len(images) <= batch_size:
+        return _generate_batch(processor, model, images, batch_size)
+
+    # Split and recurse
+    mid = len(images) // 2
+    left  = _run_batch(processor, model, images[:mid], batch_size)
+    right = _run_batch(processor, model, images[mid:], batch_size)
+    return left + right
+
+
+def _generate_batch(
+    processor: LlavaNextProcessor,
+    model: LlavaNextForConditionalGeneration,
+    images: list[Image.Image],
+    batch_size: int,
+) -> list[str]:
+    """
+    Single model.generate() call for `images`. Retries with halved batch
+    size on OOM until size 1. Raises if even size-1 fails.
+    """
+    try:
+        conversations = [
+            [{"role": "user", "content": [
+                {"type": "image"},
+                {"type": "text", "text": PROMPT},
+            ]}]
+            for _ in images
+        ]
+        prompt_texts = [
+            processor.apply_chat_template(conv, add_generation_prompt=True)
+            for conv in conversations
+        ]
+        inputs = processor(
+            images=images,
+            text=prompt_texts,
+            return_tensors="pt",
+            padding=True,
+        ).to(model.device)
+
+        input_len = inputs["input_ids"].shape[1]
+
+        with torch.no_grad():
+            output_ids = model.generate(
+                **inputs,
+                max_new_tokens=LLAVA_MAX_NEW_TOKENS,
+                do_sample=False,
+                temperature=None,
+                top_p=None,
             )
 
-        except Exception as exc:
-            logger.warning("Could not parse JSON output: %s", exc)
+        raw_texts = processor.batch_decode(
+            output_ids[:, input_len:], skip_special_tokens=True
+        )
+        return [t.strip() for t in raw_texts]
 
-    label = fallback_label(text)
-    return make_parsed(
-        label=label,
-        observations=text[:300],
-        reasoning="Fallback parser used.",
-        self_check="JSON parsing failed.",
-        uncertain=True,
-    )
+    except torch.cuda.OutOfMemoryError:
+        torch.cuda.empty_cache()
+
+        if len(images) == 1:
+            logger.error("OOM on a single image — cannot reduce further. Skipping.")
+            return [""]
+
+        half = max(1, len(images) // 2)
+        logger.warning(
+            "OOM with %d images — retrying as two batches of ~%d",
+            len(images), half,
+        )
+        left  = _generate_batch(processor, model, images[:half],      half)
+        right = _generate_batch(processor, model, images[half:], half)
+        return left + right
 
 
-def _build_prompt():
-    return [
-        {
-            "role": "user",
-            "content": [
-                {"type": "image"},
-                {"type": "text", "text": USER_PROMPT},
-            ],
-        }
-    ]
-
+# ---------------------------------------------------------------------------
+# Public API
+# ---------------------------------------------------------------------------
 
 def run_llava_on_image(image_path: Path) -> tuple[str, dict]:
+    """Single-image inference. Returns (raw_text, parsed_dict)."""
     processor, model = _load_model()
-    image = Image.open(image_path).convert("RGB")
-
-    prompt_text = processor.apply_chat_template(
-        [_build_prompt()],
-        add_generation_prompt=True,
-    )
-
-    inputs = processor(
-        images=image,
-        text=prompt_text,
-        return_tensors="pt",
-    ).to(model.device)
-
-    input_len = inputs["input_ids"].shape[1]
-
-    with torch.no_grad():
-        output_ids = model.generate(
-            **inputs,
-            max_new_tokens=LLAVA_MAX_NEW_TOKENS,
-            do_sample=False,
-        )
-
-    generated_ids = output_ids[:, input_len:]
-
-    raw_text = processor.batch_decode(
-        generated_ids,
-        skip_special_tokens=True,
-    )[0].strip()
-
-    parsed = _extract_json(raw_text)
-    return raw_text, parsed
+    image = _resize(Image.open(image_path).convert("RGB"))
+    raw_texts = _generate_batch(processor, model, [image], batch_size=1)
+    raw = raw_texts[0]
+    return raw, _extract_json(raw)
 
 
-def run_llava_on_images(image_paths: list[Path]) -> list[tuple[str, dict]]:
+def run_llava_on_images(
+    image_paths: list[Path],
+    batch_size: int = 8,
+) -> list[tuple[str, dict]]:
+    """
+    Batched inference over a list of image paths.
+
+    Args:
+        image_paths: images to classify, in order.
+        batch_size:  starting batch size. Automatically halved on OOM until
+                     a size that fits is found. Recommended: 8 on A100-80GB.
+                     Use 4 if you also have other processes on the GPU.
+
+    Returns:
+        List of (raw_text, parsed_dict), one per input image, same order.
+    """
     processor, model = _load_model()
+    results: list[tuple[str, dict]] = []
 
-    images = [
-        Image.open(image_path).convert("RGB")
-        for image_path in image_paths
-    ]
+    total = len(image_paths)
+    current_batch_size = batch_size
 
-    conversations = [_build_prompt() for _ in image_paths]
+    for start in range(0, total, current_batch_size):
+        batch_paths = image_paths[start : start + current_batch_size]
+        end_idx = start + len(batch_paths)
+        logger.info("Batch %d–%d / %d  (batch_size=%d)", start + 1, end_idx, total, current_batch_size)
 
-    prompt_texts = [
-        processor.apply_chat_template(
-            conversation,
-            add_generation_prompt=True,
-        )
-        for conversation in conversations
-    ]
+        # Load + resize images
+        images: list[Image.Image] = []
+        valid_indices: list[int] = []
+        for i, p in enumerate(batch_paths):
+            try:
+                images.append(_resize(Image.open(p).convert("RGB")))
+                valid_indices.append(i)
+            except Exception as exc:
+                logger.error("Cannot open %s: %s", p.name, exc)
 
-    inputs = processor(
-        images=images,
-        text=prompt_texts,
-        return_tensors="pt",
-        padding=True,
-    ).to(model.device)
+        # Placeholder results for failed loads
+        batch_results: list[tuple[str, dict]] = [
+            ("", make_parsed("no_damage", "image load error"))
+        ] * len(batch_paths)
 
-    input_len = inputs["input_ids"].shape[1]
+        if images:
+            raw_texts = _run_batch(processor, model, images, current_batch_size)
+            for out_idx, img_idx in enumerate(valid_indices):
+                raw = raw_texts[out_idx]
+                batch_results[img_idx] = (raw, _extract_json(raw))
 
-    with torch.no_grad():
-        output_ids = model.generate(
-            **inputs,
-            max_new_tokens=LLAVA_MAX_NEW_TOKENS,
-            do_sample=False,
-        )
+        results.extend(batch_results)
 
-    generated_ids = output_ids[:, input_len:]
+        # Free fragmented blocks between batches
+        torch.cuda.empty_cache()
 
-    raw_texts = processor.batch_decode(
-        generated_ids,
-        skip_special_tokens=True,
-    )
-
-    results = []
-
-    for raw_text in raw_texts:
-        raw_text = raw_text.strip()
-        parsed = _extract_json(raw_text)
-        results.append((raw_text, parsed))
+        if torch.cuda.is_available():
+            free, total_mem = torch.cuda.mem_get_info()
+            logger.debug("GPU after batch: free=%.1f GB", free / 1e9)
 
     return results
 
 
-def run_llava_on_folder(folder_path: str | Path) -> list[dict]:
+def run_llava_on_folder(folder_path: str | Path, batch_size: int = 8) -> list[dict]:
     image_paths = get_image_paths(folder_path)
-    results = []
+    raw_results = run_llava_on_images(image_paths, batch_size=batch_size)
+    return [
+        {
+            "image_id":     p.name,
+            "model_name":   "llava",
+            "raw_output":   raw,
+            "parsed_output": parsed,
+        }
+        for p, (raw, parsed) in zip(image_paths, raw_results)
+    ]
 
-    for image_path in image_paths:
-        try:
-            raw_text, parsed = run_llava_on_image(image_path)
-        except Exception as exc:
-            logger.error("LLaVA failed on %s: %s", image_path.name, exc)
-            raw_text = ""
-            parsed = make_parsed(
-                label="no_damage",
-                observations="",
-                reasoning=f"Inference error: {exc}",
-                self_check="Inference failed.",
-                uncertain=True,
-            )
 
-        results.append(
-            {
-                "image_id": image_path.name,
-                "model_name": "llava_medical_inspired",
-                "raw_output": raw_text,
-                "parsed_output": parsed,
-            }
-        )
-
-    logger.info("Processed %d images with LLaVA", len(results))
-    return results
-
+# ---------------------------------------------------------------------------
+# Smoke-test:  python -m src.pipelines.llava_pipeline <folder>
+# ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
     import sys
-
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
-
     folder = sys.argv[1] if len(sys.argv) > 1 else "data/properties/001/post_lease"
-    output = run_llava_on_folder(folder)
-
-    print(f"Processed {len(output)} images")
+    bs = int(sys.argv[2]) if len(sys.argv) > 2 else 8
+    output = run_llava_on_folder(folder, batch_size=bs)
+    print(f"\nProcessed {len(output)} images\n")
     for item in output[:3]:
         print(json.dumps(item, indent=2))

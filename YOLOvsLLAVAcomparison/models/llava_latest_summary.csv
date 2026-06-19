@@ -1,0 +1,11 @@
+task,metric,point_estimate,bootstrap_mean,ci_95_low,ci_95_high
+multiclass,accuracy,0.4995,0.4996,0.4781,0.523
+multiclass,balanced_accuracy,0.5149,0.5153,0.4829,0.5484
+multiclass,macro_f1,0.4382,0.438,0.4172,0.4593
+multiclass,macro_precision,0.5619,0.562,0.5394,0.5856
+multiclass,macro_recall,0.5149,0.5153,0.4829,0.5484
+binary,accuracy,0.8671,0.867,0.8512,0.8829
+binary,balanced_accuracy,0.673,0.6736,0.6444,0.7028
+binary,f1_damage,0.9239,0.9238,0.9142,0.9335
+binary,precision_damage,0.8984,0.8982,0.8829,0.913
+binary,recall_damage_sensitivity,0.951,0.951,0.9399,0.9618
