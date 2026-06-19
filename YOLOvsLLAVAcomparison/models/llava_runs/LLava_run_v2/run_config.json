@@ -1,0 +1,19 @@
+{
+  "run_name": "LLava_run_v2",
+  "model": "llava-hf/llava-v1.6-mistral-7b-hf",
+  "max_new_tokens": 256,
+  "batch_size": 64,
+  "images_evaluated": 1828,
+  "limit": null,
+  "bootstrap": 1000,
+  "image_dir": "/gpfs/home3/ddehaan/Thesis-Computervision-Pre--and-post-lease-images/YOLOvsLLAVAcomparison/data/inspection_dataset/images/test",
+  "label_dir": "/gpfs/home3/ddehaan/Thesis-Computervision-Pre--and-post-lease-images/YOLOvsLLAVAcomparison/data/inspection_dataset/labels/test",
+  "eval_labels": [
+    "damage",
+    "crack",
+    "mold",
+    "wear",
+    "asbestos",
+    "no_damage"
+  ]
+}

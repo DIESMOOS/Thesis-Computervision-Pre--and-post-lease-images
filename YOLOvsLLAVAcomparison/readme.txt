@@ -20,3 +20,5 @@ for f in list((run/"raw_outputs").glob("*.json"))[:20]:
         break
 PY
 -------------------------------------------
+
+how to run llava pipeline? 
