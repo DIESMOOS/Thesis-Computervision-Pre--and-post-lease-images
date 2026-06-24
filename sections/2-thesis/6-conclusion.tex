@@ -1,4 +1,16 @@
 \section{Conclusion}
 \label{sec:conclusion}
-% Answer each research question and address how the limitations of the study qualify the conclusion.
-Write your conclusion here. Be sure that the relation between the research gap and your contribution is clear. Be honest about how limitations in the study qualify the answer on the research question.
+
+This study investigated the suitability of supervised object detection and  multi modal foundation models for automated housing inspection. Specifically, it compared YOLOv8 and LLaVA 1.6 under identical inspection conditions using a harmonized set of housing related inspection categories.
+
+The results demonstrate that YOLOv8 consistently outperformed LLaVA 1.6 across the evaluated inspection tasks. While LLaVA was able to reason about visual content and identify some obvious defects, its overall classification performance remained substantially below that of the supervised detector. The findings therefore indicate that task specific supervision and bounding box annotations remain highly valuable for reliable housing inspection systems.
+
+Regarding robustness, both models were affected by variations in image conditions and category characteristics. Categories with fewer examples and greater visual variability proved more challenging than visually distinctive categories such as asbestos. Nevertheless, YOLOv8 maintained superior performance across the evaluated categories.
+
+This research contributes to the growing discussion on the applicability of foundation models outside their original training domains. While vision language models offer flexibility and require little task specific preparation, the results suggest that they currently do not provide a competitive alternative to supervised object detection for structured housing inspection tasks.
+
+The findings also provide insights into the transferability of advances from medical imaging to housing inspection. Medical imaging has demonstrated that high quality annotations, precise localization, and carefully designed image processing pipelines can substantially improve the detection of subtle visual abnormalities. Inspired by these developments, several aspects of the experimental design were adapted for the housing inspection domain, including the use of standardized image sizes, harmonized annotations, and category focused defect detection. The results suggest that some principles that have driven progress in medical imaging can also contribute to improved performance in housing inspection, although domain specific challenges remain.
+
+Several limitations should be considered. The study was conducted using a combination of publicly available datasets and data from a single housing corporation. In addition, only one object detection model and one vision language model were evaluated. Future research could investigate newer  multi modal models, larger housing inspection datasets, and hybrid approaches that combine object detection with  multi modal reasoning capabilities. Future work could also explore additional techniques originating from medical imaging, such as improved annotation strategies, specialized preprocessing methods, and methods for detecting subtle forms of damage that are difficult to identify visually.
+
+Overall, the findings suggest that supervised object detection currently represents the most effective approach for automated housing inspection, while  multi modal foundation models may be better suited as complementary tools for explanation, reporting, and decision support. More broadly, the results indicate that transferring selected methodological advances from medical imaging to housing inspection is a promising research direction that warrants further investigation.

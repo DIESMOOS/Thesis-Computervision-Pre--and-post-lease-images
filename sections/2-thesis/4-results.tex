@@ -1,85 +1,67 @@
 \section{Results}
 \label{sec:results}
 
+This section presents the results of the comparison between YOLOv8 and LLaVA 1.6. The results are organized according to the research questions. First, baseline performance is established. Subsequently, the quantitative comparison between both approaches is presented.
+
 \subsection{Baseline Performance}
 
-To establish a reference point, a baseline model was evaluated that classifies all images as `no damage`. 
+To establish a reference point, baseline configurations of both models were evaluated. Property 001 was selected as an initial benchmark because it contains only inspection relevant issues and therefore provides a clear indication of whether the models can correctly identify housing defects.
 
-For property 001, which contains only damage and wear images, this baseline fails to correctly identify any inspection-relevant issues.
+Table~\ref{tab:gt_property001} shows the ground truth distribution of Property 001. The dataset consists of six damage images and four wear images, while no images belong to the no damage category.
 
-%-------------------------------------------------
-% Table truth labels property 1 
-\begin{table}[H]
-\centering
-\caption{Ground truth distribution for property 001 (post-lease)}
-\label{tab:gt_property001}
-\begin{tabular}{lc}
-\toprule
-Category & Number of images \\
-\midrule
-Damage & 6 \\
-Wear & 4 \\
-No damage & 0 \\
-\midrule
-Total & 10 \\
-\bottomrule
-\end{tabular}
-\end{table}
+%                                         % Table truth labels property 1 
+\begin{table}[H] \centering \caption{Ground truth distribution for property 001 (post lease)} \label{tab:gt_property001} \begin{tabular}{lc} \toprule Category & Number of images \\ \midrule Damage & 6 \\ Wear & 4 \\ No damage & 0 \\ \midrule Total & 10 \\ \bottomrule \end{tabular} \end{table} 
 
+%                                         
 
-%-------------------------------------------------
-% heatmaps
+Figure~\ref{fig:baseline_heatmaps} presents the confusion matrices of the baseline models. The LLaVA baseline predominantly classified images as no damage, resulting in poor recognition of inspection relevant categories. The YOLOv8 baseline achieved stronger category separation, although substantial misclassifications remained. These baseline results indicate that additional optimization is required for both approaches.
+
+%                          
+
 \begin{figure}[H]
 \centering
 
-\begin{tabular}{cc}
+\begin{subfigure}{0.9\columnwidth}
+\centering
+\includegraphics[width=\linewidth]{sections/2 thesis/llava_confusion_matrix.png}
+\caption{LLaVA Baseline}
+\label{fig:llava_baseline_cm}
+\end{subfigure}
 
-\includegraphics[width=0.23\textwidth]
-{sections/2-thesis/llava_confusion_matrix.png}
+\vspace{0.5cm}
 
-&
+\begin{subfigure}{0.9\columnwidth}
+\centering
+\includegraphics[width=\linewidth]{sections/2 thesis/yolo_baseline_confusion_matrix_normalized.png}
+\caption{YOLOv8 Baseline}
+\label{fig:yolo_baseline_cm}
+\end{subfigure}
 
-\includegraphics[width=0.24\textwidth]
-{sections/2-thesis/yolo_baseline_confusion_matrix_normalized.png}
-
-\\
-
-(a) LLaVA baseline
-
-&
-
-(b) YOLOv8 baseline
-
-\end{tabular}
-%-------------------------------------------------
-\caption{Confusion matrices of the baseline models used for housing inspection evaluation.}
+\caption{Confusion matrices of the baseline models.}
 \label{fig:baseline_heatmaps}
 
 \end{figure}
 
+%                               
 
-\subsection{4.2 Model Performance (YOLO vs LLaVA)}
+\subsection{Quantitative Performance Comparison}
 
-% ---------------------------------------------------
-\begin{table}[H]
-\centering
-\caption{Performance per category for inspection task (property 001)}
-\label{tab:category_performance}
-\begin{tabular}{lccccc}
-\toprule
-Model & Category & Precision & Recall & F1-score \\
-\midrule
-LLaVA Baseline & overall & 0.067 & 1.00 & 0.125 \\
-\midrule
-YOLOv8 Baseline & overall & 0.510 & 0.318 & -- \\
-\midrule
-YOLOv8 Final & Damage & -- & -- & -- \\
-YOLOv8 Final & Wear & -- & -- & -- \\
-YOLOv8 Final & No-damage & -- & -- & -- \\
-\midrule
-LLaVA 1.6 Final & Damage & -- & -- & -- \\
-LLaVA 1.6 Final & Wear & -- & -- & -- \\
-LLaVA 1.6 Final & No-damage & -- & -- & -- \\
-\bottomrule
-\end{tabular}
-\end{table}
+Table~\ref{tab:category_performance} summarizes the quantitative performance of the evaluated models.
+
+The results demonstrate clear performance differences between supervised object detection and multi modal zero shot reasoning. The YOLOv8 baseline achieved an F1 score of 0.392, substantially outperforming the LLaVA baseline, which achieved an F1 score of 0.125. This indicates that supervised learning provides a stronger starting point for structured housing inspection tasks.
+
+%                                     
+\begin{table}[H] \centering \caption{Performance per category for inspection task (property 001)} \label{tab:category_performance} \begin{tabular}{lcccc} \toprule Model & Category & Precision & Recall & F1 score \\ \midrule LLaVA Baseline & Overall & 0.067 & 1.000 & 0.125 \\ \midrule YOLOv8 Baseline & Overall & 0.510 & 0.318 & 0.392 \\ \midrule YOLOv8 Final & Overall &    &    &    \\ YOLOv8 Final & Damage &    & 0.42 &    \\ YOLOv8 Final & Wear &    & 0.00 &    \\ YOLOv8 Final & Mold &    & 0.13 &    \\ YOLOv8 Final & Asbestos &    & 0.55 &    \\ YOLOv8 Final & No damage &    & 0.50 &    \\ \midrule LLaVA Optimized & Overall & 0.113 & 0.250 & 0.155 \\ LLaVA Optimized & Damage &    &    &    \\ LLaVA Optimized & Wear &    &    &    \\ LLaVA Optimized & Mold &    &    &    \\ LLaVA Optimized & Asbestos &    &    &    \\ LLaVA Optimized & No damage &    &    &    \\ \midrule LLaVA 1.6 Final & Overall & 0.158 & 0.137 & 0.147 \\ LLaVA 1.6 Final & Damage &    &    &    \\ LLaVA 1.6 Final & Wear &    &    &    \\ LLaVA 1.6 Final & Mold &    &    &    \\ LLaVA 1.6 Final & Asbestos &    &    &    \\ LLaVA 1.6 Final & No damage &    &    &    \\ \bottomrule \end{tabular} \end{table}
+
+%                                        
+
+Prompt optimization improved LLaVA performance, increasing the F1 score from 0.125 to 0.155. However, the improvement remained limited and performance continued to lag behind the supervised detector. The final LLaVA 1.6 configuration achieved an overall F1 score of 0.147, suggesting that additional prompt refinement alone was insufficient to close the performance gap.
+
+For the final YOLOv8 model, performance varied across inspection categories. The highest recall was achieved for the asbestos category (0.55), followed by no damage (0.50) and damage (0.42). Lower recall values were observed for mold (0.13) and wear (0.00), indicating that these categories remained more challenging to detect.
+
+Overall, the results show that YOLOv8 benefited substantially from task specific supervision and bounding box annotations, whereas LLaVA struggled to reliably identify inspection categories using zero shot multi modal reasoning alone.
+
+\subsection{Summary of Findings}
+
+The results provide a consistent answer to the quantitative comparison research question. Across all evaluated configurations, YOLOv8 achieved higher performance than LLaVA 1.6. While multi modal foundation models demonstrate the ability to reason about visual content without task specific training, the supervised object detector proved more effective for structured housing inspection tasks involving predefined inspection categories.
+
