@@ -15,7 +15,6 @@ BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 RESULTS_DIR = BASE_DIR / "results"
 
-
 def run_yolo(property_id: str, new_images_dir: Path, old_report: dict):
     yolo_raw = run_yolo_on_folder(str(new_images_dir))
 

@@ -17,12 +17,12 @@ BASE_MODEL = "yolov8n.pt"  # Ultralytics will download this automatically if mis
 PROJECT_DIR = ROOT_DIR / "models"
 RUN_NAME = "housing_yolo"
 
-#EPOCHS = 75
-IMG_SIZE = 640
+EPOCHS = 75
+IMG_SIZE = 1024
 #BATCH_SIZE = 16
 SEED = 42
 
-EPOCHS = 2
+EPOCHS = 75
 BATCH_SIZE = 4
 
 def main():

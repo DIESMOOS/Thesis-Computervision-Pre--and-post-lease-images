@@ -4,22 +4,22 @@
     "property_result": {
       "property_id": "005",
       "model_name": "yolo",
-      "images_analyzed": 15,
+      "images_analyzed": 20,
       "categories_present": [
         "damage",
         "no_damage"
       ],
       "category_counts_total": {
-        "damage": 3,
+        "damage": 6,
         "crack": 0,
         "mold": 0,
         "wear": 0,
         "asbestos": 0,
-        "no_damage": 12
+        "no_damage": 14
       },
       "image_results": [
         {
-          "image_id": "no_damage_01_mold2_57973_img2_jpg.rf.8d6a9f2d3ab030118d2b560e3b714693.jpg",
+          "image_id": "no_damage_01_NoDamage_363_jpg.rf.bfe5190a32d0ac182893e4f23997792f.jpg",
           "model_name": "yolo",
           "categories_present": [
             "damage"
@@ -35,19 +35,19 @@
           "detections": [
             {
               "label": "damage",
-              "confidence": 0.3804,
+              "confidence": 0.6982,
               "bbox": [
-                233.77,
-                0.31,
-                290.35,
-                92.13
+                240.3,
+                457.32,
+                495.21,
+                511.95
               ]
             }
           ],
           "summary": "Detected: damage."
         },
         {
-          "image_id": "no_damage_02_asbestos_pc450newF-049_jpg.rf.52b39fb754464190fce4ca722e145a22.jpg",
+          "image_id": "no_damage_02_NoDamage_949_jpeg.rf.debd86d48a6cd9156606763a177d8ba9.jpg",
           "model_name": "yolo",
           "categories_present": [
             "no_damage"
@@ -64,7 +64,7 @@
           "summary": "No visible inspection relevant issues."
         },
         {
-          "image_id": "no_damage_03_crack_3824.rf.8a84bebb645ef7456b7e40208fde986e.jpg",
+          "image_id": "no_damage_03_NoDamage_90_jpeg.rf.61713497d83a957d8033290ab20de21f.jpg",
           "model_name": "yolo",
           "categories_present": [
             "no_damage"
@@ -81,7 +81,7 @@
           "summary": "No visible inspection relevant issues."
         },
         {
-          "image_id": "no_damage_04_asbestos_pc450newF-190_jpg.rf.5b599357dccd2a6e4936bef30842304d.jpg",
+          "image_id": "no_damage_04_NoDamage_280_jpg.rf.c13764ef8aaf79ac36a2cee4c6241ce5.jpg",
           "model_name": "yolo",
           "categories_present": [
             "no_damage"
@@ -98,7 +98,7 @@
           "summary": "No visible inspection relevant issues."
         },
         {
-          "image_id": "no_damage_05_asbestos_pc450BP0027synt_jpg.rf.e4addbd8a1121ce749d8fdda96ccb43f.jpg",
+          "image_id": "no_damage_05_NoDamage_198_jpg.rf.749603df5c4d8aeb7cd53d95d156ddd2.jpg",
           "model_name": "yolo",
           "categories_present": [
             "no_damage"
@@ -115,7 +115,7 @@
           "summary": "No visible inspection relevant issues."
         },
         {
-          "image_id": "no_damage_06_house_NoDamage_229_jpg.rf.7b2b550030105fc188c9ce6853e72b6e.jpg",
+          "image_id": "no_damage_06_NoDamage_369_jpg.rf.8db2a3e6ce3ee1e22d150fd66679c1c0.jpg",
           "model_name": "yolo",
           "categories_present": [
             "no_damage"
@@ -132,7 +132,41 @@
           "summary": "No visible inspection relevant issues."
         },
         {
-          "image_id": "no_damage_07_house_NaturalDamage_419_png.rf.d15f564a84351f37b09e0b984907a966.jpg",
+          "image_id": "no_damage_07_NoDamage_199_jpg.rf.980d63ae0ad2a2d1b92a083aa7e6af19.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "no_damage_08_NoDamage_618_jpg.rf.fb73f16a755b8019004f91fe3443ff30.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "no_damage_09_NoDamage_465_jpg.rf.dbceada2b63512c05ab2ca72120618c0.jpg",
           "model_name": "yolo",
           "categories_present": [
             "damage"
@@ -148,39 +182,19 @@
           "detections": [
             {
               "label": "damage",
-              "confidence": 0.9443,
+              "confidence": 0.3608,
               "bbox": [
-                0.35,
-                259.06,
-                243.37,
-                428.98
-              ]
-            },
-            {
-              "label": "damage",
-              "confidence": 0.3314,
-              "bbox": [
-                210.22,
-                258.92,
-                245.58,
-                308.51
-              ]
-            },
-            {
-              "label": "damage",
-              "confidence": 0.253,
-              "bbox": [
-                403.64,
-                418.58,
-                511.77,
-                479.94
+                221.25,
+                462.04,
+                367.35,
+                495.75
               ]
             }
           ],
           "summary": "Detected: damage."
         },
         {
-          "image_id": "no_damage_08_house_WaterDamage_292_jpg.rf.94cb816fdcd54afef63ff4d7c2c9452d.jpg",
+          "image_id": "no_damage_10_NoDamage_502_jpg.rf.2d96035492eac49cfed4c2ccaac95d35.jpg",
           "model_name": "yolo",
           "categories_present": [
             "no_damage"
@@ -197,75 +211,7 @@
           "summary": "No visible inspection relevant issues."
         },
         {
-          "image_id": "no_damage_09_crack_2557.rf.b0cb7c6bf3a3d120403b6f8ad7d9bf79.jpg",
-          "model_name": "yolo",
-          "categories_present": [
-            "no_damage"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 1
-          },
-          "detections": [],
-          "summary": "No visible inspection relevant issues."
-        },
-        {
-          "image_id": "no_damage_10_NoDamage_629_jpg.rf.6aed42790fd25e5681bb9c4dcd897662.jpg",
-          "model_name": "yolo",
-          "categories_present": [
-            "no_damage"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 1
-          },
-          "detections": [],
-          "summary": "No visible inspection relevant issues."
-        },
-        {
-          "image_id": "no_damage_11_house_Cracks_Severe_82_jpg.rf.87557e4bf593c9ffac68170581472e4d.jpg",
-          "model_name": "yolo",
-          "categories_present": [
-            "no_damage"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 1
-          },
-          "detections": [],
-          "summary": "No visible inspection relevant issues."
-        },
-        {
-          "image_id": "no_damage_12_crack_3095.rf.eb993b8f673e3805c4b1d40fe6f193a1.jpg",
-          "model_name": "yolo",
-          "categories_present": [
-            "no_damage"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 1
-          },
-          "detections": [],
-          "summary": "No visible inspection relevant issues."
-        },
-        {
-          "image_id": "wear_01_21_jpg.rf.de2ae09e17c8d6c2ef677ba438ebd0be.jpg",
+          "image_id": "no_damage_11_NoDamage_819_jpeg.rf.f75e4ad248f68f4017872e0643b61b3d.jpg",
           "model_name": "yolo",
           "categories_present": [
             "damage"
@@ -281,19 +227,19 @@
           "detections": [
             {
               "label": "damage",
-              "confidence": 0.5532,
+              "confidence": 0.9073,
               "bbox": [
-                313.82,
-                247.23,
-                382.74,
-                394.14
+                392.02,
+                353.38,
+                463.12,
+                404.39
               ]
             }
           ],
           "summary": "Detected: damage."
         },
         {
-          "image_id": "wear_02_49_jpg.rf.7bff8bd7cb2c92a4374245277a081a67.jpg",
+          "image_id": "no_damage_12_NoDamage_516_jpg.rf.dda404a9f26d1a4e810a988151d2b518.jpg",
           "model_name": "yolo",
           "categories_present": [
             "no_damage"
@@ -310,7 +256,159 @@
           "summary": "No visible inspection relevant issues."
         },
         {
-          "image_id": "wear_03_67_jpg.rf.f649ea90d4ce011023f96b545e14f6b9.jpg",
+          "image_id": "no_damage_13_NoDamage_922_jpeg.rf.cde33ab902401e3a46fe673198b8cafd.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "damage"
+          ],
+          "category_counts": {
+            "damage": 1,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 0
+          },
+          "detections": [
+            {
+              "label": "damage",
+              "confidence": 0.2808,
+              "bbox": [
+                1.44,
+                370.07,
+                60.41,
+                397.5
+              ]
+            }
+          ],
+          "summary": "Detected: damage."
+        },
+        {
+          "image_id": "no_damage_14_NoDamage_417_jpg.rf.e8038cf75cba538ffa573a2fa6dd689b.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "no_damage_15_NoDamage_854_png.rf.9448a60b9438435137b72e5d42596531.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "damage"
+          ],
+          "category_counts": {
+            "damage": 1,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 0
+          },
+          "detections": [
+            {
+              "label": "damage",
+              "confidence": 0.8073,
+              "bbox": [
+                255.84,
+                403.92,
+                288.1,
+                511.52
+              ]
+            }
+          ],
+          "summary": "Detected: damage."
+        },
+        {
+          "image_id": "no_damage_16_NoDamage_578_jpg.rf.b0aad6ca02ff81969c35ddd6ce58feaa.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "damage"
+          ],
+          "category_counts": {
+            "damage": 1,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 0
+          },
+          "detections": [
+            {
+              "label": "damage",
+              "confidence": 0.7335,
+              "bbox": [
+                432.19,
+                451.36,
+                472.68,
+                511.82
+              ]
+            }
+          ],
+          "summary": "Detected: damage."
+        },
+        {
+          "image_id": "wear_01_4_jpg.rf.ced011eb724c2237b01d54c43ea16c35.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "wear_02_64_jpg.rf.f45a43b4e710d5b533ee81820f69167e.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "wear_03_12_jpg.rf.83d32cc40acf41ecd7051b44f1c214db.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "wear_04_28_jpg.rf.c6e40422a7c2049870fa3ce5d09eed28.jpg",
           "model_name": "yolo",
           "categories_present": [
             "no_damage"
@@ -327,31 +425,31 @@
           "summary": "No visible inspection relevant issues."
         }
       ],
-      "property_summary": "Across the property, detected 3 images with damage.",
+      "property_summary": "Across the property, detected 6 images with damage.",
       "inspection_recommended": true
     },
     "comparison": {
       "old_report_counts": {
-        "damage": 0,
-        "crack": 0,
+        "damage": 1,
+        "crack": 1,
         "mold": 0,
-        "wear": 3,
+        "wear": 4,
         "asbestos": 0,
-        "no_damage": 12
+        "no_damage": 14
       },
       "new_report_counts": {
-        "damage": 3,
+        "damage": 6,
         "crack": 0,
         "mold": 0,
         "wear": 0,
         "asbestos": 0,
-        "no_damage": 12
+        "no_damage": 14
       },
       "delta": {
-        "damage": 3,
-        "crack": 0,
+        "damage": 5,
+        "crack": -1,
         "mold": 0,
-        "wear": -3,
+        "wear": -4,
         "asbestos": 0,
         "no_damage": 0
       },
@@ -362,175 +460,22 @@
     "property_result": {
       "property_id": "005",
       "model_name": "llava_zeroshot",
-      "images_analyzed": 15,
+      "images_analyzed": 20,
       "categories_present": [
-        "damage",
+        "wear",
         "no_damage"
       ],
       "category_counts_total": {
-        "damage": 2,
+        "damage": 0,
         "crack": 0,
         "mold": 0,
-        "wear": 0,
+        "wear": 1,
         "asbestos": 0,
-        "no_damage": 13
+        "no_damage": 19
       },
       "image_results": [
         {
-          "image_id": "no_damage_01_mold2_57973_img2_jpg.rf.8d6a9f2d3ab030118d2b560e3b714693.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "no_damage"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 1
-          },
-          "detections": [],
-          "summary": "The image shows a window with a white frame and a purple ceiling. There are no visible cracks, mold, wear, or asbestos. The window appears to be in good condition."
-        },
-        {
-          "image_id": "no_damage_02_asbestos_pc450newF-049_jpg.rf.52b39fb754464190fce4ca722e145a22.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "no_damage"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 1
-          },
-          "detections": [],
-          "summary": "The image shows a surface with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
-        },
-        {
-          "image_id": "no_damage_03_crack_3824.rf.8a84bebb645ef7456b7e40208fde986e.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "no_damage"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 1
-          },
-          "detections": [],
-          "summary": "The image shows a surface with a visible crack, but no other inspection-relevant issues are present."
-        },
-        {
-          "image_id": "no_damage_04_asbestos_pc450newF-190_jpg.rf.5b599357dccd2a6e4936bef30842304d.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "no_damage"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 1
-          },
-          "detections": [],
-          "summary": "The image shows a surface with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
-        },
-        {
-          "image_id": "no_damage_05_asbestos_pc450BP0027synt_jpg.rf.e4addbd8a1121ce749d8fdda96ccb43f.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "no_damage"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 1
-          },
-          "detections": [],
-          "summary": "The image shows a surface with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
-        },
-        {
-          "image_id": "no_damage_06_house_NoDamage_229_jpg.rf.7b2b550030105fc188c9ce6853e72b6e.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "no_damage"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 1
-          },
-          "detections": [],
-          "summary": "The image shows a building facade with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
-        },
-        {
-          "image_id": "no_damage_07_house_NaturalDamage_419_png.rf.d15f564a84351f37b09e0b984907a966.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "damage"
-          ],
-          "category_counts": {
-            "damage": 1,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 0
-          },
-          "detections": [],
-          "summary": "The image shows significant damage to the ceiling and walls, with visible cracks, peeling paint, and debris scattered throughout the room."
-        },
-        {
-          "image_id": "no_damage_08_house_WaterDamage_292_jpg.rf.94cb816fdcd54afef63ff4d7c2c9452d.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "damage"
-          ],
-          "category_counts": {
-            "damage": 1,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 0
-          },
-          "detections": [],
-          "summary": "The image shows visible damage, such as water damage, in the room."
-        },
-        {
-          "image_id": "no_damage_09_crack_2557.rf.b0cb7c6bf3a3d120403b6f8ad7d9bf79.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "no_damage"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 1
-          },
-          "detections": [],
-          "summary": "The image shows a wall with a visible crack, but no other signs of damage, mold, wear, or asbestos."
-        },
-        {
-          "image_id": "no_damage_10_NoDamage_629_jpg.rf.6aed42790fd25e5681bb9c4dcd897662.jpg",
+          "image_id": "no_damage_01_NoDamage_363_jpg.rf.bfe5190a32d0ac182893e4f23997792f.jpg",
           "model_name": "llava",
           "categories_present": [
             "no_damage"
@@ -547,7 +492,7 @@
           "summary": "The image shows a building with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
         },
         {
-          "image_id": "no_damage_11_house_Cracks_Severe_82_jpg.rf.87557e4bf593c9ffac68170581472e4d.jpg",
+          "image_id": "no_damage_02_NoDamage_949_jpeg.rf.debd86d48a6cd9156606763a177d8ba9.jpg",
           "model_name": "llava",
           "categories_present": [
             "no_damage"
@@ -561,10 +506,10 @@
             "no_damage": 1
           },
           "detections": [],
-          "summary": "The image shows a surface with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
+          "summary": "The image shows a house with no visible inspection-relevant issues."
         },
         {
-          "image_id": "no_damage_12_crack_3095.rf.eb993b8f673e3805c4b1d40fe6f193a1.jpg",
+          "image_id": "no_damage_03_NoDamage_90_jpeg.rf.61713497d83a957d8033290ab20de21f.jpg",
           "model_name": "llava",
           "categories_present": [
             "no_damage"
@@ -578,10 +523,10 @@
             "no_damage": 1
           },
           "detections": [],
-          "summary": "The image shows a surface with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
+          "summary": "The image shows a modern building with a unique architectural feature, and there are no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
         },
         {
-          "image_id": "wear_01_21_jpg.rf.de2ae09e17c8d6c2ef677ba438ebd0be.jpg",
+          "image_id": "no_damage_04_NoDamage_280_jpg.rf.c13764ef8aaf79ac36a2cee4c6241ce5.jpg",
           "model_name": "llava",
           "categories_present": [
             "no_damage"
@@ -595,10 +540,10 @@
             "no_damage": 1
           },
           "detections": [],
-          "summary": "The image shows a wall with a small hole, which is a form of damage. However, there are no other visible inspection-relevant issues such as cracks, mold, wear, or asbestos."
+          "summary": "The image shows a building facade with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
         },
         {
-          "image_id": "wear_02_49_jpg.rf.7bff8bd7cb2c92a4374245277a081a67.jpg",
+          "image_id": "no_damage_05_NoDamage_198_jpg.rf.749603df5c4d8aeb7cd53d95d156ddd2.jpg",
           "model_name": "llava",
           "categories_present": [
             "no_damage"
@@ -612,10 +557,10 @@
             "no_damage": 1
           },
           "detections": [],
-          "summary": "The image shows a surface with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
+          "summary": "The image shows a building with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
         },
         {
-          "image_id": "wear_03_67_jpg.rf.f649ea90d4ce011023f96b545e14f6b9.jpg",
+          "image_id": "no_damage_06_NoDamage_369_jpg.rf.8db2a3e6ce3ee1e22d150fd66679c1c0.jpg",
           "model_name": "llava",
           "categories_present": [
             "no_damage"
@@ -629,36 +574,274 @@
             "no_damage": 1
           },
           "detections": [],
-          "summary": "The image shows a surface with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
+          "summary": "The image shows a building facade with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
+        },
+        {
+          "image_id": "no_damage_07_NoDamage_199_jpg.rf.980d63ae0ad2a2d1b92a083aa7e6af19.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "The image shows a building facade with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
+        },
+        {
+          "image_id": "no_damage_08_NoDamage_618_jpg.rf.fb73f16a755b8019004f91fe3443ff30.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "The image shows a modern building with a glass facade, and there are no visible inspection-relevant issues such as cracks, mold, asbestos, or wear."
+        },
+        {
+          "image_id": "no_damage_09_NoDamage_465_jpg.rf.dbceada2b63512c05ab2ca72120618c0.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "The image shows a building with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
+        },
+        {
+          "image_id": "no_damage_10_NoDamage_502_jpg.rf.2d96035492eac49cfed4c2ccaac95d35.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "The image shows a building facade with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
+        },
+        {
+          "image_id": "no_damage_11_NoDamage_819_jpeg.rf.f75e4ad248f68f4017872e0643b61b3d.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "The image shows a modern two-story house with a well-maintained exterior, including a stone facade, balconies, and a neatly landscaped front yard. There are no visible signs of damage, cracks, mold, wear, or asbestos."
+        },
+        {
+          "image_id": "no_damage_12_NoDamage_516_jpg.rf.dda404a9f26d1a4e810a988151d2b518.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "The image shows a building facade with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
+        },
+        {
+          "image_id": "no_damage_13_NoDamage_922_jpeg.rf.cde33ab902401e3a46fe673198b8cafd.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "The image shows a modern house with no visible inspection-relevant issues."
+        },
+        {
+          "image_id": "no_damage_14_NoDamage_417_jpg.rf.e8038cf75cba538ffa573a2fa6dd689b.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "The image shows a building facade with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
+        },
+        {
+          "image_id": "no_damage_15_NoDamage_854_png.rf.9448a60b9438435137b72e5d42596531.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "The image shows two photos of a house with no visible inspection-relevant issues."
+        },
+        {
+          "image_id": "no_damage_16_NoDamage_578_jpg.rf.b0aad6ca02ff81969c35ddd6ce58feaa.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "The image shows a building facade with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
+        },
+        {
+          "image_id": "wear_01_4_jpg.rf.ced011eb724c2237b01d54c43ea16c35.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "wear"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 1,
+            "asbestos": 0,
+            "no_damage": 0
+          },
+          "detections": [],
+          "summary": "The image shows a surface with visible wear, such as peeling paint, stains, discoloration, rust, aging, or gradual deterioration."
+        },
+        {
+          "image_id": "wear_02_64_jpg.rf.f45a43b4e710d5b533ee81820f69167e.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "The image shows a close-up of a surface with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
+        },
+        {
+          "image_id": "wear_03_12_jpg.rf.83d32cc40acf41ecd7051b44f1c214db.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "The image shows a wall with no visible inspection-relevant issues such as cracks, mold, asbestos, or damage."
+        },
+        {
+          "image_id": "wear_04_28_jpg.rf.c6e40422a7c2049870fa3ce5d09eed28.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "The image shows a wall with a small area of peeling paint, which is a form of wear. However, there are no visible cracks, mold, asbestos, or other damage."
         }
       ],
-      "property_summary": "Across the property, detected 2 images with damage.",
+      "property_summary": "Across the property, detected 1 images with wear.",
       "inspection_recommended": true
     },
     "comparison": {
       "old_report_counts": {
+        "damage": 1,
+        "crack": 1,
+        "mold": 0,
+        "wear": 4,
+        "asbestos": 0,
+        "no_damage": 14
+      },
+      "new_report_counts": {
         "damage": 0,
         "crack": 0,
         "mold": 0,
-        "wear": 3,
+        "wear": 1,
         "asbestos": 0,
-        "no_damage": 12
-      },
-      "new_report_counts": {
-        "damage": 2,
-        "crack": 0,
-        "mold": 0,
-        "wear": 0,
-        "asbestos": 0,
-        "no_damage": 13
+        "no_damage": 19
       },
       "delta": {
-        "damage": 2,
-        "crack": 0,
+        "damage": -1,
+        "crack": -1,
         "mold": 0,
         "wear": -3,
         "asbestos": 0,
-        "no_damage": 1
+        "no_damage": 5
       },
       "inspection_recommended": true
     }
@@ -667,178 +850,24 @@
     "property_result": {
       "property_id": "005",
       "model_name": "llava_rule_guided",
-      "images_analyzed": 15,
+      "images_analyzed": 20,
       "categories_present": [
-        "damage",
         "crack",
         "wear",
         "asbestos",
         "no_damage"
       ],
       "category_counts_total": {
-        "damage": 3,
-        "crack": 4,
+        "damage": 0,
+        "crack": 1,
         "mold": 0,
-        "wear": 4,
-        "asbestos": 3,
-        "no_damage": 1
+        "wear": 3,
+        "asbestos": 4,
+        "no_damage": 12
       },
       "image_results": [
         {
-          "image_id": "no_damage_01_mold2_57973_img2_jpg.rf.8d6a9f2d3ab030118d2b560e3b714693.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "wear"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 1,
-            "asbestos": 0,
-            "no_damage": 0
-          },
-          "detections": [],
-          "summary": "Detected: wear."
-        },
-        {
-          "image_id": "no_damage_02_asbestos_pc450newF-049_jpg.rf.52b39fb754464190fce4ca722e145a22.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "asbestos"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 1,
-            "no_damage": 0
-          },
-          "detections": [],
-          "summary": "Detected: asbestos."
-        },
-        {
-          "image_id": "no_damage_03_crack_3824.rf.8a84bebb645ef7456b7e40208fde986e.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "crack"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 1,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 0
-          },
-          "detections": [],
-          "summary": "Detected: crack."
-        },
-        {
-          "image_id": "no_damage_04_asbestos_pc450newF-190_jpg.rf.5b599357dccd2a6e4936bef30842304d.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "wear"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 1,
-            "asbestos": 0,
-            "no_damage": 0
-          },
-          "detections": [],
-          "summary": "Detected: wear."
-        },
-        {
-          "image_id": "no_damage_05_asbestos_pc450BP0027synt_jpg.rf.e4addbd8a1121ce749d8fdda96ccb43f.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "asbestos"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 1,
-            "no_damage": 0
-          },
-          "detections": [],
-          "summary": "Detected: asbestos."
-        },
-        {
-          "image_id": "no_damage_06_house_NoDamage_229_jpg.rf.7b2b550030105fc188c9ce6853e72b6e.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "asbestos"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 1,
-            "no_damage": 0
-          },
-          "detections": [],
-          "summary": "Detected: asbestos."
-        },
-        {
-          "image_id": "no_damage_07_house_NaturalDamage_419_png.rf.d15f564a84351f37b09e0b984907a966.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "damage"
-          ],
-          "category_counts": {
-            "damage": 1,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 0
-          },
-          "detections": [],
-          "summary": "Detected: damage."
-        },
-        {
-          "image_id": "no_damage_08_house_WaterDamage_292_jpg.rf.94cb816fdcd54afef63ff4d7c2c9452d.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "damage"
-          ],
-          "category_counts": {
-            "damage": 1,
-            "crack": 0,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 0
-          },
-          "detections": [],
-          "summary": "Detected: damage."
-        },
-        {
-          "image_id": "no_damage_09_crack_2557.rf.b0cb7c6bf3a3d120403b6f8ad7d9bf79.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "crack"
-          ],
-          "category_counts": {
-            "damage": 0,
-            "crack": 1,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 0
-          },
-          "detections": [],
-          "summary": "Detected: crack."
-        },
-        {
-          "image_id": "no_damage_10_NoDamage_629_jpg.rf.6aed42790fd25e5681bb9c4dcd897662.jpg",
+          "image_id": "no_damage_01_NoDamage_363_jpg.rf.bfe5190a32d0ac182893e4f23997792f.jpg",
           "model_name": "llava",
           "categories_present": [
             "no_damage"
@@ -855,24 +884,177 @@
           "summary": "No visible inspection relevant issues."
         },
         {
-          "image_id": "no_damage_11_house_Cracks_Severe_82_jpg.rf.87557e4bf593c9ffac68170581472e4d.jpg",
+          "image_id": "no_damage_02_NoDamage_949_jpeg.rf.debd86d48a6cd9156606763a177d8ba9.jpg",
           "model_name": "llava",
           "categories_present": [
-            "wear"
+            "no_damage"
           ],
           "category_counts": {
             "damage": 0,
             "crack": 0,
             "mold": 0,
-            "wear": 1,
+            "wear": 0,
             "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "no_damage_03_NoDamage_90_jpeg.rf.61713497d83a957d8033290ab20de21f.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "no_damage_04_NoDamage_280_jpg.rf.c13764ef8aaf79ac36a2cee4c6241ce5.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "no_damage_05_NoDamage_198_jpg.rf.749603df5c4d8aeb7cd53d95d156ddd2.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "asbestos"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 1,
             "no_damage": 0
           },
           "detections": [],
-          "summary": "Detected: wear."
+          "summary": "Detected: asbestos."
         },
         {
-          "image_id": "no_damage_12_crack_3095.rf.eb993b8f673e3805c4b1d40fe6f193a1.jpg",
+          "image_id": "no_damage_06_NoDamage_369_jpg.rf.8db2a3e6ce3ee1e22d150fd66679c1c0.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "no_damage_07_NoDamage_199_jpg.rf.980d63ae0ad2a2d1b92a083aa7e6af19.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "no_damage_08_NoDamage_618_jpg.rf.fb73f16a755b8019004f91fe3443ff30.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "no_damage_09_NoDamage_465_jpg.rf.dbceada2b63512c05ab2ca72120618c0.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "asbestos"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 1,
+            "no_damage": 0
+          },
+          "detections": [],
+          "summary": "Detected: asbestos."
+        },
+        {
+          "image_id": "no_damage_10_NoDamage_502_jpg.rf.2d96035492eac49cfed4c2ccaac95d35.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "asbestos"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 1,
+            "no_damage": 0
+          },
+          "detections": [],
+          "summary": "Detected: asbestos."
+        },
+        {
+          "image_id": "no_damage_11_NoDamage_819_jpeg.rf.f75e4ad248f68f4017872e0643b61b3d.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "no_damage_12_NoDamage_516_jpg.rf.dda404a9f26d1a4e810a988151d2b518.jpg",
           "model_name": "llava",
           "categories_present": [
             "crack"
@@ -889,7 +1071,75 @@
           "summary": "Detected: crack."
         },
         {
-          "image_id": "wear_01_21_jpg.rf.de2ae09e17c8d6c2ef677ba438ebd0be.jpg",
+          "image_id": "no_damage_13_NoDamage_922_jpeg.rf.cde33ab902401e3a46fe673198b8cafd.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "no_damage_14_NoDamage_417_jpg.rf.e8038cf75cba538ffa573a2fa6dd689b.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "no_damage_15_NoDamage_854_png.rf.9448a60b9438435137b72e5d42596531.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "no_damage_16_NoDamage_578_jpg.rf.b0aad6ca02ff81969c35ddd6ce58feaa.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 0,
+            "asbestos": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection relevant issues."
+        },
+        {
+          "image_id": "wear_01_4_jpg.rf.ced011eb724c2237b01d54c43ea16c35.jpg",
           "model_name": "llava",
           "categories_present": [
             "wear"
@@ -906,67 +1156,84 @@
           "summary": "Detected: wear."
         },
         {
-          "image_id": "wear_02_49_jpg.rf.7bff8bd7cb2c92a4374245277a081a67.jpg",
+          "image_id": "wear_02_64_jpg.rf.f45a43b4e710d5b533ee81820f69167e.jpg",
           "model_name": "llava",
           "categories_present": [
-            "crack"
+            "asbestos"
           ],
           "category_counts": {
             "damage": 0,
-            "crack": 1,
-            "mold": 0,
-            "wear": 0,
-            "asbestos": 0,
-            "no_damage": 0
-          },
-          "detections": [],
-          "summary": "Detected: crack."
-        },
-        {
-          "image_id": "wear_03_67_jpg.rf.f649ea90d4ce011023f96b545e14f6b9.jpg",
-          "model_name": "llava",
-          "categories_present": [
-            "damage"
-          ],
-          "category_counts": {
-            "damage": 1,
             "crack": 0,
             "mold": 0,
             "wear": 0,
+            "asbestos": 1,
+            "no_damage": 0
+          },
+          "detections": [],
+          "summary": "Detected: asbestos."
+        },
+        {
+          "image_id": "wear_03_12_jpg.rf.83d32cc40acf41ecd7051b44f1c214db.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "wear"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 1,
             "asbestos": 0,
             "no_damage": 0
           },
           "detections": [],
-          "summary": "Detected: damage."
+          "summary": "Detected: wear."
+        },
+        {
+          "image_id": "wear_04_28_jpg.rf.c6e40422a7c2049870fa3ce5d09eed28.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "wear"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "crack": 0,
+            "mold": 0,
+            "wear": 1,
+            "asbestos": 0,
+            "no_damage": 0
+          },
+          "detections": [],
+          "summary": "Detected: wear."
         }
       ],
-      "property_summary": "Across the property, detected 3 images with damage, 4 images with crack, 4 images with wear, 3 images with asbestos.",
+      "property_summary": "Across the property, detected 1 images with crack, 3 images with wear, 4 images with asbestos.",
       "inspection_recommended": true
     },
     "comparison": {
       "old_report_counts": {
-        "damage": 0,
-        "crack": 0,
-        "mold": 0,
-        "wear": 3,
-        "asbestos": 0,
-        "no_damage": 12
-      },
-      "new_report_counts": {
-        "damage": 3,
-        "crack": 4,
+        "damage": 1,
+        "crack": 1,
         "mold": 0,
         "wear": 4,
-        "asbestos": 3,
-        "no_damage": 1
+        "asbestos": 0,
+        "no_damage": 14
+      },
+      "new_report_counts": {
+        "damage": 0,
+        "crack": 1,
+        "mold": 0,
+        "wear": 3,
+        "asbestos": 4,
+        "no_damage": 12
       },
       "delta": {
-        "damage": 3,
-        "crack": 4,
+        "damage": -1,
+        "crack": 0,
         "mold": 0,
-        "wear": 1,
-        "asbestos": 3,
-        "no_damage": -11
+        "wear": -1,
+        "asbestos": 4,
+        "no_damage": -2
       },
       "inspection_recommended": true
     }

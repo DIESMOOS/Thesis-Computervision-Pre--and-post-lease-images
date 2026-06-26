@@ -1,0 +1,13 @@
+{
+  "property_id": "006",
+  "category_counts": {
+    "damage": 2,
+    "crack": 0,
+    "mold": 1,
+    "wear": 3,
+    "asbestos": 0,
+    "no_damage": 14
+  },
+  "summary": "Previous inspection showed 2 damage, 1 mold, 3 wear.",
+  "inspection_recommended": true
+}

@@ -7,39 +7,54 @@ random.seed(42)
 
 ROOT = Path(".")
 RAW = ROOT / "data" / "Original data folders"
-INSPECTION_DATASET = ROOT / "data" / "inspection_dataset"
 PROPERTIES_ROOT = ROOT / "data" / "properties"
 
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 
-# 10 pre + 10 post per property
+CATEGORIES = ["damage", "crack", "mold", "wear", "asbestos", "no_damage"]
+DEFECT_CATEGORIES = ["damage", "crack", "mold", "wear", "asbestos"]
+
 PROFILES = {
     "001": {
-        "pre": {"no_damage": 6, "wear": 4},
-        "post": {"damage": 6, "wear": 4},
+        "pre":  {"damage": 3, "crack": 2, "mold": 0, "wear": 3, "asbestos": 0, "no_damage": 12},
+        "post": {"damage": 5, "crack": 3, "mold": 0, "wear": 4, "asbestos": 0, "no_damage": 8},
     },
+
     "002": {
-        "pre": {"no_damage": 7, "wear": 3},
-        "post": {"no_damage": 4, "wear": 3, "damage": 3},
+        "pre":  {"damage": 3, "crack": 1, "mold": 0, "wear": 4, "asbestos": 0, "no_damage": 12},
+        "post": {"damage": 4, "crack": 2, "mold": 0, "wear": 4, "asbestos": 0, "no_damage": 10},
     },
+
     "003": {
-        "pre": {"no_damage": 5, "damage": 5},
-        "post": {"no_damage": 2, "damage": 8},
+        "pre":  {"damage": 6, "crack": 4, "mold": 2, "wear": 4, "asbestos": 1, "no_damage": 3},
+        "post": {"damage": 6, "crack": 4, "mold": 2, "wear": 4, "asbestos": 1, "no_damage": 3},
     },
+
     "004": {
-        "pre": {"no_damage": 4, "wear": 3, "damage": 3},
-        "post": {"no_damage": 8, "wear": 2},
+        "pre":  {"damage": 7, "crack": 4, "mold": 2, "wear": 3, "asbestos": 1, "no_damage": 3},
+        "post": {"damage": 3, "crack": 2, "mold": 1, "wear": 3, "asbestos": 0, "no_damage": 11},
     },
+
     "005": {
-        "pre": {"no_damage": 8, "wear": 2},
-        "post": {"no_damage": 7, "wear": 3},
+        "pre":  {"damage": 1, "crack": 1, "mold": 0, "wear": 4, "asbestos": 0, "no_damage": 14},
+        "post": {"damage": 0, "crack": 0, "mold": 0, "wear": 4, "asbestos": 0, "no_damage": 16},
     },
+
     "006": {
-        "pre": {"no_damage": 6, "wear": 4},
-        "post": {"no_damage": 5, "wear": 3, "damage": 2},
+        "pre":  {"damage": 2, "crack": 0, "mold": 1, "wear": 3, "asbestos": 0, "no_damage": 14},
+        "post": {"damage": 4, "crack": 0, "mold": 3, "wear": 4, "asbestos": 0, "no_damage": 9},
+    },
+
+    "007": {
+        "pre":  {"damage": 3, "crack": 2, "mold": 0, "wear": 3, "asbestos": 0, "no_damage": 12},
+        "post": {"damage": 4, "crack": 3, "mold": 0, "wear": 4, "asbestos": 0, "no_damage": 9},
+    },
+
+    "008": {
+        "pre":  {"damage": 6, "crack": 3, "mold": 1, "wear": 4, "asbestos": 0, "no_damage": 6},
+        "post": {"damage": 5, "crack": 3, "mold": 0, "wear": 4, "asbestos": 0, "no_damage": 8},
     },
 }
-
 
 def is_image(path: Path) -> bool:
     return path.suffix.lower() in IMAGE_EXTS
@@ -48,60 +63,42 @@ def is_image(path: Path) -> bool:
 def collect_images(folder: Path) -> list[Path]:
     if not folder.exists():
         return []
-    return sorted([p for p in folder.rglob("*") if p.is_file() and is_image(p)])
+    return sorted(p for p in folder.rglob("*") if p.is_file() and is_image(p))
 
 
 def corresponding_label_path(img_path: Path) -> Path:
     parts = list(img_path.parts)
-
     if "images" not in parts:
-        raise ValueError(f"No 'images' folder found in path: {img_path}")
-
+        return Path("__missing__")
     idx = parts.index("images")
     parts[idx] = "labels"
-
     return Path(*parts[:-1], img_path.stem + ".txt")
 
 
 def find_all_images_dirs(dataset_root: Path) -> list[Path]:
     if not dataset_root.exists():
         return []
-    return sorted([p for p in dataset_root.rglob("images") if p.is_dir()])
+    return sorted(p for p in dataset_root.rglob("images") if p.is_dir())
 
 
 def collect_dataset_images(dataset_root: Path) -> list[Path]:
     pool = []
-
     for images_dir in find_all_images_dirs(dataset_root):
         pool.extend(collect_images(images_dir))
-
     return sorted(set(pool))
 
 
 def read_house_pools(dataset_root: Path) -> tuple[list[Path], list[Path]]:
-    """
-    House classes:
-    0: Amber
-    1: Green
-    2: NoDamage
-    3: Red
-
-    Rule:
-    - only class 2 -> no_damage
-    - any other class present -> damage
-    """
     damage = []
     no_damage = []
 
     for images_dir in find_all_images_dirs(dataset_root):
         for img in collect_images(images_dir):
             label_path = corresponding_label_path(img)
-
             if not label_path.exists():
                 continue
 
             text = label_path.read_text(encoding="utf-8").strip()
-
             if not text:
                 continue
 
@@ -119,13 +116,10 @@ def sample_without_reuse(pool: list[Path], n: int, used: set[Path]) -> list[Path
     available = [p for p in pool if p not in used]
 
     if len(available) < n:
-        raise ValueError(
-            f"Not enough images left. Needed {n}, available {len(available)}"
-        )
+        raise ValueError(f"Not enough images left. Needed {n}, available {len(available)}")
 
     chosen = random.sample(available, n)
     used.update(chosen)
-
     return chosen
 
 
@@ -137,30 +131,26 @@ def copy_images(images: list[Path], target_dir: Path, category: str):
         shutil.copy2(src, dst)
 
 
-def write_old_report(property_id: str, pre_counts: dict):
-    damage = pre_counts.get("damage", 0)
-    wear = pre_counts.get("wear", 0)
-    no_damage = pre_counts.get("no_damage", 0)
+def build_summary(counts: dict) -> str:
+    parts = []
+    for cat in DEFECT_CATEGORIES:
+        if counts.get(cat, 0) > 0:
+            parts.append(f"{counts[cat]} {cat}")
 
-    if damage > 0 and wear > 0:
-        summary = "Previous inspection showed visible damage and surface wear."
-    elif damage > 0:
-        summary = "Previous inspection showed visible damage."
-    elif wear > 0:
-        summary = "Previous inspection showed surface wear."
-    else:
-        summary = "Previous inspection showed no visible inspection-relevant issues."
+    if not parts:
+        return "Previous inspection showed no visible inspection relevant issues."
+
+    return "Previous inspection showed " + ", ".join(parts) + "."
+
+
+def write_old_report(property_id: str, pre_counts: dict):
+    report_counts = {cat: int(pre_counts.get(cat, 0)) for cat in CATEGORIES}
 
     report = {
         "property_id": property_id,
-        "category_counts": {
-            "damage": damage,
-            "wear": wear,
-            "alteration": 0,
-            "no_damage": no_damage,
-        },
-        "summary": summary,
-        "inspection_recommended": damage > 0,
+        "category_counts": report_counts,
+        "summary": build_summary(report_counts),
+        "inspection_recommended": any(report_counts.get(cat, 0) > 0 for cat in DEFECT_CATEGORIES),
     }
 
     out_path = PROPERTIES_ROOT / property_id / "old_report.json"
@@ -168,157 +158,92 @@ def write_old_report(property_id: str, pre_counts: dict):
     out_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
 
 
-def clear_old_properties():
-    for property_id in PROFILES:
-        prop_dir = PROPERTIES_ROOT / property_id
-
-        if not prop_dir.exists():
-            continue
-
-        for subfolder in ["pre_lease", "post_lease"]:
-            subdir = prop_dir / subfolder
-
-            if subdir.exists():
-                for file_path in subdir.glob("*"):
-                    try:
-                        if file_path.is_file():
-                            file_path.unlink()
-                    except PermissionError:
-                        print(f"Could not delete file: {file_path}")
-
-        old_report = prop_dir / "old_report.json"
-
-        if old_report.exists():
-            try:
-                old_report.unlink()
-            except PermissionError:
-                print(f"Could not delete file: {old_report}")
+def clear_properties():
+    if PROPERTIES_ROOT.exists():
+        shutil.rmtree(PROPERTIES_ROOT)
+    PROPERTIES_ROOT.mkdir(parents=True, exist_ok=True)
 
 
-def print_dataset_debug():
-    print("RAW PATH:", RAW.resolve())
-    print("RAW EXISTS:", RAW.exists())
-    print("INSPECTION DATASET:", INSPECTION_DATASET.resolve())
-    print("INSPECTION DATASET EXISTS:", INSPECTION_DATASET.exists())
+def print_debug(pools: dict):
+    print("RAW:", RAW.resolve())
+    print("RAW exists:", RAW.exists())
     print()
+    print("Available pools:")
+    for cat in CATEGORIES:
+        print(f"{cat}: {len(pools[cat])}")
 
-    for name in [
-        "paint",
-        "crack",
-        "house",
-        "surface damage",
-        "asbestos",
-        "mold",
-        "mold2",
-    ]:
-        dataset_root = RAW / name
-        image_dirs = find_all_images_dirs(dataset_root)
-        image_count = len(collect_dataset_images(dataset_root))
+    needed = {cat: 0 for cat in CATEGORIES}
 
-        print(f"{name}:")
-        print(f"  exists: {dataset_root.exists()}")
-        print(f"  image dirs: {len(image_dirs)}")
-        print(f"  images: {image_count}")
+    for property_config in PROFILES.values():
+        for phase in ["pre", "post"]:
+            for cat, n in property_config[phase].items():
+                needed[cat] += n
 
-    inspection_images = collect_images(INSPECTION_DATASET / "images")
     print()
-    print(f"inspection_dataset images: {len(inspection_images)}")
+    print("Needed images:")
+    for cat in CATEGORIES:
+        print(f"{cat}: {needed[cat]}")
     print()
 
 
 def main():
-    print_dataset_debug()
+    if not RAW.exists():
+        raise FileNotFoundError(f"Original data folder not found: {RAW}")
 
     crack_pool = collect_dataset_images(RAW / "crack")
+    mold_pool = sorted(set(collect_dataset_images(RAW / "mold") + collect_dataset_images(RAW / "mold2")))
+    wear_pool = collect_dataset_images(RAW / "paint")
+    asbestos_pool = collect_dataset_images(RAW / "asbestos")
+
+    house_damage_pool, house_no_damage_pool = read_house_pools(RAW / "house")
     surface_damage_pool = collect_dataset_images(RAW / "surface damage")
-    paint_pool = collect_dataset_images(RAW / "paint")
 
-    house_damage_pool, house_nodamage_pool = read_house_pools(RAW / "house")
-
-    damage_pool = sorted(set(crack_pool + surface_damage_pool + house_damage_pool))
-    wear_pool = sorted(set(paint_pool))
-
-    # Primary source: house images labeled only as NoDamage.
-    no_damage_pool = sorted(set(house_nodamage_pool))
-
-    # Fallback: if house has too few no_damage images, use inspection_dataset images.
-    # This is acceptable for fake properties because these are synthetic property folders.
-    needed_no_damage = sum(
-        phase_counts.get("no_damage", 0)
-        for property_config in PROFILES.values()
-        for phase_counts in property_config.values()
-    )
-
-    if len(no_damage_pool) < needed_no_damage:
-        fallback_no_damage = collect_images(INSPECTION_DATASET / "images")
-        no_damage_pool = sorted(set(no_damage_pool + fallback_no_damage))
-
-    print(f"damage pool: {len(damage_pool)}")
-    print(f"wear pool: {len(wear_pool)}")
-    print(f"no_damage pool: {len(no_damage_pool)}")
-    print()
-
-    needed = {
-        "damage": sum(
-            phase_counts.get("damage", 0)
-            for property_config in PROFILES.values()
-            for phase_counts in property_config.values()
-        ),
-        "wear": sum(
-            phase_counts.get("wear", 0)
-            for property_config in PROFILES.values()
-            for phase_counts in property_config.values()
-        ),
-        "no_damage": needed_no_damage,
-    }
-
-    print("Needed images:")
-    print(needed)
-    print()
-
-    if len(wear_pool) < needed["wear"]:
-        raise ValueError(
-            f"Not enough wear images. Needed {needed['wear']}, found {len(wear_pool)}."
-        )
-
-    if len(no_damage_pool) < needed["no_damage"]:
-        raise ValueError(
-            f"Not enough no_damage images. Needed {needed['no_damage']}, found {len(no_damage_pool)}."
-        )
-
-    if len(damage_pool) < needed["damage"]:
-        raise ValueError(
-            f"Not enough damage images. Needed {needed['damage']}, found {len(damage_pool)}."
-        )
+    damage_pool = sorted(set(surface_damage_pool + house_damage_pool))
+    no_damage_pool = sorted(set(house_no_damage_pool))
 
     pools = {
         "damage": damage_pool,
+        "crack": crack_pool,
+        "mold": mold_pool,
         "wear": wear_pool,
+        "asbestos": asbestos_pool,
         "no_damage": no_damage_pool,
     }
 
-    clear_old_properties()
+    print_debug(pools)
 
+    needed = {cat: 0 for cat in CATEGORIES}
+    for property_config in PROFILES.values():
+        for phase in ["pre", "post"]:
+            for cat, n in property_config[phase].items():
+                needed[cat] += n
+
+    for cat in CATEGORIES:
+        if len(pools[cat]) < needed[cat]:
+            raise ValueError(f"Not enough {cat} images. Needed {needed[cat]}, found {len(pools[cat])}")
+
+    clear_properties()
     used = set()
 
-    for property_id, config in PROFILES.items():
+    for property_id, profile in PROFILES.items():
         prop_dir = PROPERTIES_ROOT / property_id
         pre_dir = prop_dir / "pre_lease"
         post_dir = prop_dir / "post_lease"
 
-        pre_counts = {}
+        pre_dir.mkdir(parents=True, exist_ok=True)
+        post_dir.mkdir(parents=True, exist_ok=True)
 
         for phase, target_dir in [("pre", pre_dir), ("post", post_dir)]:
-            for category, count in config[phase].items():
-                chosen = sample_without_reuse(pools[category], count, used)
-                copy_images(chosen, target_dir, category)
+            for cat, count in profile[phase].items():
+                chosen = sample_without_reuse(pools[cat], count, used)
+                copy_images(chosen, target_dir, cat)
 
-                if phase == "pre":
-                    pre_counts[category] = count
+        write_old_report(property_id, profile["pre"])
 
-        write_old_report(property_id, pre_counts)
+        print(f"{property_id}: created 40 pre images and 40 post images")
 
-    print("Finished building 6 fake properties with 20 images each.")
+    print()
+    print("Done. Properties created in data/properties")
 
 
 if __name__ == "__main__":

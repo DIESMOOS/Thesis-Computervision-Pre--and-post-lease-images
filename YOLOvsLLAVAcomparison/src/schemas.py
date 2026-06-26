@@ -2,7 +2,7 @@ from typing import List, Dict, Optional
 from pydantic import BaseModel
 
 
-CATEGORIES = ["damage", "wear", "alteration", "no_damage"]
+CATEGORIES = ["damage", "crack", "mold", "wear", "asbestos", "no_damage"]
 
 
 class DetectionBox(BaseModel):

@@ -64,7 +64,7 @@ MAX_IMAGE_SIZE = 1024
 PROMPT = """You are a housing inspection classifier. Look at the image carefully.
 
 Pick exactly one label from: damage, crack, mold, wear, asbestos, no_damage.
-Only choose a defect label when the defect is clearly visible.
+Only choose a defect label when the defect is clearly visible and you are confident.
 If the image is uncertain, ambiguous, low quality, or only shows normal texture, choose no_damage.
 
 Decision rules (apply in order — stop at first match):
@@ -82,10 +82,12 @@ Decision rules (apply in order — stop at first match):
 6. no_damage → choose this when no inspection relevant defect is clearly visible. Normal texture, lighting differences, shadows, stains caused by lighting, or uncertain patterns must not be classified as a defect.
 
 Tie-break rules:
-- Corrugated grey surface alone is not enough for asbestos. Choose asbestos only when the surface clearly resembles asbestos cement or fibrous asbestos material.
-- Thin surface line → crack (not damage)
-- Brown/orange patches on intact surface → wear (not damage)
-- Dark fuzzy patches → mold (not wear)
+- If unsure between a defect and no_damage, choose no_damage.
+- Do not classify texture, shadows, lighting, perspective, or normal surface patterns as defects.
+- Choose asbestos only when asbestos material is clearly visible, not only because the surface is grey or corrugated.
+- Choose crack only when there is a clear continuous fracture line.
+- Choose wear only when surface aging is clearly visible.
+- Choose mold only when dark organic or fuzzy patches are clearly visible.
 
 Return ONLY this JSON, nothing else before or after it:
 ```json
