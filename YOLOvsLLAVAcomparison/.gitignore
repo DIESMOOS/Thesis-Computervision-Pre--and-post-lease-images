@@ -5,3 +5,4 @@ __pycache__/
 .venv/
 *.npy
 raw_outputs/
+hf_token.py
