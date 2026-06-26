@@ -34,7 +34,7 @@ This schema is derived from the application domain rather than from the original
 
 The publicly available Roboflow datasets exhibit substantial heterogeneity in annotation structure, label definitions, image composition, and class distributions. Some datasets contain only positive examples, such as the crack detection dataset, while others include both damaged and undamaged images. In addition, identical visual phenomena are often described using different labels across datasets. For example, structural defects may be labeled as \textit{crack}, \textit{damage}, \textit{Amber}, or \textit{Red}, while mold and asbestos datasets use entirely different category schemes.
 
-To enable meaningful comparison, all datasets are harmonized into a shared inspection oriented label framework consisting of the categories \textit{Damage}, \textit{Wear}, \textit{Mold}, \textit{Asbestos}, and \textit{No Damage}. This harmonization process reduces label inconsistency and ensures that both YOLOv8 and LLaVA are evaluated on the same conceptual inspection task. The complete mapping procedure is shown in Table~\ref{tab:mapping}.
+To enable meaningful comparison, all datasets are harmonized into a shared inspection oriented label framework consisting of the categories \textit{Damage}, \textit{Crack}, \textit{Wear}, \textit{Mold}, \textit{Asbestos}, and \textit{No Damage}. This harmonization process reduces label inconsistency and ensures that both YOLOv8 and LLaVA are evaluated on the same conceptual inspection task. The complete mapping procedure is shown in Table~\ref{tab:mapping}.
 
 To verify the harmonization procedure, a sample of images from each dataset was manually inspected after label mapping. This validation step was used to confirm that the original labels were consistently assigned to the appropriate harmonized inspection categories. Figure~\ref{fig:beforeharm} and Figure~\ref{fig:afterharm} illustrates the label distribution before and after harmonization, demonstrating how heterogeneous dataset specific labels were transformed into a unified inspection category framework.
 
@@ -66,8 +66,6 @@ Mold \cite{Molddataset1_roboflow} & 140 &
 Mold related examples \\
 
 Mold 2 \cite{Mold2_roboflow} & 938 & mold & Mold related examples \\
-mold &
-Mold related examples \\
 
 Paint Damage \cite{hkust_paint_nodate}& 67 &
 Metal &
@@ -130,7 +128,7 @@ NoDamage, Green \\
 \subsection{Pipeline Model}
 \label{subsec:pipeline_model}
 
-This pipeline model is made according to the methodology because it operationalizes the comparison between supervised detection and multi modal reasoning within a consistent framework. The experimental setup follows an organized and unified pipeline that enables a controlled comparison between YOLOv8 and LLaVA 1.6. As shown in Figure~\ref{fig:pipeline}, the harmonized dataset is processed in parallel, where YOLOv8 produces object detections LLaVA 1.6 generates textual descriptions from the same test images. Both outputs are converted into a shared image level representation through a rule based harmonization step before being evaluated using identical metrics and qualitative error analysis. This unified pipeline ensures a fair comparison by maintaining consistent data processing and evaluation across both models.
+The pipeline model operationalizes the comparison framework by ensuring that both models are evaluated using the same data preparation procedure, inspection categories, and evaluation protocol. The experimental setup follows an organized and unified pipeline that enables a controlled comparison between YOLOv8 and LLaVA 1.6. As shown in Figure~\ref{fig:pipeline}, the harmonized dataset is processed in parallel, where YOLOv8 produces object detections, LLaVA 1.6 generates textual descriptions from the same test images. Both outputs are converted into a shared image level representation through a rule based harmonization step before being evaluated using identical metrics and qualitative error analysis. This unified pipeline ensures a fair comparison by maintaining consistent data processing and evaluation across both models.
 
 %  
 
@@ -169,7 +167,11 @@ Unified Inspection Categories
 
 \vspace{0.2cm}
 $\downarrow$
+\vspace{0.2cm}
 
+\fbox{\parbox{0.9\columnwidth}{\centering
+Qualitative Error Analysis
+}}
 \caption{Overview of the experimental pipeline.}
 \label{fig:pipeline}
 \end{figure}
@@ -228,13 +230,11 @@ Figure~\ref{fig:pipeline} provides an overview of the experimental workflow.
 
 \subsubsection{LLaVA Configuration}
 
-LLaVA 1.6 (LLaVA-v1.6-Mistral-7B) was evaluated using two prompting strategies. The first strategy consisted of a zero shot baseline, in which the model received a fixed system prompt and user prompt without task specific examples. The second strategy employed a rule guided decision prompt that incorporated explicit inspection rules, class definitions, tie breaking rules, structured JSON output, and a more robust output parsing procedure. The second configuration was developed following qualitative analysis of the baseline predictions.
-
-The rule guided prompting strategy was developed after qualitative inspection of the zero shot outputs revealed recurring classification and parsing errors.
+LLaVA 1.6 (LLaVA-v1.6-Mistral-7B) was evaluated using two prompting strategies. The first strategy consisted of a zero shot baseline, in which the model received a fixed system prompt and user prompt without task specific examples. The second strategy employed a rule guided decision prompt that incorporated explicit inspection rules, class definitions, tie breaking rules, structured JSON output, and a more robust output parsing procedure. The second prompting strategy was developed following qualitative analysis of the zero shot baseline, which revealed recurring classification and output parsing errors.
 
 For both configurations, the same test images and prompt templates were used throughout the experiments to ensure consistency. The model was evaluated without task specific fine tuning, allowing its performance to be assessed in a prompt based setting. Inference was performed deterministically using \texttt{do\_sample=False}, and each response was required to return a structured JSON object containing a single inspection category and a short explanation. 
 
-The generated JSON responses were subsequently converted into the harmonized inspection categories using a rule based mapping procedure before quantitative evaluation. for prompts see Appendix~\ref{appendix:llava}
+The generated JSON responses were subsequently converted into the harmonized inspection categories using a rule based mapping procedure before quantitative evaluation. The complete prompts are provided in Appendix~\ref{appendix:llava}
 
 
 \subsubsection{Output harmonization}
@@ -243,7 +243,7 @@ YOLOv8 produces bounding boxes with class predictions, while LLaVA produces text
 
 For YOLOv8, detections below a confidence threshold are removed, and remaining detections are aggregated to image level category predictions.
 
-For LLaVA, textual outputs are converted into category labels using a predefined keyword based mapping scheme. Ambiguous cases are flagged for qualitative analysis.
+For LLaVA, the generated JSON responses were converted into inspection categories using a rule based parsing procedure. During preliminary experiments, qualitative inspection revealed that simple keyword matching incorrectly interpreted negated statements such as "no asbestos detected" as positive predictions. The parser was therefore refined to recognise negated expressions before assigning the final inspection category.
 
 This harmonization step is central to the methodology, as it enables direct comparison between fundamentally different output formats.
 
@@ -289,11 +289,13 @@ To complement the quantitative evaluation, qualitative analysis was performed th
 
 During the initial dataset construction, all images were merged before performing a global train validation test split. Inspection of the resulting subsets revealed that multiple minority categories, particularly mold, asbestos, and wear, were underrepresented in the training set while appearing more frequently in the validation and test sets. To address this issue, the splitting procedure was modified to perform stratified splits within each source dataset before merging the subsets. This ensured a more balanced class distribution across the training, validation, and test sets and resulted in improved model performance.
 
-Initial experiments showed that smaller defects, particularly fine cracks and asbestos markings, were frequently missed at an input resolution of 640 × 640 pixels. Based on these observations and evidence from the literature on the medical field \cite{} that higher image resolutions can improve the detection of small visual abnormalities, the input resolution was increased to 1024 × 1024 pixels.
+Initial experiments showed that smaller defects, particularly fine cracks and asbestos markings, were frequently missed at an input resolution of 640 × 640 pixels. Based on these observations and evidence from medical imaging literature indicating that higher image resolutions can improve the detection of small visual abnormalities, the input resolution was increased to 1024 × 1024 pixels. \cite{}
 
 For LLaVA, qualitative analysis focused on the generated textual responses, parsed JSON outputs, and the final inspection labels produced by the rule based output mapping. This analysis showed that several classification errors originated from the output conversion rather than from the language model itself. For example, responses such as "no asbestos detected" were initially mapped to the asbestos category because the parser matched keywords without considering negation. Following these observations, the prompt and output conversion procedure were refined to return a single inspection category, resulting in more reliable classification performance.
 
 These qualitative observations complemented the quantitative evaluation by identifying failure modes that were not apparent from performance metrics alone.
+
+These observations were used to refine the experimental pipeline before the final quantitative evaluation presented in the Results chapter.
 
 \subsection{Validity, Reliability, and Reproducibility}
 \label{subsec:validity_reliability}
