@@ -1,5 +1,0 @@
-streamlit
-ultralytics
-pillow
-torch
-torchvision

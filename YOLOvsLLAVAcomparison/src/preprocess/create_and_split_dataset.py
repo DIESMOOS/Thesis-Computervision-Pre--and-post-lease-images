@@ -1,6 +1,5 @@
 import random
 import shutil
-from collections import Counter, defaultdict
 from pathlib import Path
 
 
@@ -33,8 +32,6 @@ TARGET_CLASSES = {
     "asbestos": 4,
 }
 
-ID_TO_TARGET = {v: k for k, v in TARGET_CLASSES.items()}
-
 
 # =========================================
 # ORIGINAL DATASET LABEL MAPPING
@@ -63,7 +60,7 @@ CLASS_MAPPING = {
     "house": {
         0: "damage",
         1: "damage",
-        2: None,
+        2: None,       # NoDamage ignored for YOLO object detection
         3: "damage",
     },
 
@@ -204,13 +201,17 @@ def remap_label_file(source_label: Path, target_label: Path, dataset_name: str) 
 
         target_class = mapping[original_class_id]
 
+        # None = NoDamage / ignored class
         if target_class is None:
             continue
 
         target_class_id = TARGET_CLASSES[target_class]
 
+        # YOLO bbox format: class x_center y_center width height
         if len(parts) == 5:
             x, y, w, h = map(float, parts[1:5])
+
+        # YOLO segmentation format: class x1 y1 x2 y2 ...
         else:
             x, y, w, h = segmentation_to_bbox(parts[1:])
 
@@ -221,6 +222,7 @@ def remap_label_file(source_label: Path, target_label: Path, dataset_name: str) 
             f"{target_class_id} {x:.6f} {y:.6f} {w:.6f} {h:.6f}"
         )
 
+    # Empty label files are valid. They mean no visible target object.
     target_label.write_text("\n".join(output_lines), encoding="utf-8")
     return True
 
@@ -283,66 +285,8 @@ def merge_datasets():
 
 
 # =========================================
-# STRATIFIED TRAIN / VAL / TEST SPLIT
+# TRAIN / VAL / TEST SPLIT
 # =========================================
-def dominant_label(label_path: Path) -> str:
-    if not label_path.exists() or label_path.stat().st_size == 0:
-        return "no_damage"
-
-    labels = []
-
-    for line in label_path.read_text(encoding="utf-8", errors="ignore").splitlines():
-        parts = line.strip().split()
-
-        if len(parts) < 5:
-            continue
-
-        cls_id = int(float(parts[0]))
-        labels.append(ID_TO_TARGET.get(cls_id, "damage"))
-
-    if not labels:
-        return "no_damage"
-
-    priority = ["crack", "mold", "asbestos", "wear", "damage"]
-
-    for label in priority:
-        if label in labels:
-            return label
-
-    return labels[0]
-
-
-def allocate_stratified(paths: list[Path]) -> dict[str, list[Path]]:
-    random.seed(SEED)
-    paths = paths.copy()
-    random.shuffle(paths)
-
-    n = len(paths)
-
-    if n == 1:
-        return {"train": paths, "val": [], "test": []}
-
-    if n == 2:
-        return {"train": [paths[0]], "val": [], "test": [paths[1]]}
-
-    n_train = max(1, round(n * SPLIT_RATIOS["train"]))
-    n_val = max(1, round(n * SPLIT_RATIOS["val"]))
-    n_test = n - n_train - n_val
-
-    if n_test <= 0:
-        n_test = 1
-        if n_val > 1:
-            n_val -= 1
-        else:
-            n_train -= 1
-
-    return {
-        "train": paths[:n_train],
-        "val": paths[n_train:n_train + n_val],
-        "test": paths[n_train + n_val:],
-    }
-
-
 def split_dataset():
     images_all = DATASET_DIR / "images" / "all"
     labels_all = DATASET_DIR / "labels" / "all"
@@ -355,30 +299,20 @@ def split_dataset():
     if not images:
         raise ValueError(f"No images found in {images_all}")
 
-    buckets = defaultdict(list)
-
-    for image_path in images:
-        label_path = labels_all / f"{image_path.stem}.txt"
-        label = dominant_label(label_path)
-        buckets[label].append(image_path)
-
-    print("\nClass distribution before split:")
-    for label in ["damage", "crack", "mold", "wear", "asbestos", "no_damage"]:
-        print(f"{label}: {len(buckets[label])}")
-
-    split_map = {"train": [], "val": [], "test": []}
-
-    for label, paths in buckets.items():
-        allocated = allocate_stratified(paths)
-
-        for split in ["train", "val", "test"]:
-            split_map[split].extend(allocated[split])
-
     random.seed(SEED)
-    for split in ["train", "val", "test"]:
-        random.shuffle(split_map[split])
+    random.shuffle(images)
 
-    print("\nCopying stratified split...")
+    total = len(images)
+    train_end = int(total * SPLIT_RATIOS["train"])
+    val_end = train_end + int(total * SPLIT_RATIOS["val"])
+
+    split_map = {
+        "train": images[:train_end],
+        "val": images[train_end:val_end],
+        "test": images[val_end:],
+    }
+
+    print("\nSplitting dataset...")
 
     for split, split_images in split_map.items():
         for image_path in split_images:
@@ -399,20 +333,7 @@ def split_dataset():
 
         print(f"{split}: {len(split_images)} images")
 
-    print("\nClass distribution after split:")
-
-    for split in ["train", "val", "test"]:
-        counts = Counter()
-
-        for image_path in split_map[split]:
-            label_path = labels_all / f"{image_path.stem}.txt"
-            counts[dominant_label(label_path)] += 1
-
-        print(f"\n{split}:")
-        for label in ["damage", "crack", "mold", "wear", "asbestos", "no_damage"]:
-            print(f"  {label}: {counts[label]}")
-
-    print("\nStratified split completed.")
+    print("Split completed.")
 
 
 def main():

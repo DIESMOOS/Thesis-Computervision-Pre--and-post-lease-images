@@ -3,8 +3,71 @@
 \section{Use of Artificial Intelligence Tools}
 \label{appendix:ai_usage}
 
-During this Thesis, several generative artificial intelligence (AI) tools were used to support software development, learning, experimentation, and thesis improvement. These tools functioned as assistants throughout the research process. All final decisions, implementations, analyses, interpretations, and written content remained the responsibility of the author. I used as it is called Vibe Coding, I painted the Vibe, and adjusted it accordingly.
+During this Thesis, several generative artificial intelligence (AI) tools were used to support software development, learning, experimentation, and thesis improvement. These tools functioned as assistants throughout the research process. All final decisions, implementations, analyses, interpretations, and written content remained the responsibility of the author. I used Vibe Coding.
 
+\subsection{LLaVA prompts used}
+
+The prompt for zero shot was:
+
+\begin{quote}
+You are a housing inspection classifier. Look at the image carefully.
+
+Pick EXACTLY ONE label from: damage, crack, mold, wear, asbestos, no damage
+
+Decision rules (apply in order — stop at first match):
+1. asbestos  → flat corrugated or board-like grey/white surface with a matte
+               texture; may show thin/thick line markings on the surface.
+               NOT rust, NOT peeling paint.
+2. crack     → a continuous line-shaped fracture, split, or break in the surface.
+               The line must be clearly visible, not just a discoloration.
+3. mold      → dark organic spots, green/black patches, mildew, or damp staining
+               with fuzzy or spreading edges.
+4. damage    → a hole, missing chunk, broken material, dent, or collapse.
+               NOT surface aging — the structure itself is broken.
+5. wear      → peeling paint, rust, discoloration, stains, or surface aging
+               where the structure is still intact.
+6. no damage → none of the above are visible.
+
+Tie break rules:
+Corrugated grey surface with lines → asbestos (not wear, not no damage)
+Thin surface line → crack (not damage)
+Brown/orange patches on intact surface → wear (not damage)
+Dark fuzzy patches → mold (not wear)
+
+Return ONLY this JSON, nothing else before or after it:
+json
+{"label": "<one of the 6 labels>", "reason": "<max 10 words>"}
+\end{quote}
+
+The prompt of the LLaVA rule based decision prompt was:
+
+\begin{quote}
+You are a housing inspection assistant. 
+
+Classify the image into exactly one of these labels:
+damage, crack, mold, wear, asbestos, no damage.
+
+Definitions:
+- crack: visible cracks, fractures, splits, or line shaped breaks.
+- mold: visible mold, mould, mildew, fungal growth, or damp related black spots.
+- asbestos: asbestos like material marks, suspicious fibrous material, or asbestos-related surface patterns.
+- wear: surface degradation, peeling paint, stains, discoloration, rust, aging, or gradual deterioration.
+- damage: other visible damage such as holes, broken surfaces, dents, missing material, fire damage, or water damage.
+- no damage: no visible inspection relevant issue.
+
+Rules:
+- If a crack is visible, choose crack.
+- If mold or mould is visible, choose mold.
+- If asbestos like material is visible, choose asbestos.
+- Choose no damage when the image only shows a normal wall, floor, ceiling, pipe, surface, or room feature without a clear visible defect. Do not mark minor shadows, texture, lighting, normal edges, or ordinary material patterns as damage.
+- Choose no damage only when the area looks fine.
+
+Return only this JSON object:
+{
+  "label": "one of damage crack mold wear asbestos no damage",
+  "summary": "one short sentence"
+}
+\end{quote}
 \subsection{AI Assisted Software Development}
 
 The experimental pipeline was developed using a combination Adjusting code and AI assisted software development techniques. ChatGPT and Claude Code were used throughout the project to support implementation, debugging, and code improvement.
@@ -53,88 +116,8 @@ Several publicly available datasets from Roboflow are used for the training proc
     \item Crack detection dataset (1551 images)
     \item House damage dataset (3570 images)
     \item Asbestos dataset (1331 images)
+    \item Wear dataset (1665 images)
+    \item Mold 2 (938 images)
 \end{itemize}
 
 These datasets provide additional labeled examples of inspection related defects and help improve model robustness during training.
-
-\section{Inspection Category Definitions}
-
-The following categories are used for annotation and evaluation during the experiments.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{3cm}|p{8cm}|}
-\hline
-\textbf{Category} & \textbf{Description} \\
-\hline
-Damage & Visible structural damage such as cracks, holes, or broken surfaces. \\
-\hline
-Wear & Gradual deterioration of surfaces such as paint wear or discoloration. \\
-\hline
-Alteration & Unauthorized modifications or added structures within the property. \\
-\hline
-No Damage & No visible inspection relevant issues present. \\
-\hline
-\end{tabular}
-\caption{Inspection category definitions used during annotation and evaluation.}
-\label{tab:inspection_categories}
-\end{table}
-
-\section{LLaVA Prompt Templates}
-
-The vision language model LLaVA is evaluated using fixed prompt templates to ensure reproducibility.
-
-Example prompts include:
-
-\begin{itemize}
-    \item ``Identify visible damage in this image.''
-    \item ``Is there evidence of wear or alterations in this room?''
-    \item ``Describe any inspection relevant issues visible in the image.''
-\end{itemize}
-
-Model responses are mapped to the predefined inspection categories to allow comparison with the outputs of the YOLOv8 detector.
-
-\subsection{ ROBOFLOW Datasets}
-
-\begin{figure}[H]
-    \centering
-
-    % Row 1
-    \begin{minipage}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{sections/1 thesis design/asbestos.png}
-        \small (a) Asbestos dataset
-    \end{minipage}\hfill
-    \begin{minipage}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{sections/1 thesis design/hkust_paintdamage.png}
-        \small (b) Paint damage dataset
-    \end{minipage}\hfill
-    \begin{minipage}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{sections/1 thesis design/waterdamage_housedamagedataset.png}
-        \small (c) House damage dataset
-    \end{minipage}
-
-    \vspace{0.35cm}
-
-    % Row 2
-    \begin{minipage}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{sections/1 thesis design/crack.png}
-        \small (d) Crack example
-    \end{minipage}\hfill
-    \begin{minipage}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{sections/1 thesis design/cracks.png}
-        \small (e) Multiple cracks
-    \end{minipage}\hfill
-    \begin{minipage}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{sections/1 thesis design/cracks3.png}
-        \small (f) Severe crack pattern
-    \end{minipage}
-
-    \caption{Example images from the external Roboflow datasets used during model training.}
-    \label{fig:roboflow_examples}
-\end{figure}

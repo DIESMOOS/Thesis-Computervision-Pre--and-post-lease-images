@@ -1,0 +1,385 @@
+{
+  "property_id": "001",
+  "yolo": {
+    "property_result": {
+      "property_id": "001",
+      "model_name": "yolo",
+      "images_analyzed": 10,
+      "categories_present": [
+        "no_damage"
+      ],
+      "category_counts_total": {
+        "damage": 0,
+        "wear": 0,
+        "alteration": 0,
+        "no_damage": 10
+      },
+      "image_results": [
+        {
+          "image_id": "damage_01_Cracks_Severe_53_jpg.rf.4f5761b3b65c1eb9217b08b46f1d7486.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "damage_02_3533.rf.32b969a135ae4bce8a2bbc859cfbaa9f.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "damage_03_1681.rf.949842945bf97479c6590cf24f50cc12.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "damage_04_1670.rf.0e92ad4f19b3096a519f02e6473133f9.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "damage_05_1973.rf.2e7484a48dc49ed7388f7a137c46406c.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "damage_06_2429.rf.f46f49795c1937522832eb1487e3e0ef.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "wear_01_25_jpg.rf.d8aec3986785fdf804b9209140852bf8.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "wear_02_43_jpg.rf.c91a1c8f7883dbd6720f572787fa2839.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "wear_03_49_jpg.rf.7bff8bd7cb2c92a4374245277a081a67.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "wear_04_11_jpg.rf.db8bc22ed69f2e63a120ae8bc5599e68.jpg",
+          "model_name": "yolo",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        }
+      ],
+      "property_summary": "No visible inspection-relevant issues across the property.",
+      "inspection_recommended": false
+    },
+    "comparison": {
+      "old_report_counts": {
+        "damage": 0,
+        "wear": 4,
+        "alteration": 0,
+        "no_damage": 6
+      },
+      "new_report_counts": {
+        "damage": 0,
+        "wear": 0,
+        "alteration": 0,
+        "no_damage": 10
+      },
+      "delta": {
+        "damage": 0,
+        "wear": -4,
+        "alteration": 0,
+        "no_damage": 4
+      },
+      "inspection_recommended": false
+    }
+  },
+  "llava": {
+    "property_result": {
+      "property_id": "001",
+      "model_name": "llava",
+      "images_analyzed": 10,
+      "categories_present": [
+        "no_damage"
+      ],
+      "category_counts_total": {
+        "damage": 0,
+        "wear": 0,
+        "alteration": 0,
+        "no_damage": 10
+      },
+      "image_results": [
+        {
+          "image_id": "damage_01_Cracks_Severe_53_jpg.rf.4f5761b3b65c1eb9217b08b46f1d7486.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "damage_02_3533.rf.32b969a135ae4bce8a2bbc859cfbaa9f.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "damage_03_1681.rf.949842945bf97479c6590cf24f50cc12.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "damage_04_1670.rf.0e92ad4f19b3096a519f02e6473133f9.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "damage_05_1973.rf.2e7484a48dc49ed7388f7a137c46406c.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "damage_06_2429.rf.f46f49795c1937522832eb1487e3e0ef.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "wear_01_25_jpg.rf.d8aec3986785fdf804b9209140852bf8.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "wear_02_43_jpg.rf.c91a1c8f7883dbd6720f572787fa2839.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "wear_03_49_jpg.rf.7bff8bd7cb2c92a4374245277a081a67.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        },
+        {
+          "image_id": "wear_04_11_jpg.rf.db8bc22ed69f2e63a120ae8bc5599e68.jpg",
+          "model_name": "llava",
+          "categories_present": [
+            "no_damage"
+          ],
+          "category_counts": {
+            "damage": 0,
+            "wear": 0,
+            "alteration": 0,
+            "no_damage": 1
+          },
+          "detections": [],
+          "summary": "No visible inspection-relevant issues."
+        }
+      ],
+      "property_summary": "No visible inspection-relevant issues across the property.",
+      "inspection_recommended": false
+    },
+    "comparison": {
+      "old_report_counts": {
+        "damage": 0,
+        "wear": 4,
+        "alteration": 0,
+        "no_damage": 6
+      },
+      "new_report_counts": {
+        "damage": 0,
+        "wear": 0,
+        "alteration": 0,
+        "no_damage": 10
+      },
+      "delta": {
+        "damage": 0,
+        "wear": -4,
+        "alteration": 0,
+        "no_damage": 4
+      },
+      "inspection_recommended": false
+    }
+  }
+}

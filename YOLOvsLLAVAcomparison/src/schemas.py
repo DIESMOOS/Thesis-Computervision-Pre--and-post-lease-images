@@ -2,13 +2,13 @@ from typing import List, Dict, Optional
 from pydantic import BaseModel
 
 
-CATEGORIES = ["damage", "crack", "mold", "wear", "asbestos", "no_damage"]
+CATEGORIES = ["damage", "wear", "alteration", "no_damage"]
 
 
 class DetectionBox(BaseModel):
     label: str
     confidence: float
-    bbox: Optional[List[float]] = None
+    bbox: Optional[List[float]] = None  # [x1, y1, x2, y2]
 
 
 class ImageResult(BaseModel):

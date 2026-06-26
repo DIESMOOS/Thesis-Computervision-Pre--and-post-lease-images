@@ -4,7 +4,7 @@ def map_source_label(dataset_name: str, raw_label: str) -> str:
 
     mapping = {
         "crack": {
-            "crack": "crack",
+            "crack": "damage",
         },
 
         "paint": {
@@ -12,26 +12,20 @@ def map_source_label(dataset_name: str, raw_label: str) -> str:
             "paint_damage": "wear",
             "peeling_paint": "wear",
             "discoloration": "wear",
-            "metal": "wear",
         },
 
         "mold": {
-            "mold": "mold",
-            "mould": "mold",
-            "crack": "crack",
+            "mold": "damage",
+            "crack": "damage",
             "wear": "wear",
         },
 
         "mold2": {
-            "mold": "mold",
-            "mould": "mold",
+            "mold": "damage",
         },
 
         "house": {
             "damage": "damage",
-            "amber": "damage",
-            "red": "damage",
-            "green": "no_damage",
             "nodamage": "no_damage",
             "no_damage": "no_damage",
         },
@@ -39,16 +33,10 @@ def map_source_label(dataset_name: str, raw_label: str) -> str:
         "surface damage": {
             "damage": "damage",
             "surface_damage": "damage",
-            "crack": "crack",
-            "erosion": "wear",
         },
 
         "asbestos": {
-            "asbestos": "asbestos",
-            "thick-dark-mark": "asbestos",
-            "thick-light-mark": "asbestos",
-            "thin-dark-mark": "asbestos",
-            "thin-light-mark": "asbestos",
+            "asbestos": "damage",
         },
     }
 
