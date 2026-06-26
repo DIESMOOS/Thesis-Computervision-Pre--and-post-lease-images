@@ -1,8 +1,7 @@
 from src.schemas import ImageResult, DetectionBox
 from src.config import CATEGORIES
 
-DEFECT_CATEGORIES = ["damage", "crack", "mold", "wear", "asbestos"]
-
+DEFECT_CATEGORIES = ["damage", "crack", "mold", "wear", "asbestos", "no_damage"]
 
 def empty_counts():
     return {cat: 0 for cat in CATEGORIES}

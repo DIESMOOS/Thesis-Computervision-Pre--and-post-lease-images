@@ -5,25 +5,27 @@ from pathlib import Path
 from ultralytics import YOLO
 import torch
 
-
 # =========================
 # CONFIG
 # =========================
 ROOT_DIR = Path(__file__).resolve().parents[1]
 
 DATA_YAML = ROOT_DIR / "data" / "inspection_dataset" / "data.yaml"
-BASE_MODEL = "yolov8n.pt"  # Ultralytics will download this automatically if missing
+
+# Final model used in the thesis
+BASE_MODEL = "yolov8m.pt"
 
 PROJECT_DIR = ROOT_DIR / "models"
 RUN_NAME = "housing_yolo"
 
+# Training settings (reported in the thesis)
 EPOCHS = 75
 IMG_SIZE = 1024
-#BATCH_SIZE = 16
+BATCH_SIZE = 64
 SEED = 42
+PATIENCE = 20
+WORKERS = 18
 
-EPOCHS = 75
-BATCH_SIZE = 4
 
 def main():
     if not DATA_YAML.exists():
@@ -45,17 +47,17 @@ def main():
         name=RUN_NAME,
         exist_ok=True,
         pretrained=True,
-        patience=10,
+        patience=PATIENCE,
         plots=True,
         val=True,
         device=0 if torch.cuda.is_available() else "cpu",
-        workers=4,
-        cache=True,
+        workers=WORKERS,
+        cache="disk",
     )
 
     best_model = PROJECT_DIR / RUN_NAME / "weights" / "best.pt"
 
-    print("Training finished.")
+    print("\nTraining finished.")
     print(f"Best model saved at: {best_model}")
 
 
