@@ -226,17 +226,16 @@ YOLOv8 was trained using the harmonized training dataset and initialized with pr
 
 Figure~\ref{fig:pipeline} provides an overview of the experimental workflow.
 
+\subsubsection{LLaVA Configuration}
 
-\subsubsection{LLaVA configuration}
+LLaVA 1.6 (LLaVA-v1.6-Mistral-7B) was evaluated using two prompting strategies. The first strategy consisted of a zero shot baseline, in which the model received a fixed system prompt and user prompt without task specific examples. The second strategy employed a rule guided decision prompt that incorporated explicit inspection rules, class definitions, tie breaking rules, structured JSON output, and a more robust output parsing procedure. The second configuration was developed following qualitative analysis of the baseline predictions.
 
-LLaVA 1.6 was evaluated in 2 ways zero shot setting using a fixed system prompt and a user prompt for all images. and the second method was Rule guided decision rule prompting, this uses a stricter prompt with ordered decision rules, tie break rules, JSON output, batching, and fallback parsing. The system prompt instructed the model to behave as an expert housing inspector, while the user prompt defined the inspection categories and required a structured JSON response format.
+The rule guided prompting strategy was developed after qualitative inspection of the zero shot outputs revealed recurring classification and parsing errors.
 
-The model was required to return a structured JSON object containing detected categories, category counts, and a short textual summary. 
-Generation was performed deterministically using \texttt{do\_sample=False}. Outputs were subsequently converted to the harmonized inspection categories through a predefined rule based mapping procedure.
+For both configurations, the same test images and prompt templates were used throughout the experiments to ensure consistency. The model was evaluated without task specific fine tuning, allowing its performance to be assessed in a prompt based setting. Inference was performed deterministically using \texttt{do\_sample=False}, and each response was required to return a structured JSON object containing a single inspection category and a short explanation. 
 
-LLaVA 1.6 is applied in inference mode using fixed prompt templates. Each image is evaluated using the same prompts to ensure consistency and avoid bias. 
+The generated JSON responses were subsequently converted into the harmonized inspection categories using a rule based mapping procedure before quantitative evaluation. for prompts see Appendix~\ref{appendix:llava}
 
-No fine tuning is performed, in the zero shot model as the goal is to assess zero shot performance in an inspection context. as the second assessed model of LLAVA rule based decision prompting is used. while LLaVA outputs were evaluated after conversion to the shared inspection categories.
 
 \subsubsection{Output harmonization}
 
@@ -289,8 +288,6 @@ Experiments use fixed seeds where applicable to support reproducibility. Dataset
 To complement the quantitative evaluation, qualitative analysis was performed throughout model development by manually inspecting representative predictions and failure cases for both models.
 
 During the initial dataset construction, all images were merged before performing a global train validation test split. Inspection of the resulting subsets revealed that multiple minority categories, particularly mold, asbestos, and wear, were underrepresented in the training set while appearing more frequently in the validation and test sets. To address this issue, the splitting procedure was modified to perform stratified splits within each source dataset before merging the subsets. This ensured a more balanced class distribution across the training, validation, and test sets and resulted in improved model performance.
-
-For YOLOv8, qualitative inspection focused on missed detections and localization errors. Initial experiments using an input resolution of 640 × 640 pixels showed that smaller defects, particularly fine cracks and asbestos markings, were frequently missed. Based on these observations, the input resolution was increased to 1024 × 1024 pixels. This adjustment improved the detection of smaller inspection-relevant objects while maintaining overall detection performance.
 
 Initial experiments showed that smaller defects, particularly fine cracks and asbestos markings, were frequently missed at an input resolution of 640 × 640 pixels. Based on these observations and evidence from the literature on the medical field \cite{} that higher image resolutions can improve the detection of small visual abnormalities, the input resolution was increased to 1024 × 1024 pixels.
 
