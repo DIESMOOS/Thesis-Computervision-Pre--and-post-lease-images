@@ -6,7 +6,7 @@ The methodology describes the datasets, preprocessing, model configurations, exp
 \subsection{Data Sources}
 \label{subsec:data_sources}
 
-The experimental setup is based on publicly available datasets obtained through Roboflow, which provide annotated examples of damage related visual patterns
+The experimental setup is based on publicly available datasets obtained through Roboflow, which provide annotated examples of damage related visual patterns\cite{noauthor_roboflow_nodate}.
 
 These datasets differ in annotation structure, label definitions, visual characteristics, image quality, and class distributions. They are used as heterogeneous source material for constructing a unified inspection task. 
 
@@ -37,7 +37,6 @@ The publicly available Roboflow datasets exhibit substantial heterogeneity in an
 To enable meaningful comparison, all datasets are harmonized into a shared inspection oriented label framework consisting of the categories \textit{Damage}, \textit{Crack}, \textit{Wear}, \textit{Mold}, \textit{Asbestos}, and \textit{No Damage}. This harmonization process reduces label inconsistency and ensures that both YOLOv8 and LLaVA are evaluated on the same conceptual inspection task. The complete mapping procedure is shown in Table~\ref{tab:mapping}.
 
 To verify the harmonization procedure, a sample of images from each dataset was manually inspected after label mapping. This validation step was used to confirm that the original labels were consistently assigned to the appropriate harmonized inspection categories. Figure~\ref{fig:beforeharm} and Figure~\ref{fig:afterharm} illustrates the label distribution before and after harmonization, demonstrating how heterogeneous dataset specific labels were transformed into a unified inspection category framework.
-
 
 %                                    
 \begin{table}[h]
@@ -83,7 +82,7 @@ Surface deterioration and structural damage examples \\
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\columnwidth]{sections/1 thesis design/original_label_distribution.png}
+\includegraphics[width=\columnwidth]{sections/2-thesis/Original_label_distribution.png}
 \caption{Distribution of original dataset labels before harmonization.}
 \label{fig:beforeharm}
 \end{figure}
@@ -185,7 +184,7 @@ The experimental setup was designed to ensure a fair comparison between YOLOv8 a
 
 \subsubsection{Data Preparation}
 
-The harmonized dataset was divided into training, validation, and test subsets using a stratified split. A ratio of 70\% training, 15\% validation, and 15\% testing was applied. All annotations were represented as bounding boxes. This process ensures that class distributions are preserved across splits.
+The harmonized dataset was divided into training, validation, and test subsets using a stratified split (ensures that the proportion of classes in train and test sets match the original dataset)\cite{jocher_ultralytics_2023}. A ratio of 70\% training, 15\% validation, and 15\% testing was applied. All annotations were represented as bounding boxes. This process ensures that class distributions are preserved across splits.
 
 The datasets are first processed by mapping their original labels to the shared inspection categories. Where necessary, labels are merged or reinterpreted to ensure consistency. The resulting dataset is then formatted for model input.
 
@@ -224,18 +223,17 @@ Prompt Strategy & Fixed prompt template \\
 %                              
 \subsubsection{YOLOv8 configuration}
 
-YOLOv8 was trained using the harmonized training dataset and initialized with pretrained COCO weights. Training is performed with fixed hyper parameters to ensure reproducibility and comparability. The model was trained with 75 epochs using a fixed random seed 42 to support reproducibility. Hyper parameters were kept constant throughout the experiments, These include the number of epochs 75, batch size, input resolution, learning rate, and detection thresholds. The final model is selected based on validation performance and evaluated on the test set. YOLOv8 predictions were evaluated using object detection metrics. 
+YOLOv8 was trained using the harmonized training dataset and initialized with pretrained COCO weights\cite{jocher_ultralytics_2023}. Training is performed with fixed hyper parameters to ensure reproducibility and comparability. The model was trained with 75 epochs using a fixed random seed 42 to support reproducibility. Hyper parameters were kept constant throughout the experiments, These include the number of epochs 75, batch size, input resolution, learning rate, and detection thresholds. The final model is selected based on validation performance and evaluated on the test set. YOLOv8 predictions were evaluated using object detection metrics. 
 
 Figure~\ref{fig:pipeline} provides an overview of the experimental workflow.
 
 \subsubsection{LLaVA Configuration}
 
-LLaVA 1.6 (LLaVA-v1.6-Mistral-7B) was evaluated using two prompting strategies. The first strategy consisted of a zero shot baseline, in which the model received a fixed system prompt and user prompt without task specific examples. The second strategy employed a rule guided decision prompt that incorporated explicit inspection rules, class definitions, tie breaking rules, structured JSON output, and a more robust output parsing procedure. The second prompting strategy was developed following qualitative analysis of the zero shot baseline, which revealed recurring classification and output parsing errors.
+LLaVA 1.6 (LLaVA-v1.6-Mistral-7B) was evaluated using two prompting strategies\cite{liu_visual_2023}. The first strategy consisted of a zero shot baseline, in which the model received a fixed system prompt and user prompt without task specific examples. The second strategy employed a rule guided decision prompt that incorporated explicit inspection rules, class definitions, tie breaking rules, structured JSON output, and a more robust output parsing procedure. The second prompting strategy was developed following qualitative analysis of the zero shot baseline, which revealed recurring classification and output parsing errors.
 
-For both configurations, the same test images and prompt templates were used throughout the experiments to ensure consistency. The model was evaluated without task specific fine tuning, allowing its performance to be assessed in a prompt based setting. Inference was performed deterministically using \texttt{do\_sample=False}, and each response was required to return a structured JSON object containing a single inspection category and a short explanation. 
+For both configurations, the same test images and prompt templates were used throughout the experiments to ensure consistency. The model was evaluated without task specific fine tuning, allowing its performance to be assessed in a prompt based setting. Inference was performed deterministically using \texttt{do\_sample=False}, and each response was required to return a structured JSON object containing a single inspection category and a short explanation (for enabling qualitative error analysis when necessary) . 
 
 The generated JSON responses were subsequently converted into the harmonized inspection categories using a rule based mapping procedure before quantitative evaluation. The complete prompts are provided in Appendix~\ref{appendix:llava}
-
 
 \subsubsection{Output harmonization}
 
@@ -252,7 +250,7 @@ This harmonization step is central to the methodology, as it enables direct comp
 
 The evaluation metrics were selected to assess both detection performance and category level classification performance. Because YOLOv8 and LLaVA produce different output formats, two levels of evaluation are used.
 
-For YOLOv8, object detection performance is measured using Precision, Recall, F1 score, and mean Average Precision (mAP). Precision measures the proportion of predicted detections that are correct, while Recall measures the proportion of ground truth defects that are successfully detected. The F1 score provides a balanced measure of Precision and Recall.
+For YOLOv8, object detection performance is measured using Precision, Recall, F1 score, and mean Average Precision (mAP) \cite{redmon_you_2016}. Precision measures the proportion of predicted detections that are correct, while Recall measures the proportion of ground truth defects that are successfully detected. The F1 score provides a balanced measure of Precision and Recall.
 
 Mean Average Precision (mAP) is the primary object detection metric and evaluates both localization and classification performance. A prediction is considered correct when the predicted class matches the ground truth class and the Intersection over Union (IoU) exceeds a predefined threshold. The mAP score is calculated as the mean of the Average Precision values across all categories.
 
@@ -289,20 +287,20 @@ To complement the quantitative evaluation, qualitative analysis was performed th
 
 During the initial dataset construction, all images were merged before performing a global train validation test split. Inspection of the resulting subsets revealed that multiple minority categories, particularly mold, asbestos, and wear, were underrepresented in the training set while appearing more frequently in the validation and test sets. To address this issue, the splitting procedure was modified to perform stratified splits within each source dataset before merging the subsets. This ensured a more balanced class distribution across the training, validation, and test sets and resulted in improved model performance.
 
-Initial experiments showed that smaller defects, particularly fine cracks and asbestos markings, were frequently missed at an input resolution of 640 × 640 pixels. Based on these observations and evidence from medical imaging literature indicating that higher image resolutions can improve the detection of small visual abnormalities, the input resolution was increased to 1024 × 1024 pixels. \cite{}
+Initial experiments showed that smaller defects, particularly fine cracks and asbestos markings, were frequently missed at an input resolution of 640 × 640 pixels. Based on these observations and evidence from medical imaging literature indicating that higher image resolutions can improve the detection of small visual abnormalities, the input resolution was increased to 1024 × 1024 pixels \cite{litjens_deep_2017,rana_yolo_2025,kamraoui_longitudinal_2022}.
 
 For LLaVA, qualitative analysis focused on the generated textual responses, parsed JSON outputs, and the final inspection labels produced by the rule based output mapping. This analysis showed that several classification errors originated from the output conversion rather than from the language model itself. For example, responses such as "no asbestos detected" were initially mapped to the asbestos category because the parser matched keywords without considering negation. Following these observations, the prompt and output conversion procedure were refined to return a single inspection category, resulting in more reliable classification performance.
 
 These qualitative observations complemented the quantitative evaluation by identifying failure modes that were not apparent from performance metrics alone.
 
-These observations were used to refine the experimental pipeline before the final quantitative evaluation presented in the Results chapter.
+These observations were used to refine the experimental pipeline before the final quantitative evaluation presented in Chapter~\ref{sec:results}.
 
 \subsection{Validity, Reliability, and Reproducibility}
 \label{subsec:validity_reliability}
 
 Internal validity is ensured by evaluating both models under identical conditions, using fixed prompts and consistent training settings. Construct validity is supported by aligning all data and outputs to inspection relevant categories.
 
-Reliability is supported through consistent preprocessing, fixed configurations, and documented procedures. Reproducibility is ensured by implementing the pipeline in Python and reporting all relevant settings.
+Internal validity is supported by evaluating both models on the same harmonized dataset, using identical inspection categories, shared evaluation metrics, and consistent preprocessing procedures. Construct validity is supported by aligning all datasets and model outputs to a common inspection category framework, ensuring that both models address the same inspection task.
 
 \subsection{Ethical Considerations}
 \label{subsec:ethical_considerations}
