@@ -1,0 +1,14 @@
+\section{Future Work}
+\label{sec:future_work}
+
+This study demonstrates that supervised object detection currently provides more reliable performance than prompt based vision language models for structured housing inspection. Nevertheless, several opportunities remain for further research.
+
+First, future studies should evaluate newer multi modal foundation models, such as recent versions of LLaVA, Qwen2.5 VL, InternVL, or GPT based vision models, to determine whether recent architectural improvements reduce the performance gap observed in this research. As vision language models continue to evolve rapidly, repeating this comparison with newer models may provide different conclusions.
+
+Second, future work should investigate hybrid inspection systems that combine supervised object detection with multi modal reasoning. In such a system, an object detector could first localize inspection relevant defects, after which a vision language model could interpret the detected regions, generate inspection summaries, explain predictions, or assist inspectors in decision making. Combining the strengths of both paradigms may result in more practical inspection systems than relying on either approach individually.
+
+Another important direction is the development of larger and more representative housing inspection datasets. Although this study harmonized multiple publicly available datasets, a dedicated benchmark containing images from different housing corporations, building types, and inspection scenarios would improve the generalization of future research. Increasing the number of examples for underrepresented categories such as wear and mold would likely improve model performance.
+
+Future research could also investigate techniques that have proven successful in medical imaging. These include improved annotation strategies, higher image resolutions, attention based localization methods, and preprocessing techniques designed to enhance subtle visual abnormalities. Such approaches may further improve the detection of small defects that are difficult to identify in housing inspection images.
+
+Finally, future work should extend the evaluation beyond technical performance. Factors such as inference time, computational requirements, user acceptance, explainability, and integration into existing housing inspection workflows are important for practical deployment. Evaluating these aspects would provide a more comprehensive assessment of the suitability of artificial intelligence for supporting housing inspections.

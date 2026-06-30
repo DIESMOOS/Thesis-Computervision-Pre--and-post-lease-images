@@ -1,48 +1,50 @@
 \section{Discussion}
 \label{sec:discussion}
 
-This study compared a supervised object detection model (YOLOv8) with a multi modal foundation model (LLaVA 1.6) for housing inspection tasks. The results indicate that YOLOv8 consistently outperformed LLaVA across the evaluated inspection categories. This section discusses these findings in relation to previous research, reflects on the limitations of the study, and considers implications for future inspection systems.
+This study compared a supervised object detection model (YOLOv8) with a multi modal vision language model (LLaVA 1.6) for automated housing inspection using identical datasets, inspection categories, and evaluation metrics. By evaluating both approaches under the same experimental conditions, this research addresses a gap in the literature where supervised object detectors and multi modal foundation models are typically evaluated separately using different datasets and evaluation protocols. The results demonstrate that YOLOv8 consistently outperformed both the zero shot and rule guided LLaVA configurations on the category level classification task, while LLaVA demonstrated strengths in reasoning at the property level.
 
 \subsection{Comparison with Previous Research}
 
-The superior performance of YOLOv8 is consistent with previous research on defect detection and visual inspection. Studies in building inspection, infrastructure monitoring, and damage assessment commonly report strong performance for supervised object detection models when sufficient labeled data are available. The findings of this study support the view that explicit supervision remains highly effective for structured inspection tasks.
+The superior performance of YOLOv8 is consistent with previous research on building defect detection, infrastructure monitoring, and automated damage assessment, where supervised object detection models achieve strong performance when sufficient annotated training data are available \cite{kang_improvement_2025,lee_automated_2024}. The results support earlier findings that explicit supervision allows models to learn domain specific visual characteristics required for accurate localization and classification of structural defects.
 
-The results also align with previous observations that multi modal foundation models possess strong visual reasoning capabilities but may struggle when required to perform highly specialized classification tasks without domain specific training. Although LLaVA demonstrated the ability to describe visual content and identify obvious defects, its category level classification performance remained substantially below that of the supervised detector.
+The findings also agree with recent research on multi modal foundation models. Previous studies have shown that vision language models possess strong visual reasoning capabilities and demonstrate promising zero shot performance across different domains \cite{jiang_mmad_2025,wen_autonomous_2024}. However, these studies also report that foundation models become less reliable when applied to specialized inspection tasks requiring precise category discrimination. The results obtained in this study confirm these observations. Although LLaVA was capable of recognizing obvious inspection scenarios and benefited from prompt engineering, its category level performance remained substantially below that of YOLOv8.
 
-A key contribution of this research is that both approaches were evaluated under identical conditions. Previous studies typically evaluate object detectors and vision language models separately, making direct comparison difficult. The results suggest that, for housing inspection, supervised object detection currently remains the more effective approach.
+An important contribution of this research is the controlled comparison between both model paradigms. Previous studies generally evaluate supervised detectors and vision language models independently, making direct comparison difficult. By evaluating both models under identical experimental conditions, this study demonstrates that the observed performance differences are primarily related to the learning paradigm rather than differences in datasets or evaluation methodology.
 
-\subsection{Interpretation of Results}
+\subsection{Interpretation of the Results}
 
-Several factors may explain the observed performance differences. YOLOv8 benefited from task specific training on harmonized inspection categories and learned explicit visual representations of defects through bounding box annotations. In contrast, LLaVA relied entirely on general multi modal pretraining and prompt based reasoning.
+Several factors explain the observed performance differences. First, YOLOv8 was trained directly on the harmonized inspection categories using bounding box annotations. This enabled the model to learn visual representations that are specific to housing related defects. In contrast, LLaVA relied entirely on large scale multi modal pretraining and prompt based reasoning without additional task specific learning.
 
-The category level results suggest that visually distinct categories, such as asbestos, were easier to identify than categories with greater visual variability, such as wear and mold. This finding is consistent with the heterogeneous nature of the datasets and the relatively small number of examples available for some categories.
+The category specific results further support this interpretation. Categories with distinctive visual characteristics, such as asbestos, achieved relatively high recall, whereas categories such as mold and wear remained considerably more difficult for both models. These categories exhibit greater visual variation and were represented by fewer training examples, making accurate classification inherently more challenging.
 
-The limited improvement achieved through prompt optimization further suggests that prompting alone cannot fully compensate for the absence of domain specific supervision. While LLaVA demonstrated flexibility and required no additional training, this advantage did not translate into competitive performance for the evaluated inspection task.
+An interesting observation is the difference between the category level and property level evaluations. Although LLaVA achieved lower Precision, Recall, and F1 scores than YOLOv8 on individual inspection categories, the rule guided prompting strategy correctly classified the overall inspection outcome for all evaluated properties. This suggests that vision language models may provide value at a higher semantic level by reasoning about the overall condition of a property, even when they struggle with fine grained defect classification. Rather than replacing supervised object detectors, foundation models may therefore be better suited for generating inspection summaries, supporting inspectors, or producing natural language inspection reports.
+
+Prompt engineering improved the consistency of LLaVA and reduced output parsing errors, but the overall improvement remained limited. This indicates that prompt refinement alone cannot compensate for the absence of domain specific supervision when accurate visual defect classification is required.
+
+\subsection{Transferability from Medical Imaging}
+
+One of the motivations for this research was to investigate whether methodological developments from medical imaging could be transferred to housing inspection. Medical imaging has demonstrated that accurate detection of subtle abnormalities depends not only on model architecture but also on standardized evaluation procedures, carefully annotated datasets, and appropriate image resolution \cite{kamraoui_longitudinal_2022}.
+
+Several of these principles were incorporated into this study. Public datasets were harmonized into a unified inspection framework, standardized evaluation metrics were applied throughout the experiments, and the input resolution was increased after qualitative analysis revealed that smaller defects were frequently missed. These methodological decisions improved the consistency of the evaluation and contributed to a more reliable comparison between both model paradigms.
+
+Although housing inspection and medical imaging differ substantially as application domains, both require the identification of relatively small visual abnormalities under variable imaging conditions. The findings therefore suggest that transferring methodological practices from mature computer vision domains can improve the development and evaluation of automated housing inspection systems.
 
 \subsection{Limitations}
 
-Several limitations should be considered when interpreting the results. First, the study relies on a combination of publicly available datasets and a private housing inspection dataset. Although harmonization was performed to create a unified inspection framework, differences in image composition, annotation practices, and class distributions may still influence model behavior.
+Several limitations should be considered when interpreting the results.
 
-Second, class imbalance remained present despite harmonization. Certain categories, particularly paint related damage, contained substantially fewer examples than others. This may have affected category specific performance and contributed to the lower recall observed for some classes.
+First, the harmonized dataset was constructed by combining multiple publicly available datasets originating from different domains. Although careful label mapping was performed, differences in image composition, annotation quality, and acquisition procedures may still have influenced model performance.
 
-Third, only a single object detection architecture and a single multi modal foundation model were evaluated. Although both models were selected as representative examples of their respective paradigms, alternative architectures may produce different results.
+Second, class imbalance remained an important challenge throughout the experiments. Categories such as wear contained considerably fewer examples than damage and crack, which likely contributed to the lower Recall observed for these categories. Future research would benefit from larger and more balanced housing inspection datasets.
 
-\subsection{Reproducibility, Reliability, and Validity}
+Third, this study evaluated only one supervised detector and one multi modal foundation model. Although both models were selected because they represent widely adopted approaches within their respective paradigms, the findings cannot automatically be generalized to newer detector architectures or larger vision language models.
 
-Several measures were taken to improve reproducibility. Fixed random seeds, standardized preprocessing procedures, fixed prompts, and documented hyper parameters were used throughout the experiments. In addition, all evaluations were performed using the same harmonized category framework.
+Finally, the practical evaluation was performed using inspection images from a single housing corporation. While this strengthens the ecological validity of the experiments, additional validation using data from multiple organizations would improve the generalization of the findings.
 
-The use of real housing inspection images from DGW strengthens the ecological validity of the study because the evaluation reflects realistic inspection conditions, including variation in lighting, camera angles, room layouts, and image quality. However, external validity remains limited because the dataset originates from a single housing corporation and may not fully represent other housing environments.
+\subsection{Practical Implications}
 
-\subsection{Ethical Considerations and Practical Implications}
+The findings have several practical implications for housing inspection.
 
-No personal tenant information was used during this research. All images were restricted to indoor housing environments and processed according to organizational guidelines. As a result, privacy risks were minimized.
+For automated defect detection, supervised object detection currently represents the most reliable solution because it combines accurate classification with precise localization of inspection relevant defects. This makes it suitable for supporting inspectors during property assessments and documenting the location of detected damage.
 
-From a practical perspective, the results suggest that supervised object detection currently provides the most reliable foundation for automated housing inspection support systems. While multi modal foundation models may be useful for generating explanations, summaries, or inspection reports, their performance in structured defect identification remains insufficient to replace supervised detection approaches in this domain.
-
-\subsection{Dataset Bias and Limitations}
-
-The public datasets used in this study originate from different domains and collection procedures, introducing variation in image composition, annotation practices, and class distributions. For example, crack datasets primarily contain close up defect images, whereas housing inspection datasets contain wider room level views.
-
-Class imbalance is another limitation, as some categories, such as paint damage, contain substantially fewer examples than others.
-
-Consequently, the results should be interpreted within the context of the selected datasets and the harmonized inspection framework used in this study.
+Vision language models currently appear more suitable as complementary technologies than as replacements for supervised detectors. Their ability to interpret complete scenes and generate natural language explanations makes them promising for automatically generating inspection reports, summarizing inspection outcomes, and supporting human decision making. Future inspection systems may therefore benefit from combining the localization capabilities of supervised detectors with the reasoning capabilities of multi modal foundation models.

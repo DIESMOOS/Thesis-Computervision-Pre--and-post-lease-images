@@ -121,3 +121,72 @@ Several publicly available datasets from Roboflow are used for the training proc
 \end{itemize}
 
 These datasets provide additional labeled examples of inspection related defects and help improve model robustness during training.
+
+%\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+\clearpage
+\section{Ground Truth Distribution per Property}
+\label{appendix:property_ground_truth}
+
+Table~\ref{tab:property_ground_truth} presents the ground truth distribution of the inspection categories for each property before and after the lease period. The overall status indicates whether the property improved, remained unchanged, or deteriorated based on the post lease inspection.
+%\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+\begin{table*}[ht]
+\centering
+\caption{Ground truth distribution of the inspection categories for each property.}
+\label{tab:property_ground_truth}
+\begin{tabular}{llrrrrrrl}
+\toprule
+Property & Inspection & Damage & Crack & Mold & Wear & Asbestos & No damage & Overall status \\
+\midrule
+
+001 & Pre lease  & 3 & 2 & 0 & 3 & 0 & 12 & \multirow{2}{*}{Worse} \\
+    & Post lease & 5 & 3 & 0 & 4 & 0 & 8 & \\
+\midrule
+
+002 & Pre lease  & 3 & 1 & 0 & 4 & 0 & 12 & \multirow{2}{*}{Worse} \\
+    & Post lease & 4 & 2 & 0 & 4 & 0 & 10 & \\
+\midrule
+
+003 & Pre lease  & 6 & 4 & 2 & 4 & 1 & 3 & \multirow{2}{*}{Stayed the same} \\
+    & Post lease & 6 & 4 & 2 & 4 & 1 & 3 & \\
+\midrule
+
+004 & Pre lease  & 7 & 4 & 2 & 3 & 1 & 3 & \multirow{2}{*}{Improved} \\
+    & Post lease & 3 & 2 & 1 & 3 & 0 & 11 & \\
+\midrule
+
+005 & Pre lease  & 1 & 1 & 0 & 4 & 0 & 14 & \multirow{2}{*}{Improved} \\
+    & Post lease & 0 & 0 & 0 & 4 & 0 & 16 & \\
+\midrule
+
+006 & Pre lease  & 2 & 0 & 1 & 3 & 0 & 14 & \multirow{2}{*}{Worse} \\
+    & Post lease & 4 & 0 & 3 & 4 & 0 & 9 & \\
+\midrule
+
+007 & Pre lease  & 3 & 2 & 0 & 3 & 0 & 12 & \multirow{2}{*}{Worse} \\
+    & Post lease & 4 & 3 & 0 & 4 & 0 & 9 & \\
+\midrule
+
+008 & Pre lease  & 6 & 3 & 1 & 4 & 0 & 6 & \multirow{2}{*}{Improved} \\
+    & Post lease & 5 & 3 & 0 & 4 & 0 & 8 & \\
+
+\bottomrule
+\end{tabular}
+\end{table*}
+%\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+This table below shows the overview of the property conditions.
+
+\begin{table}[ht]
+\centering
+\caption{Overview of property conditions.}
+\label{tab:property_summary}
+\begin{tabular}{lc}
+\toprule
+Property status & Number of properties \\
+\midrule
+Improved & 3 \\
+Stayed the same & 1 \\
+Worse & 4 \\
+\bottomrule
+\end{tabular}
+\end{table}
