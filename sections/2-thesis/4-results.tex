@@ -1,5 +1,6 @@
 \section{Results}
 \label{sec:results}
+\FloatBarrier
 
 This section presents the experimental results according to the research questions introduced in Section~\ref{sec:introduction}. The main research question is addressed through three sub research questions. Each subsection presents the experimental evidence corresponding to one sub research question. The implications of these findings are discussed in Chapter~\ref{sec:discussion}.
 
@@ -9,20 +10,6 @@ This section presents the experimental results according to the research questio
 The following subsections present the experimental evidence used to answer the main research question regarding the comparison between YOLOv8 and LLaVA 1.6 for housing inspection.
 
 \subsubsection{SRQ1 Comparison of YOLOv8 and LLaVA 1.6}
-\textbf{SRQ1:} How do YOLOv8 and LLaVA 1.6 compare in detecting and identifying inspection relevant categories using shared evaluation?
-
-
-To establish a reference point, baseline configurations of both models were evaluated. Property 001 was selected as an initial benchmark because it contains only inspection relevant issues and therefore provides a clear indication of whether the models can correctly identify housing defects.
-
-Table~\ref{tab:gt_property001} shows the ground truth distribution of Property 001. The dataset consists of six damage images and four wear images, while no images belong to the no damage category.
-
-% 
-% Table truth labels property 1 
-\begin{table}[H] \centering \caption{Ground truth distribution for property 001} \label{tab:gt_property001} \begin{tabular}{lc} \toprule Category & Number of images \\ \midrule Damage & 6 \\ Wear & 4 \\ No damage & 0 \\ \midrule Total & 10 \\ \bottomrule \end{tabular} \end{table} 
-%                                         
-
-Figure~\ref{fig:baseline_heatmaps} presents the confusion matrices of the baseline models. The LLaVA baseline predominantly classified images as no damage, resulting in poor recognition of inspection relevant categories. The YOLOv8 baseline achieved stronger category separation, although substantial misclassifications remained. These baseline results indicate that additional optimization is required for both approaches.
-
 %                          
 
 \begin{figure}[H]
@@ -50,11 +37,16 @@ Figure~\ref{fig:baseline_heatmaps} presents the confusion matrices of the baseli
 
 \end{figure}
 
-%                               
+%   
+\textbf{SRQ1:} How do YOLOv8 and LLaVA 1.6 compare in detecting and identifying inspection relevant categories using shared evaluation?
+
+To establish a reference point, baseline configurations of both models were first evaluated. Property 001 was selected as the initial benchmark because it contains a representative combination of inspection relevant categories together with no damage images, providing a controlled environment for comparing the baseline performance of both approaches. The complete ground truth distributions for all evaluation properties, including Property 001, are provided in Appendix~\ref{appendix:property_ground_truth}.
+
+Figure~\ref{fig:baseline_heatmaps} presents the confusion matrices of the baseline models. The LLaVA baseline predominantly classified images as no damage, resulting in poor recognition of inspection relevant categories. In contrast, the YOLOv8 baseline demonstrated stronger category separation, although substantial misclassifications remained. These baseline results indicate that additional optimization was required for both approaches before the final evaluation.
 
 Table~\ref{tab:category_performance} summarizes the quantitative performance of the final YOLOv8 model, the LLaVA zero shot baseline, and the rule guided LLaVA configuration.
 
-The results demonstrate clear performance differences between supervised object detection and multi modal zero shot reasoning. The YOLOv8 model achieved an overall F1 score of 0.138, while the LLaVA zero shot baseline achieved an overall F1 score of 0.265. Prompt optimization further improved LLaVA performance, resulting in an overall F1 score of 0.293. These results indicate that prompt engineering improved the performance of LLaVA, although both approaches have different strengths due to their fundamentally different prediction mechanisms.
+The results demonstrate clear differences between supervised object detection and multi model zero shot reasoning. At the property level, YOLOv8 achieved an overall F1 score of 0.138, while the LLaVA zero shot baseline achieved an overall F1 score of 0.265. The rule guided prompting strategy further improved LLaVA to an overall F1 score of 0.293. These findings indicate that prompt engineering increased the consistency of LLaVA predictions, although the two approaches exhibited different strengths because of their fundamentally different prediction mechanisms.
 
 
 \begin{table}[H]
@@ -105,8 +97,6 @@ No damage & 0.885 & 0.730 & 0.800 \\
 \end{table}
 %                                        
 
-Prompt optimization improved LLaVA performance, increasing the F1 score from 0.125 to 0.155. However, the improvement remained limited and performance continued to lag behind the supervised detector. The final LLaVA 1.6 configuration achieved an overall F1 score of 0.147, suggesting that additional prompt refinement alone was insufficient to close the performance gap.
-
 For the final YOLOv8 model, performance varied across inspection categories. The highest recall was achieved for the asbestos category (0.55), followed by no damage (0.50) and damage (0.42). Lower recall values were observed for mold (0.13) and wear (0.00), indicating that these categories remained more challenging to detect.
 
 Overall, the results show that YOLOv8 benefited substantially from task specific supervision and bounding box annotations, whereas LLaVA struggled to reliably identify inspection categories using zero shot multi modal reasoning alone.
@@ -119,11 +109,11 @@ Across all evaluated configurations, YOLOv8 achieved higher precision, recall, a
 
 \textbf{SRQ2:} How robust are YOLOv8 and LLaVA when evaluated on a heterogeneous housing inspection dataset containing variation in image quality, lighting conditions, and viewing angles?
 
-To evaluate robustness under realistic housing inspection conditions, the models were tested on eight independent DGW properties. The properties contain different inspection scenarios, including varying room layouts, viewing angles, lighting conditions, image quality, and levels of deterioration. Together, these properties provide a heterogeneous evaluation dataset that reflects practical housing inspections.
+To evaluate robustness under realistic housing inspection conditions, the models were tested on eight independent created properties. The properties contain different inspection scenarios, including varying room layouts, viewing angles, lighting conditions, image quality, and levels of deterioration. Together, these properties provide a heterogeneous evaluation dataset that reflects practical housing inspections.
 
 The complete ground truth distribution for each property before and after the lease period is presented in Appendix~\ref{appendix:property_ground_truth}. The appendix shows that the evaluation dataset contains properties that improved, remained unchanged, and deteriorated after the lease period. This variation ensures that the robustness evaluation is based on diverse inspection scenarios rather than on a single property.
 
-The performance of both models across the individual properties is presented in Table~\ref{tab:property_performance}. The quantitative results are used to assess the consistency of each model under different inspection conditions.
+The performance of both models across the individual properties is presented in Table~\ref{tab:practical_comparison}. The quantitative results are used to assess the consistency of each model under different inspection conditions.
 
 %  still need to generate report performance for every house.
 \begin{table}[ht]
@@ -180,7 +170,13 @@ Across all experiments, YOLOv8 produced more consistent predictions and achieved
 
 \section{Summary of Results}
 
-The experimental results provide evidence for all three sub research questions. For SRQ1, YOLOv8 consistently achieved higher performance than LLaVA 1.6 across all evaluated configurations and inspection categories. For SRQ2, both models were evaluated on a heterogeneous set of housing inspection properties representing different inspection scenarios, enabling the assessment of robustness under realistic conditions. For SRQ3, the experiments demonstrated clear practical differences between both approaches, with YOLOv8 providing structured object localization after task specific training and LLaVA offering zero shot capabilities through prompt based reasoning.
+The experimental results provide evidence for all three sub research questions.
 
-Together, these findings provide the experimental evidence used to answer the main research question. Their implications are discussed in the following chapter.
+For SRQ1, the comparison demonstrated that the two model paradigms perform best at different levels of the inspection task. YOLOv8 achieved superior performance for inspection category detection and defect localization, whereas the rule guided LLaVA configuration demonstrated stronger performance for reasoning about the overall condition of a property after prompt refinement.
+
+For SRQ2, both models were evaluated on a heterogeneous set of housing inspection properties containing variation in lighting conditions, viewing angles, image quality, and property characteristics. This enabled an assessment of their robustness under realistic housing inspection conditions.
+
+For SRQ3, the experiments demonstrated clear practical differences between both approaches. YOLOv8 requires task specific training but provides structured object localization and consistent category predictions. In contrast, LLaVA operates without additional training through prompt based reasoning and offers greater flexibility for interpreting inspection outcomes and generating natural language explanations.
+
+Together, these findings indicate that supervised object detection and multi model foundation models should not necessarily be viewed as competing alternatives. Instead, they provide complementary capabilities that operate at different levels of the inspection process, forming the basis for hybrid inspection systems that combine accurate defect localization with higher level semantic reasoning. The implications of these findings are discussed in the following chapter.
 

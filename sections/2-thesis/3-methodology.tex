@@ -6,7 +6,7 @@ The methodology describes the datasets, preprocessing, model configurations, exp
 \subsection{Data Sources}
 \label{subsec:data_sources}
 
-The experimental setup is based on publicly available datasets obtained through Roboflow, which provide annotated examples of damage related visual patterns\cite{noauthor_roboflow_nodate}.
+The experimental setup is based on publicly available datasets obtained through Roboflow, which provide annotated examples of damage related visual patterns \cite{noauthor_roboflow_nodate}.
 
 These datasets differ in annotation structure, label definitions, visual characteristics, image quality, and class distributions. They are used as heterogeneous source material for constructing a unified inspection task. 
 
@@ -289,11 +289,7 @@ During the initial dataset construction, all images were merged before performin
 
 Initial experiments showed that smaller defects, particularly fine cracks and asbestos markings, were frequently missed at an input resolution of 640 × 640 pixels. Based on these observations and evidence from medical imaging literature indicating that higher image resolutions can improve the detection of small visual abnormalities, the input resolution was increased to 1024 × 1024 pixels \cite{litjens_deep_2017,rana_yolo_2025,kamraoui_longitudinal_2022}.
 
-For LLaVA, qualitative analysis focused on the generated textual responses, parsed JSON outputs, and the final inspection labels produced by the rule based output mapping. This analysis showed that several classification errors originated from the output conversion rather than from the language model itself. For example, responses such as "no asbestos detected" were initially mapped to the asbestos category because the parser matched keywords without considering negation. Following these observations, the prompt and output conversion procedure were refined to return a single inspection category, resulting in more reliable classification performance.
-
-These qualitative observations complemented the quantitative evaluation by identifying failure modes that were not apparent from performance metrics alone.
-
-These observations were used to refine the experimental pipeline before the final quantitative evaluation presented in Chapter~\ref{sec:results}.
+For LLaVA, qualitative analysis focused on the generated textual responses, parsed JSON outputs, and the final inspection labels produced by the rule based output mapping. This analysis showed that several classification errors originated from the output conversion rather than from the language model itself. For example, responses such as "no asbestos detected" were initially mapped to the asbestos category because the parser matched keywords without considering negation. Following these observations, the prompt and output conversion procedure were refined to return a single inspection category, resulting in more reliable classification performance. These qualitative observations complemented the quantitative evaluation by identifying failure modes that were not apparent from performance metrics alone. These observations were used to refine the experimental pipeline before the final quantitative evaluation presented in Chapter~\ref{sec:results}.
 
 \subsection{Validity, Reliability, and Reproducibility}
 \label{subsec:validity_reliability}

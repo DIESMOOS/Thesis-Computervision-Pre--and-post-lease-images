@@ -5,43 +5,21 @@ from pathlib import Path
 from ultralytics import YOLO
 
 
-MODEL_PATH = "yolov8m.pt"  # later: "models/yolo/best.pt"
+MODEL_PATH = "yolov8n.pt"  # later: "models/yolo/best.pt"
 CONF_THRESHOLD = 0.25
 IMAGE_EXTS = {".jpg", ".jpeg", ".png"}
 
-THESIS_CATEGORIES = [
-    "damage",
-    "crack",
-    "mold",
-    "wear",
-    "asbestos",
-    "no_damage"
-]
+THESIS_CATEGORIES = ["damage", "wear", "alteration", "no_damage"]
 
 CATEGORY_MAP = {
+    "crack": "damage",
     "damage": "damage",
     "broken": "damage",
     "hole": "damage",
-
-    "crack": "crack",
-    "fracture": "crack",
-
-    "mold": "mold",
-    "mould": "mold",
-    "fungus": "mold",
-
-    "wear": "wear",
     "rust": "wear",
     "paint": "wear",
     "peeling": "wear",
     "stain": "wear",
-    "erosion": "wear",
-
-    "asbestos": "asbestos",
-
-    "no_damage": "no_damage",
-    "nodamage": "no_damage",
-    "green": "no_damage",
 }
 
 DEFAULT_FALLBACK_LABEL = "damage"
